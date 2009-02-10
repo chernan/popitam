@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE WideBafParameters SYSTEM "/home/geneprot/alex/Olav/config/WideBafParameters.dtd">
+<olavWideBaf:WideBafParameters name="WB_vtestProut"  xmlns:olavWideBaf="http://www.geneprot.com/namespace/olavWideBaf.html">
+  <olavWideBaf:parentMaxCharge>1</olavWideBaf:parentMaxCharge><!-- not very useful as all subscores have their own-->
+  <oneExpMsMsSpectrumAlgo type="filter" name="dummy">
+    <field>intensity</field>
+    <comparator>ge</comparator>
+    <threshold type="nFix" value="300"/>
+  </oneExpMsMsSpectrumAlgo>
+  <olavWideBaf:OneMsMsScoring>
+<olavGrossBafAA:GrossBafAAParameters name="GrossBafAA_1.0"  xmlns:olavGrossBafAA="http://www.geneprot.com/namespace/olavGrossBafAA.html">
+  <olavGrossBafAA:parentMaxCharge>1</olavGrossBafAA:parentMaxCharge>
+  <olavGrossBafAA:fragTolerance  value="600:0.2:300" unit="ppm_min_shift"/>
+  <olavGrossBafAA:aaClasses>
+    <olavGrossBafAA:oneAAClass aa="ACFIM" charge="1" nTerm="yes"/>
+    <olavGrossBafAA:oneAAClass aa="DEGHLNQSTVWY" charge="1" nTerm="yes"/>
+    <olavGrossBafAA:oneAAClass aa="KPR" charge="1" nTerm="yes"/>
+    <olavGrossBafAA:oneAAClass aa="CHP" charge="1" nTerm="no"/>
+    <olavGrossBafAA:oneAAClass aa="AFIMDEGLNQSTVWY" charge="1" nTerm="no"/>
+    <olavGrossBafAA:oneAAClass aa="KR" charge="1" nTerm="no"/>
+  </olavGrossBafAA:aaClasses>
+  <olavGrossBafAA:fragScoring charge="1" minBitPerSeries="0.1" numRndPept="100">
+    <olavGrossBafAA:score fragType="a" aaClass="ACFIM" foundWeight="1.31863" notFoundWeight="-0.152438" bit="0.34917" trueFoundProb="0.183544" falseFoundProb="0.0490985" trueFoundNum="158" falseFoundNum="17638"/>
+    <olavGrossBafAA:score fragType="a" aaClass="DEGHLNQSTVWY" foundWeight="1.07753" notFoundWeight="-0.104685" bit="0.222828" trueFoundProb="0.143339" falseFoundProb="0.0487975" trueFoundNum="593" falseFoundNum="52892"/>
+    <olavGrossBafAA:score fragType="b" aaClass="ACFIM" foundWeight="2.20856" notFoundWeight="-0.556889" bit="1.45197" trueFoundProb="0.455696" falseFoundProb="0.0500624" trueFoundNum="158" falseFoundNum="17638"/>
+    <olavGrossBafAA:score fragType="b" aaClass="DEGHLNQSTVWY" foundWeight="2.32801" notFoundWeight="-0.486492" bit="1.37629" trueFoundProb="0.409781" falseFoundProb="0.0399493" trueFoundNum="593" falseFoundNum="52892"/>
+    <olavGrossBafAA:score fragType="b" aaClass="KPR" foundWeight="2.01833" notFoundWeight="-0.142386" bit="0.436774" trueFoundProb="0.15" falseFoundProb="0.0199317" trueFoundNum="100" falseFoundNum="12292"/>
+    <olavGrossBafAA:score fragType="b-H2O" aaClass="ACFIM" foundWeight="1.68149" notFoundWeight="-0.13316" bit="0.361301" trueFoundProb="0.148936" falseFoundProb="0.0277165" trueFoundNum="94" falseFoundNum="10427"/>
+    <olavGrossBafAA:score fragType="b-H2O" aaClass="DEGHLNQSTVWY" foundWeight="1.10455" notFoundWeight="-0.0788497" bit="0.174156" trueFoundProb="0.10929" falseFoundProb="0.0362143" trueFoundNum="366" falseFoundNum="37002"/>
+    <olavGrossBafAA:score fragType="b-NH3" aaClass="ACFIM" foundWeight="1.14861" notFoundWeight="-0.0576881" bit="0.132567" trueFoundProb="0.08" falseFoundProb="0.0253662" trueFoundNum="75" falseFoundNum="8397"/>
+    <olavGrossBafAA:score fragType="y" aaClass="CHP" foundWeight="3.26885" notFoundWeight="-2.1307" bit="4.17478" trueFoundProb="0.885246" falseFoundProb="0.0336838" trueFoundNum="61" falseFoundNum="9797"/>
+    <olavGrossBafAA:score fragType="y" aaClass="AFIMDEGLNQSTVWY" foundWeight="3.15436" notFoundWeight="-0.91361" bit="2.77303" trueFoundProb="0.609354" falseFoundProb="0.0259985" trueFoundNum="727" falseFoundNum="65927"/>
+    <olavGrossBafAA:score fragType="y" aaClass="KR" foundWeight="0.778448" notFoundWeight="-0.466855" bit="0.588271" trueFoundProb="0.52381" falseFoundProb="0.24049" trueFoundNum="63" falseFoundNum="7098"/>
+    <olavGrossBafAA:score fragType="y-H2O" aaClass="CHP" foundWeight="1.68805" notFoundWeight="-0.0890694" bit="0.249778" trueFoundProb="0.102564" falseFoundProb="0.0189621" trueFoundNum="39" falseFoundNum="6012"/>
+    <olavGrossBafAA:score fragType="y-H2O" aaClass="KR" foundWeight="1.33484" notFoundWeight="-0.0648339" bit="0.16048" trueFoundProb="0.0833333" falseFoundProb="0.0219334" trueFoundNum="12" falseFoundNum="1231"/>
+    <olavGrossBafAA:score fragType="y-NH3" aaClass="CHP" foundWeight="3.01242" notFoundWeight="-0.620723" bit="2.06435" trueFoundProb="0.475" falseFoundProb="0.0233569" trueFoundNum="40" falseFoundNum="7364"/>
+    <olavGrossBafAA:score fragType="y-NH3" aaClass="AFIMDEGLNQSTVWY" foundWeight="1.99885" notFoundWeight="-0.183858" bit="0.545849" trueFoundProb="0.189286" falseFoundProb="0.0256465" trueFoundNum="560" falseFoundNum="51196"/>
+    <olavGrossBafAA:score fragType="y-NH3" aaClass="KR" foundWeight="1.18434" notFoundWeight="-0.463699" bit="0.785052" trueFoundProb="0.459459" falseFoundProb="0.140571" trueFoundNum="37" falseFoundNum="4311"/>
+  </olavGrossBafAA:fragScoring>
+</olavGrossBafAA:GrossBafAAParameters>
+  </olavWideBaf:OneMsMsScoring>
+  <olavWideBaf:OneMsMsScoring>
+<olavIntensitySlice:IntensitySliceParameters name="IntensitySlice_1.0"  xmlns:olavIntensitySlice="http://www.geneprot.com/namespace/olavIntensitySlice.html">
+  <olavIntensitySlice:parentMaxCharge>1</olavIntensitySlice:parentMaxCharge>
+  <olavIntensitySlice:nbIntensitySlices>5</olavIntensitySlice:nbIntensitySlices>
+  <olavIntensitySlice:fragTolerance  value="600:0.2:300" unit="ppm_min_shift"/>
+  <olavIntensitySlice:fragScoring charge="1">
+    <olavIntensitySlice:score fragType="b">
+      <olavIntensitySlice:matchWeight> -0.569604 -0.491643 0.123543 0.188926 0.444451</olavIntensitySlice:matchWeight>
+      <olavIntensitySlice:matchProb> 0.11315 0.122324 0.2263 0.24159 0.311927</olavIntensitySlice:matchProb>
+    </olavIntensitySlice:score>
+    <olavIntensitySlice:score fragType="b-NH3">
+      <olavIntensitySlice:matchWeight> 0.95885 0.419854 -0.139762 -0.832909 -0.427444</olavIntensitySlice:matchWeight>
+      <olavIntensitySlice:matchProb> 0.521739 0.304348 0.173913 0.0869565 0.130435</olavIntensitySlice:matchProb>
+    </olavIntensitySlice:score>
+    <olavIntensitySlice:score fragType="b-H2O">
+      <olavIntensitySlice:matchWeight> 0.297252 0.0560895 0.223144 0.366244 -0.955511</olavIntensitySlice:matchWeight>
+      <olavIntensitySlice:matchProb> 0.269231 0.211538 0.25 0.288462 0.0769231</olavIntensitySlice:matchProb>
+    </olavIntensitySlice:score>
+    <olavIntensitySlice:score fragType="y">
+      <olavIntensitySlice:matchWeight> -1.22378 -0.829121 -0.409267 0.372675 0.788975</olavIntensitySlice:matchWeight>
+      <olavIntensitySlice:matchProb> 0.0588235 0.0872865 0.132827 0.290323 0.440228</olavIntensitySlice:matchProb>
+    </olavIntensitySlice:score>
+    <olavIntensitySlice:score fragType="y-NH3">
+      <olavIntensitySlice:matchWeight> -0.280514 0.201325 0.363843 0.108951 -0.434664</olavIntensitySlice:matchWeight>
+      <olavIntensitySlice:matchProb> 0.151079 0.244604 0.28777 0.223022 0.129496</olavIntensitySlice:matchProb>
+    </olavIntensitySlice:score>
+    <olavIntensitySlice:score fragType="y-H2O">
+      <olavIntensitySlice:matchWeight> 0.105361 0.87855 -0.076961 0.105361 -0.993252</olavIntensitySlice:matchWeight>
+      <olavIntensitySlice:matchProb> 0.222222 0.481481 0.185185 0.222222 0.0740741</olavIntensitySlice:matchProb>
+    </olavIntensitySlice:score>
+  </olavIntensitySlice:fragScoring>
+</olavIntensitySlice:IntensitySliceParameters>
+  </olavWideBaf:OneMsMsScoring>
+  <olavWideBaf:OneMsMsScoring>
+<olavHMMBaf:HMMBafParameters name="HMMBaf_1.1"  xmlns:olavHMMBaf="http://www.geneprot.com/namespace/olavHMMBaf.html">
+  <olavHMMBaf:parentMaxCharge>1</olavHMMBaf:parentMaxCharge>
+  <olavHMMBaf:fragTolerance  value="600:0.2:300" unit="ppm_min_shift"/>
+  <olavHMMBaf:HmmModels>
+    <olavHMMBaf:OneHmmModel charge="1" numRndPept="100">
+      <olavHMMBaf:series nTerm="yes">b,b-H2O,b-NH3</olavHMMBaf:series>
+      <olavHMMBaf:alternModel name="hmmA" order="3" sorLambda="1.2" loglikelihood="-469.32">
+<olavHMM:HMM name="hmmA, alternative: (+),b,b-H2O,b-NH3"  xmlns:olavHMM="http://www.geneprot.com/namespace/olavHMM.html">
+  <olavHMM:States>
+    <olavHMM:oneState name="S"/>
+    <olavHMM:oneState name="M1"/>
+    <olavHMM:oneState name="M2"/>
+    <olavHMM:oneState name="M3"/>
+    <olavHMM:oneState name="F1"/>
+    <olavHMM:oneState name="F2"/>
+  </olavHMM:States>
+  <olavHMM:Emissions>
+    <olavHMM:oneEmission name="s"/>
+    <olavHMM:oneEmission name="m"/>
+    <olavHMM:oneEmission name="f"/>
+  </olavHMM:Emissions>
+  <olavHMM:Links>
+    <olavHMM:oneLink from="S" to="M1" prob="0.179715"/>
+    <olavHMM:oneLink from="S" to="F1" prob="0.820285"/>
+    <olavHMM:oneLink from="M1" to="M2" prob="0.58753"/>
+    <olavHMM:oneLink from="M1" to="F1" prob="0.41247"/>
+    <olavHMM:oneLink from="M2" to="M3" prob="0.788121"/>
+    <olavHMM:oneLink from="M2" to="F1" prob="0.211879"/>
+    <olavHMM:oneLink from="M3" to="M3" prob="0.610554"/>
+    <olavHMM:oneLink from="M3" to="F2" prob="0.389446"/>
+    <olavHMM:oneLink from="F1" to="M1" prob="0.207104"/>
+    <olavHMM:oneLink from="F1" to="F1" prob="0.792896"/>
+    <olavHMM:oneLink from="F2" to="M2" prob="0.269307"/>
+    <olavHMM:oneLink from="F2" to="F1" prob="0.730693"/>
+  </olavHMM:Links>
+  <olavHMM:Emits>
+    <olavHMM:oneEmit state="S" emit="s" prob="1"/>
+    <olavHMM:oneEmit state="M1" emit="m" prob="1"/>
+    <olavHMM:oneEmit state="M2" emit="m" prob="1"/>
+    <olavHMM:oneEmit state="M3" emit="m" prob="1"/>
+    <olavHMM:oneEmit state="F1" emit="m" prob="0.00961047"/>
+    <olavHMM:oneEmit state="F1" emit="f" prob="0.99039"/>
+    <olavHMM:oneEmit state="F2" emit="m" prob="0.46482"/>
+    <olavHMM:oneEmit state="F2" emit="f" prob="0.53518"/>
+  </olavHMM:Emits>
+</olavHMM:HMM>
+      </olavHMMBaf:alternModel>
+      <olavHMMBaf:nullModel name="mcA" order="2" sorLambda="1" loglikelihood="-20000.9">
+<olavHMM:HMM name="mcA, null: (+),b,b-H2O,b-NH3"  xmlns:olavHMM="http://www.geneprot.com/namespace/olavHMM.html">
+  <olavHMM:States>
+    <olavHMM:oneState name="S"/>
+    <olavHMM:oneState name="M1"/>
+    <olavHMM:oneState name="M2"/>
+    <olavHMM:oneState name="F1"/>
+  </olavHMM:States>
+  <olavHMM:Emissions>
+    <olavHMM:oneEmission name="s"/>
+    <olavHMM:oneEmission name="m"/>
+    <olavHMM:oneEmission name="f"/>
+  </olavHMM:Emissions>
+  <olavHMM:Links>
+    <olavHMM:oneLink from="S" to="M1" prob="0.163474"/>
+    <olavHMM:oneLink from="S" to="F1" prob="0.836526"/>
+    <olavHMM:oneLink from="M1" to="M2" prob="0.146025"/>
+    <olavHMM:oneLink from="M1" to="F1" prob="0.853975"/>
+    <olavHMM:oneLink from="M2" to="M2" prob="0.191194"/>
+    <olavHMM:oneLink from="M2" to="F1" prob="0.808806"/>
+    <olavHMM:oneLink from="F1" to="M1" prob="0.0551019"/>
+    <olavHMM:oneLink from="F1" to="F1" prob="0.944898"/>
+  </olavHMM:Links>
+  <olavHMM:Emits>
+    <olavHMM:oneEmit state="S" emit="s" prob="1"/>
+    <olavHMM:oneEmit state="M1" emit="m" prob="1"/>
+    <olavHMM:oneEmit state="M2" emit="m" prob="1"/>
+    <olavHMM:oneEmit state="F1" emit="f" prob="1"/>
+  </olavHMM:Emits>
+</olavHMM:HMM>
+      </olavHMMBaf:nullModel>
+    </olavHMMBaf:OneHmmModel>
+    <olavHMMBaf:OneHmmModel charge="1" numRndPept="100">
+      <olavHMMBaf:series nTerm="no">y,y-H2O,y-NH3</olavHMMBaf:series>
+      <olavHMMBaf:alternModel name="hmmA" order="3" sorLambda="1.2" loglikelihood="-451.374">
+<olavHMM:HMM name="hmmA, alternative: (-),y,y-H2O,y-NH3"  xmlns:olavHMM="http://www.geneprot.com/namespace/olavHMM.html">
+  <olavHMM:States>
+    <olavHMM:oneState name="S"/>
+    <olavHMM:oneState name="M1"/>
+    <olavHMM:oneState name="M2"/>
+    <olavHMM:oneState name="M3"/>
+    <olavHMM:oneState name="F1"/>
+    <olavHMM:oneState name="F2"/>
+  </olavHMM:States>
+  <olavHMM:Emissions>
+    <olavHMM:oneEmission name="s"/>
+    <olavHMM:oneEmission name="m"/>
+    <olavHMM:oneEmission name="f"/>
+  </olavHMM:Emissions>
+  <olavHMM:Links>
+    <olavHMM:oneLink from="S" to="M1" prob="0.496284"/>
+    <olavHMM:oneLink from="S" to="F1" prob="0.503716"/>
+    <olavHMM:oneLink from="M1" to="M2" prob="0.964309"/>
+    <olavHMM:oneLink from="M1" to="F1" prob="0.0356912"/>
+    <olavHMM:oneLink from="M2" to="M3" prob="0.776089"/>
+    <olavHMM:oneLink from="M2" to="F1" prob="0.223911"/>
+    <olavHMM:oneLink from="M3" to="M3" prob="0.809959"/>
+    <olavHMM:oneLink from="M3" to="F2" prob="0.190041"/>
+    <olavHMM:oneLink from="F1" to="M1" prob="0.140402"/>
+    <olavHMM:oneLink from="F1" to="F1" prob="0.859598"/>
+    <olavHMM:oneLink from="F2" to="M2" prob="0.382637"/>
+    <olavHMM:oneLink from="F2" to="F1" prob="0.617363"/>
+  </olavHMM:Links>
+  <olavHMM:Emits>
+    <olavHMM:oneEmit state="S" emit="s" prob="1"/>
+    <olavHMM:oneEmit state="M1" emit="m" prob="1"/>
+    <olavHMM:oneEmit state="M2" emit="m" prob="1"/>
+    <olavHMM:oneEmit state="M3" emit="m" prob="1"/>
+    <olavHMM:oneEmit state="F1" emit="m" prob="0.156061"/>
+    <olavHMM:oneEmit state="F1" emit="f" prob="0.843939"/>
+    <olavHMM:oneEmit state="F2" emit="m" prob="0.242512"/>
+    <olavHMM:oneEmit state="F2" emit="f" prob="0.757488"/>
+  </olavHMM:Emits>
+</olavHMM:HMM>
+      </olavHMMBaf:alternModel>
+      <olavHMMBaf:nullModel name="mcA" order="2" sorLambda="1" loglikelihood="-20658.6">
+<olavHMM:HMM name="mcA, null: (-),y,y-H2O,y-NH3"  xmlns:olavHMM="http://www.geneprot.com/namespace/olavHMM.html">
+  <olavHMM:States>
+    <olavHMM:oneState name="S"/>
+    <olavHMM:oneState name="M1"/>
+    <olavHMM:oneState name="M2"/>
+    <olavHMM:oneState name="F1"/>
+  </olavHMM:States>
+  <olavHMM:Emissions>
+    <olavHMM:oneEmission name="s"/>
+    <olavHMM:oneEmission name="m"/>
+    <olavHMM:oneEmission name="f"/>
+  </olavHMM:Emissions>
+  <olavHMM:Links>
+    <olavHMM:oneLink from="S" to="M1" prob="0.359434"/>
+    <olavHMM:oneLink from="S" to="F1" prob="0.640566"/>
+    <olavHMM:oneLink from="M1" to="M2" prob="0.142026"/>
+    <olavHMM:oneLink from="M1" to="F1" prob="0.857974"/>
+    <olavHMM:oneLink from="M2" to="M2" prob="0.207911"/>
+    <olavHMM:oneLink from="M2" to="F1" prob="0.792089"/>
+    <olavHMM:oneLink from="F1" to="M1" prob="0.0526514"/>
+    <olavHMM:oneLink from="F1" to="F1" prob="0.947349"/>
+  </olavHMM:Links>
+  <olavHMM:Emits>
+    <olavHMM:oneEmit state="S" emit="s" prob="1"/>
+    <olavHMM:oneEmit state="M1" emit="m" prob="1"/>
+    <olavHMM:oneEmit state="M2" emit="m" prob="1"/>
+    <olavHMM:oneEmit state="F1" emit="f" prob="1"/>
+  </olavHMM:Emits>
+</olavHMM:HMM>
+      </olavHMMBaf:nullModel>
+    </olavHMMBaf:OneHmmModel>
+  </olavHMMBaf:HmmModels>
+</olavHMMBaf:HMMBafParameters>
+  </olavWideBaf:OneMsMsScoring>
+</olavWideBaf:WideBafParameters>

@@ -1,0 +1,228 @@
+Popitam v4.0 is now running; run parameters are NORMAL and UNKNOWN (1 allowed gaps)
+
+________________________________________________________________________________
+
+File processed                               : test/TEST_1MOD.mgf
+Initial number of spectra                    : 4
+Instrument                                   : QTOF
+Min covbin                                   : 2
+Wanted number of coverage                    : 9
+Minimal tag lentgh                           : 3
+Minimal coverage for a valuable arrangement  : 0.300000
+
+Graph parameters                              
+ - edges_type :                              : 1,2 aa
+ - peptide error :                           : 2.00
+ - fragment error1 :                         : 0.20
+ - fragment error2 :                         : 0.30
+
+DBs                                           
+demoDB_FORWARDandDECOY                       : BASE_FORWARDandDECOY_1.0
+TAXONOMY                                     : NO
+AC FILTER                                    : P48668 DECOY_P48668 Q80V08 DECOY_Q80V08 P68871 DEC...  
+
+Enzyme                                       : Trypsin
+Missed cleavage number                       : 2
+
+Modification/Mutation parameters              
+up limit of PM range                         : 400.00
+low limit of PM range                        : -200.00
+up limit of MOD range                        : 400.00
+low limit of MOD range                       : -200.00
+
+
+________________________________________________________________________________
+
+Spectrum ID              : 0
+SpectrumTitle            : LFPLIQAM[ox]HPTLAGK P11940
+initPeakNb               :         335
+peakNb after proc.       :          37
+ParentMass raw           :   826.94570
+ParentMass(M)/Charge     :  1651.89140 / 2      
+NodeNb                   :     146 
+EdgeNb (simple/double)   :     335 / 3259   
+
+
+________________________________________________________________________________
+
+
+Total number of proteins in databases                                                          :      1666
+Number of proteins after filter (taxonomy, ACs...)                                             :        24
+Number of peptides after filter (PM...)                                                        :       225
+Number of peptides with one or more scenario                                                   :        22
+Cumulated number of scenarios                                                                  :        24
+
+SAMPLE SIZES for statistics: 21 peptides neg
+
+        # | score (deltaS ; pValue)     | mass        | access                    | id                   | dtbSeq / scenarios (shifts) 
+--------- | --------------------------- | ----------- | ------------------------- | -------------------- | -------------------- 
+ 1. (  2) |    116.165 (0.18 ; 0.0e+00) |  1635.91699 | P11940                    | PABP1_HUMAN          | LFPLIQAMHPTLAGK
+          |                             |             | DECOY_P11940              | PABP1_HUMAN          | lfPLIQAmh******      15.97 
+--------- | --------------------------- | ----------- | ------------------------- | -------------------- | -------------------- 
+ 2. (  2) |     20.547 (0.45 ; 0.0e+00) |  1396.73499 | P48668                    | K2C6C_HUMAN          | TLNNKFASFIDK
+          |                             |             | DECOY_P48668              | K2C6C_HUMAN          | **NNK-------        255.19 
+--------- | --------------------------- | ----------- | ------------------------- | -------------------- | -------------------- 
+ 3. (  2) |      9.301 (0.32 ; 5.6e-01) |  1270.70337 | Q9GZL7                    | WDR12_HUMAN          | LLKDKNEFHK
+          |                             |             | DECOY_Q9GZL7              | WDR12_HUMAN          | ----knEF**          381.22 
+--------- | --------------------------- | ----------- | ------------------------- | -------------------- | -------------------- 
+ 4. (  2) |      2.968 (0.48 ; 1.0e+00) |  1388.66187 | P11940                    | PABP1_HUMAN          | QAHLTNQYMQR
+          |                             |             | DECOY_P11940              | PABP1_HUMAN          | ------qyM**         263.17 
+--------- | --------------------------- | ----------- | ------------------------- | -------------------- | -------------------- 
+ 5. (  2) |      1.418 (1000 ; 1.0e+00) |  1274.71692 | P11216                    | PYGB_HUMAN           | AFVPRTVMIGGK
+          |                             |             | DECOY_P11216              | PYGB_HUMAN           | *********Ggk        377.16 
+--------- | --------------------------- | ----------- | ------------------------- | -------------------- | -------------------- 
+
+Processing time was:	0.620000
+
+
+NEXT______________________________________________________________
+
+Spectrum ID              : 1
+SpectrumTitle            : LC[cam]YVALDFEQEMATAASSSSLEK P63261
+initPeakNb               :         813
+peakNb after proc.       :          76
+ParentMass raw           :   850.72070
+ParentMass(M)/Charge     :  2549.16210 / 3      
+NodeNb                   :     227 
+EdgeNb (simple/double)   :     515 / 6708   
+
+
+________________________________________________________________________________
+
+
+Total number of proteins in databases                                                          :      1666
+Number of proteins after filter (taxonomy, ACs...)                                             :        24
+Number of peptides after filter (PM...)                                                        :       138
+Number of peptides with one or more scenario                                                   :        20
+Cumulated number of scenarios                                                                  :        21
+
+SAMPLE SIZES for statistics: 19 peptides neg
+
+        # | score (deltaS ; pValue)     | mass        | access                    | id                   | dtbSeq / scenarios (shifts) 
+--------- | --------------------------- | ----------- | ------------------------- | -------------------- | -------------------- 
+ 1. ( 10) |   1631.325 (0.00 ;    1000) |  2492.14502 | P63261                    | ACTG_HUMAN           | LCYVALDFEQEMATAASSSSLEK
+          |                             |             | P63261                    | ACTG_HUMAN           | **YVALDFEQEMATAASSSslEK   57.03 
+          |                             |             | P63261                    | ACTG_HUMAN           |                      
+          |                             |             | P63261                    | ACTG_HUMAN           |                      
+          |                             |             | P63261                    | ACTG_HUMAN           |                      
+          |                             |             | DECOY_P63261              | ACTG_HUMAN           |                      
+          |                             |             | DECOY_P63261              | ACTG_HUMAN           |                      
+          |                             |             | DECOY_P63261              | ACTG_HUMAN           |                      
+          |                             |             | DECOY_P63261              | ACTG_HUMAN           |                      
+          |                             |             | DECOY_P63261              | ACTG_HUMAN           |                      
+--------- | --------------------------- | ----------- | ------------------------- | -------------------- | -------------------- 
+ 2. (  2) |      7.804 (0.66 ;    1000) |  2190.19092 | P68871                    | HBB_HUMAN            | AHGKKVLGAFSDGLAHLDNLK
+          |                             |             | DECOY_P68871              | HBB_HUMAN            | *********Fsdgl-------  359.04 
+--------- | --------------------------- | ----------- | ------------------------- | -------------------- | -------------------- 
+ 3. (  2) |      5.135 (0.80 ;    1000) |  2320.20972 | P48668                    | K2C6C_HUMAN          | LALDVEIATYRKLLEGEECR
+          |                             |             | DECOY_P48668              | K2C6C_HUMAN          | *************Leg----  228.91 
+--------- | --------------------------- | ----------- | ------------------------- | -------------------- | -------------------- 
+ 4. (  2) |      4.131 (0.90 ;    1000) |  2385.16064 | P48668                    | K2C6C_HUMAN          | GSGGLGGACGGAGFGSRSLYGLGGSKR
+          |                             |             | DECOY_P48668              | K2C6C_HUMAN          | *****ggACG-----------------  164.09 
+--------- | --------------------------- | ----------- | ------------------------- | -------------------- | -------------------- 
+ 5. (  4) |      3.732 (1000 ;    1000) |  2272.18848 | Q80V08                    | Q80V08_MOUSE         | KSAEFLLHMLKNAESNAELK
+          |                             |             | P18621                    | Q80V08_MOUSE         | ---------------Nae**  277.09 
+          |                             |             | DECOY_Q80V08              | Q80V08_MOUSE         |                      
+          |                             |             | DECOY_P18621              | Q80V08_MOUSE         |                      
+--------- | --------------------------- | ----------- | ------------------------- | -------------------- | -------------------- 
+
+Processing time was:	12.220000
+
+
+NEXT______________________________________________________________
+
+Spectrum ID              : 2
+SpectrumTitle            : SAEFLLHM[ox]LK P18621
+initPeakNb               :         684
+peakNb after proc.       :          71
+ParentMass raw           :   602.81145
+ParentMass(M)/Charge     :  1203.62290 / 2      
+NodeNb                   :     110 
+EdgeNb (simple/double)   :     314 / 2916   
+
+
+________________________________________________________________________________
+
+
+Total number of proteins in databases                                                          :      1666
+Number of proteins after filter (taxonomy, ACs...)                                             :        24
+Number of peptides after filter (PM...)                                                        :       255
+Number of peptides with one or more scenario                                                   :        56
+Cumulated number of scenarios                                                                  :        58
+
+SAMPLE SIZES for statistics: 55 peptides neg
+
+        # | score (deltaS ; pValue)     | mass        | access                    | id                   | dtbSeq / scenarios (shifts) 
+--------- | --------------------------- | ----------- | ------------------------- | -------------------- | -------------------- 
+ 1. (  4) |     93.347 (0.19 ; 0.0e+00) |  1187.63721 | Q80V08                    | Q80V08_MOUSE         | SAEFLLHMLK
+          |                             |             | P18621                    | Q80V08_MOUSE         | saEFLLH***           15.99 
+          |                             |             | DECOY_Q80V08              | Q80V08_MOUSE         |                      
+          |                             |             | DECOY_P18621              | Q80V08_MOUSE         |                      
+--------- | --------------------------- | ----------- | ------------------------- | -------------------- | -------------------- 
+ 2. (  2) |     18.095 (0.39 ; 0.0e+00) |  1144.55530 | P11216                    | PYGB_HUMAN           | YEFGIFNQK
+          |                             |             | DECOY_P11216              | PYGB_HUMAN           | *EF------            59.04 
+--------- | --------------------------- | ----------- | ------------------------- | -------------------- | -------------------- 
+ 3. (  2) |      7.045 (0.93 ; 6.2e-01) |   933.52832 | P11940                    | PABP1_HUMAN          | SGVGNIFIK
+          |                             |             | DECOY_P11940              | PABP1_HUMAN          | ******FIK           270.12 
+--------- | --------------------------- | ----------- | ------------------------- | -------------------- | -------------------- 
+ 4. (  2) |      6.561 (1.00 ; 7.8e-01) |  1190.58997 | P11940                    | PABP1_HUMAN          | MNGMLLNDRK
+          |                             |             | DECOY_P11940              | PABP1_HUMAN          | ----LLndR*           12.97 
+--------- | --------------------------- | ----------- | ------------------------- | -------------------- | -------------------- 
+ 5. (  2) |      6.546 (1000 ; 7.9e-01) |  1061.62329 | P11940                    | PABP1_HUMAN          | KSGVGNIFIK
+          |                             |             | DECOY_P11940              | PABP1_HUMAN          | *******FIK          142.03 
+--------- | --------------------------- | ----------- | ------------------------- | -------------------- | -------------------- 
+
+Processing time was:	0.770000
+
+
+NEXT______________________________________________________________
+
+Spectrum ID              : 3
+SpectrumTitle            : DIVNM[ox]LM[ox]HHDR P11216
+initPeakNb               :         666
+peakNb after proc.       :          95
+ParentMass raw           :   706.81260
+ParentMass(M)/Charge     :  1411.62520 / 2      
+NodeNb                   :     128 
+EdgeNb (simple/double)   :     261 / 3126   
+
+
+________________________________________________________________________________
+
+
+Total number of proteins in databases                                                          :      1666
+Number of proteins after filter (taxonomy, ACs...)                                             :        24
+Number of peptides after filter (PM...)                                                        :       249
+Number of peptides with one or more scenario                                                   :        18
+Cumulated number of scenarios                                                                  :        22
+
+SAMPLE SIZES for statistics: 17 peptides neg
+
+        # | score (deltaS ; pValue)     | mass        | access                    | id                   | dtbSeq / scenarios (shifts) 
+--------- | --------------------------- | ----------- | ------------------------- | -------------------- | -------------------- 
+ 1. (  2) |     68.869 (0.19 ;    1000) |  1379.64380 | P11216                    | PYGB_HUMAN           | DIVNMLMHHDR
+          |                             |             | DECOY_P11216              | PYGB_HUMAN           | diVN***HHDR          31.98 
+--------- | --------------------------- | ----------- | ------------------------- | -------------------- | -------------------- 
+ 2. (  2) |     13.081 (0.43 ;    1000) |  1268.64734 | P48668                    | K2C6C_HUMAN          | SGFSSISVSRSR
+          |                             |             | DECOY_P48668              | K2C6C_HUMAN          | -------VS*SR        143.02 
+--------- | --------------------------- | ----------- | ------------------------- | -------------------- | -------------------- 
+ 3. (  2) |      5.572 (0.70 ;    1000) |  1430.77417 | P11216                    | PYGB_HUMAN           | FQNKTNGITPRR
+          |                             |             | DECOY_P11216              | PYGB_HUMAN           | *******ITprR        -19.09 
+--------- | --------------------------- | ----------- | ------------------------- | -------------------- | -------------------- 
+ 4. (  2) |      3.892 (0.86 ;    1000) |  1025.51416 | P48668                    | K2C6C_HUMAN          | SGFSSISVSR
+          |                             |             | DECOY_P48668              | K2C6C_HUMAN          | -------VS*          386.13 
+--------- | --------------------------- | ----------- | ------------------------- | -------------------- | -------------------- 
+ 5. (  2) |      3.364 (1000 ;    1000) |  1300.59436 | Q9GZL7                    | WDR12_HUMAN          | FCSGSWDKMLK
+          |                             |             | DECOY_Q9GZL7              | WDR12_HUMAN          | ****swdk---         111.07 
+--------- | --------------------------- | ----------- | ------------------------- | -------------------- | -------------------- 
+
+Processing time was:	0.920000
+
+
+NEXT______________________________________________________________
+
+
+
+RESULTS BY PROTEIN (MINIMUM PEPTIDE COVERAGE REQUIRED FOR DISPLAY IS 5): 
+
+NO CANDIDATE PROTEIN 

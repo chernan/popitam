@@ -1,0 +1,74 @@
+/* PARAMETERS POPULATION */
+
+Input dir              = ./
+Output dir             = RESULTS/ 
+DotFilename            = TREES/tree0.dot
+DataFilename           = data0.txt
+StatFilename           = STATS/stat0.txt	
+NbGeneration           = 100
+NbChromosome           = 300
+ProfondeurMaxInit      = 3
+ProfondeurMax          = 12
+PopulationInitiale     = 1
+
+/* PARAMETERS TERMINAL NODE */
+
+NbNodeTerm=13            // nombre de noeux terminaux differents.
+Convertion des differents types de nodes terminaux en cstes ou variables interpretables.
+(pas plus de 24 caracteres)
+#begin
+NodeTerm[0]   = "KS1_a"
+NodeTerm[1]   = "MS1_b"
+NodeTerm[2]   = "CS1_c"
+NodeTerm[3]   = "CS2_d"
+NodeTerm[4]   = "RC" 
+NodeTerm[5]   = "CS3_e"
+NodeTerm[6]   = "IS1_f"
+NodeTerm[7]   = "PS1_g"
+NodeTerm[8]   = "FS1_h"
+NodeTerm[9]   = "ES1_i";
+NodeTerm[10]  = "RS1_j";
+NodeTerm[11]  = "SS1_k";
+NodeTerm[12]  = "SS2_l";
+
+#end
+
+/* PARAMETERS NO TERMINAL NODE */
+
+NbNodeNTerm=5          // nombre de noeux non terminaux differents.
+Arite de chaque fonction.
+Arite[0] = 2
+Arite[1] = 2
+Arite[2] = 2
+Arite[3] = 2
+Arite[4] = 4
+
+Convertion des differents types de nodes terminaux en cstes ou variables interpretables.
+(pas plus de 24 caracteres)
+#begin
+NodenTerm[0]="+"
+NodenTerm[1]="-"
+NodenTerm[2]="*"
+NodenTerm[3]="/"
+NodenTerm[4]="ifless"
+#end
+
+/* PARAMETRES REPRODUCTION */
+Sélection          = 1       // méthode de sélection des individus parents.
+		             // 0 -> sélection par tournoi   1 -> sélection multi-objectif
+TournoiNumber      = 2;      // Number of adversaries for tournament operator.
+ProbaElitism       = 0.2    // probabilite de selection des individus parents parmis les solutions non-dominées. 
+ProbaCrossOver     = 0.3    // probabilite qu'une paire d'arbre fasse un crossOver.
+ProbaMutation      = 0.2    // probabilite d'un arbre de muter.
+ProbaPermutation   = 0.2    // probabilite qu'un noeud de l'arbre soit permute.
+ProbaMutationCoeff = 0.3    // probabilite qu'un arbre mute au niveau d'un coeeficient.
+ProbaMutConv       = 0.50    // probabilite que la mutation se fasse sur un node terminal.
+ProbaMutTrans      = 0.50    // probabilite que la mutation se fasse sur un node non terminal.
+PressionSelection  = 1.80    // pression de selection (biais vers l'elitisme).
+
+/* VALEURS COEFFICIENT */
+BorneInferieur = -100.0       // borne inferieur du coefficient.
+BorneSuperieur =  100.0       // borne superieur du coefficient.
+
+/* NOMS DES FICHIERS DOT CONTENANT LES STRUCTURES INITIALES */
+NbDotfile = 0

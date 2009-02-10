@@ -1,0 +1,4 @@
+popitam -r=NORMAL -s=UNKNOWN -m=0 -p=popParam.txt -d=test/TEST_0MOD.dta -f=dta -e=error.txt -o=stdout
+popitam -r=NORMAL -s=UNKNOWN -m=0 -p=popParam.txt -d=test/TEST_0MOD.mgf -f=mgf -e=error.txt -o=stdout
+popitam -r=NORMAL -s=UNKNOWN -m=1 -p=popParam.txt -d=test/TEST_1MOD.mgf -f=mgf -e=error.txt -o=stdout
+popitam -r=NORMAL -s=UNKNOWN -m=2 -p=popParam.txt -d=test/TEST_2MOD.mgf -f=mgf -e=error.txt -o=stdout

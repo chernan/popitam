@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+  <idi:PeptSpectraIdentifications  xmlns:idi="namespace/PeptSpectra.html">
+    <idi:OneSample>
+      <idi:header>
+        <idi:instrument>n/a</idi:instrument>
+        <idi:spectrumType>msms</idi:spectrumType>
+        <idi:date>2004-21-13</idi:date>
+        <idi:time>05:21:21</idi:time>
+        <ple:ItemOrder  xmlns:ple="namespace/PeakListExport.html">
+          <ple:item type="mass"/>
+          <ple:item type="snratio"/>
+          <ple:item type="charge"/>
+        </ple:ItemOrder>
+      </idi:header>
+    <idi:Identifications>
+      <idi:OneIdentification>
+        <idi:answer>
+          <idi:sequence>HGTVVLTALGGILK</idi:sequence>
+          <idi:modif>:::::::::::::::</idi:modif>
+          <idi:charge>2</idi:charge>
+        </idi:answer>
+        <ple:peptide   xmlns:ple="namespace/PeakListExport.html">
+        <ple:PeptideDescr>Cmpd 174, +MSn(690.08) 29.0 min</ple:PeptideDescr>
+        <ple:ParentMass><![CDATA[690.069 342869.0 2,3]]></ple:ParentMass>
+        <ple:peaks><![CDATA[
+194.849	1603.0	0
+242.001	1059.0	0
+253.046	559.0	0
+259.947	702.0	0
+267.519	481.0	0
+295.123	661.0	0
+296.141	878.0	0
+299.158	425.0	0
+312.847	647.0	0
+321.617	601.0	0
+]]></ple:peaks>
+        </ple:peptide>
+      </idi:OneIdentification>
+      <idi:OneIdentification>
+        <idi:answer>
+          <idi:sequence>HGTVVLTALGGILK</idi:sequence>
+          <idi:modif>:::::::::::mymod_01::::</idi:modif>
+          <idi:charge>2</idi:charge>
+        </idi:answer>
+        <ple:peptide   xmlns:ple="namespace/PeakListExport.html">
+        <ple:PeptideDescr>Cmpd 174, +MSn(690.08) 29.0 min</ple:PeptideDescr>
+        <ple:ParentMass><![CDATA[740.069 342869.0 2,3]]></ple:ParentMass>
+        <ple:peaks><![CDATA[
+194.849	1603.0	0
+242.001	1059.0	0
+253.046	559.0	0
+259.947	702.0	0
+267.519	481.0	0
+295.123	661.0	0
+296.141	878.0	0
+299.158	425.0	0
+312.847	647.0	0
+321.617	601.0	0
+333.745	762.0	0
+334.135	593.0	0
+337.3	526.0	0
+]]></ple:peaks>
+        </ple:peptide>
+      </idi:OneIdentification>
+    </idi:Identifications>
+  </idi:OneSample>
+</idi:PeptSpectraIdentifications>

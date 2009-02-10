@@ -1,0 +1,117 @@
+<olavWideBaf:WideBafParameters name="wb_test"  xmlns:olavWideBaf="http://www.phenyx.com/namespace/olavWideBaf.html">
+  <olavWideBaf:parentMaxCharge>4</olavWideBaf:parentMaxCharge>
+  <olavWideBaf:fragTolerance  value="5" unit="ppm"/>
+  <ExpMsMsSpectrumAlgo>
+    <oneExpMsMsSpectrumAlgo type="filter"  name="dummy">
+      <field>probability</field>
+      <comparator>ge</comparator>
+      <threshold type="nFix" value="300"/>
+    </oneExpMsMsSpectrumAlgo>
+    <oneExpMsMsSpectrumAlgo type="filter"  name="dummy">
+      <field>height</field>
+      <comparator>ge</comparator>
+      <threshold type="nFix" value="400"/>
+    </oneExpMsMsSpectrumAlgo>
+  </ExpMsMsSpectrumAlgo>
+  <olavWideBaf:OneMsMsScoring>
+<olavGrossBaf:GrossBafParameters name="GrossBaf_1.0"  xmlns:olavGrossBaf="http://www.phenyx.com/namespace/olavGrossBaf.html">
+  <olavGrossBaf:parentMaxCharge>4</olavGrossBaf:parentMaxCharge>
+  <olavGrossBaf:fragTolerance  value="5" unit="ppm"/>
+  <olavGrossBaf:fragScoring charge="2" minBitPerSeries="0.15" numRndPept="100">
+    <olavGrossBaf:score fragType="b" foundWeight="4.56012" notFoundWeight="-0.250311" bit="1.4688" trueFoundProb="0.22326" falseFoundProb="0.00233547" trueFoundNum="2356" falseFoundNum="227791"/>
+    <olavGrossBaf:score fragType="b-H2O" foundWeight="4.71845" notFoundWeight="-0.227083" bit="1.39278" trueFoundProb="0.204601" falseFoundProb="0.00182688" trueFoundNum="1217" falseFoundNum="129182"/>
+    <olavGrossBaf:score fragType="y" foundWeight="5.3681" notFoundWeight="-0.650156" bit="3.7112" trueFoundProb="0.479202" falseFoundProb="0.0022345" trueFoundNum="2356" falseFoundNum="227791"/>
+    <olavGrossBaf:score fragType="y-H2O" foundWeight="4.28864" notFoundWeight="-0.12919" bit="0.759" trueFoundProb="0.122673" falseFoundProb="0.0016835" trueFoundNum="913" falseFoundNum="109296"/>
+  </olavGrossBaf:fragScoring>
+  <olavGrossBaf:fragScoring charge="3" minBitPerSeries="0.1" numRndPept="100">
+    <olavGrossBaf:score fragType="b" foundWeight="5.45563" notFoundWeight="-0.215253" bit="1.52955" trueFoundProb="0.194332" falseFoundProb="0.00083022" trueFoundNum="247" falseFoundNum="24090"/>
+    <olavGrossBaf:score fragType="b-H2O" foundWeight="4.66667" notFoundWeight="-0.0944549" bit="0.612052" trueFoundProb="0.0909091" falseFoundProb="0.000854869" trueFoundNum="143" falseFoundNum="15207"/>
+    <olavGrossBaf:score fragType="y" foundWeight="5.15396" notFoundWeight="-0.337243" bit="2.13736" trueFoundProb="0.287449" falseFoundProb="0.00166044" trueFoundNum="247" falseFoundNum="24090"/>
+    <olavGrossBaf:score fragType="y-H2O" foundWeight="4.37154" notFoundWeight="-0.0609375" bit="0.37733" trueFoundProb="0.0598291" falseFoundProb="0.000755744" trueFoundNum="117" falseFoundNum="13232"/>
+  </olavGrossBaf:fragScoring>
+</olavGrossBaf:GrossBafParameters>
+  </olavWideBaf:OneMsMsScoring>
+  <olavWideBaf:OneMsMsScoring>
+<olavIntensitySlice:IntensitySliceParameters name="IntensitySlice_1.0"  xmlns:olavIntensitySlice="http://www.phenyx.com/namespace/olavIntensitySlice.html">
+  <olavIntensitySlice:parentMaxCharge>4</olavIntensitySlice:parentMaxCharge>
+  <olavIntensitySlice:nbIntensitySlices>5</olavIntensitySlice:nbIntensitySlices>
+  <olavIntensitySlice:fragTolerance  value="5" unit="ppm"/>
+  <olavIntensitySlice:fragScoring charge="2">
+    <olavIntensitySlice:score fragType="a">
+      <olavIntensitySlice:matchWeight> 0.510826 0.57145 0.136132 -0.182322 -2.26176</olavIntensitySlice:matchWeight>
+      <olavIntensitySlice:matchProb> 0.333333 0.354167 0.229167 0.166667 0.0208333</olavIntensitySlice:matchProb>
+    </olavIntensitySlice:score>
+    <olavIntensitySlice:score fragType="a-H2O">
+      <olavIntensitySlice:matchWeight> -0.470004 1.32176 0.223144 0.628609 -0.470004</olavIntensitySlice:matchWeight>
+      <olavIntensitySlice:matchProb> 0.125 0.75 0.25 0.375 0.125</olavIntensitySlice:matchProb>
+    </olavIntensitySlice:score>
+    <olavIntensitySlice:score fragType="a-NH3">
+      <olavIntensitySlice:matchWeight> 1.60944 1.60944 1.60944 2.30259 1.60944</olavIntensitySlice:matchWeight>
+      <olavIntensitySlice:matchProb> 1 1 1 2 1</olavIntensitySlice:matchProb>
+    </olavIntensitySlice:score>
+    <olavIntensitySlice:score fragType="b">
+      <olavIntensitySlice:matchWeight> -0.100083 0.0373875 0.150061 0.205852 -0.336472</olavIntensitySlice:matchWeight>
+      <olavIntensitySlice:matchProb> 0.180952 0.207619 0.232381 0.245714 0.142857</olavIntensitySlice:matchProb>
+    </olavIntensitySlice:score>
+    <olavIntensitySlice:score fragType="b-H2O">
+      <olavIntensitySlice:matchWeight> -0.293073 0.223144 0.315517 0.223144 -0.725937</olavIntensitySlice:matchWeight>
+      <olavIntensitySlice:matchProb> 0.149194 0.25 0.274194 0.25 0.0967742</olavIntensitySlice:matchProb>
+    </olavIntensitySlice:score>
+    <olavIntensitySlice:score fragType="b-NH3">
+      <olavIntensitySlice:matchWeight> -0.0953102 1.15745 0.820981 -0.788457 -0.788457</olavIntensitySlice:matchWeight>
+      <olavIntensitySlice:matchProb> 0.181818 0.636364 0.454545 0.0909091 0.0909091</olavIntensitySlice:matchProb>
+    </olavIntensitySlice:score>
+    <olavIntensitySlice:score fragType="y">
+      <olavIntensitySlice:matchWeight> -1.22911 -1.08803 -0.551229 0.226683 0.94081</olavIntensitySlice:matchWeight>
+      <olavIntensitySlice:matchProb> 0.0585106 0.0673759 0.115248 0.250887 0.512411</olavIntensitySlice:matchProb>
+    </olavIntensitySlice:score>
+    <olavIntensitySlice:score fragType="y-H2O">
+      <olavIntensitySlice:matchWeight> 0.0779615 0.158004 0.537494 -0.10436 -1.02065</olavIntensitySlice:matchWeight>
+      <olavIntensitySlice:matchProb> 0.216216 0.234234 0.342342 0.18018 0.0720721</olavIntensitySlice:matchProb>
+    </olavIntensitySlice:score>
+    <olavIntensitySlice:score fragType="y-NH3">
+      <olavIntensitySlice:matchWeight> 0.356675 0.579818 0.76214 0.0689929 -1.02962</olavIntensitySlice:matchWeight>
+      <olavIntensitySlice:matchProb> 0.285714 0.357143 0.428571 0.214286 0.0714286</olavIntensitySlice:matchProb>
+    </olavIntensitySlice:score>
+  </olavIntensitySlice:fragScoring>
+  <olavIntensitySlice:fragScoring charge="3">
+    <olavIntensitySlice:score fragType="a">
+      <olavIntensitySlice:matchWeight> 0.916291 0.916291 2.0149 0.916291 0.916291</olavIntensitySlice:matchWeight>
+      <olavIntensitySlice:matchProb> 0.5 0.5 1.5 0.5 0.5</olavIntensitySlice:matchProb>
+    </olavIntensitySlice:score>
+    <olavIntensitySlice:score fragType="a-H2O">
+      <olavIntensitySlice:matchWeight> 0 0 0 0 0</olavIntensitySlice:matchWeight>
+      <olavIntensitySlice:matchProb> 0 0 0 0 0</olavIntensitySlice:matchProb>
+    </olavIntensitySlice:score>
+    <olavIntensitySlice:score fragType="a-NH3">
+      <olavIntensitySlice:matchWeight> 0 0 0 0 0</olavIntensitySlice:matchWeight>
+      <olavIntensitySlice:matchProb> 0 0 0 0 0</olavIntensitySlice:matchProb>
+    </olavIntensitySlice:score>
+    <olavIntensitySlice:score fragType="b">
+      <olavIntensitySlice:matchWeight> -0.0434851 0.0618754 -0.2948 0.157186 0.467341</olavIntensitySlice:matchWeight>
+      <olavIntensitySlice:matchProb> 0.191489 0.212766 0.148936 0.234043 0.319149</olavIntensitySlice:matchProb>
+    </olavIntensitySlice:score>
+    <olavIntensitySlice:score fragType="b-H2O">
+      <olavIntensitySlice:matchWeight> 0.510826 -0.182322 0.510826 -0.182322 0.733969</olavIntensitySlice:matchWeight>
+      <olavIntensitySlice:matchProb> 0.333333 0.166667 0.333333 0.166667 0.416667</olavIntensitySlice:matchProb>
+    </olavIntensitySlice:score>
+    <olavIntensitySlice:score fragType="b-NH3">
+      <olavIntensitySlice:matchWeight> 0 0 0 0 0</olavIntensitySlice:matchWeight>
+      <olavIntensitySlice:matchProb> 0 0 0 0 0</olavIntensitySlice:matchProb>
+    </olavIntensitySlice:score>
+    <olavIntensitySlice:score fragType="y">
+      <olavIntensitySlice:matchWeight> -0.559616 -0.074108 -0.074108 0.251314 0.496437</olavIntensitySlice:matchWeight>
+      <olavIntensitySlice:matchProb> 0.114286 0.185714 0.185714 0.257143 0.328571</olavIntensitySlice:matchProb>
+    </olavIntensitySlice:score>
+    <olavIntensitySlice:score fragType="y-H2O">
+      <olavIntensitySlice:matchWeight> 0.510826 0.510826 0.510826 1.20397 -0.182322</olavIntensitySlice:matchWeight>
+      <olavIntensitySlice:matchProb> 0.333333 0.333333 0.333333 0.666667 0.166667</olavIntensitySlice:matchProb>
+    </olavIntensitySlice:score>
+    <olavIntensitySlice:score fragType="y-NH3">
+      <olavIntensitySlice:matchWeight> 0 0 0 0 0</olavIntensitySlice:matchWeight>
+      <olavIntensitySlice:matchProb> 0 0 0 0 0</olavIntensitySlice:matchProb>
+    </olavIntensitySlice:score>
+  </olavIntensitySlice:fragScoring>
+</olavIntensitySlice:IntensitySliceParameters>
+  </olavWideBaf:OneMsMsScoring>
+</olavWideBaf:WideBafParameters>

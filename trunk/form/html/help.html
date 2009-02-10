@@ -1,0 +1,319 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Popitam form help</title>
+</head>
+<body style="color: rgb(0, 0, 0); background-color: rgb(204, 204, 255);"
+ alink="#000099" link="#000099" vlink="#990099">
+<br>
+<center>
+<h1>Popitam Help</h1>
+</center>
+<br>
+<br>
+<a name="top"></a>
+<table style="width: 100%; text-align: center;" border="1">
+  <tbody>
+    <tr>
+      <td><a href="#formhelp">Form help</a> </td>
+      <td><a href="#outputhelp">Output help</a> </td>
+    </tr>
+  </tbody>
+</table>
+<h1><a name="formhelp"></a>Form help</h1>
+<br>
+<ol>
+  <li>
+    <h2><a name="examples"></a>About the examples</h2>
+    <br>
+    <ol>
+      <li>Example 1 comprises five spectra of peptides with one oxidation on methionine, or with one cystein carbamidomethylation.<br>
+        <br>
+        <ul>
+          <li>LFPLIQAM[ox]HPTLAGK (P1194)<br>
+          </li>
+          <li>LC[cam]YVALDFEQEMATAASSSSLEK (P63261)<br>
+          </li>
+          <li>SAEFLLHM[ox]LK (P18621)<br>
+          </li>
+          <li>DIVNM[ox]LM[ox]HHDR (P11216)<br>
+          </li>
+          <li>LC[cam]YVALDFEQEMATAASSSSLEK (P63261)<br>
+            <br>
+          </li>
+        </ul>
+      </li>
+      <li>Example 2 comprises one spectrum of a peptide with two cystein carbamidomethylations.<br>
+        <br>
+        <ul>
+          <li>VFNC[cam]ISYSPLC[cam]K (Q9GZL7)<br>
+          </li>
+        </ul>
+        <br>
+      </li></ol></li>
+      <a href="#top">Top</a> <li>
+        <h2><a name="data"></a>Data file</h2>
+Browse your computer's hard disk to find the file containing the 
+MS/MS peak list(s) to submit. Take care of selecting the appropriate 
+format (mgf, dta) in the format field. </li>
+      <br>
+      <a href="#top">Top</a> <li>
+        <h2><a name="dataformat"></a>Data file format</h2>
+Popitam accepts two formats: mgf (used by Mascot), dta (used by Sequest).<br>
+Please note that in mgf, the headers are not read by Popitam.</li>
+      <br>
+      <a href="#top">Top</a> <li>
+        <h2><a name="database"></a>Database</h2>
+Choose one or several databases (use the shift or ctrl keys to make
+multiple selections). Please note that Popitam does not use annotations
+about post-translational modifications in the database annotations. </li>
+      <br>
+      <a href="#top">Top</a> <li>
+       <h2><a name="aclist"></a>AC list</h2>
+Indicate in this box a list of protein accession number (ACs) separated by spaces, to use
+as a filter.</li>
+      <br>
+      <a href="#top">Top</a> <li>
+        <h2><a name="instrument"></a>Instrument</h2>
+Specify the type of mass spectrometer that was used to collect the data.</li>
+      <br>
+      <a href="#top">Top</a> <li>
+        <h2><a name="fragmenterr"></a>Fragment error</h2>
+Specify an error tolerance (in Dalton) for MS/MS fragment ion mass values. </li>
+      <br>
+      <a href="#top">Top</a> <li>
+        <h2><a name="exmodifs"></a>Expected post-translational 
+        modifications (fixed, variable)</h2>
+These options are not available for the moment. If your data 
+contain amino acids with chemical modifications, the latter 
+will be treated as unexpected modifications.</li>
+      <br>
+      <a href="#top">Top</a> <li>
+        <h2><a name="enzyme"></a>Enzyme</h2>
+Choose one digestion enzyme in the given list. Available enzymes are: 
+Trypsin, LysC, LysN, CNBr, ArgC, AspN, AspN + GluN, AspN + LysC, 
+AspN + GluN + LysC, GluC bicarbonate, GluC phosphate, 
+Chymotrypsin Low, Chymotrypsin High, Tryp + Chymo, Pepsin pH 1.3, 
+Pepsin pH > 2, and Proteinase K.</li>
+      <br>
+      <a href="#top">Top</a> <li>
+        <h2><a name="missedcleav"></a>Missed-cleavage</h2>
+Specify 1 if you want to analyse peptides with 1 missed cleavage or 0 instead. </li>
+      <br>
+      <a href="#top">Top</a> <li>
+        <h2><a name="scoring"></a>Scoring file (scenario scoring functions)</h2>
+Popitam provides the possibility to define an own 
+<a href="glossaire.html#functions">scenario scoring function</a>,
+as long as it is written in the appropriate format and based on
+Popitam's <a href="glossaire.html#functions">subscores</a>. 
+Customized scoring functions can then be tested using the web interface.</li>
+      <br>
+      <a href="#top">Top</a> <li>
+        <h2><a name="modGapNb"></a>modGap number</h2>
+Popitam builds scenarios with 1 or 2 modGaps and allows to identify 
+peptides with one or more modifications. Specify here the wanted number 
+(1 or 2) of <a href="glossaire.html#modGaps">modGaps</a> in the scenarios. <br>
+      </li>
+      <br>
+      <a href="#top">Top</a> <li>
+        <h2><a name="parenterr"></a>Precursor mass range</h2>
+Allowed deviation (in Dalton) between the precursor mass from the
+spectrum and the mass of candidate peptides from the database.
+      </li>
+      <br>
+      <a href="#top">Top</a> <li>
+        <h2><a name="gapmass"></a>modGap mass range</h2>
+Specify the mass range (in Daltons) of the <a href="glossaire.html#modGaps">modGaps</a>. <br>
+      </li>
+      <br>
+      <a href="#top">Top</a> <li>
+        <h2><a name="toppeptides"></a>Number of displayed peptides</h2>
+Choose the number of peptides to display in the results for each spectrum. </li>
+      <br>
+      <a href="#top">Top</a> <li>
+        <h2><a name="mail"></a>Email address</h2>
+Specify your email adress if you wish to receive the results by email. </li>
+      <br>
+      <a href="#top">Top</a>
+    </ol>
+    <br>
+    <br>
+    <h1><a name="outputhelp"></a>Output help</h1>
+    <br>
+    <ol>
+      <li>
+        <h2><a name="processed"></a>Total number of protein processed</h2>
+Total number of proteins in the chosen database.<br>
+      </li>
+      <br>
+      <a href="#top">Top</a> <li>
+        <h2><a name="pdigestion"></a>Peptides obtained after digestion</h2>
+After theoretical digestion of proteins, this line gives the
+number of obtained peptides. </li>
+      <br>
+      <a href="#top">Top</a> <li>
+        <h2><a name="panalyze"></a>Candidate peptides presented for
+further analysis</h2>
+Number of peptides that passed through the <a
+ href="help.html#parenterr">precursor mass filter</a>. </li>
+      <br>
+      <a href="#top">Top</a> <li>
+        <h2><a name="pscenario"></a>Candidate peptides with one or more
+valuable scenarios</h2>
+Number of peptides that lead to an identification score. </li>
+      <br>
+      <a href="#top">Top</a> <li>
+        <h2><a name="statsize"></a>Sample size for statistics</h2>
+Size of the set of peptides used to compute the <a
+ href="help.html#pvalue">p-value</a>.<br>
+      </li>
+      <br>
+      <a href="#top">Top</a> <li>
+        <h2><a name="scores"></a>Output scores</h2>
+Popitam's output includes three scores: <br>
+        <ol>
+          <li><span style="font-weight: bold;"> the <a href="help.html#outputscore">scenario score</a></span> which is
+computed using one of the three complexe <a href="./glossaire.html#functions">functions</a> learned by <a
+ href="glossaire.html#geneticProgramming">Genetic Programming</a> or
+the
+user specified scoring function </li>
+          <li><span style="font-weight: bold;">a <a
+ href="help.html#deltascore">delta score</a></span> (comprised between
+0
+and 1) which is based on the difference between the score and the next
+ranked score (similar to Sequest's deltaScore). <br>
+          </li>
+          <li><span style="font-weight: bold;">a "pseudo" <a
+ href="help.html#pvalue">p-value</a></span> (comprised between 0 and
+1)
+which gives an idea of the deviation between the score of the peptide
+and the distribution of scores.<br>
+            <br>
+          </li>
+        </ol>
+In Popitam, result validation cannot be based only on the p-value, but
+also requires manual interpretation. <br>
+        <span style="font-weight: bold;">At the moment, the best way to
+distinguish correct matches from random ones is to consider several
+parameters, including the distribution of high-ranked peptides, the
+proposed scenario and the reported mass shifts associated with modGaps.
+        </span><br>
+        <br>
+      </li>
+      <li>
+        <h2><a name="outputscore"></a>Scenario score</h2>
+The scenario score is computed using one of the complexe <a href="./glossaire.html#functions">functions</a> learned by <a
+ href="glossaire.html#geneticProgramming">Genetic Programming</a> or
+the
+user's specified scoring function. <br>
+It measures how the <a href="./glossaire.html#runjumppath">run-and-jump</a>
+path found by Popitam can fit the candidate peptide sequence. <br>
+        <br>
+      </li>
+      <a href="#top">Top</a> <li>
+        <h2><a name="deltascore"></a>Delta score</h2>
+The deltaScore for a given peptide is obtained by dividing the score of
+the next ranked peptide by the score of the peptide. For the last
+peptide, the deltaScore cannot be computed and is replaced by '-'.<br>
+        <br>
+        <a href="#top">Top</a> </li>
+      <li>
+        <h2><a name="pvalue"></a>p-value</h2>
+The p-values mirrors the probability of obtaining a score
+greater or equal to an observed score in a given distribution by chance.<br>
+In Popitam, it is computed on-the-fly from the mean and variance of the
+score distribution (the distribution is assumed to be gaussian). As we
+are not guaranteed that the negative distribution is actually gaussian,
+the value reported by Popitam is not a 'true' probability, but a
+measure that gives an idea of the deviation between the score of the first
+ranked peptide and the score distribution. In addition, when the AC
+filter is used, the statistics are often not sufficient to compute
+meaningfull p-values. <span style="font-weight: bold;"><br>
+Therefore, Popitam's p-value has to be considered with precaution, and
+the decision to accept or reject a match should not be based on the
+sole
+p-value. </span><br>
+When a small number (less than 20) of candidate peptides have been
+scored, the p-value is not computed and replaced by '-'. The size of
+the score distribution is indicated in the output (<span
+ style="font-style: italic;">sample size for statistics</span>). <br>
+        <br>
+        <a href="#top">Top</a> </li>
+      <li>
+        <h2><a name="outputmass"></a>Mass</h2>
+The reported mass is the monoisotopic mass (Mr) computed for the theoretical peptide.<br>
+      </li>
+      <br>
+      <a href="#top">Top</a> <li>
+        <h2><a name="outputdelta"></a>Delta mass</h2>
+Deviation between the observed precursor mass (experimental mass) and
+the mass of the theoretical peptide.<br>
+      </li>
+      <br>
+      <a href="#top">Top</a> <li>
+        <h2><a name="result"></a>Spectrum interpretation (Peptide / scenario (shifts))</h2>
+The spectrum interpretation column gives the best <a
+ href="./glossaire.html#scenario">scenario</a> found by Popitam for the
+theoretical peptide. <br>
+        <br>
+      </li>
+      <a href="#top">Top</a> <li>
+        <h2><a name="idaclist"></a>Found in ID(AC)</h2>
+List of all the proteins in selected database where the peptide has been found.<br>
+      </li>
+      <br>
+      <a href="#top">Top</a> <li>
+        <h2><a name="noresult"></a>What if Popitam cannot find any result ?</h2>
+The most current explanations are:
+        <ul>
+          <li>Parameters are too restrictives, try again with broader ranges.</li>
+          <li>If you used AC filter, please check that the AC you gave are in the selected database.</li>
+        </ul>
+      </li>
+      <br>
+      <a href="#top">Top</a>
+    </ol>
+  </li>
+</ol>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</body>
+</html>

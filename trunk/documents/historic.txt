@@ -1,0 +1,396 @@
+HISTORIC
+
+2005_12_01 CVS tag popitam_withsufftree
+
+2005_05_02 Initial version CVS
+
+TAGOPOP_04_09_09
+- plusieurs bugs qui restaient dans la version 09_09 concernant la construction
+  des scenarios ont été corrigés.
+- la construction des scenario a été vérifiée avec sp_creator. Tout semble 
+  marcher correctement.
+- l'affichage a été légèrement modifié.
+- cette version devrait être fonctionnelle.
+
+TAGOPOP_04_09_09
+- je retire la règle qui exige qu'un tag qui commence à la position 0 commence
+  également au noeud 0 (et réciproquement last position termine en PM), afin 
+  d'autoriser les modifs sur les terminaux.
+- modification de l'algo. pour les scenarios + calcule des scores de couverture
+  et d'erreur.
+- quand popitam est lancé en mode -f, il créé plusieurs sets pour chaque 
+  spectre, avec chaque fois des négatifs différents. Ceci permettra d'avoir 
+  des sets d'apprentissage beaucoup plus variés (plus de négatifs pour chaque
+  spectre), mais de les rentrer en mémoire un par un (à chaque génération) 
+  avec l'algo. de programmation génétique.
+
+TAGOPOP_04_08_25b
+- arrete d'include le score d'olav, car je ne suis pas certaine qu'il puisse
+  correctement gérer les arrangements.
+- rajouté à tous les scores un indice alphabétique dans leur nom pour vérifier
+  plus facilement qu'ils sont bien dans le bon ordre (pour l'affichage pour la 
+  programmation génétique)
+- rajouté les 3 nouveaux ss-scores: lakScore1 qui représente le nombre de lacks
+  le modScore1 qui représente le nombre d'hypothèses de modifs ou mut et 
+  le covScore4 qui représente une couverture qui prend aussi en compte les lacks.
+- le display est modifié; désormais, les sous-séquences sont triées par ordre
+  de position dans les arrangements, ce qui permet d'afficher le chemin parcouru
+  sur une seule ligne. Les gaps dus à des lack sont notés par des tirets.
+- l'incorporation des scores d'olav n'est toujours pas terminée.
+- la différence entre scénario modif/mut n'est pas encore tout à fait
+  terminée. La fonction est implémentée, mais il faut encore tenir compte
+  des nouveaux sous-scores pour la fonction de score, et aussi pour la
+  programmation génétique. Ce qui maintenant complété pour cette version.
+
+
+TAGOPOP_04_08_25
+- l'incorporation des scores d'olav n'est toujours pas terminée.
+- je fais une différence entre scénario de modif/mut et scénario de manque d'info.
+  (modification dans les fonctions de scorings, et ajouts de sous-scores)
+
+
+TAGOPOP_04_07_23
+- cela n'a rien à voir, mais c'est pour mémoire: Carbamidomethyl (C),Carboxymethyl (C),Oxidation (M)
+- en mode -f, je ne garde que les x premiers négatifs (et pas 1 sur x)
+- incorporation de la fonction de score de Phenyx (pas fini)
+- rajouté un qsort pour que les sous-seqs soient classées par position 
+  dans les arrangements
+- mis un pruning pour le nombre d'arrangement: un arrangment n'est gardé
+  que s'il obtient un score de recouvrement global d'au moins 50%.
+
+TAGOPOP_04_04_19
+- pour l'allongement: je regarde aux positions -2 et +2 de beginPos et
+  endPos en tenant compte du delta. 
+- corrigé un BUG!!! lors de subSeq::updateCurrentTag. NodNb était faux.
+- les tags qui ont plusieures occurences sont démultipliés avant la
+  fonction tags2subseqs(), ceci afin de pouvoir ensuite les allonger
+  sans problèmes.
+- mis sous off les modifs. prévues. Je ne veux plus du tout en tenir 
+  compte, ou alors, si je le remets, il faudra créer spécifiquement
+  les peptides avec les mutations, et non seulement leurs masses.
+
+
+TAGOPOP_04_03_31
+- modifié les sous-scores: bornés entre 0 et 1, changé quelques calculs,
+  rajouté un score de régression, un score de long. max de sousseq, un 
+  score de séries, et enlevé d'autres scores
+- rajouté la séquence modifiée si elle existe pour le display
+- changé theoSeq et theoSeqMod en:
+  seqSpec, qui correspond à la séquence telle qu'elle est dans le spectre
+  et donc qui correspond également à la masse parente observée
+  seqAsInDtb, qui correspond à la séquence telle qu'elle est dans la dtb
+  (utilisé pour compter les identifications correctes)
+
+- de plus, theoMass est supprimée
+
+TAGOPOP_04_03_17
+
+- revu la sortie de statistique. Ajouté les stats sur le nombre de noeuds et de ponts selon la longueur estimée (= la binsize).
+
+TAGOPOP_04_02_27
+- rajouté un output par protéine
+- fait plusieurs changements et débuggages qui n'ont pas été référencés ici
+
+TAGOPOP 04_12_16
+- je rajoute les classes protResults.cc/h et protElement.cc/h.
+
+
+TAGOPOP 04_02_12
+- désormais, Popitam accepte d'essayer d'identifier des spectres qui ont très peu
+  de pics. Il indique juste des warnings.
+- séparé le constructeur de data() en un constructeur vide et une fonction init();
+- remplacé la fonction data::cutPeaks() par data::putBins();
+- l'output de Tagopop est réimplémenté.
+
+TAGOPOP04_02_x
+- quelques bugs ont été corrigés!
+- le processing des tags est également modifié. La position des tags entre eux
+  est analysée et utilisée pour savoir s'ils sont compatibles ou non.
+
+TAGOPOP04_02_03
+- rajouté l'option -m pour mutations, qui s'ajoute à toutes les autres. On lance
+maitenant comme suit: tagopop -i -m ou tagopop -n -m...
+Si l'option -m manque, l'identification ne prend pas en compte de possibles 
+mutations/modifications non connues.
+
+
+TAGOPOP04_01_13
+- modifié l'output pour la programmation génétique: les spectres/peptides/arrangements
+sortent dans l'ordre de passage, avec trace du numéro de peptide (comme avant)
+et en plus du numéro de spectre. Cela pourra être utilisé par la fonction de
+fitness de PRED.
+
+
+TAGOPOP03_12_16
+- corrigé quelques BUGS! (scoring, et gestion de la liste dans result.cc)
+- modifié les noms des scores pour les rendre plus génériques
+- modifié légèrement l'output du mode f, car PRED a besoin de savoir quels scores
+  correspondent à un même peptide. J'ai donc ajouté un indice de peptide dans
+  subseq::writeScoresForFun();
+- modifié le score des familles dans subseq::computeFamScore(). Le score n'est plus 
+  construit à partir du nombre de tags sources, mais à partir du la taille de famille
+  des noeuds parcourus par les tags. Cela permet de passer outre un problème 
+  d'enchevêtrement de familles dans les sous-séquences, qu'on ne peut pas résoudre, 
+  et qui est génant pour le score (mais pas pour la recherche des cliques)
+
+TAGOPOP03_12_02
+- modifié légèrement la connection du graphe: désormais, si je tente de connecter
+  n'importe quel noeud avec le noeud initial ou final, c'est l'erreur2 qui est prise
+  en compte. Cela permet, même si la masse parente est peu précise, de relier le noeud
+  0 à un premier pic qui serait y.
+- corrigé un petit bug dans graphe::buildVertex()
+- mise en place du mode -f pour function learning. Avec ce mode, Tagopop génère un
+  fichier appelé OUT.gen qui sert d'entrée pour la programmation génétique.
+
+TAGOPOP03_11_04
+- les scores des arrangements ne sont plus mémorisés (libère de la mémoire)
+- la taille minimale des tags est maintenant calculée en fonction de la masse
+  parente avec un rapport de 1/4 par rapport à la longueur estimée de la séquence
+  (formule: masseParente/111= longueur estimée. Taille min = 1/4 longueur)
+  (en fait, dans defines.h, on peut régler le rapport (1/4, 1/5...))
+  (et avec un minimum de 2)
+
+- l'output est simplifié. Vu que les scores vont être multipliés, seul le score
+  final est indiqué dans l'output à l'écran. Les autres scores seront tous
+  sauvegardés ultérieurement dans un fichier qui sera utilisé par la programmation
+  génétique.
+
+- création de séquences consensus à partir des sous-seqs (=tableaux d'entiers);
+  Il y a 3 tableaux: consensus, consensusSimple et consensusDouble. A partir
+  de ces tableaux sont computés les covScores (maintenant au nombre de 3)
+
+
+TAGOPOP03_10_01
+- changement dans les fichiers input de probabilités ioniques: j'ai rajouté
+  les probabilités pour toutes les bins et modifié le programme en conséquence
+- développement de la partie statistique
+
+TAGOPOP03_09_25
+- modification dans l'affichage des scores (pour les doublons)
+TAGOPOP03_09_23
+- rien de particulier par rapport à la version précédente
+TAGOPOP03_09_9
+- l'intégration s'est faite avec peine et douleur. Il reste probablement
+  quelques bugs, et pas mal de choses ont bougé. Il y a encore une mauvaise
+  gestion des modifications (pas de communication entre le module digestion et
+  le reste). 
+- le module de digestion est changé et remplacé par le nouveau module de Marc. Les dtbs sont mieux
+  gérées.
+
+TAGOPOP03_08_26 (CLEAN POINT)
+- version stable, normalement sans bugs. Le problème est que je ne peux pas organiser les dtbs 
+  comme je le voudrais. Il faut encore voir le scoring
+
+
+TAGOPOP03_08_06b
+- je rajoute de quoi faire quelques stats. sur la taille des cliques et le nombre de cliques par peptides
+- l'algo intelligent de recherche de cliques est si intelligent qu'il ne prévoit pas certains cas,
+  comme le graphe à 1 ou deux noeuds connectés, ou le graphe complètement connecté. Je corrige donc
+  pour que ces cas soient pris en compte. Pour le graphe complètement connecté, je construis une clique
+  avec tous les noeuds, et je ne cherche pas de cliques plus petites.
+- pour éviter d'être ennuyée (en tout cas pour l'instant) avec les grandes séquences, j'aborde l'analyse
+  du peptide courant de la dtb lorsque le nombre de sous-seq dépasse MAX_SUBSEQS et je passe au peptide
+  théorique suivant
+- modifié dans processTag pour prendre en compte les cas où il n'y a aucun tag de trouvé
+- this is a great day: j'incorpore l'algo "intelligent" de recherche de cliques à tagopop. 
+
+TAGOPOP03_08_06
+- il y avait un dépassement mémoire avec un peptide et le nombre MAX_OCC. J'ai placé un test de vérification
+  pour MAX_OCC
+- corrigé un bug dans tags2subSeq: lorsqu'un tag a plusieures occurences, les sous-séq résultantes étaient
+  mal copiées entre elles
+- rajouté une condition de ne pas garder une sous-seq, lorsqu'elle termine au dernier aa mais pas au dernier noeud
+- un seul graphe de compatibilité--> lors du scoring, ce ne sont plus les meilleurs arrangements pour une
+  clique données qui peuvent être rajoutés à la resultList, mais tous les arrangements, indépendamment du
+  fait que les séquences partagent ou non un pic. Il me faudra rajouter un post processing pour gérer cela.
+
+TAGOPOP03_08_05c
+- l'algo de recherche de cliques force brut ne peut gérer des ensembles de 200 sous-séquences, ce qui arrive
+  très souvent avec les peptides longs. Pour tenter d'améliorer les choses, je vais reprendre la version 03_08_05b 
+  (1 seul graphe d'incompatibilité, donc 1 seule recherche de clique), et implémenter l'autre version de recherche
+  de clique (celle qui n'est pas force brut tout en restant exacte). Tout cela sera fait dans les prochaines versions.
+- corrigé un tout petit bug dans graphe::families() qui faisait tourner le programme à vide dans une boucle: 
+  diff ((diffBas < diffHaut) && (test1 == true)) est remplacé par  if ((diffBas <= diffHaut) && (test1 == true)).
+- PAS FAIT: (puisque je suis toujours ennuyée par le nombre d'arrangements possibles, je décide de ne garder que les
+  arrangements pour une clique donnée. Le scoring se fait donc au fur et à mesure que les arrangements sont
+  trouvés)
+- eh non... Je ne peux pas simplifier comme en 05b, car pour le scoring, je veux le meilleur arrangement
+  pour une clique donnée. Il faut donc que je cherche d'abord une clique de compatibilité, puis pour cette
+  clique, toutes les cliques d'arrangements, afin que chaque arrangement possède un numéro de clique qui 
+  l'identifie à la clique. Je reprends donc la version 05 et je continue à partir de celle-ci.
+
+
+TAGOPOP03_08_05b
+- je simplifie le graphe de compatibilité/précédence car je n'ai même pas besoin d'avoir une structure .comp
+  et .prob ! 
+- je remplace les deux fonctions de recherche de clique par une seule 
+
+TAGOPOP03_08_05
+- oups, je me rends compte que je peux simplifier l'algo des cliques. Il me suffit de chercher toutes les 
+  cliques qui satisfont en même temps les deux critères, de compatibilité ET précédence. Facile.
+- les deux graphes (compatibilité et précédence) sont remplacés par un seul qui gère les deux à la fois
+- la fonction combine qui sert à trouver les arrangements possibles dans chaque clique de telle sorte que
+  la règle de précédence est respectée est remplacée par une fonction de recherche de cliques compatibles du
+  point de vue précédence, ce qui évite d'avoir les mêmes arrangements proposés plusieurs fois et donc 
+  réduit le nombre d'arrangements
+
+TAGOPOP03_07_28
+- il semble y avoir un memory leak dans le program et un problem avec la fonction combine. De plus,
+  le nombre d'arrangements pour certains peptides est énorme. 
+- modifié les fonctions init() de subseq et subtag ce qui fait gagner beaucoup de temps de calcul
+- corrigé une imprécision avec les indices des ponts et les aa modifiés
+- corrigé un bug dans data.cc (les bins n'étaient pas attribuées correctement)
+- je travaille sur le scoring. Pour faciliter les choses, je garde tous les
+  arrangements possibles pour une clique. En fait, ce n'est plus la notion
+  de clique qui est importante, mais celle d'arrangements.
+
+
+TAGOPOP03_07_24
+- début du travail sur le scoring
+- les tags qui commencent au noeud 0 et ont une masse supérieure à H sont retirés lors de tag2subseq
+- modifié le incomptability tab en comptability graph. Il s'agit maintenant d'une matrice de liens (=comptabilité)
+  noeuds (sous-séquences) le but étant de rechercher toutes les cliques du graphe.
+
+TAGOPOP03_07_11 et TAGOPOP03_07_18
+- introduit un incompatibility tab: pour chaque pic, les sous-séquences incomptabibles sont listées
+- corrigé un petit bug dans le parcours de l'arbre des suffixes qui faisait
+  que certains tags n'étaient pas sous séquences du peptide théorique !
+- rajout d'une fonction qui permet de retirer des tags empruntant des chemins
+  parallèles dus à une mauvaise hypothèse ionique répétée
+- mise en place du scoring par tag indépendamment les uns des autres
+- le postprocessing également, les soustags sont bien supprimés et les familles
+  sont correctement attribuées
+- l'extraction des tags marche correctement
+
+TAGOPOP03_07_10
+- je travaille toujours sur le processing des tags. J'ai purifié la fonction 
+  récursive qui est maintenant, du moins je l'espère, non buggée. J'ai enlevé 
+  les histoires de groupes. L'extraction extrait tous les tags sans attribuer 
+  de groupes aux familles, et tous les sous tags qui commencent après.
+
+TAGOPOP03_07_01
+- j'ai encore trouvé un bug lors du processing des tags (je n'arrive pas à regrouper les chemins équivalents
+  du point de vue des familles)
+
+TAGOPOP03_06_23
+- correction bug dans processing tags
+  
+
+TAGOPOP03_06_23
+- réorganisé et épuré un peu, entre autre popParam
+- création de la file historic.txt
+
+TAGOPOP11 :
+- finitions
+
+
+TAGOPOP10 :
+- épuré pas mal les fonctions inutiles de vertex, graph, et ants
+TAGOPOP9 :
+
+
+TAGOPOP8 :
+- modifié struct BEST en TAG (placée maintenant dans defines.h avec PATH)
+- travaillé sur element.cc
+
+TAGOPOP7:
+- enlevé le score extension
+
+
+TAGOPOP6:
+- enlevé les variables de classe de ants.cc
+- enlevé les fonctions inutiles dans graphe.cc (update)
+
+TAGOPOP5 :
+- retiré la variable edgetype de graphe.h
+- enlevé le rate et deltarate de vertex.h
+
+TAGOPOP4 :
+- qqles petites choses par ci par là
+
+TAGOPOP3 :
+- transformé les fourmis en une fourmi particulière, liliRose (statique)
+- enlevé C_DE et C_SE
+
+TAGOPOP:
+!
+
+- enlevé les paramètres des fourmis dans gv
+- transformé les tableaux de ants.h de dynamiques en statiques
+- modifié quelques noms de variables dans aa.h
+- aa.txt et ion.txt se trouvent maintenant dans un répertoire commun avec
+  NANALYSE
+
+POPITAG03_01_17 :
+- modifié (simplifié!!!) l'algo de création des familles
+- mise en place du double threshold lors de la connection des noeuds et pour la construction des familles
+- il est possible d'utiliser aussi TrEMBL; en conséquence,SEQUENCE_MAX_LEN dans protein.h a été augmenté de 0x8000 à 0x9000 
+- corrigé un bug dans vertex.cc (choix des ponts)
+- le scoring est encore modifié : ajout de trailTab qui ajoutera les niveaux de phéromones sur la séquence, ajout de
+  extScore, et modification des scores faisant intervenir des moyennes arithmétiques en moyennes quadratiques
+- je teste un autre scoring basé cette fois-ci sur la couverture
+- les scores de chaque tag sont additionnés pour donner le score final --> probleme, car les soustags de tags participent trop au score
+- pour chaque spectre, les 10 meilleurs tags sont mémorisés (bestPath est maintenant un tableau de NB_PATHS éléments)
+  les éléments sont triés par score (finScore) et par ordre alphabétiques (parsedSequence)
+
+POPITAG02_11_18 :
+- l'arbre des suffixes est transformé en un tableau permettant un accès directe aux successeurs d'un noeud
+- tous les ponts sont en majuscules
+- je remplace les O X et Z des ponts de l'arc par les acides aminés normaux, afin d'éviter un problème
+  lors du matching des ponts avec l'arbre des suffixes
+- je ne fusionne plus les ponts doubles XY et YX (ce qui permet de simplifier plusieures parties du programme;
+- aa_nb est maintenant aussi dans defines.h (comme cela, je peux l'employer comme constante dans suffixTree;
+- POPTAG devient popiTAG
+- afin d'éviter les touppers, tous les caractères sont majuscules (réduction du temps de calcul)
+
+POPTAG02_11_12 : 
+- modifié dans gnb.cc afin que la recherche de sous-mots ne soit pas case sensitive
+- place les doubles ponts dans le bon sens au moment de updateAnt (et ce afin que occ(char*) marche correctement
+- modifié gnb.cc : j'ai surchargé la fonction parcourFeuille en ajoutant un paramètre exists.
+  Maintenant, lorsque je recherche les occurences d'un sous-mot (occ(char*)), la fonction me retourne
+  un bool indiquant si il y a ou non occurence.
+  (il faudra ensuite sauvegarder les occurences dans un fichier).
+- enlevé les fichiers statistic.cc et statistic.h qui ne sont plus utilisés
+- remplacement définitif de l'oracle des facteurs par l'arbre des suffixes
+
+POPTAG02_10_12 :
+- introduction de l'arbre des suffixes
+  (l'oracle des facteurs marche toujours)
+- acides aminés à 4 décimales
+- masses de H, C, O, et N dans aa.txt
+
+POPTAG02_08_30 :
+- rajouté dans le résults output le chemin parsé
+- retiré tout ce qui concernait leda
+
+POPTAG02_08_26 :
+- modifié le scoring des noeuds de telle manière que les noeuds d'une même
+  famille n'aient pas tous le même score
+
+- rajouté des lignes LEDA dans le code + makefile pour tenter d'afficher le
+  graph avec leda
+
+
+POPTAG02_08_10 :
+- corrigé but dans ants.cc : int ants::find_startVertexRandom() : la fonction retournait un nombre 
+  entre 0 et nbre vertex compris, alors qu'il fallait entre 0 et nbre vertex-1
+
+- rajouté un compteur pour les mutations  // en fin de compte, ne sert à rien
+
+- pour l'instant, cette version ne marche qu'avec les simples ponts
+ 
+- la classe fourmi construit l'oracle des facteurs de la séquence courante de la
+  dtb. Elles alignent la séquence lue avec l'oracle
+
+
+POP02_08_07 :
+- shortcuts ON
+- ants.cc, dans le calcul de dev : mis la ligne dev/=(a*a)+(b*b) en commentaires
+- vertex scoring with families
+
+
+POP02_07_18 :
+- version équivalente à RET01. Les familles sont implémentées, mais le scoring des noeuds
+  n'en tient pas compte afin de s'aligner à RET01 (qui tourne sans merging).
+- Les shortcuts sont tous OFF.
+

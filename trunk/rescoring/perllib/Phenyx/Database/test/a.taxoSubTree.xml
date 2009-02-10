@@ -1,0 +1,60 @@
+<taxoNode name="root" id="1">
+  <taxoNode name="Bacteria" id="2">
+    <taxoNode name="Escherichia coli" id="562"/>
+    <taxoNode name="Firmicutes" id="1239">
+      <taxoNode name="Bacillus subtilis" id="1423"/>
+      <taxoNode name="other Firmicutes" id="1239,-1423"/>
+    </taxoNode>
+    <taxoNode name="other Bacteria" id="2,-562,-1239"/>
+  </taxoNode>
+  <taxoNode name="Eukaryota" id="2759">
+    <taxoNode name="Viridiplantae" id="33090">
+      <taxoNode name="Chlorophyta" id="3041"/>
+      <taxoNode name="Streptophyta" id="35493">
+        <taxoNode name="Zea mays" id="4577"/>
+        <taxoNode name="Arabidopsis thaliana" id="3702"/>
+        <taxoNode name="other Streptophyta" id="33090,-3041,-35493"/>
+      </taxoNode>
+      <taxoNode name="other Viridiplantae" id="33090,-3041,-35493"/>
+    </taxoNode>
+    <taxoNode name="Fungi" id="4751">
+      <taxoNode name="Schizosaccharomyces pombe" id="4896"/>
+      <taxoNode name="Saccharomyces cerevisiae" id="4932"/>
+      <taxoNode name="other Fungi" id="4751,-4896,-4932"/>
+    </taxoNode>
+    <taxoNode name="Metazoa" id="33208">
+      <taxoNode name="Chordata" id="7711">
+        <taxoNode name="Vertebrata" id="7742">
+          <taxoNode name="Gnathostomata" id="7776">
+            <taxoNode name="Mammalia" id="40674">
+              <taxoNode name="Rodentia" id="9989">
+                <taxoNode name="Mus musculus" id="10090"/>
+                <taxoNode name="Rattus norvegicus" id="10116"/>
+                <taxoNode name="other Rodentiaother Rodentia" id="9989,-10090,-10116"/>
+              </taxoNode>
+              <taxoNode name="Bos taurus" id="9913"/>
+              <taxoNode name="Homo sapiens" id="9606"/>
+              <taxoNode name="Oryctolagus cuniculus" id="9986"/>
+              <taxoNode name="other Mammalia" id="40674,-9989,-9913,-9606,-9986"/>
+            </taxoNode>
+            <taxoNode name="Amphibia" id="8292"/>
+            <taxoNode name="other Gnathostomata" id="7776,-40674,-8292"/>
+          </taxoNode>
+          <taxoNode name="other Vertebrata" id="7742,-7776"/>
+        </taxoNode>
+        <taxoNode name="other Chordata" id="7711,-7742"/>
+      </taxoNode>
+      <taxoNode name="Insecta" id="50557">
+        <taxoNode name="Drosophila melanogaster" id="7227"/>
+        <taxoNode name="other Insecta" id="50557,-7227"/>
+      </taxoNode>
+      <taxoNode name="other Metazoa" id="33208,-50557,-7711"/>
+    </taxoNode>
+    <taxoNode name="Kinetoplastida" id="5653"/>
+    <taxoNode name="Dictyostelium discoideum" id="44689"/>
+    <taxoNode name="other Eukaryota" id="2759,-33090,-4751,-33208,-5653,-44689"/>
+  </taxoNode>
+  <taxoNode name="Archaea" id="2157"/>
+  <taxoNode name="Viruses" id="10239"/>
+  <taxoNode name="other root" id="1,-2,-2759,-2157,-10239"/>
+</taxoNode>

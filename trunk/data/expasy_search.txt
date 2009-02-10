@@ -1,0 +1,21 @@
+<table width="100%" class="headfoot">
+<tr>
+<td align="center">
+<form method="GET" action="http://master.expasy.org/cgi-bin/search" name="ExpasySearchForm">
+Search
+<select name="db">
+<option value="sptrde">Swiss-Prot/TrEMBL
+<option value="sptrful">Swiss-Prot/TrEMBL (full text)
+<option value="ps">PROSITE
+<option value="ch2d">SWISS-2DPAGE
+<option value="enz">ENZYME
+<option value="newt">NEWT Taxonomy
+<option value="hamap">HAMAP families
+<option value="expasy">ExPASy web site
+</select>
+for
+<input name="SEARCH" size="19">
+<input type="submit" value="Go">
+<input type="button" value="Clear" onClick="ExpasySearchForm.SEARCH.value=''">
+</form>
+</td></tr></table>

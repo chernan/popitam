@@ -1,0 +1,15 @@
+<!--only leave the msmsCompounds with a number of fragments higher or equal REPLACEBYVALUE -->
+
+<oneExpMsMsSpectrumFilter spectrumType="msms" name="dummy">
+    <level>msmsCompounds</level>    
+    <action type="removeOther">             
+        <threshold type="sort">  
+            <relativeTo>absValue</relativeTo>                                                        
+            <thresholdValue>REPLACEBYVALUE</thresholdValue>
+            <comparator>ge</comparator>                                          
+        </threshold>
+    </action>
+    <filterValue type="directValue">                                                        
+        <name>size</name>                                               
+    </filterValue>
+</oneExpMsMsSpectrumFilter>
