@@ -1,0 +1,15 @@
+<!--only leave the fragments with an intensity higher or equal to REPLACEBYVALUE -->
+
+<oneExpMsMsSpectrumFilter spectrumType="msms" name="dummy">
+    <level>peaks</level>    
+    <action type="removeOther">             
+        <threshold type="sort">  
+            <relativeTo>absValue</relativeTo>                                                        
+            <thresholdValue>REPLACEBYVALUE</thresholdValue>
+            <comparator>ge</comparator>                                          
+        </threshold>
+    </action>
+    <filterValue type="directValue">                                                        
+        <name>fragment.intensity</name>                                         
+    </filterValue>
+</oneExpMsMsSpectrumFilter>

@@ -1,0 +1,94 @@
+<scoringList>
+  <oneInstrumentScoringList spectrumType="msms" instrument="ESI">
+    <defaultParentCharge>2,3</defaultParentCharge>
+    <scorings>
+      <oneScoring name="esquire 3000">
+        <fragTol>default</fragTol>
+        <file>esquire3000-gbaa-is-hmm.scoring.xml</file>
+      </oneScoring>
+      <oneScoring name="esquire 3000+">
+        <fragTol>default</fragTol>
+        <file>esquire3000+-gbaa-is-hmm.scoring.xml</file>
+      </oneScoring>
+      <oneScoring name="esquire 3000+ - 0.05 Da">
+        <fragTol>.05Da</fragTol>
+        <file>esquire3000+.Da_.05.scoring.xml</file>
+      </oneScoring>
+      <oneScoring name="esquire 3000+ - 0.1 Da">
+        <fragTol>.1Da</fragTol>
+        <file>esquire3000+.Da_.1.scoring.xml</file>
+      </oneScoring>
+      <oneScoring name="esquire 3000+ - 0.2 Da">
+        <fragTol>.2Da</fragTol>
+        <file>esquire3000+.Da_.2.scoring.xml</file>
+      </oneScoring>
+      <oneScoring name="esquire 3000+ - 0.4 Da">
+        <fragTol>.4Da</fragTol>
+        <file>esquire3000+.Da_.4.scoring.xml</file>
+      </oneScoring>
+      <oneScoring name="esquire 3000+ - 0.6 Da">
+        <fragTol>.6Da</fragTol>
+        <file>esquire3000+.Da_.6.scoring.xml</file>
+      </oneScoring>
+      <oneScoring name="esquire 3000+ - 0.8 Da">
+        <fragTol>.8Da</fragTol>
+        <file>esquire3000+.Da_.8.scoring.xml</file>
+      </oneScoring>
+      <oneScoring name="esquire 3000+ - 1.0 Da">
+        <fragTol>1.Da</fragTol>
+        <file>esquire3000+.Da_1.0.scoring.xml</file>
+      </oneScoring>
+      <oneScoring name="esquire 3000+ - 100 ppm">
+        <fragTol>100ppm</fragTol>
+        <file>esquire3000+.ppm_100.scoring.xml</file>
+      </oneScoring>
+      <oneScoring name="esquire 3000+ - 200 ppm">
+        <fragTol>200ppm</fragTol>
+        <file>esquire3000+.ppm_200.scoring.xml</file>
+      </oneScoring>
+      <oneScoring name="esquire 3000+ - 400 ppm">
+        <fragTol>400ppm</fragTol>
+        <file>esquire3000+.ppm_400.scoring.xml</file>
+      </oneScoring>
+      <oneScoring name="esquire 3000+ - 1000 ppm">
+        <fragTol>100ppm</fragTol>
+        <file>esquire3000+.ppm_1000.scoring.xml</file>
+      </oneScoring>
+    </scorings>
+  </oneInstrumentScoringList>
+  <oneInstrumentScoringList spectrumType="msms" instrument="LCQ">
+    <defaultParentCharge>2,3</defaultParentCharge>
+    <scorings>
+      <oneScoring name="LCQ">
+        <fragTol>default</fragTol>
+        <file>omics_A-gb-is-hmm.scoring.xml</file>
+      </oneScoring>
+     </scorings>
+  </oneInstrumentScoringList>
+  <oneInstrumentScoringList spectrumType="msms" instrument="QTOF">
+    <defaultParentCharge>1,2,3</defaultParentCharge>
+    <scorings>
+      <oneScoring name="QTOF">
+        <fragTol>default</fragTol>
+        <file>qtof.scoring.xml</file>
+      </oneScoring>
+     </scorings>
+  </oneInstrumentScoringList>
+  <oneInstrumentScoringList spectrumType="msms" instrument="LC Maldi TofTof">
+    <defaultParentCharge>1</defaultParentCharge>
+    <scorings>
+      <oneScoring name="LCQ">
+        <fragTol>default</fragTol>
+        <file>toftof_bdal-gbaa-is-im-hmmJ.scoring.xml</file>
+      </oneScoring>
+     </scorings>
+  </oneInstrumentScoringList>
+  <oneInstrumentScoringList spectrumType="ms" instrument="default">
+    <defaultParentCharge>1,2,3</defaultParentCharge>
+    <scorings>
+      <oneScoring name="aldente">
+        <file>def.aldenteScoring.xml</file>
+      </oneScoring>
+     </scorings>
+  </oneInstrumentScoringList>
+</scoringList>

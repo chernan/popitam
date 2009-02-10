@@ -1,0 +1,2 @@
+_Ptm iNbItem 1	
+_Item sString "PHOS"				sAbv "PHOS"		sFormula "H1PO3"

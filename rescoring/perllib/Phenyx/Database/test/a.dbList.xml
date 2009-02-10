@@ -1,0 +1,5 @@
+<dbList>
+  <oneDb name="SwissProt" taxonomy="yes" seqType="AA"/>
+  <oneDb name="Trembl" taxonomy="yes" seqType="AA"/>
+  <oneDb name="IPI" taxonomy="yes" seqType="AA"/>
+</dbList>

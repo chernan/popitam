@@ -1,0 +1,1426 @@
+Content-Type: text/html; charset=utf-8
+
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US"><head><title>ExPASy - Popitam</title>
+<style type="text/css">
+	
+	<!--/* <![CDATA[ */
+	
+	h1 {text-align: left;}
+	body { color: #000000; background-color: #FFFFFF; }
+	a:link	{ color:#000099; text-decoration: underline; }
+	a:visited { color:#990099; text-decoration: underline; }
+	a:active { color:#000000; text-decoration: underline; }
+	A.blacklink:link { color: WindowText; text-decoration: none}
+	A.blacklink:visited { color: WindowText; text-decoration: none}
+	A.blacklink:hover { text-decoration: underline}
+	table.popitableparam { background-color: #FFFFEA; border-width: 0px; width: 100%;}
+	table.popitableoutputform { background-color: #FFFFEA; width: 100%; }
+	table.spectrum { background-color: #CCCCFF; border-width: 1px; width: 100%; }
+	
+	
+	/* ]]> */-->
+</style>
+
+<script language="javascript" type="text/javascript">
+<!-- Hide script
+//<![CDATA[
+
+function CheckAndSend(requestId)
+{
+    if(!CheckString(document.myform.dataFile, 0, 1, 0, "Data file must be a	text field")){ return	}
+    if(!CheckString(document.myform.acList, 0, 1, 0, "AC list must be a	text field")){ return	}
+    if(!CheckDouble(document.myform.fragmentError1, 3, 0.01, 1, "Fragment error must be a	decimal	value, >=	0.01, <=	1")){ return	}
+    if(!CheckString(document.myform.scoreFile, 0, 1, 0, "Scoring function file must be a	text field")){ return	}
+    if(!CheckDouble(document.myform.maxAddPM, 0, 0, 0, "Precursor mass range. Maximal mass add must be a	decimal	value")){ return	}
+    if(!CheckDouble(document.myform.maxLossPM, 0, 0, 0, "Precursor mass range. Maximal mass loss must be a	decimal	value")){ return	}
+    if(!CheckDouble(document.myform.maxAddModif, 0, 0, 0, "Gap mass range. Maximal gap add must be a	decimal	value")){ return	}
+    if(!CheckDouble(document.myform.maxLossModif, 0, 0, 0, "Gap mass range. Maximal gap loss must be a	decimal	value")){ return	}
+    if(!CheckInt(document.myform.nbDisplay, 3, 1, 20, "Results number must	be an integer, >=	1, <=	20")){ return	}
+    if(!CheckString(document.myform.mail, 0, 0, 0, "mail must be a	text field")){ return	}
+	document.myform.request.value=requestId;
+    document.myform.submit();
+}
+
+function FormRequest(requestId)
+{
+	document.myform.request.value=requestId;
+	document.myform.submit();
+}
+
+function CheckDouble(obj, limit, min, max, stringError)
+{
+	if((limit & 4) && !obj.value)
+		return true
+	var re = /^-?\d+\.?\d*e?-?\d*$/
+	if(!re.exec(obj.value) || !CheckLimit(obj.value, limit, min, max)){
+		alert(stringError)
+		obj.select()
+		return false
+	}
+	return true 
+}
+
+function CheckInt(obj, limit, min, max, stringError)
+{
+	if((limit & 4) && !obj.value)
+		return true
+	var re = /^-?\d+$/
+	if(!re.exec(obj.value) || !CheckLimit(obj.value, limit, min, max)){
+		alert(stringError)
+		obj.select()
+		return false
+	}
+	return true
+}
+
+function CheckString(obj, limit, min, max, stringError)
+{
+	if((limit & 4) && !obj.value)
+		return true
+	if(!CheckLimit(obj.value.length, limit, min, max)){
+		alert(stringError)
+		obj.select()
+		return false
+	}
+	return true 
+}
+
+function CheckLimit(value, limit, min, max)
+{
+	if((limit & 1) && (value < min))
+		return false
+	if((limit & 2) && (value > max))
+		return false
+	return true
+}
+
+//]]> End script hiding --></script>
+
+</head><body>
+<h2>
+	Popitam results (version: v3.0)
+</h2>
+<h3>
+	Submission parameters
+</h3>
+<table class="popitableparam">
+	<tbody>
+		<tr>
+			<td width="200"><a target="_blank" class="blacklink" href="/cgi-bin/popitam/help.pl?help.html+data">Data file name</a>
+			</td>
+			<td width="200"><font face="Courier New" size="2">
+	Pasted data
+</font>
+</td>
+		</tr>
+		<tr>
+			<td><a target="_blank" class="blacklink" href="/cgi-bin/popitam/help.pl?help.html+database">Database</a>
+			</td>
+			<td><font face="Courier New" size="2">
+	demoDB, release: 1.0
+</font>
+</td>
+		</tr>
+		<tr>
+			<td><a target="_blank" class="blacklink" href="/cgi-bin/popitam/help.pl?help.html+aclist">AC list</a>
+			</td>
+			<td><font face="Courier New" size="2">
+	P11940 P63261 P18621 P11216 P63261
+</font>
+</td>
+		</tr>
+		<tr>
+			<td><a target="_blank" class="blacklink" href="/cgi-bin/popitam/help.pl?help.html+instrument">Instrument</a>
+			</td>
+			<td><font face="Courier New" size="2">
+	QTOF
+</font>
+</td>
+		</tr>
+		<tr>
+			<td><a target="_blank" class="blacklink" href="/cgi-bin/popitam/help.pl?help.html+fragmenterr">Fragment error</a>
+			</td>
+			<td><font face="Courier New" size="2">
+	0.2
+</font>
+</td>
+		</tr>
+		<tr>
+			<td><a target="_blank" class="blacklink" href="/cgi-bin/popitam/help.pl?help.html+modGapNb">ModGap number</a>
+			</td>
+			<td><font face="Courier New" size="2">
+	1
+</font>
+</td>
+		</tr>
+		<tr>
+			<td><a target="_blank" class="blacklink" href="/cgi-bin/popitam/help.pl?help.html+parenterr">Precurseur mass range</a>
+			</td>
+			<td><font face="Courier New" size="2">
+	[-200.00 ; 400.00]
+</font>
+</td>
+		</tr>
+		<tr>
+			<td><a target="_blank" class="blacklink" href="/cgi-bin/popitam/help.pl?help.html+gapmass">Modification range</a>
+			</td>
+			<td><font face="Courier New" size="2">
+	[-200.00 ; 400.00]
+</font>
+</td>
+		</tr>
+		<tr>
+			<td><a target="_blank" class="blacklink" href="/cgi-bin/popitam/help.pl?help.html+scoring">Scoring file name</a>
+			</td>
+			<td><font face="Courier New" size="2">
+	Pasted scoring function
+</font>
+</td>
+		</tr>
+		<tr>
+			<td><a target="_blank" class="blacklink" href="/cgi-bin/popitam/help.pl?help.html+toppeptides">Number of displayed peptides</a>
+			</td>
+			<td><font face="Courier New" size="2">
+	5
+</font>
+</td>
+		</tr>
+	</tbody>
+</table>
+<br />
+<a name="upstart" />
+<h3>
+	Result summary table (4 processed spectrum)
+</h3>
+<table class="popitableoutputform" border="1" cellpadding="2">
+	<tbody>
+		<tr align="center">
+			<td>#</td>
+			<td><a target="_new" class="blacklink" href="/cgi-bin/popitam/help.pl?help.html+outputscore">Scenario score</a>
+			</td>
+			<td><a target="_new" class="blacklink" href="/cgi-bin/popitam/help.pl?help.html+deltascore">Delta score</a>
+			</td>
+			<td><a target="_new" class="blacklink" href="/cgi-bin/popitam/help.pl?help.html+outputmass">Mass</a>
+			</td>
+			<td><a target="_new" class="blacklink" href="/cgi-bin/popitam/help.pl?help.html+result">Peptide / Scenario</a>
+			</td>
+			<td><a target="_new" class="blacklink" href="/cgi-bin/popitam/help.pl?help.html+shift">Shift</a>
+			</td>
+			<td><a target="_new" class="blacklink" href="/cgi-bin/popitam/help.pl?help.html+idaclist">AC</a>
+			</td>
+			<td><a target="_new" class="blacklink" href="/cgi-bin/popitam/help.pl?help.html+idaclist">Id</a>
+			</td>
+			<td>Description</td>
+		</tr>
+		<tr align="center">
+			<tr>
+				<td><a target="_self" align="right" href="#spectrum0"><font face="Courier New" size="2">
+	1
+</font></a></td>
+				<td align="right"><font face="Courier New" size="2">
+	116.16
+</font></td>
+				<td align="right"><font face="Courier New" size="2">
+	0.17
+</font></td>
+				<td align="right"><font face="Courier New" size="2">
+	1635.9169
+</font></td>
+				<td><font face="Courier New" size="2">
+	LFPLIQAMHPTLAGK<br />
+	lfPLIQAmh******
+</font></td>
+				<td><font face="Courier New" size="2">
+	15.97  
+</font></td>
+				<td><a target="_new" align="left" href="/uniprot/P11940"><font face="Courier New" size="2">
+	P11940<br />
+</font></a></td>
+				<td><font face="Courier New" size="2">
+	PABP1_HUMAN<br />
+</font></td>
+				<td><font face="Courier New" size="2">
+	Polyadenylate-binding protein 1 - Homo sapiens (Human).<br />
+</font></td>
+			</tr>
+			<tr>
+				<td><a target="_self" align="right" href="#spectrum1"><font face="Courier New" size="2">
+	2
+</font></a></td>
+				<td align="right"><font face="Courier New" size="2">
+	1630.44
+</font></td>
+				<td align="right"><font face="Courier New" size="2">
+	0.00
+</font></td>
+				<td align="right"><font face="Courier New" size="2">
+	2492.1450
+</font></td>
+				<td><font face="Courier New" size="2">
+	LCYVALDFEQEMATAASSSSLEK<br />
+	**YVALDFEQEMATAASSSslEK
+</font></td>
+				<td><font face="Courier New" size="2">
+	57.02  
+</font></td>
+				<td><a target="_new" align="left" href="/uniprot/P63261"><font face="Courier New" size="2">
+	P63261<br />
+</font></a>
+				<a target="_new" align="left" href="/uniprot/P63261"><font face="Courier New" size="2">
+	P63261<br />
+</font></a>
+				<a target="_new" align="left" href="/uniprot/P63261"><font face="Courier New" size="2">
+	P63261<br />
+</font></a>
+				<a target="_new" align="left" href="/uniprot/P63261"><font face="Courier New" size="2">
+	P63261<br />
+</font></a>
+				<a target="_new" align="left" href="/uniprot/P63261"><font face="Courier New" size="2">
+	P63261<br />
+</font></a></td>
+				<td><font face="Courier New" size="2">
+	ACTG_HUMAN<br />
+</font>
+<font face="Courier New" size="2">
+	ACTG_HUMAN<br />
+</font>
+<font face="Courier New" size="2">
+	ACTG_HUMAN<br />
+</font>
+<font face="Courier New" size="2">
+	ACTG_HUMAN<br />
+</font>
+<font face="Courier New" size="2">
+	ACTG_HUMAN<br />
+</font></td>
+				<td><font face="Courier New" size="2">
+	Actin, cytoplasmic 2 - Homo sapiens (Human).<br />
+</font>
+<font face="Courier New" size="2">
+	Actin, cytoplasmic 2 - Homo sapiens (Human).<br />
+</font>
+<font face="Courier New" size="2">
+	Actin, cytoplasmic 2 - Homo sapiens (Human).<br />
+</font>
+<font face="Courier New" size="2">
+	Actin, cytoplasmic 2 - Homo sapiens (Human).<br />
+</font>
+<font face="Courier New" size="2">
+	Actin, cytoplasmic 2 - Homo sapiens (Human).<br />
+</font></td>
+			</tr>
+			<tr>
+				<td><a target="_self" align="right" href="#spectrum2"><font face="Courier New" size="2">
+	3
+</font></a></td>
+				<td align="right"><font face="Courier New" size="2">
+	93.34
+</font></td>
+				<td align="right"><font face="Courier New" size="2">
+	0.19
+</font></td>
+				<td align="right"><font face="Courier New" size="2">
+	1187.6372
+</font></td>
+				<td><font face="Courier New" size="2">
+	SAEFLLHMLK<br />
+	saEFLLH***
+</font></td>
+				<td><font face="Courier New" size="2">
+	15.98  
+</font></td>
+				<td><a target="_new" align="left" href="/uniprot/Q80V08"><font face="Courier New" size="2">
+	Q80V08<br />
+</font></a>
+				<a target="_new" align="left" href="/uniprot/P18621"><font face="Courier New" size="2">
+	P18621<br />
+</font></a></td>
+				<td><font face="Courier New" size="2">
+	Q80V08_MOUSE<br />
+</font>
+<font face="Courier New" size="2">
+	RL17_HUMAN<br />
+</font></td>
+				<td><font face="Courier New" size="2">
+	Rpl17 protein (Fragment) - Mus musculus (Mouse).<br />
+</font>
+<font face="Courier New" size="2">
+	60S ribosomal protein L17 - Homo sapiens (Human).<br />
+</font></td>
+			</tr>
+			<tr>
+				<td><a target="_self" align="right" href="#spectrum3"><font face="Courier New" size="2">
+	4
+</font></a></td>
+				<td align="right"><font face="Courier New" size="2">
+	68.86
+</font></td>
+				<td align="right"><font face="Courier New" size="2">
+	0.18
+</font></td>
+				<td align="right"><font face="Courier New" size="2">
+	1379.6437
+</font></td>
+				<td><font face="Courier New" size="2">
+	DIVNMLMHHDR<br />
+	diVN***HHDR
+</font></td>
+				<td><font face="Courier New" size="2">
+	31.98  
+</font></td>
+				<td><a target="_new" align="left" href="/uniprot/P11216"><font face="Courier New" size="2">
+	P11216<br />
+</font></a></td>
+				<td><font face="Courier New" size="2">
+	PYGB_HUMAN<br />
+</font></td>
+				<td><font face="Courier New" size="2">
+	Glycogen phosphorylase, brain form - Homo sapiens (Human).<br />
+</font></td>
+			</tr>
+		</tr>
+	</tbody>
+</table>
+<br />
+<br />
+<a name="spectrum0" />
+<table class="spectrum" bgcolor="#CCCCFF" border="1" rules="none" cellpadding="2">
+	<caption align="left">
+		<b>Spectrum_1</b>
+	</caption>
+	<table class="spectrum" bgcolor="#CCCCFF" border="0" rules="none" cellpadding="1">
+		<tr>
+			<td align="left" width="220">Title</td>
+			<td align="left"><font face="Courier New" size="2">
+	LFPLIQAM[ox]HPTLAGK P11940
+</font></td>
+			<td align="right"></td>
+		</tr>
+		<tr>
+			<td align="left" width="220">Initial peak number</td>
+			<td align="left"><font face="Courier New" size="2">
+	335
+</font></td>
+			<td align="right"></td>
+		</tr>
+		<tr>
+			<td align="left" width="220">Raw precursor mass</td>
+			<td align="left"><font face="Courier New" size="2">
+	826.9457
+</font></td>
+			<td align="right"></td>
+		</tr>
+		<tr>
+			<td align="left" width="220">Precursor mass (MH)</td>
+			<td align="left"><font face="Courier New" size="2">
+	1651.8914
+</font></td>
+			<td align="right"></td>
+		</tr>
+		<tr>
+			<td align="left" width="220">Charge</td>
+			<td align="left"><font face="Courier New" size="2">
+	2
+</font></td>
+			<td align="right"></td>
+		</tr>
+		<tr>
+			<td align="left" width="220"><a target="_new" class="blacklink" href="/cgi-bin/popitam/help.pl?help.html+todo">Candidate proteins</a></td>
+			<td align="left"><font face="Courier New" size="2">
+	12
+</font></td>
+			<td align="right"></td>
+		</tr>
+		<tr>
+			<td align="left" width="220"><a target="_new" class="blacklink" href="/cgi-bin/popitam/help.pl?help.html+todo">Candidate peptides</a></td>
+			<td align="left"><font face="Courier New" size="2">
+	160
+</font></td>
+			<td align="right"></td>
+		</tr>
+		<tr>
+			<td align="left" width="220"><a target="_new" class="blacklink" href="/cgi-bin/popitam/help.pl?help.html+todo">Peptides with at least one scenario</a></td>
+			<td align="left"><font face="Courier New" size="2">
+	15
+</font></td>
+			<td align="right"></td>
+		</tr>
+	</table>
+	<table class="popitableoutputform" bgcolor="#FFFFEA" border="1" cellpadding="2" width="1500">
+		<tr align="center">
+			<td>Rank</td>
+			<td><a target="_new" class="blacklink" href="/cgi-bin/popitam/help.pl?help.html+outputscore">Scenario score</a>
+			</td>
+			<td><a target="_new" class="blacklink" href="/cgi-bin/popitam/help.pl?help.html+deltascore">Delta score</a>
+			</td>
+			<td><a target="_new" class="blacklink" href="/cgi-bin/popitam/help.pl?help.html+outputmass">Mass</a>
+			</td>
+			<td><a target="_new" class="blacklink" href="/cgi-bin/popitam/help.pl?help.html+result">Peptide / Scenario</a>
+			</td>
+			<td><a target="_new" class="blacklink" href="/cgi-bin/popitam/help.pl?help.html+shift">Shift</a>
+			</td>
+			<td><a target="_new" class="blacklink" href="/cgi-bin/popitam/help.pl?help.html+idaclist">AC</a>
+			</td>
+			<td><a target="_new" class="blacklink" href="/cgi-bin/popitam/help.pl?help.html+idaclist">Id</a>
+			</td>
+			<td>Description</td>
+		</tr>
+		<tr>
+			<tr>
+				<td align="right"><font face="Courier New" size="2">
+	1
+</font></td>
+				<td align="right"><font face="Courier New" size="2">
+	116.16
+</font></td>
+				<td align="right"><font face="Courier New" size="2">
+	0.17
+</font></td>
+				<td align="right"><font face="Courier New" size="2">
+	1635.9169
+</font></td>
+				<td><font face="Courier New" size="2">
+	LFPLIQAMHPTLAGK<br />
+	lfPLIQAmh******
+</font></td>
+				<td><font face="Courier New" size="2">
+	15.97  
+</font></td>
+				<td><a target="_new" align="left" href="/uniprot/P11940"><font face="Courier New" size="2">
+	P11940<br />
+</font></a></td>
+				<td><font face="Courier New" size="2">
+	PABP1_HUMAN<br />
+</font></td>
+				<td><font face="Courier New" size="2">
+	Polyadenylate-binding protein 1 - Homo sapiens (Human).<br />
+</font></td>
+			</tr>
+			<tr>
+				<td align="right"><font face="Courier New" size="2">
+	2
+</font></td>
+				<td align="right"><font face="Courier New" size="2">
+	20.54
+</font></td>
+				<td align="right"><font face="Courier New" size="2">
+	0.14
+</font></td>
+				<td align="right"><font face="Courier New" size="2">
+	1396.7349
+</font></td>
+				<td><font face="Courier New" size="2">
+	TLNNKFASFIDK<br />
+	**NNK-------
+</font></td>
+				<td><font face="Courier New" size="2">
+	255.19  
+</font></td>
+				<td><a target="_new" align="left" href="/uniprot/P48668"><font face="Courier New" size="2">
+	P48668<br />
+</font></a></td>
+				<td><font face="Courier New" size="2">
+	K2C6C_HUMAN<br />
+</font></td>
+				<td><font face="Courier New" size="2">
+	Keratin, type II cytoskeletal 6C - Homo sapiens (Human).<br />
+</font></td>
+			</tr>
+			<tr>
+				<td align="right"><font face="Courier New" size="2">
+	3
+</font></td>
+				<td align="right"><font face="Courier New" size="2">
+	2.96
+</font></td>
+				<td align="right"><font face="Courier New" size="2">
+	0.74
+</font></td>
+				<td align="right"><font face="Courier New" size="2">
+	1388.6618
+</font></td>
+				<td><font face="Courier New" size="2">
+	QAHLTNQYMQR<br />
+	------qyM**
+</font></td>
+				<td><font face="Courier New" size="2">
+	263.17  
+</font></td>
+				<td><a target="_new" align="left" href="/uniprot/P11940"><font face="Courier New" size="2">
+	P11940<br />
+</font></a></td>
+				<td><font face="Courier New" size="2">
+	PABP1_HUMAN<br />
+</font></td>
+				<td><font face="Courier New" size="2">
+	Polyadenylate-binding protein 1 - Homo sapiens (Human).<br />
+</font></td>
+			</tr>
+			<tr>
+				<td align="right"><font face="Courier New" size="2">
+	4
+</font></td>
+				<td align="right"><font face="Courier New" size="2">
+	2.20
+</font></td>
+				<td align="right"><font face="Courier New" size="2">
+	0.64
+</font></td>
+				<td align="right"><font face="Courier New" size="2">
+	1338.6719
+</font></td>
+				<td><font face="Courier New" size="2">
+	DYFFALAHTVR<br />
+	*****Lah---
+</font></td>
+				<td><font face="Courier New" size="2">
+	313.07  
+</font></td>
+				<td><a target="_new" align="left" href="/uniprot/P11216"><font face="Courier New" size="2">
+	P11216<br />
+</font></a></td>
+				<td><font face="Courier New" size="2">
+	PYGB_HUMAN<br />
+</font></td>
+				<td><font face="Courier New" size="2">
+	Glycogen phosphorylase, brain form - Homo sapiens (Human).<br />
+</font></td>
+			</tr>
+			<tr>
+				<td align="right"><font face="Courier New" size="2">
+	5
+</font></td>
+				<td align="right"><font face="Courier New" size="2">
+	1.41
+</font></td>
+				<td align="right"><font face="Courier New" size="2">
+	1000
+</font></td>
+				<td align="right"><font face="Courier New" size="2">
+	1274.7169
+</font></td>
+				<td><font face="Courier New" size="2">
+	AFVPRTVMIGGK<br />
+	*********Ggk
+</font></td>
+				<td><font face="Courier New" size="2">
+	377.15  
+</font></td>
+				<td><a target="_new" align="left" href="/uniprot/P11216"><font face="Courier New" size="2">
+	P11216<br />
+</font></a></td>
+				<td><font face="Courier New" size="2">
+	PYGB_HUMAN<br />
+</font></td>
+				<td><font face="Courier New" size="2">
+	Glycogen phosphorylase, brain form - Homo sapiens (Human).<br />
+</font></td>
+			</tr>
+		</tr>
+	</table>
+</table>
+<br />
+<br />
+<a href="#upstart">Top</a><br><br><a name="spectrum1" />
+<table class="spectrum" bgcolor="#CCCCFF" border="1" rules="none" cellpadding="2">
+	<caption align="left">
+		<b>Spectrum_2</b>
+	</caption>
+	<table class="spectrum" bgcolor="#CCCCFF" border="0" rules="none" cellpadding="1">
+		<tr>
+			<td align="left" width="220">Title</td>
+			<td align="left"><font face="Courier New" size="2">
+	LC[cam]YVALDFEQEMATAASSSSLEK P63261
+</font></td>
+			<td align="right"></td>
+		</tr>
+		<tr>
+			<td align="left" width="220">Initial peak number</td>
+			<td align="left"><font face="Courier New" size="2">
+	813
+</font></td>
+			<td align="right"></td>
+		</tr>
+		<tr>
+			<td align="left" width="220">Raw precursor mass</td>
+			<td align="left"><font face="Courier New" size="2">
+	850.7207
+</font></td>
+			<td align="right"></td>
+		</tr>
+		<tr>
+			<td align="left" width="220">Precursor mass (MH)</td>
+			<td align="left"><font face="Courier New" size="2">
+	2549.1621
+</font></td>
+			<td align="right"></td>
+		</tr>
+		<tr>
+			<td align="left" width="220">Charge</td>
+			<td align="left"><font face="Courier New" size="2">
+	3
+</font></td>
+			<td align="right"></td>
+		</tr>
+		<tr>
+			<td align="left" width="220"><a target="_new" class="blacklink" href="/cgi-bin/popitam/help.pl?help.html+todo">Candidate proteins</a></td>
+			<td align="left"><font face="Courier New" size="2">
+	12
+</font></td>
+			<td align="right"></td>
+		</tr>
+		<tr>
+			<td align="left" width="220"><a target="_new" class="blacklink" href="/cgi-bin/popitam/help.pl?help.html+todo">Candidate peptides</a></td>
+			<td align="left"><font face="Courier New" size="2">
+	61
+</font></td>
+			<td align="right"></td>
+		</tr>
+		<tr>
+			<td align="left" width="220"><a target="_new" class="blacklink" href="/cgi-bin/popitam/help.pl?help.html+todo">Peptides with at least one scenario</a></td>
+			<td align="left"><font face="Courier New" size="2">
+	7
+</font></td>
+			<td align="right"></td>
+		</tr>
+	</table>
+	<table class="popitableoutputform" bgcolor="#FFFFEA" border="1" cellpadding="2" width="1500">
+		<tr align="center">
+			<td>Rank</td>
+			<td><a target="_new" class="blacklink" href="/cgi-bin/popitam/help.pl?help.html+outputscore">Scenario score</a>
+			</td>
+			<td><a target="_new" class="blacklink" href="/cgi-bin/popitam/help.pl?help.html+deltascore">Delta score</a>
+			</td>
+			<td><a target="_new" class="blacklink" href="/cgi-bin/popitam/help.pl?help.html+outputmass">Mass</a>
+			</td>
+			<td><a target="_new" class="blacklink" href="/cgi-bin/popitam/help.pl?help.html+result">Peptide / Scenario</a>
+			</td>
+			<td><a target="_new" class="blacklink" href="/cgi-bin/popitam/help.pl?help.html+shift">Shift</a>
+			</td>
+			<td><a target="_new" class="blacklink" href="/cgi-bin/popitam/help.pl?help.html+idaclist">AC</a>
+			</td>
+			<td><a target="_new" class="blacklink" href="/cgi-bin/popitam/help.pl?help.html+idaclist">Id</a>
+			</td>
+			<td>Description</td>
+		</tr>
+		<tr>
+			<tr>
+				<td align="right"><font face="Courier New" size="2">
+	1
+</font></td>
+				<td align="right"><font face="Courier New" size="2">
+	1630.44
+</font></td>
+				<td align="right"><font face="Courier New" size="2">
+	0.00
+</font></td>
+				<td align="right"><font face="Courier New" size="2">
+	2492.1450
+</font></td>
+				<td><font face="Courier New" size="2">
+	LCYVALDFEQEMATAASSSSLEK<br />
+	**YVALDFEQEMATAASSSslEK
+</font></td>
+				<td><font face="Courier New" size="2">
+	57.02  
+</font></td>
+				<td><a target="_new" align="left" href="/uniprot/P63261"><font face="Courier New" size="2">
+	P63261<br />
+</font></a>
+				<a target="_new" align="left" href="/uniprot/P63261"><font face="Courier New" size="2">
+	P63261<br />
+</font></a>
+				<a target="_new" align="left" href="/uniprot/P63261"><font face="Courier New" size="2">
+	P63261<br />
+</font></a>
+				<a target="_new" align="left" href="/uniprot/P63261"><font face="Courier New" size="2">
+	P63261<br />
+</font></a>
+				<a target="_new" align="left" href="/uniprot/P63261"><font face="Courier New" size="2">
+	P63261<br />
+</font></a></td>
+				<td><font face="Courier New" size="2">
+	ACTG_HUMAN<br />
+</font>
+<font face="Courier New" size="2">
+	ACTG_HUMAN<br />
+</font>
+<font face="Courier New" size="2">
+	ACTG_HUMAN<br />
+</font>
+<font face="Courier New" size="2">
+	ACTG_HUMAN<br />
+</font>
+<font face="Courier New" size="2">
+	ACTG_HUMAN<br />
+</font></td>
+				<td><font face="Courier New" size="2">
+	Actin, cytoplasmic 2 - Homo sapiens (Human).<br />
+</font>
+<font face="Courier New" size="2">
+	Actin, cytoplasmic 2 - Homo sapiens (Human).<br />
+</font>
+<font face="Courier New" size="2">
+	Actin, cytoplasmic 2 - Homo sapiens (Human).<br />
+</font>
+<font face="Courier New" size="2">
+	Actin, cytoplasmic 2 - Homo sapiens (Human).<br />
+</font>
+<font face="Courier New" size="2">
+	Actin, cytoplasmic 2 - Homo sapiens (Human).<br />
+</font></td>
+			</tr>
+			<tr>
+				<td align="right"><font face="Courier New" size="2">
+	2
+</font></td>
+				<td align="right"><font face="Courier New" size="2">
+	3.26
+</font></td>
+				<td align="right"><font face="Courier New" size="2">
+	0.59
+</font></td>
+				<td align="right"><font face="Courier New" size="2">
+	2342.1574
+</font></td>
+				<td><font face="Courier New" size="2">
+	KDLYANTVLSGGTTMYPGIADR<br />
+	--------------myP*****
+</font></td>
+				<td><font face="Courier New" size="2">
+	207.06  
+</font></td>
+				<td><a target="_new" align="left" href="/uniprot/P63261"><font face="Courier New" size="2">
+	P63261<br />
+</font></a>
+				<a target="_new" align="left" href="/uniprot/P63261"><font face="Courier New" size="2">
+	P63261<br />
+</font></a>
+				<a target="_new" align="left" href="/uniprot/P63261"><font face="Courier New" size="2">
+	P63261<br />
+</font></a>
+				<a target="_new" align="left" href="/uniprot/P63261"><font face="Courier New" size="2">
+	P63261<br />
+</font></a>
+				<a target="_new" align="left" href="/uniprot/P63261"><font face="Courier New" size="2">
+	P63261<br />
+</font></a></td>
+				<td><font face="Courier New" size="2">
+	ACTG_HUMAN<br />
+</font>
+<font face="Courier New" size="2">
+	ACTG_HUMAN<br />
+</font>
+<font face="Courier New" size="2">
+	ACTG_HUMAN<br />
+</font>
+<font face="Courier New" size="2">
+	ACTG_HUMAN<br />
+</font>
+<font face="Courier New" size="2">
+	ACTG_HUMAN<br />
+</font></td>
+				<td><font face="Courier New" size="2">
+	Actin, cytoplasmic 2 - Homo sapiens (Human).<br />
+</font>
+<font face="Courier New" size="2">
+	Actin, cytoplasmic 2 - Homo sapiens (Human).<br />
+</font>
+<font face="Courier New" size="2">
+	Actin, cytoplasmic 2 - Homo sapiens (Human).<br />
+</font>
+<font face="Courier New" size="2">
+	Actin, cytoplasmic 2 - Homo sapiens (Human).<br />
+</font>
+<font face="Courier New" size="2">
+	Actin, cytoplasmic 2 - Homo sapiens (Human).<br />
+</font></td>
+			</tr>
+			<tr>
+				<td align="right"><font face="Courier New" size="2">
+	3
+</font></td>
+				<td align="right"><font face="Courier New" size="2">
+	1.95
+</font></td>
+				<td align="right"><font face="Courier New" size="2">
+	0.55
+</font></td>
+				<td align="right"><font face="Courier New" size="2">
+	2229.0412
+</font></td>
+				<td><font face="Courier New" size="2">
+	QAVDQISSGFFSPKEPDCFK<br />
+	***********Spk----FK
+</font></td>
+				<td><font face="Courier New" size="2">
+	320.08  
+</font></td>
+				<td><a target="_new" align="left" href="/uniprot/P11216"><font face="Courier New" size="2">
+	P11216<br />
+</font></a></td>
+				<td><font face="Courier New" size="2">
+	PYGB_HUMAN<br />
+</font></td>
+				<td><font face="Courier New" size="2">
+	Glycogen phosphorylase, brain form - Homo sapiens (Human).<br />
+</font></td>
+			</tr>
+			<tr>
+				<td align="right"><font face="Courier New" size="2">
+	4
+</font></td>
+				<td align="right"><font face="Courier New" size="2">
+	1.08
+</font></td>
+				<td align="right"><font face="Courier New" size="2">
+	0.72
+</font></td>
+				<td align="right"><font face="Courier New" size="2">
+	2508.3488
+</font></td>
+				<td><font face="Courier New" size="2">
+	EFTPPVQAAYQKVVAGVANALAHK<br />
+	*************VA---------
+</font></td>
+				<td><font face="Courier New" size="2">
+	40.88  
+</font></td>
+				<td><a target="_new" align="left" href="/uniprot/P68871"><font face="Courier New" size="2">
+	P68871<br />
+</font></a></td>
+				<td><font face="Courier New" size="2">
+	HBB_HUMAN<br />
+</font></td>
+				<td><font face="Courier New" size="2">
+	Hemoglobin subunit beta - Homo sapiens (Human).<br />
+</font></td>
+			</tr>
+			<tr>
+				<td align="right"><font face="Courier New" size="2">
+	5
+</font></td>
+				<td align="right"><font face="Courier New" size="2">
+	0.78
+</font></td>
+				<td align="right"><font face="Courier New" size="2">
+	1000
+</font></td>
+				<td align="right"><font face="Courier New" size="2">
+	2380.2280
+</font></td>
+				<td><font face="Courier New" size="2">
+	VANTSTQTMGPRPAAAAAAATPAVR<br />
+	***************Aaa-------
+</font></td>
+				<td><font face="Courier New" size="2">
+	169.01  
+</font></td>
+				<td><a target="_new" align="left" href="/uniprot/P11940"><font face="Courier New" size="2">
+	P11940<br />
+</font></a></td>
+				<td><font face="Courier New" size="2">
+	PABP1_HUMAN<br />
+</font></td>
+				<td><font face="Courier New" size="2">
+	Polyadenylate-binding protein 1 - Homo sapiens (Human).<br />
+</font></td>
+			</tr>
+		</tr>
+	</table>
+</table>
+<br />
+<br />
+<a href="#upstart">Top</a><br><br><a name="spectrum2" />
+<table class="spectrum" bgcolor="#CCCCFF" border="1" rules="none" cellpadding="2">
+	<caption align="left">
+		<b>Spectrum_3</b>
+	</caption>
+	<table class="spectrum" bgcolor="#CCCCFF" border="0" rules="none" cellpadding="1">
+		<tr>
+			<td align="left" width="220">Title</td>
+			<td align="left"><font face="Courier New" size="2">
+	SAEFLLHM[ox]LK P18621
+</font></td>
+			<td align="right"></td>
+		</tr>
+		<tr>
+			<td align="left" width="220">Initial peak number</td>
+			<td align="left"><font face="Courier New" size="2">
+	684
+</font></td>
+			<td align="right"></td>
+		</tr>
+		<tr>
+			<td align="left" width="220">Raw precursor mass</td>
+			<td align="left"><font face="Courier New" size="2">
+	602.8114
+</font></td>
+			<td align="right"></td>
+		</tr>
+		<tr>
+			<td align="left" width="220">Precursor mass (MH)</td>
+			<td align="left"><font face="Courier New" size="2">
+	1203.6229
+</font></td>
+			<td align="right"></td>
+		</tr>
+		<tr>
+			<td align="left" width="220">Charge</td>
+			<td align="left"><font face="Courier New" size="2">
+	2
+</font></td>
+			<td align="right"></td>
+		</tr>
+		<tr>
+			<td align="left" width="220"><a target="_new" class="blacklink" href="/cgi-bin/popitam/help.pl?help.html+todo">Candidate proteins</a></td>
+			<td align="left"><font face="Courier New" size="2">
+	12
+</font></td>
+			<td align="right"></td>
+		</tr>
+		<tr>
+			<td align="left" width="220"><a target="_new" class="blacklink" href="/cgi-bin/popitam/help.pl?help.html+todo">Candidate peptides</a></td>
+			<td align="left"><font face="Courier New" size="2">
+	204
+</font></td>
+			<td align="right"></td>
+		</tr>
+		<tr>
+			<td align="left" width="220"><a target="_new" class="blacklink" href="/cgi-bin/popitam/help.pl?help.html+todo">Peptides with at least one scenario</a></td>
+			<td align="left"><font face="Courier New" size="2">
+	46
+</font></td>
+			<td align="right"></td>
+		</tr>
+	</table>
+	<table class="popitableoutputform" bgcolor="#FFFFEA" border="1" cellpadding="2" width="1500">
+		<tr align="center">
+			<td>Rank</td>
+			<td><a target="_new" class="blacklink" href="/cgi-bin/popitam/help.pl?help.html+outputscore">Scenario score</a>
+			</td>
+			<td><a target="_new" class="blacklink" href="/cgi-bin/popitam/help.pl?help.html+deltascore">Delta score</a>
+			</td>
+			<td><a target="_new" class="blacklink" href="/cgi-bin/popitam/help.pl?help.html+outputmass">Mass</a>
+			</td>
+			<td><a target="_new" class="blacklink" href="/cgi-bin/popitam/help.pl?help.html+result">Peptide / Scenario</a>
+			</td>
+			<td><a target="_new" class="blacklink" href="/cgi-bin/popitam/help.pl?help.html+shift">Shift</a>
+			</td>
+			<td><a target="_new" class="blacklink" href="/cgi-bin/popitam/help.pl?help.html+idaclist">AC</a>
+			</td>
+			<td><a target="_new" class="blacklink" href="/cgi-bin/popitam/help.pl?help.html+idaclist">Id</a>
+			</td>
+			<td>Description</td>
+		</tr>
+		<tr>
+			<tr>
+				<td align="right"><font face="Courier New" size="2">
+	1
+</font></td>
+				<td align="right"><font face="Courier New" size="2">
+	93.34
+</font></td>
+				<td align="right"><font face="Courier New" size="2">
+	0.19
+</font></td>
+				<td align="right"><font face="Courier New" size="2">
+	1187.6372
+</font></td>
+				<td><font face="Courier New" size="2">
+	SAEFLLHMLK<br />
+	saEFLLH***
+</font></td>
+				<td><font face="Courier New" size="2">
+	15.98  
+</font></td>
+				<td><a target="_new" align="left" href="/uniprot/Q80V08"><font face="Courier New" size="2">
+	Q80V08<br />
+</font></a>
+				<a target="_new" align="left" href="/uniprot/P18621"><font face="Courier New" size="2">
+	P18621<br />
+</font></a></td>
+				<td><font face="Courier New" size="2">
+	Q80V08_MOUSE<br />
+</font>
+<font face="Courier New" size="2">
+	RL17_HUMAN<br />
+</font></td>
+				<td><font face="Courier New" size="2">
+	Rpl17 protein (Fragment) - Mus musculus (Mouse).<br />
+</font>
+<font face="Courier New" size="2">
+	60S ribosomal protein L17 - Homo sapiens (Human).<br />
+</font></td>
+			</tr>
+			<tr>
+				<td align="right"><font face="Courier New" size="2">
+	2
+</font></td>
+				<td align="right"><font face="Courier New" size="2">
+	18.09
+</font></td>
+				<td align="right"><font face="Courier New" size="2">
+	0.38
+</font></td>
+				<td align="right"><font face="Courier New" size="2">
+	1144.5552
+</font></td>
+				<td><font face="Courier New" size="2">
+	YEFGIFNQK<br />
+	*EF------
+</font></td>
+				<td><font face="Courier New" size="2">
+	59.04  
+</font></td>
+				<td><a target="_new" align="left" href="/uniprot/P11216"><font face="Courier New" size="2">
+	P11216<br />
+</font></a></td>
+				<td><font face="Courier New" size="2">
+	PYGB_HUMAN<br />
+</font></td>
+				<td><font face="Courier New" size="2">
+	Glycogen phosphorylase, brain form - Homo sapiens (Human).<br />
+</font></td>
+			</tr>
+			<tr>
+				<td align="right"><font face="Courier New" size="2">
+	3
+</font></td>
+				<td align="right"><font face="Courier New" size="2">
+	7.04
+</font></td>
+				<td align="right"><font face="Courier New" size="2">
+	0.93
+</font></td>
+				<td align="right"><font face="Courier New" size="2">
+	933.5283
+</font></td>
+				<td><font face="Courier New" size="2">
+	SGVGNIFIK<br />
+	******FIK
+</font></td>
+				<td><font face="Courier New" size="2">
+	270.12  
+</font></td>
+				<td><a target="_new" align="left" href="/uniprot/P11940"><font face="Courier New" size="2">
+	P11940<br />
+</font></a></td>
+				<td><font face="Courier New" size="2">
+	PABP1_HUMAN<br />
+</font></td>
+				<td><font face="Courier New" size="2">
+	Polyadenylate-binding protein 1 - Homo sapiens (Human).<br />
+</font></td>
+			</tr>
+			<tr>
+				<td align="right"><font face="Courier New" size="2">
+	4
+</font></td>
+				<td align="right"><font face="Courier New" size="2">
+	6.56
+</font></td>
+				<td align="right"><font face="Courier New" size="2">
+	0.99
+</font></td>
+				<td align="right"><font face="Courier New" size="2">
+	1190.5899
+</font></td>
+				<td><font face="Courier New" size="2">
+	MNGMLLNDRK<br />
+	----LLndR*
+</font></td>
+				<td><font face="Courier New" size="2">
+	12.97  
+</font></td>
+				<td><a target="_new" align="left" href="/uniprot/P11940"><font face="Courier New" size="2">
+	P11940<br />
+</font></a></td>
+				<td><font face="Courier New" size="2">
+	PABP1_HUMAN<br />
+</font></td>
+				<td><font face="Courier New" size="2">
+	Polyadenylate-binding protein 1 - Homo sapiens (Human).<br />
+</font></td>
+			</tr>
+			<tr>
+				<td align="right"><font face="Courier New" size="2">
+	5
+</font></td>
+				<td align="right"><font face="Courier New" size="2">
+	6.54
+</font></td>
+				<td align="right"><font face="Courier New" size="2">
+	1000
+</font></td>
+				<td align="right"><font face="Courier New" size="2">
+	1061.6232
+</font></td>
+				<td><font face="Courier New" size="2">
+	KSGVGNIFIK<br />
+	*******FIK
+</font></td>
+				<td><font face="Courier New" size="2">
+	142.02  
+</font></td>
+				<td><a target="_new" align="left" href="/uniprot/P11940"><font face="Courier New" size="2">
+	P11940<br />
+</font></a></td>
+				<td><font face="Courier New" size="2">
+	PABP1_HUMAN<br />
+</font></td>
+				<td><font face="Courier New" size="2">
+	Polyadenylate-binding protein 1 - Homo sapiens (Human).<br />
+</font></td>
+			</tr>
+		</tr>
+	</table>
+</table>
+<br />
+<br />
+<a href="#upstart">Top</a><br><br><a name="spectrum3" />
+<table class="spectrum" bgcolor="#CCCCFF" border="1" rules="none" cellpadding="2">
+	<caption align="left">
+		<b>Spectrum_4</b>
+	</caption>
+	<table class="spectrum" bgcolor="#CCCCFF" border="0" rules="none" cellpadding="1">
+		<tr>
+			<td align="left" width="220">Title</td>
+			<td align="left"><font face="Courier New" size="2">
+	DIVNM[ox]LM[ox]HHDR P11216
+</font></td>
+			<td align="right"></td>
+		</tr>
+		<tr>
+			<td align="left" width="220">Initial peak number</td>
+			<td align="left"><font face="Courier New" size="2">
+	666
+</font></td>
+			<td align="right"></td>
+		</tr>
+		<tr>
+			<td align="left" width="220">Raw precursor mass</td>
+			<td align="left"><font face="Courier New" size="2">
+	706.8126
+</font></td>
+			<td align="right"></td>
+		</tr>
+		<tr>
+			<td align="left" width="220">Precursor mass (MH)</td>
+			<td align="left"><font face="Courier New" size="2">
+	1411.6252
+</font></td>
+			<td align="right"></td>
+		</tr>
+		<tr>
+			<td align="left" width="220">Charge</td>
+			<td align="left"><font face="Courier New" size="2">
+	2
+</font></td>
+			<td align="right"></td>
+		</tr>
+		<tr>
+			<td align="left" width="220"><a target="_new" class="blacklink" href="/cgi-bin/popitam/help.pl?help.html+todo">Candidate proteins</a></td>
+			<td align="left"><font face="Courier New" size="2">
+	12
+</font></td>
+			<td align="right"></td>
+		</tr>
+		<tr>
+			<td align="left" width="220"><a target="_new" class="blacklink" href="/cgi-bin/popitam/help.pl?help.html+todo">Candidate peptides</a></td>
+			<td align="left"><font face="Courier New" size="2">
+	185
+</font></td>
+			<td align="right"></td>
+		</tr>
+		<tr>
+			<td align="left" width="220"><a target="_new" class="blacklink" href="/cgi-bin/popitam/help.pl?help.html+todo">Peptides with at least one scenario</a></td>
+			<td align="left"><font face="Courier New" size="2">
+	15
+</font></td>
+			<td align="right"></td>
+		</tr>
+	</table>
+	<table class="popitableoutputform" bgcolor="#FFFFEA" border="1" cellpadding="2" width="1500">
+		<tr align="center">
+			<td>Rank</td>
+			<td><a target="_new" class="blacklink" href="/cgi-bin/popitam/help.pl?help.html+outputscore">Scenario score</a>
+			</td>
+			<td><a target="_new" class="blacklink" href="/cgi-bin/popitam/help.pl?help.html+deltascore">Delta score</a>
+			</td>
+			<td><a target="_new" class="blacklink" href="/cgi-bin/popitam/help.pl?help.html+outputmass">Mass</a>
+			</td>
+			<td><a target="_new" class="blacklink" href="/cgi-bin/popitam/help.pl?help.html+result">Peptide / Scenario</a>
+			</td>
+			<td><a target="_new" class="blacklink" href="/cgi-bin/popitam/help.pl?help.html+shift">Shift</a>
+			</td>
+			<td><a target="_new" class="blacklink" href="/cgi-bin/popitam/help.pl?help.html+idaclist">AC</a>
+			</td>
+			<td><a target="_new" class="blacklink" href="/cgi-bin/popitam/help.pl?help.html+idaclist">Id</a>
+			</td>
+			<td>Description</td>
+		</tr>
+		<tr>
+			<tr>
+				<td align="right"><font face="Courier New" size="2">
+	1
+</font></td>
+				<td align="right"><font face="Courier New" size="2">
+	68.86
+</font></td>
+				<td align="right"><font face="Courier New" size="2">
+	0.18
+</font></td>
+				<td align="right"><font face="Courier New" size="2">
+	1379.6437
+</font></td>
+				<td><font face="Courier New" size="2">
+	DIVNMLMHHDR<br />
+	diVN***HHDR
+</font></td>
+				<td><font face="Courier New" size="2">
+	31.98  
+</font></td>
+				<td><a target="_new" align="left" href="/uniprot/P11216"><font face="Courier New" size="2">
+	P11216<br />
+</font></a></td>
+				<td><font face="Courier New" size="2">
+	PYGB_HUMAN<br />
+</font></td>
+				<td><font face="Courier New" size="2">
+	Glycogen phosphorylase, brain form - Homo sapiens (Human).<br />
+</font></td>
+			</tr>
+			<tr>
+				<td align="right"><font face="Courier New" size="2">
+	2
+</font></td>
+				<td align="right"><font face="Courier New" size="2">
+	13.08
+</font></td>
+				<td align="right"><font face="Courier New" size="2">
+	0.29
+</font></td>
+				<td align="right"><font face="Courier New" size="2">
+	1268.6473
+</font></td>
+				<td><font face="Courier New" size="2">
+	SGFSSISVSRSR<br />
+	-------VS*SR
+</font></td>
+				<td><font face="Courier New" size="2">
+	143.02  
+</font></td>
+				<td><a target="_new" align="left" href="/uniprot/P48668"><font face="Courier New" size="2">
+	P48668<br />
+</font></a></td>
+				<td><font face="Courier New" size="2">
+	K2C6C_HUMAN<br />
+</font></td>
+				<td><font face="Courier New" size="2">
+	Keratin, type II cytoskeletal 6C - Homo sapiens (Human).<br />
+</font></td>
+			</tr>
+			<tr>
+				<td align="right"><font face="Courier New" size="2">
+	3
+</font></td>
+				<td align="right"><font face="Courier New" size="2">
+	3.89
+</font></td>
+				<td align="right"><font face="Courier New" size="2">
+	0.86
+</font></td>
+				<td align="right"><font face="Courier New" size="2">
+	1025.5141
+</font></td>
+				<td><font face="Courier New" size="2">
+	SGFSSISVSR<br />
+	-------VS*
+</font></td>
+				<td><font face="Courier New" size="2">
+	386.12  
+</font></td>
+				<td><a target="_new" align="left" href="/uniprot/P48668"><font face="Courier New" size="2">
+	P48668<br />
+</font></a></td>
+				<td><font face="Courier New" size="2">
+	K2C6C_HUMAN<br />
+</font></td>
+				<td><font face="Courier New" size="2">
+	Keratin, type II cytoskeletal 6C - Homo sapiens (Human).<br />
+</font></td>
+			</tr>
+			<tr>
+				<td align="right"><font face="Courier New" size="2">
+	4
+</font></td>
+				<td align="right"><font face="Courier New" size="2">
+	3.36
+</font></td>
+				<td align="right"><font face="Courier New" size="2">
+	0.63
+</font></td>
+				<td align="right"><font face="Courier New" size="2">
+	1300.5943
+</font></td>
+				<td><font face="Courier New" size="2">
+	FCSGSWDKMLK<br />
+	****swdk---
+</font></td>
+				<td><font face="Courier New" size="2">
+	111.07  
+</font></td>
+				<td><a target="_new" align="left" href="/uniprot/Q9GZL7"><font face="Courier New" size="2">
+	Q9GZL7<br />
+</font></a></td>
+				<td><font face="Courier New" size="2">
+	WDR12_HUMAN<br />
+</font></td>
+				<td><font face="Courier New" size="2">
+	WD repeat protein 12 - Homo sapiens (Human).<br />
+</font></td>
+			</tr>
+			<tr>
+				<td align="right"><font face="Courier New" size="2">
+	5
+</font></td>
+				<td align="right"><font face="Courier New" size="2">
+	2.14
+</font></td>
+				<td align="right"><font face="Courier New" size="2">
+	1000
+</font></td>
+				<td align="right"><font face="Courier New" size="2">
+	1293.7445
+</font></td>
+				<td><font face="Courier New" size="2">
+	LKVIFLENYR<br />
+	-------NY*
+</font></td>
+				<td><font face="Courier New" size="2">
+	118.02  
+</font></td>
+				<td><a target="_new" align="left" href="/uniprot/P11216"><font face="Courier New" size="2">
+	P11216<br />
+</font></a></td>
+				<td><font face="Courier New" size="2">
+	PYGB_HUMAN<br />
+</font></td>
+				<td><font face="Courier New" size="2">
+	Glycogen phosphorylase, brain form - Homo sapiens (Human).<br />
+</font></td>
+			</tr>
+		</tr>
+	</table>
+</table>
+<br />
+<br />
+<a href="#upstart">Top</a><br><br><form method="post" action="/H:/SIB/DEVELOPPEMENT/EC_POPITAM/NEW_TAGOPOP/form/perlcgi/test.pl" enctype="multipart/form-data" name="myform">
+<input type="hidden" name="request" value="0" /><input type="hidden" name="dataFileCopy" value="BEGIN IONS&#13;&#10;TITLE=LFPLIQAM[ox]HPTLAGK P11940&#13;&#10;PEPMASS=826.945700&#13;&#10;CHARGE=2+&#13;&#10;86.0934 36.0476&#13;&#10;120.0778 38.3810&#13;&#10;183.1421 82.5238&#13;&#10;186.1234 14.7619&#13;&#10;204.1279 182.4286&#13;&#10;211.1351 237.4762&#13;&#10;211.2223 15.9524&#13;&#10;212.0454 1.5238&#13;&#10;212.1373 16.9524&#13;&#10;233.1540 222.9048&#13;&#10;233.2798 9.9048&#13;&#10;234.1568 31.4286&#13;&#10;235.1584 3.9048&#13;&#10;242.0739 0.8095&#13;&#10;242.1482 6.8095&#13;&#10;245.1276 9.2381&#13;&#10;257.1494 2.1905&#13;&#10;261.1514 162.8571&#13;&#10;261.2886 8.0952&#13;&#10;262.1505 35.4762&#13;&#10;275.1602 142.2381&#13;&#10;276.1585 15.2857&#13;&#10;295.2000 0.6667&#13;&#10;296.2165 20.5238&#13;&#10;313.1613 5.1905&#13;&#10;324.1016 1.6667&#13;&#10;324.2161 148.0000&#13;&#10;324.3389 7.0000&#13;&#10;325.2194 26.4762&#13;&#10;341.2284 3.1905&#13;&#10;358.2020 130.6191&#13;&#10;359.1973 19.4762&#13;&#10;371.1945 2.1905&#13;&#10;374.2196 2.1905&#13;&#10;383.2139 12.5238&#13;&#10;388.2454 53.9524&#13;&#10;389.2257 7.1429&#13;&#10;407.2357 2.1905&#13;&#10;409.3019 8.2381&#13;&#10;424.2731 8.0476&#13;&#10;437.3074 41.7619&#13;&#10;438.2754 13.6667&#13;&#10;443.2876 64.3810&#13;&#10;452.2761 92.5238&#13;&#10;453.2633 23.7619&#13;&#10;460.2419 4.2857&#13;&#10;464.9257 7.6667&#13;&#10;465.5423 4.2857&#13;&#10;471.2762 159.3333&#13;&#10;471.6161 1.5714&#13;&#10;471.7277 6.2381&#13;&#10;472.2729 42.4286&#13;&#10;472.4512 3.0952&#13;&#10;484.2041 5.3333&#13;&#10;489.2664 19.2381&#13;&#10;495.2491 5.2381&#13;&#10;503.2561 7.1429&#13;&#10;504.1217 2.8571&#13;&#10;520.3133 1.0952&#13;&#10;523.2980 34.0000&#13;&#10;524.3162 13.6667&#13;&#10;550.8028 12.3810&#13;&#10;556.3687 48.6667&#13;&#10;557.3879 9.9048&#13;&#10;559.7823 30.1429&#13;&#10;560.2850 19.9524&#13;&#10;560.8082 4.5238&#13;&#10;565.3829 10.2857&#13;&#10;567.3239 5.4762&#13;&#10;568.3202 14.3810&#13;&#10;569.3242 3.3333&#13;&#10;577.2584 6.4762&#13;&#10;582.2940 5.3810&#13;&#10;583.2838 5.1905&#13;&#10;584.3666 126.8095&#13;&#10;585.3796 32.9524&#13;&#10;586.3409 378.3810&#13;&#10;586.5981 14.7619&#13;&#10;586.8126 11.5714&#13;&#10;587.3411 106.4762&#13;&#10;588.3655 12.3810&#13;&#10;591.6169 2.5238&#13;&#10;591.7957 134.1905&#13;&#10;592.0016 11.3333&#13;&#10;592.2900 67.3333&#13;&#10;592.4195 9.2381&#13;&#10;592.5343 0.0000&#13;&#10;592.7948 23.4762&#13;&#10;595.2901 31.9524&#13;&#10;595.4893 2.3810&#13;&#10;595.8068 20.7619&#13;&#10;595.9941 2.0952&#13;&#10;596.2029 2.0000&#13;&#10;596.3444 6.3333&#13;&#10;597.2656 7.3810&#13;&#10;599.3205 12.2381&#13;&#10;606.3415 17.3810&#13;&#10;609.2561 2.1905&#13;&#10;615.2762 4.2857&#13;&#10;616.7845 3.8095&#13;&#10;623.7974 14.4762&#13;&#10;624.8344 7.2381&#13;&#10;632.3583 0.8571&#13;&#10;632.8156 22.1905&#13;&#10;633.3314 12.2381&#13;&#10;648.3351 23.0476&#13;&#10;648.8512 9.4762&#13;&#10;656.3483 12.8095&#13;&#10;656.8145 9.7143&#13;&#10;664.8616 392.0476&#13;&#10;665.3675 257.2857&#13;&#10;665.5513 16.8571&#13;&#10;665.8671 124.4762&#13;&#10;666.1382 5.5238&#13;&#10;666.3597 27.1905&#13;&#10;666.5031 2.6667&#13;&#10;666.6042 3.2857&#13;&#10;667.3370 5.1429&#13;&#10;668.2136 4.2381&#13;&#10;670.3322 25.1905&#13;&#10;671.2714 8.9048&#13;&#10;671.4000 3.2381&#13;&#10;674.3340 3.5714&#13;&#10;675.3218 11.6667&#13;&#10;678.3098 3.1429&#13;&#10;681.2971 2.1905&#13;&#10;684.4404 11.1429&#13;&#10;685.3203 5.3333&#13;&#10;687.8481 74.3333&#13;&#10;688.1723 1.2381&#13;&#10;688.3311 97.9048&#13;&#10;688.5742 0.8571&#13;&#10;688.8440 49.0952&#13;&#10;688.9899 2.9048&#13;&#10;689.1617 1.7619&#13;&#10;689.3373 26.1905&#13;&#10;689.5020 2.0000&#13;&#10;689.7311 2.7619&#13;&#10;690.3995 2.1905&#13;&#10;695.3169 3.0000&#13;&#10;696.3491 10.0952&#13;&#10;696.4806 1.0476&#13;&#10;696.8577 1969.3334&#13;&#10;697.3580 1756.9047&#13;&#10;697.8574 749.7144&#13;&#10;698.3650 237.5715&#13;&#10;698.6605 16.9048&#13;&#10;698.8568 31.0476&#13;&#10;699.1118 2.3810&#13;&#10;699.3206 4.4286&#13;&#10;700.1233 7.6667&#13;&#10;700.5598 3.6667&#13;&#10;700.6981 0.6667&#13;&#10;705.3733 26.3810&#13;&#10;706.2920 4.4286&#13;&#10;706.7950 4.3810&#13;&#10;712.4310 45.7619&#13;&#10;713.3995 10.6190&#13;&#10;715.3879 5.4762&#13;&#10;723.3836 127.7143&#13;&#10;723.6049 12.0476&#13;&#10;724.3812 51.3810&#13;&#10;725.3951 16.0476&#13;&#10;725.9045 2.1905&#13;&#10;727.3143 5.1429&#13;&#10;738.3467 40.4762&#13;&#10;738.5455 3.7143&#13;&#10;738.8804 13.6667&#13;&#10;739.3742 7.5714&#13;&#10;739.8215 1.9048&#13;&#10;743.4006 15.4286&#13;&#10;754.4227 2.6667&#13;&#10;755.4927 7.3810&#13;&#10;761.8331 7.5714&#13;&#10;770.3917 84.5238&#13;&#10;770.6429 5.6190&#13;&#10;770.8649 93.4286&#13;&#10;771.0754 5.5238&#13;&#10;771.2063 10.2857&#13;&#10;771.3794 51.5714&#13;&#10;779.3885 20.9524&#13;&#10;783.2610 2.7619&#13;&#10;783.4376 40.0000&#13;&#10;784.4655 10.4762&#13;&#10;794.9276 186.7143&#13;&#10;795.1669 10.7143&#13;&#10;795.4374 162.0000&#13;&#10;795.7086 8.9524&#13;&#10;795.9415 62.7143&#13;&#10;796.2274 3.5714&#13;&#10;796.3800 8.2857&#13;&#10;796.6170 4.8571&#13;&#10;802.3695 3.1905&#13;&#10;804.9465 4.1905&#13;&#10;806.4451 44.4286&#13;&#10;807.4044 105.9048&#13;&#10;808.2542 11.6190&#13;&#10;808.4016 32.4762&#13;&#10;809.3897 12.0000&#13;&#10;810.3431 9.1429&#13;&#10;811.3263 2.8571&#13;&#10;813.4135 3.3333&#13;&#10;817.9232 20.1429&#13;&#10;818.3982 35.9048&#13;&#10;818.7388 2.9048&#13;&#10;818.8983 17.3810&#13;&#10;819.4122 6.2857&#13;&#10;826.2516 6.8571&#13;&#10;826.4688 70.5714&#13;&#10;826.9235 973.1906&#13;&#10;827.4295 1062.8572&#13;&#10;827.6971 54.0952&#13;&#10;827.9203 545.1429&#13;&#10;828.4171 213.4286&#13;&#10;828.9482 28.0000&#13;&#10;829.2079 6.7619&#13;&#10;852.3770 5.0476&#13;&#10;859.3488 2.3810&#13;&#10;866.3834 26.2857&#13;&#10;870.4379 128.4286&#13;&#10;871.4126 54.5238&#13;&#10;872.4116 15.5238&#13;&#10;877.4484 61.0952&#13;&#10;877.6571 7.8095&#13;&#10;878.2757 4.7619&#13;&#10;878.4544 27.5714&#13;&#10;879.4265 6.7619&#13;&#10;897.3382 2.3810&#13;&#10;915.5145 2.8571&#13;&#10;923.4654 10.2381&#13;&#10;924.4446 7.8571&#13;&#10;930.4875 28.2857&#13;&#10;931.4480 10.5238&#13;&#10;941.0947 1.7143&#13;&#10;941.4406 252.6190&#13;&#10;941.7569 12.0476&#13;&#10;941.8900 4.0952&#13;&#10;942.4390 134.9048&#13;&#10;943.4448 40.0952&#13;&#10;943.7170 1.4286&#13;&#10;944.4305 8.3333&#13;&#10;979.4014 7.5714&#13;&#10;987.4767 19.8571&#13;&#10;988.4297 48.3810&#13;&#10;988.6694 4.0952&#13;&#10;989.4693 12.2857&#13;&#10;1003.5405 8.7619&#13;&#10;1004.5176 3.1905&#13;&#10;1005.4860 90.7143&#13;&#10;1006.4633 32.5238&#13;&#10;1006.6816 3.8095&#13;&#10;1007.5554 14.6190&#13;&#10;1051.2197 6.8571&#13;&#10;1051.4624 39.5714&#13;&#10;1051.6591 10.2381&#13;&#10;1051.8828 2.7619&#13;&#10;1052.1559 3.0476&#13;&#10;1052.4690 165.7143&#13;&#10;1053.5237 89.0476&#13;&#10;1054.5497 36.9524&#13;&#10;1055.5388 7.2857&#13;&#10;1056.3258 2.1905&#13;&#10;1067.1709 4.1429&#13;&#10;1067.5109 83.8572&#13;&#10;1068.5358 47.1905&#13;&#10;1068.8083 5.0952&#13;&#10;1069.4994 382.8095&#13;&#10;1070.0026 8.7143&#13;&#10;1070.5261 184.2857&#13;&#10;1070.8890 6.5714&#13;&#10;1071.5208 53.6667&#13;&#10;1071.9095 2.3333&#13;&#10;1072.1990 1.7143&#13;&#10;1072.4940 6.8095&#13;&#10;1090.4684 2.1905&#13;&#10;1091.4996 2.1905&#13;&#10;1092.5898 4.3333&#13;&#10;1100.5040 5.6190&#13;&#10;1102.5242 2.1905&#13;&#10;1118.5566 83.9524&#13;&#10;1118.9347 7.8571&#13;&#10;1119.6045 48.8571&#13;&#10;1120.5548 12.8095&#13;&#10;1120.7714 0.1905&#13;&#10;1125.5029 7.0952&#13;&#10;1164.6121 7.2857&#13;&#10;1182.5779 162.9524&#13;&#10;1183.0647 9.0000&#13;&#10;1183.3529 23.0952&#13;&#10;1183.5468 102.0476&#13;&#10;1184.0234 2.8095&#13;&#10;1184.2042 1.6190&#13;&#10;1184.4475 9.4762&#13;&#10;1184.6235 29.2857&#13;&#10;1185.5925 5.8095&#13;&#10;1189.3999 1.0000&#13;&#10;1189.5885 44.2857&#13;&#10;1190.4084 6.4286&#13;&#10;1190.6094 20.2381&#13;&#10;1191.5730 13.4762&#13;&#10;1232.6182 4.1905&#13;&#10;1237.5007 1.1905&#13;&#10;1247.7599 4.7619&#13;&#10;1248.5665 5.0476&#13;&#10;1265.6017 16.1429&#13;&#10;1295.5302 10.4762&#13;&#10;1295.7129 25.8571&#13;&#10;1296.4791 4.2857&#13;&#10;1296.7126 6.8571&#13;&#10;1296.8768 6.6667&#13;&#10;1297.7214 8.6667&#13;&#10;1298.5856 2.9524&#13;&#10;1311.6281 2.8571&#13;&#10;1314.6595 2.7619&#13;&#10;1315.7568 4.1905&#13;&#10;1328.7397 45.3810&#13;&#10;1329.7367 24.1905&#13;&#10;1330.7556 8.7143&#13;&#10;1378.7205 33.1429&#13;&#10;1379.4253 8.3333&#13;&#10;1379.7717 14.2857&#13;&#10;1380.3362 2.2857&#13;&#10;1385.6620 4.1905&#13;&#10;1392.7028 226.9524&#13;&#10;1393.3235 19.9048&#13;&#10;1393.6984 143.1429&#13;&#10;1394.0221 19.5714&#13;&#10;1394.4191 10.8095&#13;&#10;1394.7009 38.8571&#13;&#10;1394.9178 11.7619&#13;&#10;1395.7708 9.0000&#13;&#10;1449.7029 52.0476&#13;&#10;1450.6533 33.0952&#13;&#10;1450.9067 8.0952&#13;&#10;1451.7195 10.9524&#13;&#10;END IONS&#13;&#10;&#13;&#10;BEGIN IONS&#13;&#10;TITLE=LC[cam]YVALDFEQEMATAASSSSLEK P63261&#13;&#10;PEPMASS=850.720700&#13;&#10;CHARGE=3+&#13;&#10;86.0914 27.0952&#13;&#10;101.0634 4.1905&#13;&#10;102.0519 22.1905&#13;&#10;104.0517 150.0952&#13;&#10;104.1163 4.2857&#13;&#10;105.0548 5.0476&#13;&#10;120.0776 24.9048&#13;&#10;131.1145 48.3810&#13;&#10;133.0528 6.0952&#13;&#10;136.0764 28.4286&#13;&#10;147.1059 90.5238&#13;&#10;173.0861 45.0476&#13;&#10;191.0938 2.1905&#13;&#10;203.0847 14.7619&#13;&#10;226.1253 12.5238&#13;&#10;235.1069 17.2381&#13;&#10;240.0996 20.4286&#13;&#10;241.0697 5.2857&#13;&#10;244.1313 35.7619&#13;&#10;246.1203 34.8571&#13;&#10;247.1231 6.4286&#13;&#10;257.0938 42.9524&#13;&#10;258.1059 133.5238&#13;&#10;259.1258 22.3333&#13;&#10;260.0889 6.2857&#13;&#10;261.0858 8.1905&#13;&#10;263.1036 24.7619&#13;&#10;274.1189 384.0952&#13;&#10;275.1224 55.2857&#13;&#10;276.1473 119.5714&#13;&#10;277.1080 32.3333&#13;&#10;278.1130 3.1429&#13;&#10;286.1109 60.5714&#13;&#10;287.1417 14.8571&#13;&#10;300.1478 10.4286&#13;&#10;304.1297 13.6667&#13;&#10;313.1107 10.4286&#13;&#10;315.1525 16.4762&#13;&#10;324.0874 9.5238&#13;&#10;332.1307 11.3810&#13;&#10;333.1596 2.1905&#13;&#10;334.1496 10.3810&#13;&#10;345.1714 5.0476&#13;&#10;346.1648 115.1905&#13;&#10;346.4112 2.8571&#13;&#10;347.1798 17.4762&#13;&#10;357.1614 10.8095&#13;&#10;369.1512 8.8095&#13;&#10;370.1223 12.5714&#13;&#10;374.1600 4.0952&#13;&#10;384.1727 7.8571&#13;&#10;387.1412 28.3810&#13;&#10;387.2915 1.5238&#13;&#10;389.2184 76.4762&#13;&#10;389.3734 4.4286&#13;&#10;390.2292 5.8571&#13;&#10;392.1460 38.6667&#13;&#10;393.1215 4.1905&#13;&#10;393.2529 2.0476&#13;&#10;395.2149 4.2857&#13;&#10;397.1445 15.5238&#13;&#10;397.2545 6.2381&#13;&#10;402.1658 6.2857&#13;&#10;403.1762 19.4762&#13;&#10;404.2010 4.3810&#13;&#10;405.1696 14.5714&#13;&#10;409.1650 10.9524&#13;&#10;415.1411 15.1905&#13;&#10;417.1747 13.4762&#13;&#10;419.2398 5.2857&#13;&#10;423.1627 70.1905&#13;&#10;424.1615 18.8571&#13;&#10;428.1884 6.4286&#13;&#10;431.2158 11.9048&#13;&#10;436.9497 1.6667&#13;&#10;437.1774 420.3810&#13;&#10;437.4169 14.4762&#13;&#10;438.1822 87.0476&#13;&#10;439.1921 27.4762&#13;&#10;440.2217 7.3333&#13;&#10;444.2170 8.6190&#13;&#10;447.2511 18.5714&#13;&#10;460.1631 10.1429&#13;&#10;463.2090 9.0476&#13;&#10;464.2677 5.2857&#13;&#10;465.2318 2.1905&#13;&#10;468.1815 5.3810&#13;&#10;472.2252 5.6190&#13;&#10;476.2602 249.4286&#13;&#10;476.5738 6.6667&#13;&#10;477.2568 49.5238&#13;&#10;478.2572 14.6667&#13;&#10;482.1980 3.9524&#13;&#10;486.2086 10.6190&#13;&#10;487.2011 10.1905&#13;&#10;490.7457 46.2381&#13;&#10;491.2316 23.4286&#13;&#10;491.7237 13.8095&#13;&#10;494.2021 68.8095&#13;&#10;495.1937 15.9524&#13;&#10;496.1967 5.3333&#13;&#10;500.1744 11.1905&#13;&#10;501.1794 4.2857&#13;&#10;503.1795 2.1905&#13;&#10;504.1944 13.3810&#13;&#10;505.2215 18.2857&#13;&#10;506.2500 7.5714&#13;&#10;508.2435 162.1429&#13;&#10;509.2498 31.8571&#13;&#10;510.2376 14.6190&#13;&#10;515.2159 10.5238&#13;&#10;516.2665 72.6667&#13;&#10;517.2440 34.1429&#13;&#10;517.7582 6.2381&#13;&#10;518.2318 16.0476&#13;&#10;520.1917 79.4762&#13;&#10;521.2001 14.4286&#13;&#10;523.2776 2.8571&#13;&#10;526.2475 29.6667&#13;&#10;527.2305 2.8571&#13;&#10;527.7158 2.9524&#13;&#10;533.2698 4.8571&#13;&#10;534.2128 60.3333&#13;&#10;536.2434 431.6191&#13;&#10;536.4030 25.7619&#13;&#10;537.2504 125.4286&#13;&#10;538.2574 32.8571&#13;&#10;539.2560 8.4762&#13;&#10;543.2014 33.5714&#13;&#10;544.2264 10.2857&#13;&#10;545.2731 9.4762&#13;&#10;546.2603 11.7143&#13;&#10;556.2462 24.3333&#13;&#10;556.7301 2.1905&#13;&#10;557.2655 20.3810&#13;&#10;558.2075 11.2857&#13;&#10;559.2464 5.4762&#13;&#10;560.3156 15.5714&#13;&#10;561.2064 11.6667&#13;&#10;562.2817 48.0000&#13;&#10;563.2927 339.7144&#13;&#10;563.7018 4.6667&#13;&#10;564.3011 73.3810&#13;&#10;564.7761 3.1905&#13;&#10;565.3228 15.2381&#13;&#10;576.2571 26.8095&#13;&#10;577.3079 19.5714&#13;&#10;579.1352 1.3810&#13;&#10;579.2883 78.7619&#13;&#10;580.2930 18.6667&#13;&#10;582.7576 19.2857&#13;&#10;583.2700 7.1429&#13;&#10;584.1701 1.7619&#13;&#10;584.3204 5.4286&#13;&#10;589.2529 23.5238&#13;&#10;591.2482 14.0000&#13;&#10;592.2831 18.8095&#13;&#10;599.2275 5.4762&#13;&#10;605.2823 7.2857&#13;&#10;607.2822 453.8096&#13;&#10;607.4584 24.9048&#13;&#10;607.7450 13.8095&#13;&#10;608.2866 135.6190&#13;&#10;608.5327 8.9048&#13;&#10;609.2878 40.2857&#13;&#10;610.2936 7.1429&#13;&#10;614.2510 13.2857&#13;&#10;614.3746 5.2381&#13;&#10;615.2722 9.8571&#13;&#10;616.2189 4.5714&#13;&#10;620.1818 3.6667&#13;&#10;620.3282 2.8571&#13;&#10;620.7429 1.0952&#13;&#10;621.2720 64.3810&#13;&#10;621.7389 3.1905&#13;&#10;622.3220 7.8571&#13;&#10;626.2672 9.4286&#13;&#10;629.3643 58.6190&#13;&#10;630.3125 19.9048&#13;&#10;630.4824 1.5238&#13;&#10;631.2585 18.6190&#13;&#10;632.3049 51.4286&#13;&#10;633.2659 34.4286&#13;&#10;634.2485 10.5238&#13;&#10;635.2430 6.4762&#13;&#10;642.1774 1.0000&#13;&#10;644.2327 10.4762&#13;&#10;645.2486 5.2857&#13;&#10;647.3078 12.1905&#13;&#10;647.5811 4.5714&#13;&#10;649.2397 463.0953&#13;&#10;649.7072 23.2857&#13;&#10;650.3135 665.0001&#13;&#10;650.6450 43.0952&#13;&#10;650.9166 7.3810&#13;&#10;651.3221 197.1905&#13;&#10;651.5678 14.6190&#13;&#10;651.7569 1.9524&#13;&#10;652.3306 31.2381&#13;&#10;662.2811 14.8095&#13;&#10;665.2524 22.6667&#13;&#10;666.2574 8.2381&#13;&#10;672.2855 41.6667&#13;&#10;673.3020 17.3333&#13;&#10;675.3294 41.7143&#13;&#10;675.4861 2.1905&#13;&#10;675.6227 3.7143&#13;&#10;675.8569 2.9048&#13;&#10;676.3323 25.7619&#13;&#10;677.4418 6.3810&#13;&#10;684.3066 5.2381&#13;&#10;684.8000 216.9048&#13;&#10;685.0892 3.7143&#13;&#10;685.2885 156.0476&#13;&#10;685.7933 75.8095&#13;&#10;685.9531 3.3333&#13;&#10;686.0655 6.7143&#13;&#10;686.2889 36.4762&#13;&#10;686.9100 0.7143&#13;&#10;687.2497 18.0952&#13;&#10;688.3029 6.4286&#13;&#10;690.2930 21.3810&#13;&#10;691.3434 12.6190&#13;&#10;692.3646 128.8572&#13;&#10;692.6105 5.7619&#13;&#10;692.7393 3.9048&#13;&#10;693.3557 34.2381&#13;&#10;693.5031 7.1905&#13;&#10;694.3518 19.2857&#13;&#10;695.3626 6.2381&#13;&#10;698.2896 2.1905&#13;&#10;700.2990 4.7619&#13;&#10;701.3051 28.8095&#13;&#10;702.3429 29.3810&#13;&#10;702.7615 5.4286&#13;&#10;702.8807 1.3333&#13;&#10;703.3184 20.3333&#13;&#10;703.8076 10.6667&#13;&#10;704.2984 52.2381&#13;&#10;704.7493 1.1905&#13;&#10;705.3194 28.3810&#13;&#10;706.2780 6.3333&#13;&#10;709.3444 6.7619&#13;&#10;711.3182 30.6191&#13;&#10;711.8143 29.1429&#13;&#10;712.3236 17.7143&#13;&#10;715.2664 5.4762&#13;&#10;719.3519 57.1429&#13;&#10;719.8778 2.6190&#13;&#10;720.3610 1319.2858&#13;&#10;720.6648 54.9524&#13;&#10;720.8361 66.3810&#13;&#10;721.3611 527.5238&#13;&#10;721.6313 24.0952&#13;&#10;721.8820 11.2857&#13;&#10;722.0643 8.4762&#13;&#10;722.3483 186.2381&#13;&#10;722.7417 5.4286&#13;&#10;723.2291 6.6667&#13;&#10;723.3655 29.3333&#13;&#10;726.2893 11.5238&#13;&#10;729.2430 9.5238&#13;&#10;730.3164 6.9048&#13;&#10;736.2918 48.1905&#13;&#10;737.3522 1234.3334&#13;&#10;737.8644 26.0000&#13;&#10;738.1019 15.0952&#13;&#10;738.3619 444.8096&#13;&#10;738.7422 8.9524&#13;&#10;739.3522 81.4762&#13;&#10;739.5787 13.3810&#13;&#10;740.3386 21.9524&#13;&#10;741.3007 8.1429&#13;&#10;742.3686 7.2857&#13;&#10;743.2939 8.1429&#13;&#10;744.2916 13.6190&#13;&#10;745.2982 11.2381&#13;&#10;750.0898 1.0952&#13;&#10;750.3025 61.9524&#13;&#10;750.5416 0.7143&#13;&#10;750.8229 60.0952&#13;&#10;750.9936 3.0952&#13;&#10;751.3228 38.8571&#13;&#10;751.8133 17.5714&#13;&#10;752.2880 12.0476&#13;&#10;752.8028 2.1905&#13;&#10;754.2799 12.4762&#13;&#10;761.3450 6.2857&#13;&#10;762.3075 78.7143&#13;&#10;763.3271 33.9048&#13;&#10;764.3226 9.5714&#13;&#10;770.3278 4.7619&#13;&#10;771.8184 7.6667&#13;&#10;772.3733 29.9524&#13;&#10;772.5858 0.9048&#13;&#10;773.3182 8.2381&#13;&#10;773.4540 5.1905&#13;&#10;774.3609 4.2857&#13;&#10;775.8332 8.4762&#13;&#10;776.6736 1.5714&#13;&#10;776.8530 7.0476&#13;&#10;777.3345 8.6190&#13;&#10;780.2936 99.0000&#13;&#10;780.5713 5.9048&#13;&#10;781.0911 3.9524&#13;&#10;781.3101 52.4762&#13;&#10;782.2938 5.2381&#13;&#10;783.3281 5.1905&#13;&#10;785.2948 4.5714&#13;&#10;785.5902 1.0476&#13;&#10;785.8451 114.9048&#13;&#10;786.3260 104.9048&#13;&#10;786.5669 5.6667&#13;&#10;786.8077 62.1429&#13;&#10;787.1288 1.3333&#13;&#10;787.3506 31.0952&#13;&#10;788.4103 3.1429&#13;&#10;790.3670 84.3810&#13;&#10;791.3850 46.7143&#13;&#10;792.3459 20.4762&#13;&#10;793.3611 5.7143&#13;&#10;797.9371 2.5714&#13;&#10;801.3193 5.2381&#13;&#10;803.3361 8.0952&#13;&#10;803.4762 0.7143&#13;&#10;805.2473 3.0476&#13;&#10;805.3906 21.2857&#13;&#10;806.3235 34.1905&#13;&#10;806.6292 3.5238&#13;&#10;806.8345 17.0476&#13;&#10;806.9868 8.0476&#13;&#10;807.3358 30.0000&#13;&#10;807.6158 9.7143&#13;&#10;807.8114 6.4762&#13;&#10;808.3917 1804.2384&#13;&#10;808.9291 39.0000&#13;&#10;809.3934 674.6667&#13;&#10;809.9228 13.9524&#13;&#10;810.0690 7.1429&#13;&#10;810.4005 189.8572&#13;&#10;810.6827 8.8095&#13;&#10;810.8740 1.2857&#13;&#10;811.3785 31.0000&#13;&#10;811.5989 2.2857&#13;&#10;812.3367 10.8095&#13;&#10;812.7203 1.0952&#13;&#10;813.3865 13.0476&#13;&#10;813.7617 4.8571&#13;&#10;814.3358 20.9524&#13;&#10;814.5366 1.4286&#13;&#10;814.8530 16.2857&#13;&#10;815.0425 3.1429&#13;&#10;815.3297 25.3333&#13;&#10;816.3212 20.3810&#13;&#10;817.3827 27.7619&#13;&#10;818.4004 13.9524&#13;&#10;818.6090 0.8571&#13;&#10;818.8661 8.2857&#13;&#10;819.1148 2.8095&#13;&#10;819.3212 62.7143&#13;&#10;820.3307 28.6667&#13;&#10;821.3311 11.0476&#13;&#10;822.3339 13.8571&#13;&#10;822.5010 3.1429&#13;&#10;823.3767 7.9524&#13;&#10;823.8998 2.2381&#13;&#10;825.2634 1.0952&#13;&#10;827.1260 7.7143&#13;&#10;827.3459 138.2857&#13;&#10;827.8608 163.2381&#13;&#10;828.1429 7.7143&#13;&#10;828.3479 114.8572&#13;&#10;828.8495 37.5714&#13;&#10;829.3603 9.4762&#13;&#10;832.3720 15.1429&#13;&#10;833.3461 126.7143&#13;&#10;833.6390 8.5238&#13;&#10;834.1552 7.6667&#13;&#10;834.3425 81.6191&#13;&#10;834.5295 1.7619&#13;&#10;835.3911 311.2381&#13;&#10;835.7998 8.8095&#13;&#10;836.3694 236.1905&#13;&#10;836.8326 108.0000&#13;&#10;837.0161 17.4762&#13;&#10;837.3728 123.3810&#13;&#10;837.5616 12.0000&#13;&#10;837.8688 23.6191&#13;&#10;838.0732 5.1905&#13;&#10;838.2096 5.3810&#13;&#10;838.4067 26.7619&#13;&#10;838.8107 6.5238&#13;&#10;839.1426 6.5714&#13;&#10;839.3805 13.0952&#13;&#10;840.0417 4.2857&#13;&#10;840.8724 2.1905&#13;&#10;841.3508 2.6667&#13;&#10;841.5388 1.6190&#13;&#10;841.8531 2.2381&#13;&#10;842.3763 2.1905&#13;&#10;843.3920 11.5714&#13;&#10;844.3883 13.7619&#13;&#10;844.7098 96.9048&#13;&#10;845.0295 142.2381&#13;&#10;845.3787 112.9524&#13;&#10;845.7029 63.8095&#13;&#10;846.0617 29.6667&#13;&#10;846.3967 14.8571&#13;&#10;846.6926 4.2857&#13;&#10;846.9936 1.5714&#13;&#10;847.2966 3.0952&#13;&#10;848.2856 6.1905&#13;&#10;848.8727 2.3333&#13;&#10;849.3892 32.5714&#13;&#10;849.7447 2.1905&#13;&#10;849.8936 33.5714&#13;&#10;850.1750 4.4762&#13;&#10;850.3476 21.1429&#13;&#10;850.7410 12.3810&#13;&#10;850.8660 18.7619&#13;&#10;851.1190 12.8571&#13;&#10;851.3253 176.7619&#13;&#10;851.7749 20.8095&#13;&#10;852.1161 9.1905&#13;&#10;852.3357 62.3333&#13;&#10;852.5289 5.0000&#13;&#10;852.7107 6.7143&#13;&#10;852.9152 2.0000&#13;&#10;853.2170 5.9524&#13;&#10;853.3630 18.5714&#13;&#10;853.8742 6.1429&#13;&#10;854.2891 20.1905&#13;&#10;854.8038 8.7143&#13;&#10;855.3489 6.0952&#13;&#10;858.3441 17.0476&#13;&#10;858.8279 13.3333&#13;&#10;859.5334 4.4286&#13;&#10;860.3161 1.9048&#13;&#10;861.4169 32.0952&#13;&#10;862.4103 9.2381&#13;&#10;862.6686 30.7143&#13;&#10;862.8682 373.1429&#13;&#10;863.3708 426.2857&#13;&#10;863.8665 246.7619&#13;&#10;864.3537 109.3810&#13;&#10;864.6813 6.7619&#13;&#10;864.8473 31.4762&#13;&#10;865.4164 16.1905&#13;&#10;866.3254 7.0476&#13;&#10;867.0161 0.9524&#13;&#10;867.4576 2.5238&#13;&#10;869.3633 21.0000&#13;&#10;870.4868 3.9524&#13;&#10;871.3799 6.9524&#13;&#10;871.9088 20.4762&#13;&#10;872.3490 33.0952&#13;&#10;872.8793 6.8571&#13;&#10;873.3395 9.4762&#13;&#10;877.3909 2.1905&#13;&#10;879.4243 836.5715&#13;&#10;879.8394 17.5714&#13;&#10;880.0909 19.7619&#13;&#10;880.4249 390.1905&#13;&#10;880.8359 11.6667&#13;&#10;881.1636 4.9048&#13;&#10;881.4180 97.0000&#13;&#10;882.2312 1.4762&#13;&#10;882.4142 22.8571&#13;&#10;883.3426 7.5238&#13;&#10;883.5221 5.6667&#13;&#10;888.5441 2.5238&#13;&#10;890.3548 29.3810&#13;&#10;890.5400 2.5238&#13;&#10;891.3781 14.0476&#13;&#10;892.3853 6.2381&#13;&#10;893.3491 17.8095&#13;&#10;893.5783 2.8571&#13;&#10;894.3527 7.1429&#13;&#10;898.3699 22.0952&#13;&#10;899.3465 6.1905&#13;&#10;901.3103 4.0952&#13;&#10;902.3979 3.1905&#13;&#10;906.8631 51.7143&#13;&#10;907.3647 154.7143&#13;&#10;907.6438 7.2381&#13;&#10;907.8643 125.4286&#13;&#10;908.3851 71.8571&#13;&#10;908.8646 21.0476&#13;&#10;909.3491 11.9524&#13;&#10;909.4905 2.6190&#13;&#10;909.9005 7.0952&#13;&#10;910.4964 2.9524&#13;&#10;915.8428 15.4286&#13;&#10;916.3666 38.4762&#13;&#10;917.3074 12.0952&#13;&#10;918.3015 3.6667&#13;&#10;919.3926 3.8095&#13;&#10;924.3881 9.3810&#13;&#10;932.3901 17.2857&#13;&#10;934.3444 206.4286&#13;&#10;934.5694 8.0476&#13;&#10;934.9200 4.2381&#13;&#10;935.0918 9.4286&#13;&#10;935.3551 95.0476&#13;&#10;935.5423 6.3333&#13;&#10;936.3402 39.0000&#13;&#10;937.2759 16.4286&#13;&#10;938.4265 6.2381&#13;&#10;941.8233 2.1905&#13;&#10;942.8236 7.3333&#13;&#10;945.4942 4.1905&#13;&#10;946.4034 25.1905&#13;&#10;947.2630 2.4286&#13;&#10;947.4294 9.0000&#13;&#10;948.4158 2.3810&#13;&#10;950.9077 12.5238&#13;&#10;951.3714 15.4762&#13;&#10;951.5570 5.3810&#13;&#10;951.8616 10.8571&#13;&#10;952.3563 73.7143&#13;&#10;952.5931 5.8571&#13;&#10;952.9598 2.9524&#13;&#10;953.1321 2.6667&#13;&#10;953.4005 26.9524&#13;&#10;954.3687 28.5714&#13;&#10;954.5214 8.9524&#13;&#10;955.4058 14.2381&#13;&#10;962.4797 62.5714&#13;&#10;963.4017 94.6190&#13;&#10;963.7168 12.2381&#13;&#10;963.9371 65.5714&#13;&#10;964.4064 152.2857&#13;&#10;964.9091 17.3810&#13;&#10;965.2169 7.7619&#13;&#10;965.4108 53.3333&#13;&#10;965.6486 4.2857&#13;&#10;965.9978 2.2857&#13;&#10;966.4065 26.9048&#13;&#10;967.1853 3.9524&#13;&#10;967.4767 2.2381&#13;&#10;970.4092 3.9524&#13;&#10;972.4415 13.0952&#13;&#10;972.9222 18.2857&#13;&#10;973.4272 13.3333&#13;&#10;978.3661 2.1905&#13;&#10;979.3956 21.6191&#13;&#10;980.4621 1134.5239&#13;&#10;981.0583 14.4286&#13;&#10;981.4722 541.0477&#13;&#10;981.8582 30.1429&#13;&#10;982.1288 31.9524&#13;&#10;982.4579 340.8096&#13;&#10;983.4400 126.9048&#13;&#10;983.7609 7.4762&#13;&#10;984.4409 44.7619&#13;&#10;984.7620 2.9524&#13;&#10;985.4484 14.9524&#13;&#10;986.4537 4.2857&#13;&#10;988.3862 11.3333&#13;&#10;988.9161 2.1905&#13;&#10;989.3837 4.0952&#13;&#10;989.5901 1.9524&#13;&#10;989.9224 12.5238&#13;&#10;990.4182 19.7143&#13;&#10;990.9610 5.1905&#13;&#10;991.3631 2.1905&#13;&#10;996.3607 5.2857&#13;&#10;997.5980 2.2381&#13;&#10;998.4337 27.9524&#13;&#10;998.9399 105.2381&#13;&#10;999.4540 120.7143&#13;&#10;999.9111 70.1429&#13;&#10;1000.2307 14.5714&#13;&#10;1000.4252 19.3333&#13;&#10;1000.6567 0.6667&#13;&#10;1000.8114 0.7619&#13;&#10;1000.9998 5.0000&#13;&#10;1005.3557 75.0476&#13;&#10;1006.3893 48.7619&#13;&#10;1007.3725 17.0476&#13;&#10;1007.5475 1.4762&#13;&#10;1007.6972 0.4762&#13;&#10;1007.9424 21.5238&#13;&#10;1008.2208 3.1429&#13;&#10;1008.4446 45.5714&#13;&#10;1008.9285 15.0952&#13;&#10;1015.4952 4.1905&#13;&#10;1017.4700 7.2381&#13;&#10;1020.5153 6.7619&#13;&#10;1021.4448 4.1905&#13;&#10;1023.3048 10.5714&#13;&#10;1023.4808 9.1905&#13;&#10;1033.4833 108.9524&#13;&#10;1034.0001 1.7143&#13;&#10;1034.1581 1.9524&#13;&#10;1034.4635 43.1905&#13;&#10;1034.7310 2.2857&#13;&#10;1035.4669 78.4286&#13;&#10;1035.8040 1.9048&#13;&#10;1035.9871 3.0952&#13;&#10;1036.4613 52.5238&#13;&#10;1036.9132 4.1905&#13;&#10;1037.4583 17.8095&#13;&#10;1047.2759 4.0476&#13;&#10;1047.4504 27.1905&#13;&#10;1047.6189 5.4286&#13;&#10;1048.4742 79.3810&#13;&#10;1048.8016 6.8571&#13;&#10;1048.9991 49.9048&#13;&#10;1049.4510 58.9524&#13;&#10;1049.8408 8.2857&#13;&#10;1050.3878 10.3333&#13;&#10;1050.9778 2.0476&#13;&#10;1051.5044 682.0953&#13;&#10;1052.0094 10.6667&#13;&#10;1052.5109 367.2382&#13;&#10;1052.9648 4.2857&#13;&#10;1053.1691 11.7143&#13;&#10;1053.5269 97.9524&#13;&#10;1053.8827 5.0476&#13;&#10;1054.2651 3.4762&#13;&#10;1054.5171 25.9048&#13;&#10;1054.8712 1.5714&#13;&#10;1055.5128 5.1429&#13;&#10;1057.4261 28.6190&#13;&#10;1057.6344 1.0476&#13;&#10;1057.9814 14.0000&#13;&#10;1058.4518 4.7143&#13;&#10;1058.8007 6.3810&#13;&#10;1063.3879 13.2857&#13;&#10;1064.3981 8.0476&#13;&#10;1065.1965 0.4762&#13;&#10;1065.3978 10.9524&#13;&#10;1065.5701 12.3333&#13;&#10;1066.3121 2.2381&#13;&#10;1066.4681 9.2857&#13;&#10;1067.2710 5.1905&#13;&#10;1067.4667 8.2857&#13;&#10;1068.4603 5.4762&#13;&#10;1076.4205 12.4286&#13;&#10;1077.4277 13.1905&#13;&#10;1092.4680 8.6190&#13;&#10;1093.4600 4.2857&#13;&#10;1094.4299 44.7619&#13;&#10;1095.2465 7.4286&#13;&#10;1095.4661 54.8571&#13;&#10;1095.7618 1.9524&#13;&#10;1096.2136 6.5714&#13;&#10;1096.4683 22.6667&#13;&#10;1097.2976 1.1429&#13;&#10;1097.4965 11.8095&#13;&#10;1102.7074 2.5238&#13;&#10;1108.3990 3.0476&#13;&#10;1111.2527 11.6667&#13;&#10;1111.4624 125.8572&#13;&#10;1111.9624 6.7619&#13;&#10;1112.2740 7.0952&#13;&#10;1112.5059 72.4762&#13;&#10;1112.8282 4.7143&#13;&#10;1113.4366 28.2857&#13;&#10;1113.6105 10.3810&#13;&#10;1114.4824 4.2857&#13;&#10;1118.4587 90.1429&#13;&#10;1118.8263 4.0000&#13;&#10;1118.9644 5.8571&#13;&#10;1119.4691 41.7143&#13;&#10;1119.8412 6.7143&#13;&#10;1120.1865 1.0952&#13;&#10;1120.3477 9.7143&#13;&#10;1120.5736 16.5714&#13;&#10;1122.0392 12.9048&#13;&#10;1126.5188 7.2857&#13;&#10;1128.4343 8.7619&#13;&#10;1128.6136 2.8571&#13;&#10;1129.4144 4.2857&#13;&#10;1129.6553 6.4286&#13;&#10;1129.9773 116.3334&#13;&#10;1130.4635 161.9048&#13;&#10;1130.9902 105.1905&#13;&#10;1131.5133 42.1429&#13;&#10;1132.0004 18.6190&#13;&#10;1132.2213 3.3333&#13;&#10;1134.4901 10.1429&#13;&#10;1135.6000 5.4286&#13;&#10;1136.2939 2.0000&#13;&#10;1136.4969 56.0476&#13;&#10;1137.4669 29.8571&#13;&#10;1137.6844 0.8571&#13;&#10;1138.4261 12.1905&#13;&#10;1138.9484 24.9048&#13;&#10;1139.2747 8.7619&#13;&#10;1139.5259 45.3810&#13;&#10;1139.7520 4.9524&#13;&#10;1139.9349 29.4762&#13;&#10;1140.1608 13.0476&#13;&#10;1140.5667 11.6667&#13;&#10;1140.9919 6.5238&#13;&#10;1146.4417 5.6667&#13;&#10;1147.5112 5.0476&#13;&#10;1148.4199 4.3810&#13;&#10;1163.5171 2.2381&#13;&#10;1164.4905 75.2381&#13;&#10;1165.5430 44.6667&#13;&#10;1165.8705 6.6190&#13;&#10;1166.4301 12.3333&#13;&#10;1166.6594 5.3333&#13;&#10;1181.4152 6.9524&#13;&#10;1182.5270 253.5238&#13;&#10;1182.8735 18.0476&#13;&#10;1183.1731 7.3333&#13;&#10;1183.5409 147.2381&#13;&#10;1183.9679 4.0000&#13;&#10;1184.4869 53.2381&#13;&#10;1184.7527 15.1905&#13;&#10;1185.4569 17.4762&#13;&#10;1185.7836 7.3333&#13;&#10;1186.6143 4.1905&#13;&#10;1189.4830 60.9048&#13;&#10;1189.9398 1.4762&#13;&#10;1190.1665 3.9048&#13;&#10;1190.4648 31.0000&#13;&#10;1190.8047 2.0952&#13;&#10;1191.6311 6.3333&#13;&#10;1203.4877 2.1905&#13;&#10;1207.5219 14.7143&#13;&#10;1208.5386 12.5714&#13;&#10;1209.8521 2.1905&#13;&#10;1210.5442 5.1905&#13;&#10;1217.5720 14.5714&#13;&#10;1218.4043 8.1905&#13;&#10;1218.8851 1.7619&#13;&#10;1219.5662 4.3333&#13;&#10;1227.3718 1.4286&#13;&#10;1227.5753 8.1905&#13;&#10;1239.5353 80.9524&#13;&#10;1239.8942 5.9048&#13;&#10;1240.5245 62.2857&#13;&#10;1241.1582 1.0476&#13;&#10;1241.3511 4.5714&#13;&#10;1241.6012 19.9524&#13;&#10;1242.5046 9.6190&#13;&#10;1255.5190 11.3810&#13;&#10;1257.4872 4.4286&#13;&#10;1277.5975 4.2857&#13;&#10;1278.4642 18.4762&#13;&#10;1279.3296 1.8095&#13;&#10;1279.5613 10.7619&#13;&#10;1288.6144 6.1429&#13;&#10;1293.2910 1.3333&#13;&#10;1293.5170 31.8095&#13;&#10;1293.8447 3.1905&#13;&#10;1294.5824 20.0476&#13;&#10;1297.6648 10.3810&#13;&#10;1298.7358 4.7143&#13;&#10;1309.6691 3.3333&#13;&#10;1311.2344 7.0952&#13;&#10;1311.5715 120.2857&#13;&#10;1312.1317 10.7619&#13;&#10;1312.5642 44.0952&#13;&#10;1312.7706 10.5714&#13;&#10;1313.5493 32.6191&#13;&#10;1313.8608 6.2381&#13;&#10;1350.6007 17.0952&#13;&#10;1351.5055 18.0476&#13;&#10;1352.6433 6.2857&#13;&#10;1363.5203 2.1905&#13;&#10;1365.6666 5.3810&#13;&#10;1368.1577 10.1905&#13;&#10;1368.5682 433.0001&#13;&#10;1369.1577 47.1429&#13;&#10;1369.5728 338.2857&#13;&#10;1370.2070 9.6191&#13;&#10;1370.6086 139.3810&#13;&#10;1371.1230 6.3810&#13;&#10;1371.5664 49.2857&#13;&#10;1372.6307 6.9524&#13;&#10;1398.6533 6.3333&#13;&#10;1399.6440 3.9524&#13;&#10;1404.6143 2.1905&#13;&#10;1422.5096 10.7619&#13;&#10;1424.5222 6.9524&#13;&#10;1439.6223 19.1429&#13;&#10;1439.8059 10.3333&#13;&#10;1440.5198 8.7619&#13;&#10;1440.7395 13.3810&#13;&#10;1440.9241 0.7619&#13;&#10;1441.5465 8.0952&#13;&#10;1442.6592 5.1905&#13;&#10;1457.4821 4.4762&#13;&#10;1457.7002 4.3810&#13;&#10;1471.4984 2.1905&#13;&#10;1499.2263 1.5714&#13;&#10;1499.6338 52.7143&#13;&#10;1500.0199 3.4286&#13;&#10;1500.3850 8.5714&#13;&#10;1500.6367 37.5238&#13;&#10;1501.4275 7.8095&#13;&#10;1501.7291 9.5238&#13;&#10;1501.8914 1.1905&#13;&#10;1502.5875 3.1905&#13;&#10;1540.5360 2.5238&#13;&#10;1570.2794 3.2381&#13;&#10;1570.6561 54.1429&#13;&#10;1571.3253 2.0476&#13;&#10;1571.6866 35.4286&#13;&#10;1572.2976 5.0000&#13;&#10;1572.6639 20.2857&#13;&#10;1573.6055 10.4762&#13;&#10;1653.8696 2.5238&#13;&#10;1654.7500 7.2857&#13;&#10;1671.7096 4.0952&#13;&#10;1672.0552 3.4762&#13;&#10;1743.8379 3.1429&#13;&#10;END IONS&#13;&#10;&#13;&#10;BEGIN IONS&#13;&#10;TITLE=SAEFLLHM[ox]LK P18621&#13;&#10;PEPMASS=602.811450&#13;&#10;CHARGE=2+&#13;&#10;84.0752 122.0000&#13;&#10;86.0386 5.0000&#13;&#10;86.0937 449.7143&#13;&#10;102.0527 754.7142&#13;&#10;102.1131 29.1905&#13;&#10;103.0624 53.1429&#13;&#10;110.0682 655.2858&#13;&#10;110.1292 32.4762&#13;&#10;111.0742 46.7619&#13;&#10;120.0769 592.3809&#13;&#10;120.1439 37.0000&#13;&#10;121.0853 37.7143&#13;&#10;128.0785 13.5238&#13;&#10;129.0964 304.6191&#13;&#10;130.0804 335.9524&#13;&#10;131.0787 2715.8098&#13;&#10;132.0819 170.2857&#13;&#10;132.1540 7.9524&#13;&#10;133.0786 8.9524&#13;&#10;136.0574 2.3810&#13;&#10;138.0611 42.5238&#13;&#10;141.0595 48.2381&#13;&#10;147.1074 457.4763&#13;&#10;147.2244 14.7143&#13;&#10;148.1044 45.5714&#13;&#10;152.0890 5.1905&#13;&#10;155.0847 79.4286&#13;&#10;159.0720 3169.2380&#13;&#10;160.0754 230.7619&#13;&#10;161.0805 19.4762&#13;&#10;166.0569 65.7619&#13;&#10;169.1246 24.8571&#13;&#10;171.0879 2.7619&#13;&#10;171.1741 1.6190&#13;&#10;173.0892 157.6667&#13;&#10;173.1987 7.0952&#13;&#10;174.0927 16.3810&#13;&#10;175.0915 9.3810&#13;&#10;177.0858 5.2381&#13;&#10;183.0983 21.3810&#13;&#10;184.0728 14.1905&#13;&#10;186.0845 31.8571&#13;&#10;188.1360 7.3333&#13;&#10;193.1044 160.3810&#13;&#10;194.0915 30.4286&#13;&#10;195.0993 7.1905&#13;&#10;196.1173 7.3810&#13;&#10;197.1283 43.2381&#13;&#10;199.1665 111.3810&#13;&#10;200.1595 17.4762&#13;&#10;200.2838 3.3810&#13;&#10;201.0821 397.1905&#13;&#10;202.0942 32.4286&#13;&#10;203.1045 11.5714&#13;&#10;204.0713 147.6191&#13;&#10;205.0862 16.6190&#13;&#10;206.0975 12.0952&#13;&#10;207.1436 32.6190&#13;&#10;209.1456 3.1905&#13;&#10;211.0655 8.7619&#13;&#10;212.1115 29.8095&#13;&#10;215.1331 15.0476&#13;&#10;217.0763 20.0476&#13;&#10;217.1607 3.5238&#13;&#10;219.0922 5.1905&#13;&#10;221.0981 613.8572&#13;&#10;221.2530 25.8571&#13;&#10;222.0974 90.1429&#13;&#10;223.1454 167.6667&#13;&#10;224.1178 30.6190&#13;&#10;225.1098 17.6191&#13;&#10;227.1348 92.9048&#13;&#10;227.2468 4.8095&#13;&#10;228.1323 6.5238&#13;&#10;231.1059 313.7619&#13;&#10;233.1460 594.2381&#13;&#10;233.2780 45.0000&#13;&#10;234.1284 137.0476&#13;&#10;234.3155 3.4286&#13;&#10;235.1201 34.5714&#13;&#10;236.1143 4.0952&#13;&#10;237.0821 19.4762&#13;&#10;238.1224 11.1905&#13;&#10;239.1057 24.3333&#13;&#10;240.1196 13.4762&#13;&#10;242.1809 45.5714&#13;&#10;243.1235 75.9048&#13;&#10;244.1658 16.5238&#13;&#10;246.1802 2.5238&#13;&#10;249.1163 605.6191&#13;&#10;249.3280 7.5714&#13;&#10;250.1261 94.4762&#13;&#10;251.1435 511.0477&#13;&#10;252.1299 132.2857&#13;&#10;253.0761 7.7143&#13;&#10;253.2236 2.7619&#13;&#10;254.1462 49.3810&#13;&#10;255.0857 38.4286&#13;&#10;257.1022 6.1429&#13;&#10;259.1017 157.3334&#13;&#10;260.1628 377.4286&#13;&#10;260.3181 27.8571&#13;&#10;260.4283 2.3810&#13;&#10;261.1451 490.9048&#13;&#10;261.3870 9.2381&#13;&#10;262.1366 71.9524&#13;&#10;263.1198 11.4286&#13;&#10;267.1011 30.5714&#13;&#10;268.0803 24.6667&#13;&#10;268.1743 33.2857&#13;&#10;269.1533 21.6667&#13;&#10;270.1031 206.2381&#13;&#10;270.2732 3.5714&#13;&#10;270.3582 0.8571&#13;&#10;271.1116 31.4286&#13;&#10;271.2037 1.9524&#13;&#10;272.1618 25.3333&#13;&#10;272.6336 36.0000&#13;&#10;273.1411 20.4286&#13;&#10;275.1479 3.4762&#13;&#10;276.0888 1.9048&#13;&#10;277.1123 530.1429&#13;&#10;277.2125 32.5714&#13;&#10;277.3201 17.8095&#13;&#10;278.1151 88.3810&#13;&#10;279.1319 67.9048&#13;&#10;280.1492 20.6667&#13;&#10;281.1299 3.1905&#13;&#10;282.1760 6.2857&#13;&#10;284.1283 4.2857&#13;&#10;285.0944 617.7143&#13;&#10;285.3626 19.0000&#13;&#10;286.0995 93.4286&#13;&#10;287.1049 39.2857&#13;&#10;288.1102 1948.6191&#13;&#10;289.1177 281.6667&#13;&#10;291.1355 3.1905&#13;&#10;292.1619 7.1905&#13;&#10;294.1469 2.9524&#13;&#10;294.2417 2.5714&#13;&#10;296.1735 10.3810&#13;&#10;297.1752 21.4286&#13;&#10;301.1964 45.4286&#13;&#10;301.3902 1.8571&#13;&#10;302.1596 25.6190&#13;&#10;302.2953 0.7143&#13;&#10;303.1185 54.3333&#13;&#10;304.1496 12.4762&#13;&#10;306.1740 29.3809&#13;&#10;308.1883 17.2857&#13;&#10;309.1758 4.3810&#13;&#10;310.1449 8.0476&#13;&#10;312.1256 9.2381&#13;&#10;313.1003 68.4286&#13;&#10;314.1086 32.8095&#13;&#10;316.1676 336.3810&#13;&#10;316.2803 23.9524&#13;&#10;317.0770 3.1429&#13;&#10;317.1712 106.5714&#13;&#10;318.1794 20.5238&#13;&#10;324.1714 32.4286&#13;&#10;325.2092 46.7143&#13;&#10;326.1962 71.4762&#13;&#10;327.2020 13.5714&#13;&#10;328.1859 12.4286&#13;&#10;329.1790 118.1429&#13;&#10;329.2976 4.7619&#13;&#10;330.1649 53.5238&#13;&#10;331.1191 19.5714&#13;&#10;332.1536 23.7619&#13;&#10;334.1797 726.2382&#13;&#10;334.4414 10.4762&#13;&#10;335.1837 128.9524&#13;&#10;336.2215 63.4286&#13;&#10;338.1757 10.3810&#13;&#10;341.1957 13.5714&#13;&#10;343.2266 877.1431&#13;&#10;343.5598 16.9524&#13;&#10;344.2147 238.1905&#13;&#10;344.3733 10.2381&#13;&#10;344.4771 1.2381&#13;&#10;345.1995 52.8571&#13;&#10;346.2081 82.4762&#13;&#10;347.1794 22.7619&#13;&#10;348.1493 255.4762&#13;&#10;348.3145 0.8571&#13;&#10;349.1536 44.6667&#13;&#10;349.3927 2.1905&#13;&#10;350.1482 15.1429&#13;&#10;351.1817 15.5714&#13;&#10;352.1891 111.2381&#13;&#10;353.1972 52.0000&#13;&#10;353.7097 27.4762&#13;&#10;354.1906 23.7619&#13;&#10;356.1749 167.7143&#13;&#10;356.3486 5.3810&#13;&#10;357.1820 31.6667&#13;&#10;358.1298 42.1429&#13;&#10;362.1738 159.5715&#13;&#10;363.1772 27.4762&#13;&#10;364.2263 550.0953&#13;&#10;365.2253 109.2857&#13;&#10;365.4625 1.6190&#13;&#10;366.1878 10.3810&#13;&#10;368.1862 20.3810&#13;&#10;369.1462 16.4762&#13;&#10;370.1634 25.1429&#13;&#10;371.1998 20.7619&#13;&#10;372.1864 187.1429&#13;&#10;373.1984 77.3810&#13;&#10;374.2198 64.3333&#13;&#10;375.2313 9.3333&#13;&#10;376.1525 22.3333&#13;&#10;377.2173 17.6667&#13;&#10;378.1702 5.1905&#13;&#10;380.1679 156.7143&#13;&#10;381.1586 36.3333&#13;&#10;381.2493 10.2857&#13;&#10;382.1663 22.7143&#13;&#10;383.1638 20.2381&#13;&#10;384.1491 3.6190&#13;&#10;385.1662 9.3333&#13;&#10;385.7180 56.1905&#13;&#10;386.2095 28.8095&#13;&#10;389.1884 154.6191&#13;&#10;390.1833 322.2857&#13;&#10;390.3682 9.3333&#13;&#10;390.6991 4.0952&#13;&#10;391.1875 89.8571&#13;&#10;392.2094 61.2857&#13;&#10;393.1980 16.2857&#13;&#10;395.2328 5.0476&#13;&#10;396.1478 6.0476&#13;&#10;398.1775 622.7620&#13;&#10;398.4811 21.8571&#13;&#10;398.5803 4.3810&#13;&#10;399.1811 153.9524&#13;&#10;399.3098 9.1905&#13;&#10;399.7337 2.1905&#13;&#10;400.1710 50.0476&#13;&#10;400.3091 5.6190&#13;&#10;401.1943 88.7619&#13;&#10;401.4027 4.2857&#13;&#10;402.2127 43.6191&#13;&#10;403.2344 7.2381&#13;&#10;407.2159 1319.9050&#13;&#10;407.5560 32.2857&#13;&#10;408.2161 267.3810&#13;&#10;408.6494 1.3810&#13;&#10;409.2198 82.7619&#13;&#10;409.3307 10.5714&#13;&#10;410.2107 28.6190&#13;&#10;411.2200 4.2857&#13;&#10;412.2168 15.3810&#13;&#10;413.2253 2.0952&#13;&#10;414.1970 10.3810&#13;&#10;415.2072 15.3333&#13;&#10;416.1894 108.5238&#13;&#10;416.3446 2.6190&#13;&#10;416.4940 2.3333&#13;&#10;416.5945 0.8571&#13;&#10;417.1694 180.2857&#13;&#10;418.1918 55.4286&#13;&#10;419.2492 96.4762&#13;&#10;419.4275 1.9524&#13;&#10;420.2669 22.0000&#13;&#10;420.3690 0.8571&#13;&#10;421.2468 13.4762&#13;&#10;423.2193 7.4762&#13;&#10;424.1943 2.1905&#13;&#10;426.1682 184.4286&#13;&#10;426.5027 3.1905&#13;&#10;427.2264 93.0952&#13;&#10;427.7577 29.4286&#13;&#10;428.1685 18.5714&#13;&#10;428.3052 2.7619&#13;&#10;429.1102 1.2381&#13;&#10;429.2210 33.3810&#13;&#10;430.2615 16.0952&#13;&#10;431.2167 6.2857&#13;&#10;432.2657 12.0952&#13;&#10;433.2524 30.5714&#13;&#10;435.1759 383.3334&#13;&#10;436.1917 88.3810&#13;&#10;438.2246 20.7143&#13;&#10;439.1992 8.4286&#13;&#10;441.2062 35.1429&#13;&#10;442.1914 12.7619&#13;&#10;442.3536 2.9524&#13;&#10;443.2010 9.3810&#13;&#10;444.2468 34.1429&#13;&#10;445.2418 59.3333&#13;&#10;446.2576 19.5238&#13;&#10;447.2549 344.0000&#13;&#10;447.4360 26.0952&#13;&#10;447.7313 7.2381&#13;&#10;447.9566 3.0476&#13;&#10;448.2672 90.3333&#13;&#10;449.2836 18.1905&#13;&#10;452.2166 5.2381&#13;&#10;453.2590 29.9048&#13;&#10;454.1143 0.9048&#13;&#10;454.2609 17.2857&#13;&#10;455.2196 4.8571&#13;&#10;457.2721 42.3333&#13;&#10;458.2570 21.5238&#13;&#10;459.2468 102.2857&#13;&#10;459.7516 31.3333&#13;&#10;460.2562 13.9524&#13;&#10;460.7476 3.1905&#13;&#10;461.2263 47.5714&#13;&#10;462.2701 233.6191&#13;&#10;462.4415 13.6667&#13;&#10;463.2678 70.4762&#13;&#10;464.2603 19.2381&#13;&#10;464.4352 2.4286&#13;&#10;465.2606 34.5714&#13;&#10;466.2779 39.1905&#13;&#10;467.2753 12.3810&#13;&#10;469.2793 10.1905&#13;&#10;472.2701 5.0476&#13;&#10;473.2271 21.5238&#13;&#10;474.1309 2.5238&#13;&#10;475.2476 85.0953&#13;&#10;476.2574 20.2857&#13;&#10;478.2545 13.8095&#13;&#10;479.2495 6.7143&#13;&#10;479.3619 2.1429&#13;&#10;480.2824 1540.4286&#13;&#10;480.6670 22.7143&#13;&#10;481.2868 409.5715&#13;&#10;481.4278 45.1429&#13;&#10;481.6719 7.4762&#13;&#10;482.1260 2.1905&#13;&#10;482.2659 90.2381&#13;&#10;482.7654 118.6667&#13;&#10;482.9049 4.0952&#13;&#10;483.0578 2.1429&#13;&#10;483.2788 356.3333&#13;&#10;483.7608 24.5238&#13;&#10;484.2898 81.7619&#13;&#10;484.5020 3.7143&#13;&#10;485.2600 41.8095&#13;&#10;486.2662 12.8571&#13;&#10;487.1594 1.6190&#13;&#10;487.2879 10.6667&#13;&#10;488.2376 4.2381&#13;&#10;489.2203 20.4762&#13;&#10;490.2540 33.0476&#13;&#10;491.2640 6.0952&#13;&#10;491.7846 6.4286&#13;&#10;492.2610 9.4762&#13;&#10;493.2686 26.0476&#13;&#10;495.2623 8.2857&#13;&#10;502.2556 33.0952&#13;&#10;503.2444 173.6667&#13;&#10;503.4683 3.9524&#13;&#10;504.2579 42.1429&#13;&#10;505.2435 10.3810&#13;&#10;505.7695 2.1905&#13;&#10;506.2922 15.3810&#13;&#10;508.2621 17.6190&#13;&#10;509.2604 33.6191&#13;&#10;510.2650 16.7619&#13;&#10;511.2711 664.5715&#13;&#10;511.5638 25.0476&#13;&#10;511.8021 2.0000&#13;&#10;512.2713 203.8572&#13;&#10;512.4747 18.0000&#13;&#10;513.2573 41.0476&#13;&#10;514.3028 23.4762&#13;&#10;514.7852 47.0476&#13;&#10;515.0754 1.7143&#13;&#10;515.2719 44.0000&#13;&#10;515.6097 0.7619&#13;&#10;515.7802 18.3810&#13;&#10;516.2643 5.2857&#13;&#10;518.3161 5.0476&#13;&#10;520.1251 1.0952&#13;&#10;520.2833 80.7143&#13;&#10;521.2679 34.5714&#13;&#10;523.7684 12.9048&#13;&#10;523.8668 0.6190&#13;&#10;524.2759 9.1905&#13;&#10;524.9886 1.7619&#13;&#10;526.2747 107.3333&#13;&#10;526.4470 7.4286&#13;&#10;527.0807 1.2857&#13;&#10;527.2713 95.3809&#13;&#10;527.7825 8.4762&#13;&#10;528.2924 25.9048&#13;&#10;529.2698 47.5238&#13;&#10;529.4838 5.1905&#13;&#10;530.2520 96.1905&#13;&#10;530.4745 6.3333&#13;&#10;531.2637 38.9524&#13;&#10;532.3381 61.8571&#13;&#10;532.5316 0.8095&#13;&#10;533.3573 15.0476&#13;&#10;534.3675 14.0476&#13;&#10;536.2568 7.3333&#13;&#10;539.2697 72.0476&#13;&#10;540.2637 20.4762&#13;&#10;542.3037 11.9524&#13;&#10;544.2800 1374.3334&#13;&#10;544.6169 25.6667&#13;&#10;544.7267 18.4762&#13;&#10;544.9091 6.5714&#13;&#10;545.0568 0.7143&#13;&#10;545.2790 370.2382&#13;&#10;545.6037 15.4762&#13;&#10;545.7482 5.7143&#13;&#10;546.2932 115.8572&#13;&#10;546.5157 1.0476&#13;&#10;547.2795 20.4286&#13;&#10;548.2621 143.6191&#13;&#10;549.2780 56.4286&#13;&#10;549.4944 1.1905&#13;&#10;550.3106 6.0476&#13;&#10;551.3245 18.6667&#13;&#10;552.3090 8.3333&#13;&#10;557.3200 7.5714&#13;&#10;558.3318 73.0476&#13;&#10;559.3145 36.4286&#13;&#10;559.7771 8.3810&#13;&#10;560.3536 166.0000&#13;&#10;560.5415 5.0000&#13;&#10;561.3463 42.3810&#13;&#10;562.3067 13.2381&#13;&#10;566.3269 131.2857&#13;&#10;567.2000 4.0000&#13;&#10;567.3358 90.7143&#13;&#10;568.3500 29.1905&#13;&#10;568.4634 2.0000&#13;&#10;570.3094 8.9524&#13;&#10;570.4495 2.6190&#13;&#10;570.7963 7.4286&#13;&#10;572.2813 4.1905&#13;&#10;573.3337 3.1905&#13;&#10;574.2857 4.9524&#13;&#10;575.3362 64.8572&#13;&#10;576.3149 31.7619&#13;&#10;577.3431 13.2381&#13;&#10;578.3458 37.6667&#13;&#10;579.3288 18.4762&#13;&#10;582.2843 5.2857&#13;&#10;584.3033 2.1905&#13;&#10;585.3360 5.2381&#13;&#10;586.2130 1.5714&#13;&#10;586.3417 9.5714&#13;&#10;588.3098 7.6667&#13;&#10;593.0793 2.7619&#13;&#10;593.3652 1360.6191&#13;&#10;593.7908 42.1905&#13;&#10;594.3477 861.4763&#13;&#10;594.5436 91.3333&#13;&#10;594.8309 16.2381&#13;&#10;595.0033 2.6190&#13;&#10;595.3313 302.7619&#13;&#10;595.7451 5.0952&#13;&#10;596.3356 104.7619&#13;&#10;596.4987 9.8571&#13;&#10;597.3286 20.2381&#13;&#10;598.3364 13.1429&#13;&#10;602.8894 2.1905&#13;&#10;603.3488 26.7143&#13;&#10;604.3154 15.4762&#13;&#10;606.3615 3.9524&#13;&#10;612.3375 133.8572&#13;&#10;612.9259 1.0952&#13;&#10;613.3436 39.5238&#13;&#10;615.3286 8.0476&#13;&#10;616.3395 17.3333&#13;&#10;617.2955 5.3810&#13;&#10;619.3658 5.0000&#13;&#10;621.3497 17.1429&#13;&#10;622.3265 260.5714&#13;&#10;622.5260 17.9048&#13;&#10;623.3161 107.9524&#13;&#10;624.3264 146.0000&#13;&#10;625.3248 47.4762&#13;&#10;625.4738 1.6190&#13;&#10;626.3502 13.0000&#13;&#10;627.3539 3.2381&#13;&#10;628.1093 0.8571&#13;&#10;630.3141 19.3333&#13;&#10;631.3539 6.0000&#13;&#10;633.3598 13.8571&#13;&#10;634.3459 6.2857&#13;&#10;636.3690 38.0952&#13;&#10;637.3584 12.3810&#13;&#10;639.3502 50.7143&#13;&#10;640.1447 6.6667&#13;&#10;640.3309 273.9524&#13;&#10;640.7233 2.8571&#13;&#10;641.3277 96.0000&#13;&#10;641.5166 9.1429&#13;&#10;641.7852 2.3810&#13;&#10;642.3398 42.6667&#13;&#10;643.1888 1.3333&#13;&#10;643.3295 26.5238&#13;&#10;644.3643 12.4762&#13;&#10;645.2922 4.1905&#13;&#10;649.3454 3.4762&#13;&#10;649.5809 0.8571&#13;&#10;651.3243 5.7619&#13;&#10;652.3328 7.2857&#13;&#10;656.2803 3.1905&#13;&#10;657.3627 919.5239&#13;&#10;657.6719 36.7143&#13;&#10;658.3466 487.8095&#13;&#10;658.5211 60.6667&#13;&#10;658.7601 16.6191&#13;&#10;658.9652 6.6190&#13;&#10;659.1836 3.9048&#13;&#10;659.3486 156.1429&#13;&#10;659.9006 2.2381&#13;&#10;660.3688 32.4286&#13;&#10;661.3234 41.5714&#13;&#10;662.3622 16.4286&#13;&#10;664.4081 17.8571&#13;&#10;667.3585 11.4286&#13;&#10;668.3745 7.5238&#13;&#10;671.4020 26.7619&#13;&#10;672.3842 8.4762&#13;&#10;672.4995 1.0476&#13;&#10;675.2762 6.7619&#13;&#10;676.3088 2.1905&#13;&#10;678.2607 5.0952&#13;&#10;679.4159 79.1429&#13;&#10;680.4267 60.4762&#13;&#10;681.4233 23.0476&#13;&#10;682.3774 7.3333&#13;&#10;683.4075 12.0000&#13;&#10;688.4250 32.6667&#13;&#10;689.4414 25.1905&#13;&#10;689.6473 1.0952&#13;&#10;690.3995 3.1905&#13;&#10;695.3525 35.8095&#13;&#10;696.3613 14.3810&#13;&#10;704.9012 0.5714&#13;&#10;705.1202 4.9048&#13;&#10;705.3547 116.9048&#13;&#10;705.5870 12.7619&#13;&#10;706.4413 1149.0477&#13;&#10;706.8734 18.0476&#13;&#10;707.1553 21.0952&#13;&#10;707.4479 631.6667&#13;&#10;707.7820 24.4762&#13;&#10;708.0328 7.2381&#13;&#10;708.1895 1.6190&#13;&#10;708.4373 142.3810&#13;&#10;709.0715 5.4762&#13;&#10;709.4325 21.1429&#13;&#10;711.2028 2.2381&#13;&#10;711.3464 15.7143&#13;&#10;711.4856 0.7619&#13;&#10;712.3638 9.3810&#13;&#10;713.3801 4.2857&#13;&#10;716.3362 3.1905&#13;&#10;718.5765 2.5238&#13;&#10;722.3665 4.1905&#13;&#10;723.3777 179.9048&#13;&#10;723.6049 11.4286&#13;&#10;724.3705 79.6667&#13;&#10;724.9994 3.7619&#13;&#10;725.3952 48.9048&#13;&#10;726.4200 21.9048&#13;&#10;735.3922 7.3810&#13;&#10;736.4130 12.3810&#13;&#10;738.4174 2.1905&#13;&#10;740.4198 4.1905&#13;&#10;741.3042 5.8095&#13;&#10;741.4720 5.3333&#13;&#10;743.3961 29.2857&#13;&#10;744.4554 7.4762&#13;&#10;751.3751 5.7619&#13;&#10;752.4129 41.4286&#13;&#10;752.6042 2.9048&#13;&#10;753.4038 46.1905&#13;&#10;754.3696 17.3810&#13;&#10;756.4246 9.0952&#13;&#10;768.3562 13.5238&#13;&#10;769.3362 69.3810&#13;&#10;770.4323 532.7143&#13;&#10;770.7156 21.2381&#13;&#10;770.9917 15.0476&#13;&#10;771.2256 41.5238&#13;&#10;771.4214 308.3810&#13;&#10;772.1881 10.4286&#13;&#10;772.4163 105.0953&#13;&#10;773.4349 16.5238&#13;&#10;780.3962 17.6667&#13;&#10;787.1900 8.0476&#13;&#10;787.3722 98.0476&#13;&#10;788.3917 27.4286&#13;&#10;789.3668 18.9048&#13;&#10;791.4280 12.5238&#13;&#10;795.3975 10.3333&#13;&#10;796.4330 6.2857&#13;&#10;798.3883 107.9048&#13;&#10;798.6360 0.9524&#13;&#10;798.7787 3.0000&#13;&#10;799.2021 3.0952&#13;&#10;799.4255 43.6667&#13;&#10;810.4039 5.2381&#13;&#10;811.5164 14.5714&#13;&#10;818.4436 34.4762&#13;&#10;819.4313 7.9524&#13;&#10;826.3079 1.0952&#13;&#10;826.4710 16.6667&#13;&#10;827.4418 8.4286&#13;&#10;827.5616 3.6190&#13;&#10;835.4930 35.2857&#13;&#10;836.4666 99.2381&#13;&#10;837.4534 33.4286&#13;&#10;838.4285 12.8095&#13;&#10;838.6138 1.9048&#13;&#10;851.5179 3.1429&#13;&#10;853.5096 890.7620&#13;&#10;853.9929 20.4286&#13;&#10;854.5154 458.8096&#13;&#10;855.2780 4.9048&#13;&#10;855.5092 112.4286&#13;&#10;855.7261 10.0476&#13;&#10;856.1813 4.3333&#13;&#10;856.3465 3.6190&#13;&#10;856.4995 14.6667&#13;&#10;858.3304 5.0476&#13;&#10;859.4870 4.3810&#13;&#10;863.4540 11.9048&#13;&#10;864.5050 3.0952&#13;&#10;873.4378 6.1429&#13;&#10;879.4976 18.4762&#13;&#10;880.5147 6.3810&#13;&#10;881.4255 60.5714&#13;&#10;882.4094 33.1905&#13;&#10;882.5758 8.5238&#13;&#10;883.4738 16.6667&#13;&#10;899.4742 10.5714&#13;&#10;900.4517 35.0476&#13;&#10;900.7214 2.3810&#13;&#10;901.4454 16.2381&#13;&#10;902.4556 11.5714&#13;&#10;912.4656 7.7619&#13;&#10;913.4930 5.1905&#13;&#10;917.4998 259.4286&#13;&#10;918.2470 7.7143&#13;&#10;918.5032 133.3333&#13;&#10;918.8354 5.6190&#13;&#10;919.0850 8.6667&#13;&#10;919.2827 1.8571&#13;&#10;919.5035 39.3810&#13;&#10;920.4619 3.4762&#13;&#10;945.3658 20.6190&#13;&#10;945.5095 4.7619&#13;&#10;946.4372 30.5714&#13;&#10;947.1783 2.8095&#13;&#10;947.3943 4.1429&#13;&#10;964.5187 162.0000&#13;&#10;964.9675 1.5714&#13;&#10;965.2373 3.2857&#13;&#10;965.5197 101.9524&#13;&#10;965.9143 1.9048&#13;&#10;966.4932 20.6667&#13;&#10;967.5097 3.1905&#13;&#10;971.4395 4.1905&#13;&#10;982.5377 303.9524&#13;&#10;982.8246 19.5238&#13;&#10;983.2762 18.3333&#13;&#10;983.5391 190.3810&#13;&#10;983.7853 17.6191&#13;&#10;984.5332 60.7619&#13;&#10;994.5173 5.0476&#13;&#10;1013.5462 4.2857&#13;&#10;1028.5355 27.7619&#13;&#10;1029.5007 11.2381&#13;&#10;1030.5127 3.1429&#13;&#10;1032.5277 2.1905&#13;&#10;1046.5688 75.7619&#13;&#10;1047.5693 35.1429&#13;&#10;1053.4176 2.5238&#13;&#10;1053.6146 12.8095&#13;&#10;1059.4908 5.4762&#13;&#10;END IONS&#13;&#10;&#13;&#10;&#13;&#10;BEGIN IONS&#13;&#10;TITLE=DIVNM[ox]LM[ox]HHDR P11216&#13;&#10;PEPMASS=706.812600&#13;&#10;CHARGE=2+&#13;&#10;72.0798 31.4762&#13;&#10;86.0919 40.3810&#13;&#10;156.1072 22.2857&#13;&#10;175.1108 532.0953&#13;&#10;175.2211 17.3810&#13;&#10;176.1151 28.7143&#13;&#10;183.1107 17.8095&#13;&#10;184.1029 12.0000&#13;&#10;198.0744 28.0000&#13;&#10;201.1157 828.1429&#13;&#10;201.1975 40.3810&#13;&#10;201.2814 19.4762&#13;&#10;202.1138 83.8095&#13;&#10;211.0924 3.1905&#13;&#10;212.1085 5.1429&#13;&#10;213.1379 20.5714&#13;&#10;214.1114 95.5714&#13;&#10;228.1013 10.8095&#13;&#10;229.1095 916.4764&#13;&#10;230.1115 104.0000&#13;&#10;233.1287 8.5238&#13;&#10;245.0814 9.5238&#13;&#10;253.0870 11.6190&#13;&#10;255.1130 10.9524&#13;&#10;257.1062 8.3810&#13;&#10;262.0760 92.6191&#13;&#10;263.0792 7.0952&#13;&#10;265.1057 3.8095&#13;&#10;269.1240 6.2381&#13;&#10;270.2025 2.5238&#13;&#10;272.0116 0.9048&#13;&#10;272.1271 12.2857&#13;&#10;274.1132 17.6190&#13;&#10;275.1176 8.2381&#13;&#10;279.0999 9.2857&#13;&#10;280.1048 7.0952&#13;&#10;282.1580 5.1905&#13;&#10;283.1649 22.4762&#13;&#10;284.1678 7.1905&#13;&#10;290.1350 302.0476&#13;&#10;290.2501 13.7143&#13;&#10;291.1409 32.7143&#13;&#10;297.1432 39.8095&#13;&#10;298.1263 11.6667&#13;&#10;300.1801 12.6190&#13;&#10;310.1834 16.1429&#13;&#10;311.1503 12.7619&#13;&#10;312.1485 12.2857&#13;&#10;323.9332 2.7619&#13;&#10;328.1675 197.5238&#13;&#10;329.1669 24.0952&#13;&#10;330.1251 6.2381&#13;&#10;343.1476 10.6667&#13;&#10;344.1277 11.3333&#13;&#10;345.1346 11.0952&#13;&#10;348.1846 15.1905&#13;&#10;353.1999 2.8571&#13;&#10;355.1945 22.3333&#13;&#10;356.1832 12.2857&#13;&#10;357.1231 5.2381&#13;&#10;358.1281 12.6190&#13;&#10;361.1358 45.1429&#13;&#10;362.1649 9.4286&#13;&#10;365.2291 6.9048&#13;&#10;367.1658 21.6190&#13;&#10;368.1842 6.4762&#13;&#10;370.1549 4.2857&#13;&#10;372.1240 15.9048&#13;&#10;375.1544 39.6667&#13;&#10;376.1366 8.8571&#13;&#10;377.1470 5.4762&#13;&#10;380.6998 10.3810&#13;&#10;390.1201 13.6667&#13;&#10;392.1899 6.6190&#13;&#10;393.1823 4.7619&#13;&#10;394.1699 6.2381&#13;&#10;395.1810 4.2857&#13;&#10;397.1987 21.7143&#13;&#10;398.2041 3.9048&#13;&#10;402.2345 8.4762&#13;&#10;409.1787 15.2857&#13;&#10;410.1751 28.5238&#13;&#10;411.1939 39.0476&#13;&#10;412.1809 14.8095&#13;&#10;412.6490 13.6667&#13;&#10;413.2146 11.7619&#13;&#10;413.7021 5.2381&#13;&#10;414.2410 10.3333&#13;&#10;422.1922 25.0000&#13;&#10;422.6996 11.0000&#13;&#10;423.2048 8.3810&#13;&#10;425.2129 16.3810&#13;&#10;426.1915 17.6190&#13;&#10;427.1919 489.7619&#13;&#10;427.3304 25.7619&#13;&#10;427.4279 12.7143&#13;&#10;427.5497 5.3333&#13;&#10;427.6767 4.7619&#13;&#10;428.1935 116.7619&#13;&#10;429.1838 11.5238&#13;&#10;439.2352 2.6667&#13;&#10;440.1820 4.0952&#13;&#10;441.1638 11.9524&#13;&#10;442.2186 119.4286&#13;&#10;442.3706 9.1905&#13;&#10;443.2029 24.0952&#13;&#10;443.3080 0.7619&#13;&#10;444.1984 7.2381&#13;&#10;445.1843 7.4762&#13;&#10;445.7106 8.4762&#13;&#10;446.2245 13.2381&#13;&#10;453.1874 11.4762&#13;&#10;454.1906 93.5238&#13;&#10;454.6942 22.1429&#13;&#10;455.1849 13.2857&#13;&#10;457.1867 8.1429&#13;&#10;458.1703 24.7619&#13;&#10;459.0486 0.9048&#13;&#10;459.1891 12.6190&#13;&#10;462.1880 15.4286&#13;&#10;469.6991 4.2381&#13;&#10;470.0439 0.0952&#13;&#10;470.2055 5.1905&#13;&#10;470.6911 15.9048&#13;&#10;472.1739 7.6190&#13;&#10;473.1722 22.0476&#13;&#10;474.2055 25.9524&#13;&#10;476.1624 7.5714&#13;&#10;477.1892 18.4286&#13;&#10;479.0782 1.6667&#13;&#10;479.2239 98.5238&#13;&#10;479.7011 43.9048&#13;&#10;480.2222 24.0000&#13;&#10;481.2085 11.2857&#13;&#10;484.6949 10.9524&#13;&#10;486.2104 42.7143&#13;&#10;487.1743 4.5238&#13;&#10;489.1948 4.9524&#13;&#10;490.1859 23.2857&#13;&#10;493.1771 4.2857&#13;&#10;493.7057 7.9048&#13;&#10;494.1960 41.9048&#13;&#10;497.2250 12.2381&#13;&#10;500.1546 4.2381&#13;&#10;502.2237 24.4762&#13;&#10;502.6975 81.4286&#13;&#10;503.1973 30.9524&#13;&#10;504.2206 15.0952&#13;&#10;507.2119 9.4286&#13;&#10;508.2155 28.3333&#13;&#10;509.2167 7.1905&#13;&#10;510.2444 11.8571&#13;&#10;511.2137 269.0953&#13;&#10;511.4024 11.7143&#13;&#10;511.5509 7.8571&#13;&#10;511.7093 153.4286&#13;&#10;512.0303 4.1905&#13;&#10;512.2186 50.5238&#13;&#10;512.7023 10.8571&#13;&#10;516.7106 35.4286&#13;&#10;517.2296 32.5238&#13;&#10;517.6932 3.9524&#13;&#10;518.2482 4.1905&#13;&#10;519.1855 4.2857&#13;&#10;519.7846 8.9524&#13;&#10;520.2314 32.6667&#13;&#10;520.7261 20.9048&#13;&#10;521.2562 8.5238&#13;&#10;522.2105 32.2381&#13;&#10;523.2291 10.7143&#13;&#10;525.2552 78.7143&#13;&#10;525.7142 16.9524&#13;&#10;526.2173 58.6191&#13;&#10;526.6755 15.4762&#13;&#10;527.2368 15.3333&#13;&#10;527.5677 1.0952&#13;&#10;528.7463 161.5238&#13;&#10;529.0843 4.3333&#13;&#10;529.2563 91.7619&#13;&#10;529.7537 17.4286&#13;&#10;532.3018 4.2857&#13;&#10;534.2261 27.9524&#13;&#10;534.6978 22.9048&#13;&#10;535.0359 1.0476&#13;&#10;535.2004 25.8571&#13;&#10;537.1511 11.1429&#13;&#10;538.2335 9.3333&#13;&#10;538.7214 2.0952&#13;&#10;539.1737 3.1429&#13;&#10;539.3191 7.7619&#13;&#10;543.2189 207.7143&#13;&#10;543.7139 111.2381&#13;&#10;543.9726 3.0000&#13;&#10;544.2175 45.1429&#13;&#10;544.7025 8.8571&#13;&#10;545.2236 7.2857&#13;&#10;546.2188 23.2381&#13;&#10;547.2206 36.2857&#13;&#10;547.3765 5.9048&#13;&#10;548.2248 14.0952&#13;&#10;548.7158 19.9524&#13;&#10;549.2084 14.6190&#13;&#10;551.7430 20.3333&#13;&#10;552.2385 84.7619&#13;&#10;552.5342 1.2857&#13;&#10;552.7391 40.4762&#13;&#10;553.0768 1.6190&#13;&#10;553.2504 4.4286&#13;&#10;553.6993 6.2857&#13;&#10;554.2244 11.8095&#13;&#10;556.2562 3.1905&#13;&#10;557.2335 12.6190&#13;&#10;560.2095 5.4762&#13;&#10;560.3578 0.7619&#13;&#10;560.4754 0.9524&#13;&#10;560.7458 395.4763&#13;&#10;560.9600 16.6667&#13;&#10;561.0717 8.0952&#13;&#10;561.2446 238.2381&#13;&#10;561.5182 4.1905&#13;&#10;561.7518 74.8095&#13;&#10;561.9650 2.1429&#13;&#10;562.0538 4.6667&#13;&#10;562.2296 32.5238&#13;&#10;562.7302 7.3810&#13;&#10;563.2626 5.8571&#13;&#10;564.0618 6.1905&#13;&#10;564.2408 713.6667&#13;&#10;564.5515 12.8095&#13;&#10;564.7758 6.7619&#13;&#10;564.9294 0.7143&#13;&#10;565.2548 157.9048&#13;&#10;565.5676 2.3810&#13;&#10;565.7205 25.3810&#13;&#10;566.2431 80.1429&#13;&#10;566.7565 20.6667&#13;&#10;567.2097 17.5714&#13;&#10;569.2503 2.1905&#13;&#10;571.2395 20.0952&#13;&#10;572.2182 49.6667&#13;&#10;574.2404 19.0000&#13;&#10;575.2425 12.4762&#13;&#10;576.2320 10.8571&#13;&#10;576.3561 2.3810&#13;&#10;577.2476 8.5238&#13;&#10;581.2315 3.5714&#13;&#10;582.2192 8.3333&#13;&#10;583.7447 10.1429&#13;&#10;584.2235 25.4286&#13;&#10;584.7047 15.5238&#13;&#10;585.2805 65.0953&#13;&#10;585.7704 34.5238&#13;&#10;586.2638 11.9048&#13;&#10;587.0624 0.8571&#13;&#10;587.2363 12.7143&#13;&#10;587.3546 2.0000&#13;&#10;588.2797 5.0476&#13;&#10;589.2490 136.2381&#13;&#10;589.4209 13.9524&#13;&#10;589.6190 2.1429&#13;&#10;590.2369 41.6190&#13;&#10;590.7755 18.0476&#13;&#10;591.2704 26.2381&#13;&#10;592.2252 6.3333&#13;&#10;592.7466 183.3333&#13;&#10;593.2632 110.9524&#13;&#10;593.4525 2.5714&#13;&#10;593.7544 35.9524&#13;&#10;594.2657 14.1429&#13;&#10;595.2415 18.7619&#13;&#10;596.2333 4.2381&#13;&#10;597.7172 9.0476&#13;&#10;598.2320 56.0000&#13;&#10;598.5382 2.3810&#13;&#10;598.7557 19.0476&#13;&#10;599.2623 8.3810&#13;&#10;600.2440 6.9524&#13;&#10;602.2916 5.7143&#13;&#10;603.2739 14.4286&#13;&#10;604.0327 1.0000&#13;&#10;604.2909 11.0000&#13;&#10;604.7739 5.4762&#13;&#10;607.2795 8.3333&#13;&#10;608.2805 23.4286&#13;&#10;608.7723 16.2857&#13;&#10;609.2901 8.4762&#13;&#10;611.2727 16.4286&#13;&#10;612.2520 18.6190&#13;&#10;613.2887 17.5714&#13;&#10;613.7684 4.1905&#13;&#10;614.2808 11.4286&#13;&#10;617.0505 3.1429&#13;&#10;617.2921 92.5714&#13;&#10;617.5726 0.7143&#13;&#10;617.7858 44.0952&#13;&#10;618.2936 19.5714&#13;&#10;619.3048 6.3810&#13;&#10;620.2808 19.4286&#13;&#10;621.2714 36.5238&#13;&#10;622.2979 38.8095&#13;&#10;622.7850 58.9048&#13;&#10;623.2836 32.6191&#13;&#10;624.2707 7.4762&#13;&#10;624.8134 3.1905&#13;&#10;625.2642 9.0476&#13;&#10;625.6506 2.0476&#13;&#10;625.7736 7.9524&#13;&#10;627.2686 8.8571&#13;&#10;629.3168 15.4286&#13;&#10;630.0626 1.8095&#13;&#10;630.2933 30.3810&#13;&#10;630.8302 0.7619&#13;&#10;631.2617 21.2857&#13;&#10;633.2542 5.7619&#13;&#10;633.4292 3.4286&#13;&#10;633.8050 43.5238&#13;&#10;634.2867 120.3810&#13;&#10;634.4933 2.9524&#13;&#10;634.6121 2.5714&#13;&#10;634.7759 67.0476&#13;&#10;635.2861 37.3810&#13;&#10;636.2745 8.0476&#13;&#10;636.3942 0.3333&#13;&#10;638.3329 44.5238&#13;&#10;638.8112 7.3333&#13;&#10;639.3152 26.9048&#13;&#10;639.5187 0.7143&#13;&#10;639.7637 49.6190&#13;&#10;640.2989 76.6667&#13;&#10;640.7618 9.9048&#13;&#10;641.0989 0.5714&#13;&#10;641.2456 5.2381&#13;&#10;641.3905 10.1429&#13;&#10;641.5582 1.8571&#13;&#10;641.7852 3.1905&#13;&#10;642.3721 66.5238&#13;&#10;642.8000 473.1429&#13;&#10;643.3000 392.4762&#13;&#10;643.8080 127.5714&#13;&#10;644.0557 2.3810&#13;&#10;644.3026 30.6667&#13;&#10;644.7896 13.2857&#13;&#10;645.2861 13.0476&#13;&#10;647.2732 420.9524&#13;&#10;647.7170 4.7619&#13;&#10;647.8563 7.1429&#13;&#10;648.2871 122.7143&#13;&#10;648.7638 4.2857&#13;&#10;649.2787 64.7143&#13;&#10;649.7675 9.5238&#13;&#10;650.1699 2.1905&#13;&#10;650.2885 16.2857&#13;&#10;652.2681 7.3810&#13;&#10;653.2606 7.3333&#13;&#10;653.7989 4.7619&#13;&#10;654.2914 14.6191&#13;&#10;655.2802 27.5238&#13;&#10;656.2246 2.9524&#13;&#10;656.4252 1.7143&#13;&#10;656.7601 3.8571&#13;&#10;657.2807 60.1429&#13;&#10;657.7767 26.7143&#13;&#10;658.2903 33.3333&#13;&#10;658.7586 9.4762&#13;&#10;659.2457 8.4762&#13;&#10;660.7575 2.1905&#13;&#10;661.1816 1.8095&#13;&#10;661.2996 7.9524&#13;&#10;664.2431 5.2857&#13;&#10;665.7952 82.4762&#13;&#10;666.0510 2.2381&#13;&#10;666.2921 226.2381&#13;&#10;666.7744 102.0476&#13;&#10;666.9637 3.4286&#13;&#10;667.2840 54.1429&#13;&#10;667.7968 15.2857&#13;&#10;668.3116 15.2857&#13;&#10;669.2605 9.0476&#13;&#10;670.2955 10.3810&#13;&#10;674.3552 18.3333&#13;&#10;674.7975 899.3333&#13;&#10;675.2976 627.7619&#13;&#10;675.7896 255.2857&#13;&#10;676.0179 15.7619&#13;&#10;676.3060 91.2381&#13;&#10;676.5387 5.5714&#13;&#10;676.7410 8.2381&#13;&#10;677.2390 22.1905&#13;&#10;677.8093 3.0476&#13;&#10;678.3283 8.5714&#13;&#10;680.3004 7.3810&#13;&#10;682.2575 6.2857&#13;&#10;683.2782 3.3333&#13;&#10;685.3203 23.1429&#13;&#10;686.2877 8.3810&#13;&#10;687.0948 1.2381&#13;&#10;687.3569 6.8095&#13;&#10;689.2896 13.8095&#13;&#10;690.2820 15.5714&#13;&#10;690.7786 6.3333&#13;&#10;693.3150 24.4286&#13;&#10;694.3114 33.0476&#13;&#10;695.3556 7.3810&#13;&#10;697.7902 43.9048&#13;&#10;698.2825 80.8095&#13;&#10;698.5649 7.7619&#13;&#10;698.7878 42.4286&#13;&#10;699.2549 37.5714&#13;&#10;699.4532 1.3333&#13;&#10;699.7352 8.6667&#13;&#10;702.3081 33.2857&#13;&#10;704.3342 14.5238&#13;&#10;705.3526 6.1429&#13;&#10;706.3535 97.4286&#13;&#10;706.5601 11.3810&#13;&#10;706.7966 322.0952&#13;&#10;707.0425 43.3333&#13;&#10;707.2960 304.6667&#13;&#10;707.6448 27.6190&#13;&#10;707.8043 118.8095&#13;&#10;708.3100 68.1429&#13;&#10;708.5659 1.0952&#13;&#10;709.5186 3.1905&#13;&#10;711.0142 3.8571&#13;&#10;711.2697 246.7619&#13;&#10;711.5170 16.1905&#13;&#10;712.2795 77.4286&#13;&#10;713.3022 22.7143&#13;&#10;714.2037 6.3333&#13;&#10;718.3099 3.3333&#13;&#10;721.3554 31.6667&#13;&#10;722.3192 9.2857&#13;&#10;730.3015 5.4762&#13;&#10;732.2671 4.1905&#13;&#10;733.3080 26.2381&#13;&#10;734.2771 2.1905&#13;&#10;735.3050 3.9524&#13;&#10;742.3221 5.0952&#13;&#10;743.2629 7.6190&#13;&#10;743.4204 2.5238&#13;&#10;746.2527 3.1905&#13;&#10;752.4103 2.1905&#13;&#10;758.3218 7.4762&#13;&#10;760.3618 320.3810&#13;&#10;761.3499 91.3333&#13;&#10;762.1696 2.1429&#13;&#10;762.4133 24.9524&#13;&#10;768.3283 17.5714&#13;&#10;770.3118 6.0476&#13;&#10;771.3699 3.5714&#13;&#10;783.2692 10.1905&#13;&#10;783.4409 6.7619&#13;&#10;784.3378 4.9524&#13;&#10;785.3615 20.1905&#13;&#10;785.5049 1.0476&#13;&#10;786.3818 11.2857&#13;&#10;803.2597 6.2857&#13;&#10;804.4020 7.5238&#13;&#10;806.3828 13.2857&#13;&#10;807.3281 20.4286&#13;&#10;810.3506 5.3333&#13;&#10;813.3146 6.3810&#13;&#10;823.6977 1.1429&#13;&#10;824.3578 246.7619&#13;&#10;824.5478 15.6667&#13;&#10;824.7830 3.3810&#13;&#10;825.1906 7.4762&#13;&#10;825.3648 79.8095&#13;&#10;826.3768 35.0000&#13;&#10;826.5450 4.6190&#13;&#10;827.3456 5.3333&#13;&#10;829.3384 6.2381&#13;&#10;830.4007 11.7143&#13;&#10;831.2771 8.2381&#13;&#10;831.4095 17.4286&#13;&#10;835.3458 6.1905&#13;&#10;841.4341 5.4762&#13;&#10;843.4109 173.5714&#13;&#10;844.4030 60.3810&#13;&#10;844.6982 2.8095&#13;&#10;845.3683 16.2381&#13;&#10;847.1539 3.8571&#13;&#10;847.3539 39.6190&#13;&#10;847.6160 2.0000&#13;&#10;848.3259 14.1429&#13;&#10;849.3666 14.4762&#13;&#10;850.3577 3.6667&#13;&#10;850.5087 0.7619&#13;&#10;851.3105 8.2857&#13;&#10;857.3295 2.1905&#13;&#10;858.3923 16.6667&#13;&#10;858.9517 2.1905&#13;&#10;859.4219 6.4762&#13;&#10;862.3328 4.2857&#13;&#10;865.3470 7.1429&#13;&#10;866.3137 3.1429&#13;&#10;868.4165 12.2857&#13;&#10;869.4598 4.4286&#13;&#10;872.3099 7.2857&#13;&#10;880.4169 7.8095&#13;&#10;882.3179 18.0952&#13;&#10;882.5486 1.3333&#13;&#10;883.3810 3.9048&#13;&#10;886.4117 5.0476&#13;&#10;889.3836 21.1905&#13;&#10;890.2932 5.5714&#13;&#10;890.4092 12.0000&#13;&#10;893.2840 4.7619&#13;&#10;894.3973 28.3333&#13;&#10;894.5903 1.6190&#13;&#10;895.4193 25.6667&#13;&#10;896.4330 5.3333&#13;&#10;898.3489 3.3333&#13;&#10;907.3919 245.2381&#13;&#10;908.3926 96.4762&#13;&#10;908.7103 5.4762&#13;&#10;909.4138 26.3810&#13;&#10;910.4207 5.2857&#13;&#10;911.3583 20.3333&#13;&#10;912.1875 3.8095&#13;&#10;912.3893 7.5714&#13;&#10;913.2642 7.2857&#13;&#10;915.4821 2.1905&#13;&#10;922.3773 57.2857&#13;&#10;922.6079 3.5714&#13;&#10;923.4442 30.6191&#13;&#10;925.3884 3.1905&#13;&#10;928.3376 4.0952&#13;&#10;929.4089 4.2857&#13;&#10;930.3594 7.5238&#13;&#10;931.3969 4.2857&#13;&#10;940.4219 48.6667&#13;&#10;941.4031 34.6191&#13;&#10;946.1980 3.4286&#13;&#10;946.4033 23.4762&#13;&#10;947.2493 4.5238&#13;&#10;947.4214 9.1905&#13;&#10;950.4295 10.2381&#13;&#10;951.3674 13.1905&#13;&#10;953.4325 10.0476&#13;&#10;954.2445 3.0952&#13;&#10;955.3896 3.1905&#13;&#10;957.4210 393.2382&#13;&#10;957.7217 25.1429&#13;&#10;957.9769 2.0476&#13;&#10;958.4192 223.4762&#13;&#10;959.4350 51.9524&#13;&#10;960.4215 13.5238&#13;&#10;962.3096 5.1905&#13;&#10;963.2720 2.3810&#13;&#10;968.3984 25.7619&#13;&#10;969.3701 12.4286&#13;&#10;970.3986 7.0952&#13;&#10;971.3957 65.4286&#13;&#10;971.6644 1.8095&#13;&#10;971.8418 3.0476&#13;&#10;972.4258 21.8571&#13;&#10;973.3179 7.5714&#13;&#10;978.4524 4.1905&#13;&#10;980.3248 2.8095&#13;&#10;980.4517 2.8095&#13;&#10;986.4058 26.0952&#13;&#10;986.6612 2.3810&#13;&#10;987.4063 26.5238&#13;&#10;987.7434 1.9524&#13;&#10;988.4424 9.2857&#13;&#10;995.4888 22.0952&#13;&#10;995.7192 3.4286&#13;&#10;996.4467 10.5238&#13;&#10;1003.2452 3.6667&#13;&#10;1003.4177 29.0000&#13;&#10;1004.3892 63.9524&#13;&#10;1004.9747 4.6190&#13;&#10;1005.4188 46.8571&#13;&#10;1006.3757 15.2381&#13;&#10;1010.3892 8.2381&#13;&#10;1014.3900 8.1905&#13;&#10;1021.4239 569.1429&#13;&#10;1021.8647 17.7143&#13;&#10;1022.1801 18.1429&#13;&#10;1022.4082 274.3334&#13;&#10;1023.1219 5.9048&#13;&#10;1023.4163 96.1429&#13;&#10;1024.4247 11.8095&#13;&#10;1024.7225 3.6190&#13;&#10;1031.3542 4.6190&#13;&#10;1031.5140 24.2381&#13;&#10;1032.4160 44.1905&#13;&#10;1033.3770 18.5714&#13;&#10;1033.6658 3.5714&#13;&#10;1039.4635 14.0476&#13;&#10;1055.4835 2.1905&#13;&#10;1056.2444 7.0000&#13;&#10;1056.4941 112.6190&#13;&#10;1056.7854 12.8571&#13;&#10;1057.5087 65.5714&#13;&#10;1058.1648 1.7619&#13;&#10;1058.4506 10.8571&#13;&#10;1058.6248 8.6190&#13;&#10;1059.1837 0.9048&#13;&#10;1059.4146 35.2857&#13;&#10;1060.4738 30.0476&#13;&#10;1061.2979 4.7619&#13;&#10;1061.5018 7.6190&#13;&#10;1067.4047 30.9524&#13;&#10;1068.3718 30.3810&#13;&#10;1069.3129 6.6190&#13;&#10;1070.3878 2.6667&#13;&#10;1078.4155 5.3333&#13;&#10;1085.4343 176.4286&#13;&#10;1085.8240 6.3810&#13;&#10;1086.4204 112.3333&#13;&#10;1086.7443 14.7619&#13;&#10;1087.3643 42.2857&#13;&#10;1088.3706 9.2857&#13;&#10;1093.4174 4.2857&#13;&#10;1094.4659 6.3333&#13;&#10;1095.4967 19.2857&#13;&#10;1096.4132 20.7619&#13;&#10;1097.4130 6.1429&#13;&#10;1102.6250 3.1905&#13;&#10;1103.2737 3.4286&#13;&#10;1103.4918 31.5714&#13;&#10;1103.6786 5.2381&#13;&#10;1104.4897 11.2381&#13;&#10;1106.5472 4.2857&#13;&#10;1110.4825 49.9524&#13;&#10;1111.0918 2.2857&#13;&#10;1111.4708 27.4762&#13;&#10;1111.6388 5.7619&#13;&#10;1111.8506 0.9524&#13;&#10;1112.5276 11.5714&#13;&#10;1113.4861 2.1905&#13;&#10;1120.2194 14.6190&#13;&#10;1120.4998 172.7619&#13;&#10;1120.9292 5.3333&#13;&#10;1121.5165 103.5714&#13;&#10;1122.5072 21.4286&#13;&#10;1123.4822 19.0952&#13;&#10;1124.1478 1.1429&#13;&#10;1124.3435 9.4286&#13;&#10;1124.5696 2.9048&#13;&#10;1125.3741 4.9048&#13;&#10;1131.2684 4.5238&#13;&#10;1131.4855 19.8571&#13;&#10;1132.1207 2.0952&#13;&#10;1132.4781 9.4286&#13;&#10;1133.4816 4.2857&#13;&#10;1151.4271 2.5238&#13;&#10;1156.4573 5.3810&#13;&#10;1167.6588 2.1429&#13;&#10;1174.2106 2.3333&#13;&#10;1174.4814 81.9524&#13;&#10;1175.4681 69.1429&#13;&#10;1176.4371 11.0952&#13;&#10;1176.6394 3.0000&#13;&#10;1184.0540 3.0476&#13;&#10;1184.4130 39.0476&#13;&#10;1184.7517 1.5238&#13;&#10;1185.4866 19.3810&#13;&#10;1186.4541 5.3810&#13;&#10;1192.5365 11.5238&#13;&#10;1195.4471 10.0952&#13;&#10;1238.4568 25.0000&#13;&#10;1239.4517 13.2857&#13;&#10;1239.6892 4.2381&#13;&#10;END IONS&#13;&#10;" /><input type="hidden" name="formatList" value="mgf" /><input type="hidden" name="database" value="SWISSPROT" /><input type="hidden" name="acList" value="P11940 P63261 P18621 P11216 P63261" /><input type="hidden" name="instrument" value="QTOF" /><input type="hidden" name="fragmentError1" value="0.2" /><input type="hidden" name="enzyme" value="0|Trypsin" /><input type="hidden" name="missedcleav" value="1" /><input type="hidden" name="scoreFile" value="" /><input type="hidden" name="scoreFileCopy" value="#generation 50&#13;&#10;digraph g {&#13;&#10;node [shape = box, height=.1]&#13;&#10;label = &quot;FitObj1:0.877779, FitObj2:0, CorrectNb:390, Nbnode:57, NbTerminal:29, NbFunction:28, NbCoeff:0, Prof:12&quot;;&#13;&#10;node0[label = &quot;*&quot;];&#13;&#10;&quot;node0&quot;-&gt;&quot;node1&quot;;&#13;&#10;node1[label = &quot;*&quot;];&#13;&#10;&quot;node1&quot;-&gt;&quot;node2&quot;;&#13;&#10;node2[label = &quot;PS1_g&quot;];&#13;&#10;&quot;node1&quot;-&gt;&quot;node3&quot;;&#13;&#10;node3[label = &quot;*&quot;];&#13;&#10;&quot;node3&quot;-&gt;&quot;node4&quot;;&#13;&#10;node4[label = &quot;+&quot;];&#13;&#10;&quot;node4&quot;-&gt;&quot;node5&quot;;&#13;&#10;node5[label = &quot;CS1_c&quot;];&#13;&#10;&quot;node4&quot;-&gt;&quot;node6&quot;;&#13;&#10;node6[label = &quot;PS1_g&quot;];&#13;&#10;&quot;node3&quot;-&gt;&quot;node7&quot;;&#13;&#10;node7[label = &quot;-&quot;];&#13;&#10;&quot;node7&quot;-&gt;&quot;node8&quot;;&#13;&#10;node8[label = &quot;MS1_b&quot;];&#13;&#10;&quot;node7&quot;-&gt;&quot;node9&quot;;&#13;&#10;node9[label = &quot;-&quot;];&#13;&#10;&quot;node9&quot;-&gt;&quot;node10&quot;;&#13;&#10;node10[label = &quot;ES1_i&quot;];&#13;&#10;&quot;node9&quot;-&gt;&quot;node11&quot;;&#13;&#10;node11[label = &quot;MS1_b&quot;];&#13;&#10;&quot;node0&quot;-&gt;&quot;node12&quot;;&#13;&#10;node12[label = &quot;+&quot;];&#13;&#10;&quot;node12&quot;-&gt;&quot;node13&quot;;&#13;&#10;node13[label = &quot;+&quot;];&#13;&#10;&quot;node13&quot;-&gt;&quot;node14&quot;;&#13;&#10;node14[label = &quot;/&quot;];&#13;&#10;&quot;node14&quot;-&gt;&quot;node15&quot;;&#13;&#10;node15[label = &quot;*&quot;];&#13;&#10;&quot;node15&quot;-&gt;&quot;node16&quot;;&#13;&#10;node16[label = &quot;*&quot;];&#13;&#10;&quot;node16&quot;-&gt;&quot;node17&quot;;&#13;&#10;node17[label = &quot;PS1_g&quot;];&#13;&#10;&quot;node16&quot;-&gt;&quot;node18&quot;;&#13;&#10;node18[label = &quot;*&quot;];&#13;&#10;&quot;node18&quot;-&gt;&quot;node19&quot;;&#13;&#10;node19[label = &quot;+&quot;];&#13;&#10;&quot;node19&quot;-&gt;&quot;node20&quot;;&#13;&#10;node20[label = &quot;CS1_c&quot;];&#13;&#10;&quot;node19&quot;-&gt;&quot;node21&quot;;&#13;&#10;node21[label = &quot;CS1_c&quot;];&#13;&#10;&quot;node18&quot;-&gt;&quot;node22&quot;;&#13;&#10;node22[label = &quot;-&quot;];&#13;&#10;&quot;node22&quot;-&gt;&quot;node23&quot;;&#13;&#10;node23[label = &quot;ES1_i&quot;];&#13;&#10;&quot;node22&quot;-&gt;&quot;node24&quot;;&#13;&#10;node24[label = &quot;-&quot;];&#13;&#10;&quot;node24&quot;-&gt;&quot;node25&quot;;&#13;&#10;node25[label = &quot;+&quot;];&#13;&#10;&quot;node25&quot;-&gt;&quot;node26&quot;;&#13;&#10;node26[label = &quot;CS1_c&quot;];&#13;&#10;&quot;node25&quot;-&gt;&quot;node27&quot;;&#13;&#10;node27[label = &quot;+&quot;];&#13;&#10;&quot;node27&quot;-&gt;&quot;node28&quot;;&#13;&#10;node28[label = &quot;RS1_j&quot;];&#13;&#10;&quot;node27&quot;-&gt;&quot;node29&quot;;&#13;&#10;node29[label = &quot;*&quot;];&#13;&#10;&quot;node29&quot;-&gt;&quot;node30&quot;;&#13;&#10;node30[label = &quot;IS1_f&quot;];&#13;&#10;&quot;node29&quot;-&gt;&quot;node31&quot;;&#13;&#10;node31[label = &quot;IS1_f&quot;];&#13;&#10;&quot;node24&quot;-&gt;&quot;node32&quot;;&#13;&#10;node32[label = &quot;+&quot;];&#13;&#10;&quot;node32&quot;-&gt;&quot;node33&quot;;&#13;&#10;node33[label = &quot;MS1_b&quot;];&#13;&#10;&quot;node32&quot;-&gt;&quot;node34&quot;;&#13;&#10;node34[label = &quot;PS1_g&quot;];&#13;&#10;&quot;node15&quot;-&gt;&quot;node35&quot;;&#13;&#10;node35[label = &quot;-&quot;];&#13;&#10;&quot;node35&quot;-&gt;&quot;node36&quot;;&#13;&#10;node36[label = &quot;IS1_f&quot;];&#13;&#10;&quot;node35&quot;-&gt;&quot;node37&quot;;&#13;&#10;node37[label = &quot;-&quot;];&#13;&#10;&quot;node37&quot;-&gt;&quot;node38&quot;;&#13;&#10;node38[label = &quot;ES1_i&quot;];&#13;&#10;&quot;node37&quot;-&gt;&quot;node39&quot;;&#13;&#10;node39[label = &quot;MS1_b&quot;];&#13;&#10;&quot;node14&quot;-&gt;&quot;node40&quot;;&#13;&#10;node40[label = &quot;ES1_i&quot;];&#13;&#10;&quot;node13&quot;-&gt;&quot;node41&quot;;&#13;&#10;node41[label = &quot;*&quot;];&#13;&#10;&quot;node41&quot;-&gt;&quot;node42&quot;;&#13;&#10;node42[label = &quot;SS2_l&quot;];&#13;&#10;&quot;node41&quot;-&gt;&quot;node43&quot;;&#13;&#10;node43[label = &quot;+&quot;];&#13;&#10;&quot;node43&quot;-&gt;&quot;node44&quot;;&#13;&#10;node44[label = &quot;*&quot;];&#13;&#10;&quot;node44&quot;-&gt;&quot;node45&quot;;&#13;&#10;node45[label = &quot;ES1_i&quot;];&#13;&#10;&quot;node44&quot;-&gt;&quot;node46&quot;;&#13;&#10;node46[label = &quot;+&quot;];&#13;&#10;&quot;node46&quot;-&gt;&quot;node47&quot;;&#13;&#10;node47[label = &quot;CS1_c&quot;];&#13;&#10;&quot;node46&quot;-&gt;&quot;node48&quot;;&#13;&#10;node48[label = &quot;PS1_g&quot;];&#13;&#10;&quot;node43&quot;-&gt;&quot;node49&quot;;&#13;&#10;node49[label = &quot;KS1_a&quot;];&#13;&#10;&quot;node12&quot;-&gt;&quot;node50&quot;;&#13;&#10;node50[label = &quot;+&quot;];&#13;&#10;&quot;node50&quot;-&gt;&quot;node51&quot;;&#13;&#10;node51[label = &quot;SS1_k&quot;];&#13;&#10;&quot;node50&quot;-&gt;&quot;node52&quot;;&#13;&#10;node52[label = &quot;+&quot;];&#13;&#10;&quot;node52&quot;-&gt;&quot;node53&quot;;&#13;&#10;node53[label = &quot;/&quot;];&#13;&#10;&quot;node53&quot;-&gt;&quot;node54&quot;;&#13;&#10;node54[label = &quot;PS1_g&quot;];&#13;&#10;&quot;node53&quot;-&gt;&quot;node55&quot;;&#13;&#10;node55[label = &quot;ES1_i&quot;];&#13;&#10;&quot;node52&quot;-&gt;&quot;node56&quot;;&#13;&#10;node56[label = &quot;KS1_a&quot;];&#13;&#10;}&#13;&#10;" /><input type="hidden" name="gapMax" value="1" /><input type="hidden" name="maxAddPM" value="200" /><input type="hidden" name="maxLossPM" value="0" /><input type="hidden" name="maxAddModif" value="200" /><input type="hidden" name="maxLossModif" value="0" /><input type="hidden" name="nbDisplay" value="5" /><input type="hidden" name="mail" value="" /><br />
+<input type="button" name="resubmit" value="Resubmit" onclick="FormRequest(0)" />
+</form></body></html>

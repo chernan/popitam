@@ -1,0 +1,28 @@
+20         // aa number; modifier également dans defines.h si on veut rajouter des aa
+G gly 57.021460
+A ala 71.037110
+S ser 87.032030
+P pro 97.052760
+V val 99.068410
+T thr 101.047680
+C cys 103.009190  //CAM: 160.03065; change also in compare.cc to add modif!
+L leu 113.084060
+I ile 113.084060
+N asn 114.042930
+D asp 115.026940
+Q gln 128.058580
+K lys 128.094960
+E glu 129.042590
+M met 131.040490
+H his 137.058910
+F phe 147.068410
+R arg 156.101110
+Y tyr 163.063330
+W trp 186.079310
+Hydrogen=1.007825
+Carbon=12.000000
+Nitrogen=14.003070
+Oxygen=15.994910
+
+
+

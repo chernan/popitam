@@ -1,0 +1,2 @@
+./popitam -r=NORMAL -s=UNKNOWN -m=1 -p=popParamTestLocal.txt -d=test/TEST_1MOD.mgf -f=mgf -e=error.txt -o=test/TEST_1MOD.out
+./popitam -r=NORMAL -s=UNKNOWN -m=2 -p=popParamTestLocal.txt -d=test/TEST_2MOD.mgf -f=mgf -e=error.txt -o=test/TEST_2MOD.out

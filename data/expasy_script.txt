@@ -1,0 +1,24 @@
+function redirect(el) {
+  el.href = "/cgi-bin/redirect.pl?" + el.href;
+  el.onmousedown = "";
+  return true;
+}
+function getCookie(name) {
+	var c = document.cookie;
+	var p = name + '=';
+	var b = c.indexOf('; '+p);
+	if (b == -1) { 
+		b = c.indexOf(p);
+		if (b != 0) return null;
+	} else b+=2;
+	var e = document.cookie.indexOf(';',b);
+	if(e == -1) e = c.length;
+	return unescape(c.substring(b + p.length, e));
+}
+var ca=getCookie('searcharg');
+if(ca)document.ExpasySearchForm.SEARCH.value=ca;
+var sd = document.ExpasySearchForm.db
+var co = getCookie('searchdb')
+var c1 = 'sptrde'
+if (!c1) c1 = co
+for (var i=0; i<sd.length; i++) sd[i].selected = (sd[i].value == c1)

@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<analysis>
+<version>v4.0</version>
+<inputParameters>
+   <inputFile>test/TEST_2MOD.mgf</inputFile>
+   <initNbSpectra>1</initNbSpectra>
+   <instrument>QTOF</instrument>
+   <minCovBin>2</minCovBin>
+   <wantedCovBin>9</wantedCovBin>
+   <minTagLength>3</minTagLength>
+   <minCovArr>0.300000</minCovArr>
+   <edgeType>1</edgeType>
+   <precTolerance>2.000000</precTolerance>
+   <fragmError1>0.200000</fragmError1>
+   <fragmError2>0.300000</fragmError2>
+   <db1path>demoDB_FORWARDandDECOY</db1path>
+   <db1release>BASE_FORWARDandDECOY_1.0</db1release>
+   <db2path></db2path>
+   <db2release></db2release>
+   <taxId>1</taxId>
+   <acFilter>P48668 DECOY_P48668 Q80V08 DECOY_Q80V08 P68871 DECOY_P68871 P11940 DECOY_P11940 P63261 DECOY_P63261 P18621 DECOY_P18621 P11216 DECOY_P11216 P63261 DECOY_P63261 Q9GZL7 DECOY_Q9GZL7</acFilter>
+   <enzyme>Trypsin</enzyme>
+   <missedCleavageNb>2</missedCleavageNb>
+   <upLimitPM>400.000000</upLimitPM>
+   <lowLimitPM>-200.000000</lowLimitPM>
+   <upLimitMod>400.000000</upLimitMod>
+   <lowLimitMod>-200.000000</lowLimitMod>
+</inputParameters>
+<spectrumMatchList>
+    <spectrumMatch ref="0">
+      <title>VFNC[cam]ISYSPLC[cam]K Q9GZL7</title>
+      <initPeakNb>326</initPeakNb>
+      <peakNb>57</peakNb>
+      <precursor>
+        <moz>744.387412</moz>
+        <mass>1486.774825</mass>
+        <charge>2</charge>
+      </precursor>
+      <nodeNb>128</nodeNb>
+      <simpleEdgeNb>287</simpleEdgeNb>
+      <doubleEdgeNb>3356</doubleEdgeNb>
+      <dbSearch>
+         <totalNbProtein>1666</totalNbProtein>
+         <protNbAfterFilter>24</protNbAfterFilter>
+         <pepNbAfterFilter>241</pepNbAfterFilter>
+         <pepNbWithOneMoreScenarios>240</pepNbWithOneMoreScenarios>
+         <cumulNbOfScenarios>2885</cumulNbOfScenarios>
+         <sampleSize>239</sampleSize>
+      </dbSearch>
+      <matchList>
+        <match>
+          <rank>1</rank>
+          <score>659853.403468</score>
+          <deltaS>0.852071</deltaS>
+          <pValue>0.000000</pValue>
+          <peptide>
+            <mass>1372.651855</mass>
+            <dbSequence>VFNCISYSPLCK</dbSequence>
+            <scenario>vfN*ISYSpl**</scenario>
+            <shift>57.077271</shift>
+            <shift>57.045654</shift>
+          </peptide>
+          <dbRefList>
+            <dbRef>
+               <ac>Q9GZL7</ac>
+               <id>WDR12_HUMAN</id>
+               <de>WD repeat protein 12 - Homo sapiens (Human).</de>
+               <ac>DECOY_Q9GZL7</ac>
+               <id>WDR12_HUMAN</id>
+               <de>WD repeat protein 12 - Homo sapiens (Human).</de>
+            </dbRef>
+          </dbRefList>
+        </match>
+        <match>
+          <rank>2</rank>
+          <score>562242.049000</score>
+          <deltaS>0.054014</deltaS>
+          <pValue>0.000000</pValue>
+          <peptide>
+            <mass>1528.753052</mass>
+            <dbSequence>VFNCISYSPLCKR</dbSequence>
+            <scenario>vfN*ISYSpl***</scenario>
+            <shift>57.077271</shift>
+            <shift>-99.055542</shift>
+          </peptide>
+          <dbRefList>
+            <dbRef>
+               <ac>Q9GZL7</ac>
+               <id>WDR12_HUMAN</id>
+               <de>WD repeat protein 12 - Homo sapiens (Human).</de>
+               <ac>DECOY_Q9GZL7</ac>
+               <id>WDR12_HUMAN</id>
+               <de>WD repeat protein 12 - Homo sapiens (Human).</de>
+            </dbRef>
+          </dbRefList>
+        </match>
+        <match>
+          <rank>3</rank>
+          <score>30368.996595</score>
+          <deltaS>0.663876</deltaS>
+          <pValue>1.000000</pValue>
+          <peptide>
+            <mass>1573.843628</mass>
+            <dbSequence>RGFSANSARLPGVSR</dbSequence>
+            <scenario>---saNS*RLP*Vsr</scenario>
+            <shift>-65.087425</shift>
+            <shift>-22.002630</shift>
+          </peptide>
+          <dbRefList>
+            <dbRef>
+               <ac>P48668</ac>
+               <id>K2C6C_HUMAN</id>
+               <de>Keratin, type II cytoskeletal 6C - Homo sapiens (Human).</de>
+               <ac>DECOY_P48668</ac>
+               <id>K2C6C_HUMAN</id>
+               <de>Keratin, type II cytoskeletal 6C - Homo sapiens (Human).</de>
+            </dbRef>
+          </dbRefList>
+        </match>
+        <match>
+          <rank>4</rank>
+          <score>20161.241531</score>
+          <deltaS>0.462011</deltaS>
+          <pValue>1.000000</pValue>
+          <peptide>
+            <mass>1114.587036</mass>
+            <dbSequence>LEGLEDALQK</dbSequence>
+            <scenario>**GLED*LQK</scenario>
+            <shift>-23.994606</shift>
+            <shift>396.212372</shift>
+          </peptide>
+          <dbRefList>
+            <dbRef>
+               <ac>P48668</ac>
+               <id>K2C6C_HUMAN</id>
+               <de>Keratin, type II cytoskeletal 6C - Homo sapiens (Human).</de>
+               <ac>DECOY_P48668</ac>
+               <id>K2C6C_HUMAN</id>
+               <de>Keratin, type II cytoskeletal 6C - Homo sapiens (Human).</de>
+            </dbRef>
+          </dbRefList>
+        </match>
+        <match>
+          <rank>5</rank>
+          <score>9314.718686</score>
+          <deltaS>1000</deltaS>
+          <pValue>1.000000</pValue>
+          <peptide>
+            <mass>1106.633545</mass>
+            <dbSequence>YLKDVTLQK</dbSequence>
+            <scenario>*LKD**LQK</scenario>
+            <shift>112.057083</shift>
+            <shift>268.114105</shift>
+          </peptide>
+          <dbRefList>
+            <dbRef>
+               <ac>P18621</ac>
+               <id>RL17_HUMAN</id>
+               <de>60S ribosomal protein L17 - Homo sapiens (Human).</de>
+               <ac>DECOY_P18621</ac>
+               <id>RL17_HUMAN</id>
+               <de>60S ribosomal protein L17 - Homo sapiens (Human).</de>
+            </dbRef>
+          </dbRefList>
+        </match>
+      </matchList>
+    </spectrumMatch>
+</spectrumMatchList>
+<spectrumList>
+  <spectrum id="0">
+  <peakList>
+<![CDATA[87.071700 6.125746 ?
+120.099100 27.551186 ?
+132.097300 14.990429 ?
+147.132900 5.153890 ?
+219.173100 52.157270 ?
+220.181200 6.169936 ?
+246.150200 5.816514 ?
+247.162500 45.957895 ?
+248.172300 6.847310 ?
+262.137900 17.375944 ?
+275.100600 27.094665 ?
+276.112600 6.906188 ?
+279.168800 5.580909 ?
+280.154100 6.022679 ?
+289.159800 5.816514 ?
+307.166600 45.265801 ?
+308.170300 6.626425 ?
+331.166800 8.673237 ?
+361.212000 16.389336 ?
+371.185200 10.558103 ?
+378.236200 17.420102 ?
+388.202600 16.153732 ?
+389.200600 8.246217 ?
+396.244300 5.978490 ?
+399.223800 7.289049 ?
+422.165100 8.437632 ?
+427.223000 6.744212 ?
+430.235500 20.924761 ?
+444.244600 6.066868 ?
+458.217200 8.025332 ?
+499.269700 7.289049 ?
+517.305700 88.470040 ?
+517.536900 6.243564 ?
+518.315900 19.113522 ?
+519.298600 5.212768 ?
+521.248900 12.163145 ?
+522.245600 6.552797 ?
+586.323500 5.625099 ?
+589.304200 7.274330 ?
+604.337100 50.449130 ?
+605.336400 16.227360 ?
+606.335800 6.508607 ?
+745.415500 5.360024 ?
+767.411800 25.828295 ?
+768.398100 10.381377 ?
+854.428300 100.000000 ?
+854.719200 6.081588 ?
+855.422600 40.435864 ?
+856.443100 14.902081 ?
+967.514600 41.098518 ?
+968.518600 21.631574 ?
+969.514000 6.346631 ?
+1127.545400 17.449572 ?
+1128.566900 11.338545 ?
+1241.607700 17.420102 ?
+1242.614700 16.065384 ?
+1243.560900 8.157870 ?
+
+]]></peakList>
+  </spectrum>
+</spectrumList>
+</analysis>

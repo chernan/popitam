@@ -1,0 +1,8 @@
+<p><center><table width="100%" bgcolor="gray" cellspacing="1" cellpadding="2" align="center" class="headfoot"><tr>
+<td bgcolor="#FFFFFF" align="center"> <strong><a target="_top" href="http://master.expasy.org/"><img src="/images/expasy_logos/expasy16.gif" alt="ExPASy logo" border="0" align="top"> ExPASy Home page</a></strong></td>
+<td bgcolor="#FF9999" align="center"> <strong><a target="_top" href="http://master.expasy.org/sitemap.html">Site Map</a></strong></td>
+<td bgcolor="#C0EAC0" align="center"> <strong><a target="_top" href="http://master.expasy.org/ExpasyHunt/">Search ExPASy</a></strong></td>
+<td bgcolor="#CCCCFF" align="center"> <strong><a target="_top" href="http://master.expasy.org/contact.html">Contact us</a></strong></td>
+<td bgcolor="#FFCC00" align="center"> <strong><a target="_top" href="http://master.expasy.org/tools/">Proteomics tools</a></strong></td>
+<td bgcolor="#FFFF66" align="center"> <strong><a target="_top" href="http://master.expasy.org/sprot/">Swiss-Prot</a></strong></td>
+</tr></table></center>

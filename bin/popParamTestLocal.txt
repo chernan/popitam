@@ -1,0 +1,104 @@
+// FILE NAMES
+
+PATH_FILE               :(plus besoin)../data/path.txt
+AMINO_ACID_FILE         :../data/aa20.txt
+
+GPPARAMETERS            :../data/functionLoadParam.txt
+SCORE_FUN_FUNCTION0     :../data/funScore0.dot
+SCORE_FUN_FUNCTION1     :../data/funScore1.dot
+SCORE_FUN_FUNCTION2     :../data/funScore2.dot
+
+PROBS_TOFTOF1           :../data/TOFTOF_1.prob
+PROBS_QTOF1             :../data/QTOF_1.prob
+PROBS_QTOF2             :../data/QTOF_2.prob
+PROBS_QTOF3             :../data/QTOF_3.prob
+
+DB1_PATH                :../CREATE_DB/testDBs/demoDB_BASE_FORWARDandDECOY.bin
+DB2_PATH                :NO
+TAX_ID                  :NO
+AC_FILTER               :P48668 DECOY_P48668 Q80V08 DECOY_Q80V08 P68871 DECOY_P68871 P11940 DECOY_P11940 P63261 DECOY_P63261 P18621 DECOY_P18621 P11216 DECOY_P11216 P63261 DECOY_P63261 Q9GZL7 DECOY_Q9GZL7
+ENZYME                  :Trypsin
+OUTPUT_DIR              :./
+GEN_OR_FILENAME_SUFF    :/PAT/LS/OR_SPEC
+GEN_NOD_FILENAME_SUFF   :/PAT/LS/NOD_SPEC
+SCORE_NEG_FILE          :SCORE_NEG.txt
+SCORE_RANDOM_FILE       :SCORE_RANDOM.txt
+
+
+// SPECTRUM PARAMETERS
+
+FRAGM_ERROR1            :0.2
+FRAGM_ERROR2            :0.3
+PREC_MASS_ERR           :2
+INSTRUMENT              :QTOF
+
+
+// DIGESTION PARAMETERS 
+
+MISSED                  :2
+
+
+// POPITAM SPECIFIC PARAMETERS		
+
+PEAK_INT_SEUIL          :5
+BIN_NB                  :10
+COVBIN                  :9
+EDGE_TYPE               :1    
+MIN_TAG_LENTGH          :3     
+RESULT_NB               :5
+MIN_PEP_PER_PROT        :5
+UP_LIMIT_RANGE_PM       :400.0
+LOW_LIMIT_RANGE_PM      :-200.0
+UP_LIMIT_RANGE_MOD      :400.0
+LOW_LIMIT_RANGE_MOD     :-200.0
+MIN_COV_ARR             :0.3
+PLOT                    :0
+PVAL_ECHSIZE            :0
+
+// ********************************************************************************************** //
+
+REMARKS
+
+DBs                =  NO or path for the databases to use; if "default" is specified, then the makefile option will be used
+                      2 dbs can be specified; all dbs must accept the same taxonomy!!!)
+
+TAXID             =   DEPRECATED! Better let NO or suffer unexpected behavior!
+                      If taxonomy was included in the header of the fasta file used to build the db, 
+                      and if you really wants to take advantage of taxonomy, try putting a taxid... 
+                      (e.g. 9606 for Homo sapiens, 158879 for Staphylococcus aureus (strain N315), etc.)                    
+
+AC_FILTER          =  list of ACs (separated by a space) 
+                      eg: P48666 Q80V08 P68871 P11940 P63261 P18621 P11216 P63261 Q9GZL7
+
+ENZYME             =  choose between Trypsin, LysC, LysN, CNBr, ArgC, AspN, 
+                      AspN + GluN, AspN + LysC, AspN + GluN + LysC, 
+                      GluC bicarbonate, GluC phosphate, Chymotrypsin Low,
+                      Chymotrypsin High, Tryp + Chymo, Pepsin pH 1.3, 
+                      Pepsin pH > 2, and Proteinase K
+                      
+FRAGM_ERROR1       =  error tolerance authorized when linking nodes from ion series with same terminal
+FRAGM_ERROR2       =  error tolerance authorized when linking nodes from ion series with different terminals (usually, twice the FRAGMENT_ERROR1)
+PREC_MASS_ERR      =  this parameter is only important when running Popitam in NORMAL mode (not open search). Otherwise, it is not considered.
+
+INSTRUMENT         =  QTOF / TOFTOF   
+
+MISSED             =  0 (means no missed cleavage) / 1 (means 0 or 1 missed cleavages)
+
+PEAK_INT_SEUIL     =  float, représentant le seuil d'intensité (en % par rapport à l'intensité maximum normalisée 100) 
+                      à partir duquel on ne considère plus les pics (2 signifie que les pics avec une intensité < 2 sont supprimés) 
+BIN_NB             =  10 c'est le nombre de bins que popitam s'attendra à trouver dans les fichiers de probabilités ioniques
+COVBIN             =  1-BIN_NB, c'est la couverture, en noeuds, que l'on veut avoir lors de la construction du graphe
+
+EDGE_TYPE          =  0 (means one aa edges) / 1 (means one and two aa edges)
+RESULT_NB          =  [1-50] (number of elements in the resultList)
+MIN_PEP_PER_PROT   =  positive integer; indique un seuil (en nombre de peptides) pour l'affichage des protéines identifiées;
+MAX_ADD_PM         =  float: maximum positive delta authorized for the precursor mass 
+                      (when run with 1 open-mod, should be equal to MAX_ADD_MOD)
+                      (when run with 2 open-mods, should be equal to 2*MAX_ADD_MOD)                           
+MAX_LOS_PM         =  float: maximum negative delta authorized for the precursor mass
+                      (when run with 1 open-mod, should be equal to MAX_LOS_MOD)
+                      (when run with 2 open-mods, should be equal to 2*MAX_LOS_MOD)   
+MAX_ADD_MOD        =  float: maximum positive delta authorized for an open-modification
+MAX_LOS_MOD        =  float: maximum negative delta authorized for an open-modification
+
+PLOT               =  0 (means no plot), 1 (means plot)

@@ -1,0 +1,50 @@
+param 
+	dataBase nbItem 1 
+		item id 0 string "Swiss-Prot" 
+	taxon nbItem 1
+		item id 9606 string "Homo sapiens" 
+	contaminant nbMaxContaminant 3 
+	proteinFilter nbCoupleMin 4 massMin 0 massMax 100000 
+	deltaMass deltaDa 0.200000 deltaPpm 200 error 25 
+	digestion 
+		enzyme id 0 string "Trypsin" 
+		missedCleavage id 1 string "One" 
+		precision id 1 string "MonoIsotopic" 
+		proton id 0 string "[M+H]" 
+		ptm use 1
+			type nbItem 4
+				item id 0 string "Observed"
+				item id 1 string "By similarity"
+				item id 2 string "Probable"
+				item id 3 string "Potential"
+			mode id 1 string "Variable"	
+		modif nbItem 9
+				item label "CAM" locus "C" add "C2H4ON" supp "H" tolerance 1 use 1 score 0.3 use 1
+					mode id 0 string "Fixed"
+				item label "CM" locus "C" add "C2H3O" supp "H" tolerance 1 use 0 score 0.3 use 1
+					mode id 0 string "Fixed"	
+				item label "PAM" locus "C" add "" supp "H" tolerance 2 use 0 score 0.8 use 1
+					mode id 1 string "Variable"
+				item label "MSO" locus "M" add "OH" supp "H" tolerance 2 use 1 score 0.9 use 1
+					mode id 1 string "Variable"
+				item label "Phos" locus "ST" add "" supp "" tolerance 0 use 0 score 0.5 use 1
+					mode id 0 string "Fixed"
+				item label "Phos" locus "Y" add "" supp "" tolerance 0 use 0 score 0.5 use 1
+					mode id 0 string "Fixed"
+				item label "Ester" locus "DE>" add "" supp "" tolerance 0 use 0 score 0.5 use 1
+					mode id 0 string "Fixed"
+				item label "" locus "" add "" supp "" tolerance 0 use 0 score 0.5 use 1
+					mode id 0 string "Fixed"
+				item label "" locus "" add "" supp "" tolerance 0 use 0 score 0.5 use 1
+					mode id 0 string "Fixed"
+	scoring 
+		missedCleavage param 0.5 use 1 
+		intensity param 1.0 use 1 
+		contaminant param 0.2 use 1 
+		cTermR param 1.5 use 1 
+		cTermK param 0.5 use 1 
+		cTermLimit param 5 use 1 
+		coverage param 1.0 use 1 
+		pi param 0.5 use 1 
+		mass param 0.5 use 1 
+	resultList nbMaxResult 20

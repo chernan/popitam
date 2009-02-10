@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Popitam</title>
+</head>
+<body style="color: rgb(0, 0, 0); background-color: rgb(204, 204, 255);"
+ alink="#000099" link="#000099" vlink="#990099">
+<br>
+<center>
+<h1>Popitam</h1>
+</center>
+<h2>What is Popitam ?</h2>
+<p>Idea and development of Popitam are part of a PhD work performed in 2005 at
+the <a href="http://www.isb-sib.ch/">Swiss Institute of Bioinformatics</a>
+in
+the <a href="http://www.isb-sib.ch/groups/pig.htm">Proteome
+Informatics
+Group</a> (PIG). Popitam uses a tag-oriented approach and performs a
+database-guided spectrum interpretation. It identifies spectra from
+modified and/or mutated
+peptides without "a priori"-knowledge about the expected types of
+modification. Popitam creates a spectrum graph <span
+ style="font-style: italic;"></span>which is specifically parsed for
+each candidate peptide
+extracted from a database. Popitam searches the graph for
+all tags (of the longest possible length) that match subsequences of
+the
+current candidate peptide. Then, the tags are combined according to
+compatibility rules to build plausible spectrum interpretation
+scenarios. Usually, a scenario consists of one or several tags,
+separated by gaps. Using the flanking masses of the tags, Popitam
+classifies gaps either as modification or mutation events, or as lack
+of information in the spectrum due to low peak
+statistics. Finally, each <a href="glossaire.html#scenario">scenario</a>
+is scored and the candidate peptide with the highest-scoring scenario
+is
+proposed as the identification result. </p>
+<p>Here are the main steps of Popitam's algorithm:<br>
+<br>
+<img alt="Popitam schema" src="./image/schemaPopitam.jpeg"
+ style="width: 394px; height: 342px;"></p>
+<ol>
+  <li>The MS/MS spectrum is preprocessed in order to remove isotopic
+peaks and filter background noise.</li>
+  <li>The MS/MS spectrum is transformed into a spectrum graph (which is
+a widely used structure in <span style="font-style: italic;">de novo</span>
+sequencing approaches).</li>
+  <li>Candidate peptides are selected from a database according to
+filtering criteria like taxonomy, accession code (AC), digestion rules
+and precursor mass error.<br>
+    <br>
+For each candidate peptide: <br>
+    <br>
+  </li>
+  <li> the peptide sequence is indexed as a suffix tree</li>
+  <li>tags that are consistent with both the current candidate sequence
+and the peak pattern in the spectrum are extracted from the spectrum by
+simultaneous parsing the spectrum graph and the suffix tree. <br>
+  </li>
+  <li> using the list of extracted tags and compatibility rules between
+the tags, Popitam builds various possible interpretation <a
+ href="./glossaire.html#scenario">scenarios</a>. A scenario corresponds
+to a <a href="./glossaire.html#runjumppath">run-and-jump path</a> in
+the
+spectrum graph.</li>
+  <li> each scenario is scored using <a
+ href="./glossaire.html#functions">functions</a> learned by <a
+ href="./glossaire.html#geneticProgramming">Genetic Programming</a> (it
+is possible to defines one's own scoring function and to use Popitam
+with it).<br>
+    <br>
+The peptide that obtained the highest scenario score is proposed as the
+identification result. The scenario indicates the emplacement and
+shifts
+of the modifications</li>
+</ol>
+<br>
+<!-- NB: this links does not work when tested on lin-071, but works fine on ExPASy -->
+<a href="/cgi-bin/popitam/form.cgi#form" target="_top">
+<h2>Want to try it yourself ?</h2>
+</a>
+</body>
+</html>

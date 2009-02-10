@@ -1,0 +1,84 @@
+Popitam v4.0 is now running; run parameters are NORMAL and UNKNOWN (2 allowed gaps)
+
+________________________________________________________________________________
+
+File processed                               : test/TEST_2MOD.mgf
+Initial number of spectra                    : 1
+Instrument                                   : QTOF
+Min covbin                                   : 2
+Wanted number of coverage                    : 9
+Minimal tag lentgh                           : 3
+Minimal coverage for a valuable arrangement  : 0.300000
+
+Graph parameters                              
+ - edges_type :                              : 1,2 aa
+ - peptide error :                           : 2.00
+ - fragment error1 :                         : 0.20
+ - fragment error2 :                         : 0.30
+
+DBs                                           
+demoDB_FORWARDandDECOY                       : BASE_FORWARDandDECOY_1.0
+TAXONOMY                                     : NO
+AC FILTER                                    : P48668 DECOY_P48668 Q80V08 DECOY_Q80V08 P68871 DEC...  
+
+Enzyme                                       : Trypsin
+Missed cleavage number                       : 2
+
+Modification/Mutation parameters              
+up limit of PM range                         : 400.00
+low limit of PM range                        : -200.00
+up limit of MOD range                        : 400.00
+low limit of MOD range                       : -200.00
+
+
+________________________________________________________________________________
+
+Spectrum ID              : 0
+SpectrumTitle            : VFNC[cam]ISYSPLC[cam]K Q9GZL7
+initPeakNb               :         326
+peakNb after proc.       :          57
+ParentMass raw           :   744.38741
+ParentMass(M)/Charge     :  1486.77482 / 2      
+NodeNb                   :     128 
+EdgeNb (simple/double)   :     287 / 3356   
+
+
+________________________________________________________________________________
+
+
+Total number of proteins in databases                                                          :      1666
+Number of proteins after filter (taxonomy, ACs...)                                             :        24
+Number of peptides after filter (PM...)                                                        :       241
+Number of peptides with one or more scenario                                                   :       240
+Cumulated number of scenarios                                                                  :      2885
+
+SAMPLE SIZES for statistics: 239 peptides neg
+
+        # | score (deltaS ; pValue)     | mass        | access                    | id                   | dtbSeq / scenarios (shifts) 
+--------- | --------------------------- | ----------- | ------------------------- | -------------------- | -------------------- 
+ 1. (  2) | 659853.403 (0.85 ; 0.0e+00) |  1372.65186 | Q9GZL7                    | WDR12_HUMAN          | VFNCISYSPLCK
+          |                             |             | DECOY_Q9GZL7              | WDR12_HUMAN          | vfN*ISYSpl**         57.08    57.05 
+--------- | --------------------------- | ----------- | ------------------------- | -------------------- | -------------------- 
+ 2. (  2) | 562242.049 (0.05 ; 0.0e+00) |  1528.75305 | Q9GZL7                    | WDR12_HUMAN          | VFNCISYSPLCKR
+          |                             |             | DECOY_Q9GZL7              | WDR12_HUMAN          | vfN*ISYSpl***        57.08   -99.06 
+--------- | --------------------------- | ----------- | ------------------------- | -------------------- | -------------------- 
+ 3. (  2) |  30368.997 (0.66 ; 1.0e+00) |  1573.84363 | P48668                    | K2C6C_HUMAN          | RGFSANSARLPGVSR
+          |                             |             | DECOY_P48668              | K2C6C_HUMAN          | ---saNS*RLP*Vsr     -65.09   -22.00 
+--------- | --------------------------- | ----------- | ------------------------- | -------------------- | -------------------- 
+ 4. (  2) |  20161.242 (0.46 ; 1.0e+00) |  1114.58704 | P48668                    | K2C6C_HUMAN          | LEGLEDALQK
+          |                             |             | DECOY_P48668              | K2C6C_HUMAN          | **GLED*LQK          -23.99   396.21 
+--------- | --------------------------- | ----------- | ------------------------- | -------------------- | -------------------- 
+ 5. (  2) |   9314.719 (1000 ; 1.0e+00) |  1106.63354 | P18621                    | RL17_HUMAN           | YLKDVTLQK
+          |                             |             | DECOY_P18621              | RL17_HUMAN           | *LKD**LQK           112.06   268.11 
+--------- | --------------------------- | ----------- | ------------------------- | -------------------- | -------------------- 
+
+Processing time was:	0.820000
+
+
+NEXT______________________________________________________________
+
+
+
+RESULTS BY PROTEIN (MINIMUM PEPTIDE COVERAGE REQUIRED FOR DISPLAY IS 5): 
+
+NO CANDIDATE PROTEIN 

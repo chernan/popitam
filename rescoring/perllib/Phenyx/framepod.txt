@@ -1,0 +1,81 @@
+use strict;
+
+package Phenyx::;
+require Exporter;
+use Carp;
+
+=head1 NAME
+
+
+=head1 SYNOPSIS
+
+
+=head1 DESCRIPTION
+
+
+=head1 FUNCTIONS
+
+
+=head1 METHODS
+
+
+=head1 EXAMPLES
+
+
+=head1 SEE ALSO
+
+
+=head1 Legal Disclaimer Concerning the Utilisation of the Accessed Perl Scripts and Modules
+
+All intellectual property rights on any part of source code that the End-User may download within the use of Phenyx, whether in accordance with the License Agreement or during a test phase agreed upon with GeneBio, belong exclusively to GeneBio and the making available of such source code shall not be construed as meaning that GeneBio has renounced to its rights. End-User is granted the limited right to use such parts of source code only in the course of the permitted use of Phenyx, whether in accordance with the License Agreement or during a test phase agreed upon with GeneBio. End-User shall not make any other use of such parts of source code, in particular shall not reproduce, modify, include them whether modified or not into a product of the End-User whether for internal use or for commercialisation, sub-licence them or transmit them to any third party.
+
+Such parts of source code are made available "as is" and GeneBio does not warrant that these parts of source code will meet End User's requirements, be error free or secure or operate uninterrupted or be non-infringing. GeneBio shall not be liable for any direct or indirect damage of any nature including loss of business or profits and loss of data resulting from the use of such parts of source code.
+
+=head1 AUTHORS
+
+Alexandre Masselot, www.genebio.com
+
+=cut
+
+our (@ISA, @EXPORT, @EXPORT_OK, $VERSION);
+@ISA = qw(Exporter);
+
+@EXPORT = qw(&getVersion);
+@EXPORT_OK = ();
+$VERSION = "0.9";
+
+use File::Basename;
+
+
+sub new{
+  my ($pkg, $h)=@_;
+
+  my $dvar={};
+  bless $dvar, $pkg;
+
+  foreach (keys %$h){
+    $dvar->set($_, $h->{$_});
+  }
+
+  return $dvar;
+}
+
+#-------------------------------- setters/getters
+
+sub set{
+  my ($this, $name, $val)=@_;
+  $this->{$name}=$val;
+}
+
+sub get{
+  my ($this, $name)=@_;
+  return $this->{$name};
+}
+
+# -------------------------------   misc
+sub getVersion{
+  return $VERSION;
+}
+
+return 1;
+
