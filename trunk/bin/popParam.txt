@@ -1,17 +1,17 @@
 // FILE NAMES
 
 PATH_FILE               :(plus besoin)../data/path.txt
-AMINO_ACID_FILE         :resources/aa20.txt
+AMINO_ACID_FILE         :../data/aa20.txt
 
-GPPARAMETERS            :resources/functionLoadParam.txt
-SCORE_FUN_FUNCTION0     :resources/funScore0.dot
-SCORE_FUN_FUNCTION1     :resources/funScore1.dot
-SCORE_FUN_FUNCTION2     :resources/funScore2.dot
+GPPARAMETERS            :../data/functionLoadParam.txt
+SCORE_FUN_FUNCTION0     :../data/funScore0.dot
+SCORE_FUN_FUNCTION1     :../data/funScore1.dot
+SCORE_FUN_FUNCTION2     :../data/funScore2.dot
 
-PROBS_TOFTOF1           :resources/TOFTOF_1.prob
-PROBS_QTOF1             :resources/QTOF_1.prob
-PROBS_QTOF2             :resources/QTOF_2.prob
-PROBS_QTOF3             :resources/QTOF_3.prob
+PROBS_TOFTOF1           :../data/TOFTOF_1.prob
+PROBS_QTOF1             :../data/QTOF_1.prob
+PROBS_QTOF2             :../data/QTOF_2.prob
+PROBS_QTOF3             :../data/QTOF_3.prob
 
 DB1_PATH                :dbs/demoDB_BASE_FORWARDandDECOY.bin
 DB2_PATH                :NO
@@ -19,10 +19,10 @@ TAX_ID                  :NO
 AC_FILTER               :P48668 DECOY_P48668 Q80V08 DECOY_Q80V08 P68871 DECOY_P68871 P11940 DECOY_P11940 P63261 DECOY_P63261 P18621 DECOY_P18621 P11216 DECOY_P11216 P63261 DECOY_P63261 Q9GZL7 DECOY_Q9GZL7
 ENZYME                  :Trypsin
 OUTPUT_DIR              :./
-GEN_OR_FILENAME_SUFF    :/PAT/LS/OR_SPEC
-GEN_NOD_FILENAME_SUFF   :/PAT/LS/NOD_SPEC
-SCORE_NEG_FILE          :SCORE_NEG.txt
-SCORE_RANDOM_FILE       :SCORE_RANDOM.txt
+GEN_OR_FILENAME_SUFF    :(plus besoin)
+GEN_NOD_FILENAME_SUFF   :(plus besoin)
+SCORE_NEG_FILE          :(plus besoin)
+SCORE_RANDOM_FILE       :(plus besoin)
 
 
 // SPECTRUM PARAMETERS

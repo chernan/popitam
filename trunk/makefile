@@ -1,4 +1,3 @@
-#blabla
 CC			= g++
 CFLAGS			= -Wall 
 
@@ -33,7 +32,7 @@ endif
 
 POP_VERSION		= '"v4.0"'
 
-SRC_DIR			= ./src ./src/DIGEST ./src/DIGEST/base ./src/DIGEST/database ./src/DIGEST/digest
+SRC_DIR			= ./src ./src/src_digest ./src/src_digest/base ./src/src_digest/database ./src/src_digest/digest
 # macro qui indique ou chercher pour toutes les sources files
 VPATH			= ${SRC_DIR}
 # data folder - don't forget the final /
@@ -43,11 +42,10 @@ DATA 			= '"./data/"'
 # windows H:\\Work\\Projects\\cpp\\DTBS\\WINDB\\
 DB				= '"../DB/"'
 
-INCLUDE_DIR		= -I ./src -I ./src/DIGEST -I ./src/DIGEST/base -I ./src/DIGEST/database -I ./src/DIGEST/digest
+INCLUDE_DIR		= -I ./src -I ./src/src_digest -I ./src/src_digest/base -I ./src/src_digest/database -I ./src/src_digest/digest
 OBJ_DIR			= ./obj
 OUT_DIR         	= ./bin
 OUT             	= $(OUT_DIR)/popitam
-DIST_DIR		= ./dist
 
 OBJECTS 		= atomicmass file MATerror tagfile txtfile util \
 			  actree dbentry  dbfile dbfilereader dbptm dbreader \
@@ -63,28 +61,22 @@ RM			= /bin/rm -rf
 MKDIR			= /bin/mkdir -p
 
 all:	$(OBJ_DIR) $(OUT) make_subprojects
-
+	dos2unix $(OUT_DIR)/popParam.txt
+	
 clean:	clean_obj clean_subprojects
 	$(RM) $(OUT)
-	$(RM) $(DIST_DIR)
 
 clean_obj:	clean_subprojects_obj
 	$(RM) $(OBJ_DIR)
 
 clean_subprojects_obj:
-	@make -C ./form clean_obj
-	@make -C ./DB clean_obj
-	@make -C ./CREATE_DB clean_obj
+	@make -C ./createDB clean_obj
 
 clean_subprojects:
-	@make -C ./form clean
-	@make -C ./DB clean
-	@make -C ./CREATE_DB clean
+	@make -C ./createDB clean
 
 make_subprojects:
-	@make -C ./form
-	@make -C ./DB
-	@make -C ./CREATE_DB
+	@make -C ./createDB
 
 help: 
 	@echo "Three options modify default compilation, i.e. debug (use OPTION=...)"
@@ -95,59 +87,10 @@ help:
 	@echo "    DATA  folder containing data files "
 	@echo "    DB    folder containing databases, i.e. UniProtSP and UniProtTR folders"
 	
-dist:	all dist_init
-	cp $(OUT) $(DIST_DIR)/
-#	cp test/TEST_* $(DIST_DIR)/test/
-	cp ./bin/com.txt $(DIST_DIR)/
-	cp ./bin/popParamTest.txt $(DIST_DIR)/popParam.txt
-	dos2unix $(DIST_DIR)/popParam.txt
-	cp ./documents/readme.txt $(DIST_DIR)/readme.txt
-	cp ./bin/testPopitam.pl $(DIST_DIR)/
-	cp ./data/*.prob $(DIST_DIR)/resources/
-	cp ./data/aa20.txt $(DIST_DIR)/resources/
-	cp ./data/functionLoadParam.txt $(DIST_DIR)/resources/
-	cp ./data/*.dot $(DIST_DIR)/resources/
-	cp ./CREATE_DB/testDBs/demoDB_BASE_FORWARDandDECOY.fasta $(DIST_DIR)/dbs/
-#	cp ./CREATE_DB/testDBs/demoDB_BASE_FORWARDandDECOY.bin $(DIST_DIR)/dbs/
-	cp ./CREATE_DB/testDBs/demoDB_CAMHEADER.fasta $(DIST_DIR)/dbs/
-	cp ./CREATE_DB/testDBs/demoDB_PHENHEADER_FORWARDandDECOY.fasta $(DIST_DIR)/dbs/
-	cp ./CREATE_DB/bin/createDB $(DIST_DIR)/dbs/
-	cp ./rescoring/auto_popitam_rescored2pidres.pl $(DIST_DIR)/
-	cp -r ./rescoring/preprocess/ $(DIST_DIR)/rescoring/
-	cp ./rescoring/01_extractscenario/popitam_scenarioextractor.pl $(DIST_DIR)/rescoring/01_extractscenario/
-	cp ./rescoring/02_pm-rescoring/esquire3000+.scoring.xml $(DIST_DIR)/rescoring/02_pm-rescoring/
-	cp ./rescoring/02_pm-rescoring/FT-ICRnormal_5.0ppm_gb-is.scoring.xml $(DIST_DIR)/rescoring/02_pm-rescoring/
-	cp ./rescoring/02_pm-rescoring/toftof.scoring.xml $(DIST_DIR)/rescoring/02_pm-rescoring/
-	cp ./rescoring/02_pm-rescoring/qtof.scoring.xml $(DIST_DIR)/rescoring/02_pm-rescoring/
-	cp ./rescoring/02_pm-rescoring/gpsprot-peptides.dico $(DIST_DIR)/rescoring/02_pm-rescoring/
-	cp ./rescoring/02_pm-rescoring/gpsprot-peptides-3.mm_links_binary $(DIST_DIR)/rescoring/02_pm-rescoring/
-	cp ./rescoring/02_pm-rescoring/insilicodef.xml $(DIST_DIR)/rescoring/02_pm-rescoring/
-	cp ./rescoring/02_pm-rescoring/phenyx-peptmatchscore $(DIST_DIR)/rescoring/02_pm-rescoring/
-	cp ./rescoring/03_pidres/Import2PIDRes.pm $(DIST_DIR)/rescoring/03_pidres/
-	cp ./rescoring/03_pidres/popitam_xml2pidres.pl $(DIST_DIR)/rescoring/03_pidres/
-	cp ./rescoring/03_pidres/popitam_xml2pidres.pl.properties $(DIST_DIR)/rescoring/03_pidres/
-	cp ./rescoring/data/dummy-phenyx.conf $(DIST_DIR)/rescoring/data/
-	cp -r ./rescoring/perllib/ $(DIST_DIR)/rescoring/
-	dos2unix $(DIST_DIR)/testPopitam.pl
-	dos2unix $(DIST_DIR)/auto_popitam_rescored2pidres.pl
-	chmod +rwx $(DIST_DIR)/testPopitam.pl
-	chmod +rwx $(DIST_DIR)/auto_popitam_rescored2pidres.pl
-	chmod +rwx $(DIST_DIR)/rescoring/02_pm-rescoring/
-
+	
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
 
-dist_init:
-	mkdir -p $(DIST_DIR)/resources/
-	mkdir -p $(DIST_DIR)/dbs/
-#	mkdir -p $(DIST_DIR)/test/
-	mkdir -p $(DIST_DIR)/rescoring/preprocess/
-	mkdir -p $(DIST_DIR)/rescoring/01_extractscenario/
-	mkdir -p $(DIST_DIR)/rescoring/02_pm-rescoring/
-	mkdir -p $(DIST_DIR)/rescoring/03_pidres/
-	mkdir -p $(DIST_DIR)/rescoring/data/
-	mkdir -p $(DIST_DIR)/rescoring/perllib/
-    
 $(OUT): $(foreach x,$(OBJECTS),$(OBJ_DIR)/$(x).o)   # met chaque object dans x, et créer le nom complet 
 	$(CC) $(OPT) -o $@ $^
 
