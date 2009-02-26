@@ -29,34 +29,28 @@ This distribution of Popitam includes the following files/folders:
 
 // -------------------------------------------------------------------------------
 
-popitamDist:
+popitamx.x:
 
-- resources                         this directory contains some files used by Popitam
-- dbs                               this directory contains protein databases and programs to create them
-- rescoring                         this directory contains files used for rescoring Popitam's scenario using Phenyx's scoring functions 
+- bin                               contains the executable popitam (after compilation)
+- createDB                          contains examples protein databases (fasta) and a program to index them
+- data                              contains some files used by Popitam
+- dbs                               contains the indexed protein databases 
+- documents                         contains some documents relative to the algorithm
+- rescoring                         contains files and scripts used for rescoring Popitam's scenario using Phenyx's scoring functions 
+- form                              contains cgi scripts for interfacing Popitam in a browser
+- src                               contains the source files
 - auto_popitam_rescored2pidres.pl   a script for running a small pipeline (Popitam + Phenyx rescorer)
 - com.txt                           some examples of commands to run Popitam
-- popitam                           the Popitam program 
 - popParam.txt                      a default parameter file
 - testPopitam.pl                    a perl script that runs Popitam on the test input spectra and
                                     compares the obtained outputs with the example outputs (located in popitamDist/test)
 
 // -------------------------------------------------------------------------------
                                
-popitamDist/test:                   some example input spectra and output files
-
-// -------------------------------------------------------------------------------
-
-popitamDist/dbs:
-
-- createDB                  program for database indexing (only linux)
-- demoDB_BASE_FORWARDandDECOY.fasta         a small demo database in fasta format 
-- demoDB_BASE_FORWARDandDECOY.bin           the same database after indexing 
-- demoDB_PHENHEADER.fasta                   a demo database with phenyx-type headers
-- demoDB_CAMHEADER.fasta                    a demo database with a very simple header        
-
-Please note that these are demo databases. The DECOY sequences are not shuffled. Consequently, 
-the DECOY peptides are always grouped with the "non decoy" ones in the results.
+There are several protein databases provided in createDB/testDBs. Please note that these 
+are demo databases. The DECOY sequences are NOT shuffled (I use it for testing only). 
+Consequently, the DECOY peptides are always grouped with the "non decoy" ones in the 
+results.
 
 //*********************************************************************************//
   2) Testing the local installation of Popitam
