@@ -125,9 +125,9 @@ void runManagerParameters::initIN_OUT(char* filenameIN, char* fileformat, char* 
 	if (!strcmp(fileformat, "dta")) {strcpy(FORMAT, "dta");}
 	if (!strcmp(fileformat, "pop")) {strcpy(FORMAT, "pop");}
 
-    char filenameXML[256];
-    strcpy(filenameXML, filenameOUT);
-    strcat(filenameXML, ".xml");
+	char filenameXML[256];
+	strcpy(filenameXML, filenameOUT);
+	strcat(filenameXML, ".xml");
     
 	FILEOUTXML.Open(filenameXML, "w");
 	fprintf(FILEOUTXML, "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");

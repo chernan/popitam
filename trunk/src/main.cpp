@@ -22,45 +22,37 @@
 #include "about.h"
 #include "usage.h"
 #include "memorycheck.h"
-
 #include "MATerror.h"
 
 // ******************************************************************************************** //
 
 memorycheck memCheck;
 
-
 // ******************************************************************************************** //
-
 
 int main(int argc, char** argv) 
 {
+	int status;
  
-  srand(0);                                                                                       // ou: time_t t;   srand((unsigned)time(&t))
-  //about();
+	srand(0);                                                                                       // ou: time_t t;   srand((unsigned)time(&t))
+	//about();
   
-	try{
- 
-  	runManager* runM;
-  	runM = new runManager();
-  	runM->init(argc, argv);
- 
-  	runM->run();
-  	
-  	runM->endRun();
+	try {
+		runManager* runM = new runManager();
+		runM->init(argc, argv);
+		runM->run();
+		runM->endRun();
+		delete runM;
+		runM = NULL;
+		status = 0;
 
-
-  	delete runM; runM = NULL;
-
-	}catch(Error *pError){
+	} catch(Error *pError){
 		pError->Print();
 		delete pError;
+		status = 1;
 	}
-
   
-  return 0;
-
+	return status;
 }
 
 // ********************************************************************************************** //
-
