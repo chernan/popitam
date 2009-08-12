@@ -87,12 +87,12 @@ void  NODE::setChild(NODE *child,int ID)
   if (ID >= ArgvNb)
     {
       cerr<<"\nError 0 in function NODE::setChild().\n";
-      exit(0);
+      exit(1);
     }
   if (Children == NULL)
     {
       cerr<<"\nError 1 in function NODE::setChild().\n";
-      exit(0);
+      exit(1);
     }
   Children[ID] = child;
 }
