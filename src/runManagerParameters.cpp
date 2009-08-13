@@ -38,6 +38,9 @@ using namespace std;
 
 runManagerParameters::runManagerParameters() 
 {
+  XML_OUT   =  1;
+  SHT_OUT   =  1;
+
   r_NORMAL  =  0;
   r_CHECK   =  0;
   r_FUN     =  0; 
@@ -82,10 +85,13 @@ runManagerParameters::runManagerParameters()
 runManagerParameters::~runManagerParameters() 
 {
   FILEIN.Close();
-  fprintf(FILEOUTXML, "</analysis>\n");
+  if (XML_OUT) {
+    fprintf(FILEOUTXML, "</analysis>\n");
+    FILEOUTXML.Close();
+  }
   FILEOUT.Close();
-  FILEOUTXML.Close();
-  FILEOUTSHORT.Close();
+  if (SHT_OUT)
+    FILEOUTSHORT.Close();
 }
 
 // ********************************************************************************************** //
@@ -93,16 +99,44 @@ runManagerParameters::~runManagerParameters()
 
 void runManagerParameters::init(int argc, char** argv) 
 { 
-  if (argc != 9) usage();
-  initArguments(argc, argv);
-  initIN_OUT(argv[5]+3, argv[6]+3,argv[8]+3);
+  if (!(argc >= 9 && argc <= 11)) {
+    usage();
+  }
 
-  strcpy(FILE_ERROR_NAME, argv[7]+3); 
+  initArguments(argc, argv);
+
+  char* filenameIN  = argv[5]+3;
+  char* fileformat  = argv[6]+3;
+  char* filenameOUT = argv[8]+3;
+  char* filenameERR = argv[7]+3;
+  char* filenamePARAMS = argv[4]+3;
+  initIN_OUT(filenameIN, fileformat, filenameOUT);
+
+  strcpy(FILE_ERROR_NAME, filenameERR); 
   checkArguments(argc, argv);
   displayArguments(FILEOUT);
 
+  // Open xml output file (if requested)
+  if (XML_OUT) {
+    char filenameXML[256];
+    strcpy(filenameXML, filenameOUT);
+    strcat(filenameXML, ".xml");
+    FILEOUTXML.Open(filenameXML, "w");
+    fprintf(FILEOUTXML, "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
+    fprintf(FILEOUTXML, "<analysis>\n");
+    fprintf(FILEOUTXML, "<version>%s</version>\n", POP_VERSION);
+  }
+	
+  // Open sht output file (if requested)
+  if (SHT_OUT) { 
+    char filenameShort[256];
+    strcpy(filenameShort, filenameOUT);
+    strcat(filenameShort, ".sht");
+    FILEOUTSHORT.Open(filenameShort, "w");
+  }
+
   File fp;
-  fp.Open(argv[4]+3, "r");
+  fp.Open(filenamePARAMS, "r");
   loadParameters(fp, argv);
   fp.Close();
 }
@@ -112,9 +146,9 @@ void runManagerParameters::init(int argc, char** argv)
 void runManagerParameters::initIN_OUT(char* filenameIN, char* fileformat, char* filenameOUT)
 {
 	if (!strcmp(filenameOUT, "stdout")) FILEOUT.Open(stdout);                                       // OUVERTURE FICHIER OUTPUT
-	else                                FILEOUT.Open(filenameOUT, "w");
+	else FILEOUT.Open(filenameOUT, "w");
 
-	char* usedFileName=NULL;
+	char* usedFileName = NULL;
 	if (!strcmp(fileformat, "mzdata")) {strcpy(FORMAT, "mgf"); usedFileName = convertSpectra(filenameIN);}
 	else { usedFileName = filenameIN; }
 
@@ -125,19 +159,6 @@ void runManagerParameters::initIN_OUT(char* filenameIN, char* fileformat, char* 
 	if (!strcmp(fileformat, "dta")) {strcpy(FORMAT, "dta");}
 	if (!strcmp(fileformat, "pop")) {strcpy(FORMAT, "pop");}
 
-	char filenameXML[256];
-	strcpy(filenameXML, filenameOUT);
-	strcat(filenameXML, ".xml");
-    
-	FILEOUTXML.Open(filenameXML, "w");
-	fprintf(FILEOUTXML, "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
-	fprintf(FILEOUTXML, "<analysis>\n");
-	fprintf(FILEOUTXML, "<version>%s</version>\n", POP_VERSION);
-	
-	char filenameShort[256];
-	strcpy(filenameShort, filenameOUT);
-	strcat(filenameShort, ".sht");
-	FILEOUTSHORT.Open(filenameShort, "w");
 }
 
 // ********************************************************************************************** //
@@ -192,6 +213,30 @@ void runManagerParameters::checkArguments(int argc, char** argv)
   if ((m_MUTMOD < 0) || (m_MUTMOD > 3))     fatal_error(FILE_ERROR_NAME, PARAMETER, "please check your argument for soluceMode");
   if ((r_FUN) && (s_UNKNOWN))               fatal_error(FILE_ERROR_NAME, PARAMETER, "Popitam cannot be used FUN mode with unidentified spectra");
   if (MAX_MUT_NB < m_MUTMOD)                fatal_error(FILE_ERROR_NAME, PARAMETER, "To much MUTMOD; please increase MAX_MUT_NB in defines.h");
+
+  // Parse -noxml and/or -nosht optional arguments
+  const char noxml[] = "-noxml";
+  const char nosht[] = "-nosht";
+  const int len1 = strlen(noxml);
+  const int len2 = strlen(nosht);
+  const char* argvA = argv[9];
+  const char* argvB = argv[10];
+  if (argc == 10) {
+    if (strncmp(argvA, noxml, len1) == 0)
+      XML_OUT = 0;
+    else if (strncmp(argvA, nosht, len2) == 0)
+      SHT_OUT = 0;
+    else
+      fatal_error(FILE_ERROR_NAME, PARAMETER, "invalid argument! (only -noxml or -nosht are valid)");
+  }
+  else if (argc == 11) {
+    if ((strncmp(argvA, noxml, len1) == 0 && strncmp(argvB, nosht, len2) == 0) || ((strncmp(argvA, nosht, len2) == 0 && strncmp(argvB, noxml, len1) == 0))) {
+      XML_OUT = 0;
+      SHT_OUT = 0;
+    }
+    else
+      fatal_error(FILE_ERROR_NAME, PARAMETER, "invalid argument! (only -noxml or -nosht are valid)");
+  }
 }
 
 // ********************************************************************************************** //
@@ -207,8 +252,19 @@ void runManagerParameters::displayArguments(File &fp)
   if (s_IDSET)    fprintf(fp, "%s", "IDSET ");
   if (s_MIXSET)   fprintf(fp, "%s", "MIXSET ");
 
-  fprintf(fp, "(%i allowed gaps)", m_MUTMOD);
-  fprintf(fp, "\n\n________________________________________________________________________________\n\n");  
+  fprintf(fp, "(%i allowed gaps)\n", m_MUTMOD);
+
+  if (XML_OUT)
+    fprintf(fp, "%s", "XML output is enabled\n");
+  else
+    fprintf(fp, "%s", "XML output is disabled\n");
+
+  if (SHT_OUT)
+    fprintf(fp, "%s", "SHT output is enabled\n");
+  else
+    fprintf(fp, "%s", "SHT output is disabled\n");
+
+  fprintf(fp, "\n________________________________________________________________________________\n\n");  
 }
 
 // ********************************************************************************************** //

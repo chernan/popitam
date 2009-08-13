@@ -146,7 +146,8 @@ void Compare::buildGraph()
   popiGraph		= new graphe();																		  memCheck.graph++;
   popiGraph->init(runManParam, aaParam,	ionParam, spectrumData);
   popiGraph->display(runManParam->FILEOUT);
-  popiGraph->displayXML(runManParam->FILEOUTXML);
+  if (runManParam->XML_OUT)
+    popiGraph->displayXML(runManParam->FILEOUTXML);
 }
 
 // ********************************************************************************************** //
@@ -260,7 +261,8 @@ void Compare::Run(void)
 		m_digest.Run(m_pEntry->GetSQ(), m_pEntry->GetPtm() );  // rdv dans FindPeptide
 	}
   specStats->display(runManParam->FILEOUT);	 
-  specStats->displayXML(runManParam->FILEOUTXML);
+  if (runManParam->XML_OUT)
+    specStats->displayXML(runManParam->FILEOUTXML);
 }
 
 
@@ -451,21 +453,30 @@ void Compare::EndRun(int ID)
   specResults->computePValuesRANDOM();
   //  specResults->writeSimple(runManParam->FILEOUT);
   specResults->write(runManParam->FILEOUT);
-  specResults->writeXML(runManParam->FILEOUTXML);
-  specResults->writeShort(runManParam->FILEOUTSHORT);
 
-  if (runManParam->PLOT)	   {specResults->createPopScoresNEG(ID);
-								specResults->createPopScoresRANDOM(ID);}
+  if (runManParam->XML_OUT)
+    specResults->writeXML(runManParam->FILEOUTXML);
 
-  if (runManParam->s_IDSET)	   {computeIDSETstats();
-								displayIDSETstats(runManParam->FILEOUT);}  
+  if (runManParam->SHT_OUT)
+    specResults->writeShort(runManParam->FILEOUTSHORT);
+
+  if (runManParam->PLOT) {
+    specResults->createPopScoresNEG(ID);
+    specResults->createPopScoresRANDOM(ID);
+  }
+
+  if (runManParam->s_IDSET) {
+    computeIDSETstats();
+    displayIDSETstats(runManParam->FILEOUT);
+  }
     
-  if (runManParam->r_NORMAL)	popiResults->addToProtList(specResults,	ID);
+  if (runManParam->r_NORMAL)
+    popiResults->addToProtList(specResults, ID);
 
-  if (runManParam->r_FUN)		{funGen->endRun(ID);}
+  if (runManParam->r_FUN)
+    funGen->endRun(ID);
 
-
-	m_db.CloseAll();
+  m_db.CloseAll();
 }
 
  //	********************************************************************************************** //

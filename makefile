@@ -30,7 +30,7 @@ ifeq ($(OPTION), o)
         OPT = -O3
 endif
 
-POP_VERSION		= '"v4.0"'
+POP_VERSION		= '"v4.0.1"'
 
 SRC_DIR			= ./src ./src/src_digest ./src/src_digest/base ./src/src_digest/database ./src/src_digest/digest
 # macro qui indique ou chercher pour toutes les sources files

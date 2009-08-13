@@ -29,34 +29,28 @@ void usage()
   File fp(stdout);
 
   fprintf(fp, "VERSION : Popitam %s\n\n", POP_VERSION);
-  fprintf(fp, "USAGE : \n\n");
-  fprintf(fp, "tagopop -r=runMode -s=soluceMode -m=modNb -p=paramFile -d=dataFile -f=dataFileFormat -e=errorFile -o=outputFile\n\n");
-  fprintf(fp, "\n");
-  
+  fprintf(fp, "USAGE : \n");
+  fprintf(fp, "tagopop -r=runMode -s=soluceMode -m=modNb -p=paramFile -d=dataFile -f=dataFileFormat -e=errorFile -o=outputFile [-noxml] [-nosht]\n\n");
+  fprintf(fp, "REQUIRED arguments:\n");
   fprintf(fp, "runMode:           NORMAL  for a \"normal\" use of tagopop\n");
   fprintf(fp, "                   CHECK   if you are debugging (only for single spectrum input data) and you whish to see all output files\n");
   fprintf(fp, "                   FUN     if you want produce output for function learning by Genetic Programming (only with identified spectra\n");
-  
   fprintf(fp, "soluceMode:        UNKNOWN for a \"normal\" use of tagopop (you don't know the answers)\n");
   fprintf(fp, "                   IDSET   if the source data are already identified and you whish to see tagopop's performance\n");
   fprintf(fp, "                   MIXSET  if the source data were obtained from a mixture (not finished, please change the AC list in the code)\n");
-  
   fprintf(fp, "modifNb:           0       if you don't want to allow scenarios with modifications/mutations\n");
   fprintf(fp, "                   1       if you want to allow scenarios with a maximum of 1 modification hypotheses (more slow)\n");
   fprintf(fp, "                   2       if you want to allow scenarios with a maximum of 2 modification hypotheses (yet more slow)\n");
-  
   fprintf(fp, "paramFile          filename.txt (put here the filename of the paramFile you want to use)\n");
-
   fprintf(fp, "dataFile           filename     (put here the MS/MS datafile you want to submit)\n");
-
   fprintf(fp, "dataFileFormat     mgf     for mascot format\n");
   fprintf(fp, "                   dta     for dta format\n");
-
   fprintf(fp, "errorFile          filename\n");
-
-  fprintf(fp, "outputFile         filename or stdout\n");
-                            
-  fprintf(fp, "\n_________________________________________________________________________________\n\n");
+  fprintf(fp, "outputFile         filename or stdout\n\n");
+  fprintf(fp, "OPTIONAL arguments:\n");
+  fprintf(fp, "noxml              tell Popitam to not generate a XML file output\n");
+  fprintf(fp, "nosht              tell Popitam to not generate a SHT file output\n");
+  fprintf(fp, "_________________________________________________________________________________\n\n");
 
   fp.Close();
   exit(1);
