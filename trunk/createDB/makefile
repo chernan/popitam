@@ -19,7 +19,7 @@ MKDIR		= /bin/mkdir -p
 all:	make_dir $(OUT)
 
 clean:	clean_obj
-	$(RM) $(OUT_DIR)
+	$(RM) $(OUT)
 	
 clean_obj:
 	$(RM) $(OBJ_DIR)

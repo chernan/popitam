@@ -91,10 +91,12 @@ void runManager::init(int argc,	char** argv)
 
 void runManager::initRunManParam(int argc, char** argv)
 {
-  runManParam =	new	runManagerParameters();										     memCheck.runManParam++;
+  runManParam =	new runManagerParameters();										     memCheck.runManParam++;
   runManParam->init(argc, argv);
   runManParam->display(runManParam->FILEOUT);
-  runManParam->displayXML(runManParam->FILEOUTXML);
+
+  if (runManParam->XML_OUT)
+    runManParam->displayXML(runManParam->FILEOUTXML);
 }
 
 
@@ -185,7 +187,8 @@ void runManager::initScoreFunctions()
 
 void runManager::run()
 {
-  fprintf(runManParam->FILEOUTXML, "<spectrumMatchList>\n");
+  if (runManParam->XML_OUT)
+    fprintf(runManParam->FILEOUTXML, "<spectrumMatchList>\n");
   spectrumData = new data();																	  memCheck.data++;
   spectrumData->init(runManParam);
   
@@ -193,12 +196,14 @@ void runManager::run()
   while(spectrumData->load()) 
   {
   	  spectrumData->display(runManParam->FILEOUT);
-  	  spectrumData->displayXML(runManParam->FILEOUTXML);
+          if (runManParam->XML_OUT)
+     	      spectrumData->displayXML(runManParam->FILEOUTXML);
   	  
-	  unsigned long	int	iniTime	= clock();
+	  unsigned long	int iniTime = clock();
 	  //if ((spectrumData->get_parentMassM() < 2224) | (spectrumData->get_parentMassM()	> 2228)) continue;
   
-	  popitam	  =	new	Compare();																  memCheck.popitam++;
+	  popitam = new Compare();
+	  memCheck.popitam++;
 	  
 	  // CONSTRUIT LE GRAPHE, DIRIGE LES POINTEURS 
 	  popitam->init_POP(runManParam, 
@@ -207,35 +212,54 @@ void runManager::run()
 			ionParamTOFTOF1, ionParamQTOF1, ionParamQTOF2,	ionParamQTOF3,
 			spectrumData, popiResults, allRunStats);
 	  
-	  popitam->init_DIG();																		  // PREPARE LA	DIGESTION	  
-	  
-	  popitam->Run();																			  // IDENTIFIE LE SPECTRE	   
-	 
-	  popitam->EndRun(spectrumData->specID);																		  
+	  popitam->init_DIG(); // PREPARE LA DIGESTION	  
+	  popitam->Run();      // IDENTIFIE LE SPECTRE
+	  popitam->EndRun(spectrumData->specID);
 	  
 	  fprintf(runManParam->FILEOUT,	"\nProcessing time was:	%f\n", (double)(clock()-iniTime)/CLOCKS_PER_SEC);
         
-		//popitam->DisplayUnusedAC(runManParam->FILEOUT);
+	  //popitam->DisplayUnusedAC(runManParam->FILEOUT);
 	  fprintf(runManParam->FILEOUT,	"\n\nNEXT______________________________________________________________\n\n");
  
-	  if (popitam	  != NULL) {delete popitam;		popitam		= NULL;							  memCheck.popitam--;}	 
+	  if (popitam != NULL) {
+	    delete popitam;
+	    popitam = NULL;
+	    memCheck.popitam--;
+	  }
   }
-  fprintf(runManParam->FILEOUTXML, "</spectrumMatchList>\n");
-  fprintf(runManParam->FILEOUTXML, "<spectrumList>\n");
-  if (spectrumData != NULL)	{delete	spectrumData; spectrumData = NULL;							  memCheck.data--;}
+
+  if (runManParam->XML_OUT) {
+    fprintf(runManParam->FILEOUTXML, "</spectrumMatchList>\n");
+    fprintf(runManParam->FILEOUTXML, "<spectrumList>\n");
+  }
+
+  if (spectrumData != NULL) {
+    delete spectrumData;
+    spectrumData = NULL;
+    memCheck.data--;
+  }
+
   runManParam->FILEIN.Close();
   
-  	
-  // je reload les spectres pour le fichier output xml (les spectres doivent apparaître à la fin)
-  runManParam->FILEIN.Open(runManParam->FILEINNAME, "r");
-  spectrumData = new data();																	  memCheck.data++;
-  spectrumData->init(runManParam);
-  while(spectrumData->load()) 
-  {
-  	spectrumData->writeSpectrumListXML(runManParam->FILEOUTXML);
+  if (runManParam->XML_OUT) {
+	  // je reload les spectres pour le fichier output xml (les spectres doivent apparaître à la fin)
+	  runManParam->FILEIN.Open(runManParam->FILEINNAME, "r");
+	  spectrumData = new data();
+	  memCheck.data++;
+	  spectrumData->init(runManParam);
+
+	  while(spectrumData->load()) {
+		spectrumData->writeSpectrumListXML(runManParam->FILEOUTXML);
+	  }
+
+	  if (spectrumData != NULL) {
+	    delete spectrumData;
+	    spectrumData = NULL;
+	    memCheck.data--;
+	  }
+
+	  fprintf(runManParam->FILEOUTXML, "</spectrumList>\n");
   }
-  if (spectrumData != NULL)	{delete	spectrumData; spectrumData = NULL;							  memCheck.data--;}
-  fprintf(runManParam->FILEOUTXML, "</spectrumList>\n");
 }
 
 

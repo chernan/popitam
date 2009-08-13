@@ -49,6 +49,8 @@ class runManagerParameters {
   
 
   // PARAMETRES DE RUN (DONNES EN ARGUMENTS)
+  int   XML_OUT;
+  int   SHT_OUT;
   
   int   r_NORMAL;
   int   r_CHECK;
