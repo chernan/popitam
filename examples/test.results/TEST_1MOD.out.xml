@@ -1,0 +1,900 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<analysis>
+<version>4.0.2</version>
+<inputParameters>
+   <inputFile>./test.results/TEST_1MOD.mgf</inputFile>
+   <initNbSpectra>4</initNbSpectra>
+   <instrument>QTOF</instrument>
+   <minCovBin>2</minCovBin>
+   <wantedCovBin>9</wantedCovBin>
+   <minTagLength>3</minTagLength>
+   <minCovArr>0.300000</minCovArr>
+   <edgeType>1</edgeType>
+   <precTolerance>2.000000</precTolerance>
+   <fragmError1>0.200000</fragmError1>
+   <fragmError2>0.300000</fragmError2>
+   <db1path>DemoDB</db1path>
+   <db1release>20090814</db1release>
+   <db2path></db2path>
+   <db2release></db2release>
+   <taxId>1</taxId>
+   <acFilter>P48668 DECOY_P48668 Q80V08 DECOY_Q80V08 P68871 DECOY_P68871 P11940 DECOY_P11940 P63261 DECOY_P63261 P18621 DECOY_P18621 P11216 DECOY_P11216 P63261 DECOY_P63261 Q9GZL7 DECOY_Q9GZL7</acFilter>
+   <enzyme>Trypsin</enzyme>
+   <missedCleavageNb>2</missedCleavageNb>
+   <upLimitPM>400.000000</upLimitPM>
+   <lowLimitPM>-200.000000</lowLimitPM>
+   <upLimitMod>400.000000</upLimitMod>
+   <lowLimitMod>-200.000000</lowLimitMod>
+</inputParameters>
+<spectrumMatchList>
+    <spectrumMatch ref="0">
+      <title>LFPLIQAM[ox]HPTLAGK P11940</title>
+      <initPeakNb>335</initPeakNb>
+      <peakNb>37</peakNb>
+      <precursor>
+        <moz>826.945700</moz>
+        <mass>1651.891400</mass>
+        <charge>2</charge>
+      </precursor>
+      <nodeNb>146</nodeNb>
+      <simpleEdgeNb>335</simpleEdgeNb>
+      <doubleEdgeNb>3259</doubleEdgeNb>
+      <dbSearch>
+         <totalNbProtein>1666</totalNbProtein>
+         <protNbAfterFilter>24</protNbAfterFilter>
+         <pepNbAfterFilter>225</pepNbAfterFilter>
+         <pepNbWithOneMoreScenarios>22</pepNbWithOneMoreScenarios>
+         <cumulNbOfScenarios>24</cumulNbOfScenarios>
+         <sampleSize>21</sampleSize>
+      </dbSearch>
+      <matchList>
+        <match>
+          <rank>1</rank>
+          <score>116.125940</score>
+          <deltaS>0.176939</deltaS>
+          <pValue>0.000000</pValue>
+          <peptide>
+            <mass>1635.916992</mass>
+            <dbSequence>LFPLIQAMHPTLAGK</dbSequence>
+            <scenario>lfPLIQAmh******</scenario>
+            <shift>15.974365</shift>
+          </peptide>
+          <dbRefList>
+            <dbRef>
+               <ac>P11940</ac>
+               <id>PABP1_HUMAN</id>
+               <de>Polyadenylate-binding protein 1 - Homo sapiens (Human).</de>
+               <ac>DECOY_P11940</ac>
+               <id>PABP1_HUMAN</id>
+               <de>Polyadenylate-binding protein 1 - Homo sapiens (Human).</de>
+            </dbRef>
+          </dbRefList>
+        </match>
+        <match>
+          <rank>2</rank>
+          <score>20.547170</score>
+          <deltaS>0.452634</deltaS>
+          <pValue>0.000000</pValue>
+          <peptide>
+            <mass>1396.734985</mass>
+            <dbSequence>TLNNKFASFIDK</dbSequence>
+            <scenario>**NNK-------</scenario>
+            <shift>255.192581</shift>
+          </peptide>
+          <dbRefList>
+            <dbRef>
+               <ac>P48668</ac>
+               <id>K2C6C_HUMAN</id>
+               <de>Keratin, type II cytoskeletal 6C - Homo sapiens (Human).</de>
+               <ac>DECOY_P48668</ac>
+               <id>K2C6C_HUMAN</id>
+               <de>Keratin, type II cytoskeletal 6C - Homo sapiens (Human).</de>
+            </dbRef>
+          </dbRefList>
+        </match>
+        <match>
+          <rank>3</rank>
+          <score>9.300343</score>
+          <deltaS>0.319137</deltaS>
+          <pValue>0.558015</pValue>
+          <peptide>
+            <mass>1270.703369</mass>
+            <dbSequence>LLKDKNEFHK</dbSequence>
+            <scenario>----knEF**</scenario>
+            <shift>381.219360</shift>
+          </peptide>
+          <dbRefList>
+            <dbRef>
+               <ac>Q9GZL7</ac>
+               <id>WDR12_HUMAN</id>
+               <de>WD repeat protein 12 - Homo sapiens (Human).</de>
+               <ac>DECOY_Q9GZL7</ac>
+               <id>WDR12_HUMAN</id>
+               <de>WD repeat protein 12 - Homo sapiens (Human).</de>
+            </dbRef>
+          </dbRefList>
+        </match>
+        <match>
+          <rank>4</rank>
+          <score>2.968084</score>
+          <deltaS>0.477782</deltaS>
+          <pValue>0.999975</pValue>
+          <peptide>
+            <mass>1388.661865</mass>
+            <dbSequence>QAHLTNQYMQR</dbSequence>
+            <scenario>------qyM**</scenario>
+            <shift>263.171143</shift>
+          </peptide>
+          <dbRefList>
+            <dbRef>
+               <ac>P11940</ac>
+               <id>PABP1_HUMAN</id>
+               <de>Polyadenylate-binding protein 1 - Homo sapiens (Human).</de>
+               <ac>DECOY_P11940</ac>
+               <id>PABP1_HUMAN</id>
+               <de>Polyadenylate-binding protein 1 - Homo sapiens (Human).</de>
+            </dbRef>
+          </dbRefList>
+        </match>
+        <match>
+          <rank>5</rank>
+          <score>1.418096</score>
+          <deltaS>1000</deltaS>
+          <pValue>1.000000</pValue>
+          <peptide>
+            <mass>1274.716919</mass>
+            <dbSequence>AFVPRTVMIGGK</dbSequence>
+            <scenario>*********Ggk</scenario>
+            <shift>377.157379</shift>
+          </peptide>
+          <dbRefList>
+            <dbRef>
+               <ac>P11216</ac>
+               <id>PYGB_HUMAN</id>
+               <de>Glycogen phosphorylase, brain form - Homo sapiens (Human).</de>
+               <ac>DECOY_P11216</ac>
+               <id>PYGB_HUMAN</id>
+               <de>Glycogen phosphorylase, brain form - Homo sapiens (Human).</de>
+            </dbRef>
+          </dbRefList>
+        </match>
+      </matchList>
+    </spectrumMatch>
+    <spectrumMatch ref="1">
+      <title>LC[cam]YVALDFEQEMATAASSSSLEK P63261</title>
+      <initPeakNb>813</initPeakNb>
+      <peakNb>76</peakNb>
+      <precursor>
+        <moz>850.720700</moz>
+        <mass>2549.162100</mass>
+        <charge>3</charge>
+      </precursor>
+      <nodeNb>227</nodeNb>
+      <simpleEdgeNb>515</simpleEdgeNb>
+      <doubleEdgeNb>6708</doubleEdgeNb>
+      <dbSearch>
+         <totalNbProtein>1666</totalNbProtein>
+         <protNbAfterFilter>24</protNbAfterFilter>
+         <pepNbAfterFilter>138</pepNbAfterFilter>
+         <pepNbWithOneMoreScenarios>20</pepNbWithOneMoreScenarios>
+         <cumulNbOfScenarios>21</cumulNbOfScenarios>
+         <sampleSize>19</sampleSize>
+      </dbSearch>
+      <matchList>
+        <match>
+          <rank>1</rank>
+          <score>1631.254687</score>
+          <deltaS>0.004781</deltaS>
+          <pValue>1000</pValue>
+          <peptide>
+            <mass>2492.145020</mass>
+            <dbSequence>LCYVALDFEQEMATAASSSSLEK</dbSequence>
+            <scenario>**YVALDFEQEMATAASSSslEK</scenario>
+            <shift>57.025249</shift>
+          </peptide>
+          <dbRefList>
+            <dbRef>
+               <ac>P63261</ac>
+               <id>ACTG_HUMAN</id>
+               <de>Actin, cytoplasmic 2 - Homo sapiens (Human).</de>
+               <ac>P63261</ac>
+               <id>ACTG_HUMAN</id>
+               <de>Actin, cytoplasmic 2 - Homo sapiens (Human).</de>
+               <ac>P63261</ac>
+               <id>ACTG_HUMAN</id>
+               <de>Actin, cytoplasmic 2 - Homo sapiens (Human).</de>
+               <ac>P63261</ac>
+               <id>ACTG_HUMAN</id>
+               <de>Actin, cytoplasmic 2 - Homo sapiens (Human).</de>
+               <ac>P63261</ac>
+               <id>ACTG_HUMAN</id>
+               <de>Actin, cytoplasmic 2 - Homo sapiens (Human).</de>
+               <ac>DECOY_P63261</ac>
+               <id>ACTG_HUMAN</id>
+               <de>Actin, cytoplasmic 2 - Homo sapiens (Human).</de>
+               <ac>DECOY_P63261</ac>
+               <id>ACTG_HUMAN</id>
+               <de>Actin, cytoplasmic 2 - Homo sapiens (Human).</de>
+               <ac>DECOY_P63261</ac>
+               <id>ACTG_HUMAN</id>
+               <de>Actin, cytoplasmic 2 - Homo sapiens (Human).</de>
+               <ac>DECOY_P63261</ac>
+               <id>ACTG_HUMAN</id>
+               <de>Actin, cytoplasmic 2 - Homo sapiens (Human).</de>
+               <ac>DECOY_P63261</ac>
+               <id>ACTG_HUMAN</id>
+               <de>Actin, cytoplasmic 2 - Homo sapiens (Human).</de>
+            </dbRef>
+          </dbRefList>
+        </match>
+        <match>
+          <rank>2</rank>
+          <score>7.799265</score>
+          <deltaS>0.658445</deltaS>
+          <pValue>1000</pValue>
+          <peptide>
+            <mass>2190.190918</mass>
+            <dbSequence>AHGKKVLGAFSDGLAHLDNLK</dbSequence>
+            <scenario>*********Fsdgl-------</scenario>
+            <shift>359.039612</shift>
+          </peptide>
+          <dbRefList>
+            <dbRef>
+               <ac>P68871</ac>
+               <id>HBB_HUMAN</id>
+               <de>Hemoglobin subunit beta - Homo sapiens (Human).</de>
+               <ac>DECOY_P68871</ac>
+               <id>HBB_HUMAN</id>
+               <de>Hemoglobin subunit beta - Homo sapiens (Human).</de>
+            </dbRef>
+          </dbRefList>
+        </match>
+        <match>
+          <rank>3</rank>
+          <score>5.135388</score>
+          <deltaS>0.804078</deltaS>
+          <pValue>1000</pValue>
+          <peptide>
+            <mass>2320.209717</mass>
+            <dbSequence>LALDVEIATYRKLLEGEECR</dbSequence>
+            <scenario>*************Leg----</scenario>
+            <shift>228.909180</shift>
+          </peptide>
+          <dbRefList>
+            <dbRef>
+               <ac>P48668</ac>
+               <id>K2C6C_HUMAN</id>
+               <de>Keratin, type II cytoskeletal 6C - Homo sapiens (Human).</de>
+               <ac>DECOY_P48668</ac>
+               <id>K2C6C_HUMAN</id>
+               <de>Keratin, type II cytoskeletal 6C - Homo sapiens (Human).</de>
+            </dbRef>
+          </dbRefList>
+        </match>
+        <match>
+          <rank>4</rank>
+          <score>4.129253</score>
+          <deltaS>0.883212</deltaS>
+          <pValue>1000</pValue>
+          <peptide>
+            <mass>2385.160645</mass>
+            <dbSequence>GSGGLGGACGGAGFGSRSLYGLGGSKR</dbSequence>
+            <scenario>*****ggACG-----------------</scenario>
+            <shift>164.089996</shift>
+          </peptide>
+          <dbRefList>
+            <dbRef>
+               <ac>P48668</ac>
+               <id>K2C6C_HUMAN</id>
+               <de>Keratin, type II cytoskeletal 6C - Homo sapiens (Human).</de>
+               <ac>DECOY_P48668</ac>
+               <id>K2C6C_HUMAN</id>
+               <de>Keratin, type II cytoskeletal 6C - Homo sapiens (Human).</de>
+            </dbRef>
+          </dbRefList>
+        </match>
+        <match>
+          <rank>5</rank>
+          <score>3.647006</score>
+          <deltaS>1000</deltaS>
+          <pValue>1000</pValue>
+          <peptide>
+            <mass>2272.188477</mass>
+            <dbSequence>KSAEFLLHMLKNAESNAELK</dbSequence>
+            <scenario>---------------Nae**</scenario>
+            <shift>277.092529</shift>
+          </peptide>
+          <dbRefList>
+            <dbRef>
+               <ac>Q80V08</ac>
+               <id>Q80V08_MOUSE</id>
+               <de>Rpl17 protein (Fragment) - Mus musculus (Mouse).</de>
+               <ac>P18621</ac>
+               <id>RL17_HUMAN</id>
+               <de>60S ribosomal protein L17 - Homo sapiens (Human).</de>
+               <ac>DECOY_Q80V08</ac>
+               <id>Q80V08_MOUSE</id>
+               <de>Rpl17 protein (Fragment) - Mus musculus (Mouse).</de>
+               <ac>DECOY_P18621</ac>
+               <id>RL17_HUMAN</id>
+               <de>60S ribosomal protein L17 - Homo sapiens (Human).</de>
+            </dbRef>
+          </dbRefList>
+        </match>
+      </matchList>
+    </spectrumMatch>
+    <spectrumMatch ref="2">
+      <title>SAEFLLHM[ox]LK P18621</title>
+      <initPeakNb>684</initPeakNb>
+      <peakNb>71</peakNb>
+      <precursor>
+        <moz>602.811450</moz>
+        <mass>1203.622900</mass>
+        <charge>2</charge>
+      </precursor>
+      <nodeNb>110</nodeNb>
+      <simpleEdgeNb>314</simpleEdgeNb>
+      <doubleEdgeNb>2916</doubleEdgeNb>
+      <dbSearch>
+         <totalNbProtein>1666</totalNbProtein>
+         <protNbAfterFilter>24</protNbAfterFilter>
+         <pepNbAfterFilter>255</pepNbAfterFilter>
+         <pepNbWithOneMoreScenarios>56</pepNbWithOneMoreScenarios>
+         <cumulNbOfScenarios>58</cumulNbOfScenarios>
+         <sampleSize>55</sampleSize>
+      </dbSearch>
+      <matchList>
+        <match>
+          <rank>1</rank>
+          <score>93.341971</score>
+          <deltaS>0.193839</deltaS>
+          <pValue>0.000000</pValue>
+          <peptide>
+            <mass>1187.637207</mass>
+            <dbSequence>SAEFLLHMLK</dbSequence>
+            <scenario>saEFLLH***</scenario>
+            <shift>15.985718</shift>
+          </peptide>
+          <dbRefList>
+            <dbRef>
+               <ac>Q80V08</ac>
+               <id>Q80V08_MOUSE</id>
+               <de>Rpl17 protein (Fragment) - Mus musculus (Mouse).</de>
+               <ac>P18621</ac>
+               <id>RL17_HUMAN</id>
+               <de>60S ribosomal protein L17 - Homo sapiens (Human).</de>
+               <ac>DECOY_Q80V08</ac>
+               <id>Q80V08_MOUSE</id>
+               <de>Rpl17 protein (Fragment) - Mus musculus (Mouse).</de>
+               <ac>DECOY_P18621</ac>
+               <id>RL17_HUMAN</id>
+               <de>60S ribosomal protein L17 - Homo sapiens (Human).</de>
+            </dbRef>
+          </dbRefList>
+        </match>
+        <match>
+          <rank>2</rank>
+          <score>18.093302</score>
+          <deltaS>0.386014</deltaS>
+          <pValue>0.000000</pValue>
+          <peptide>
+            <mass>1144.555298</mass>
+            <dbSequence>YEFGIFNQK</dbSequence>
+            <scenario>*EF------</scenario>
+            <shift>59.043423</shift>
+          </peptide>
+          <dbRefList>
+            <dbRef>
+               <ac>P11216</ac>
+               <id>PYGB_HUMAN</id>
+               <de>Glycogen phosphorylase, brain form - Homo sapiens (Human).</de>
+               <ac>DECOY_P11216</ac>
+               <id>PYGB_HUMAN</id>
+               <de>Glycogen phosphorylase, brain form - Homo sapiens (Human).</de>
+            </dbRef>
+          </dbRefList>
+        </match>
+        <match>
+          <rank>3</rank>
+          <score>6.984273</score>
+          <deltaS>0.939336</deltaS>
+          <pValue>0.636993</pValue>
+          <peptide>
+            <mass>933.528320</mass>
+            <dbSequence>SGVGNIFIK</dbSequence>
+            <scenario>******FIK</scenario>
+            <shift>270.124268</shift>
+          </peptide>
+          <dbRefList>
+            <dbRef>
+               <ac>P11940</ac>
+               <id>PABP1_HUMAN</id>
+               <de>Polyadenylate-binding protein 1 - Homo sapiens (Human).</de>
+               <ac>DECOY_P11940</ac>
+               <id>PABP1_HUMAN</id>
+               <de>Polyadenylate-binding protein 1 - Homo sapiens (Human).</de>
+            </dbRef>
+          </dbRefList>
+        </match>
+        <match>
+          <rank>4</rank>
+          <score>6.560581</score>
+          <deltaS>0.997804</deltaS>
+          <pValue>0.782870</pValue>
+          <peptide>
+            <mass>1190.589966</mass>
+            <dbSequence>MNGMLLNDRK</dbSequence>
+            <scenario>----LLndR*</scenario>
+            <shift>12.972046</shift>
+          </peptide>
+          <dbRefList>
+            <dbRef>
+               <ac>P11940</ac>
+               <id>PABP1_HUMAN</id>
+               <de>Polyadenylate-binding protein 1 - Homo sapiens (Human).</de>
+               <ac>DECOY_P11940</ac>
+               <id>PABP1_HUMAN</id>
+               <de>Polyadenylate-binding protein 1 - Homo sapiens (Human).</de>
+            </dbRef>
+          </dbRefList>
+        </match>
+        <match>
+          <rank>5</rank>
+          <score>6.546172</score>
+          <deltaS>1000</deltaS>
+          <pValue>0.787300</pValue>
+          <peptide>
+            <mass>1061.623291</mass>
+            <dbSequence>KSGVGNIFIK</dbSequence>
+            <scenario>*******FIK</scenario>
+            <shift>142.029266</shift>
+          </peptide>
+          <dbRefList>
+            <dbRef>
+               <ac>P11940</ac>
+               <id>PABP1_HUMAN</id>
+               <de>Polyadenylate-binding protein 1 - Homo sapiens (Human).</de>
+               <ac>DECOY_P11940</ac>
+               <id>PABP1_HUMAN</id>
+               <de>Polyadenylate-binding protein 1 - Homo sapiens (Human).</de>
+            </dbRef>
+          </dbRefList>
+        </match>
+      </matchList>
+    </spectrumMatch>
+    <spectrumMatch ref="3">
+      <title>DIVNM[ox]LM[ox]HHDR P11216</title>
+      <initPeakNb>666</initPeakNb>
+      <peakNb>95</peakNb>
+      <precursor>
+        <moz>706.812600</moz>
+        <mass>1411.625200</mass>
+        <charge>2</charge>
+      </precursor>
+      <nodeNb>128</nodeNb>
+      <simpleEdgeNb>261</simpleEdgeNb>
+      <doubleEdgeNb>3126</doubleEdgeNb>
+      <dbSearch>
+         <totalNbProtein>1666</totalNbProtein>
+         <protNbAfterFilter>24</protNbAfterFilter>
+         <pepNbAfterFilter>249</pepNbAfterFilter>
+         <pepNbWithOneMoreScenarios>18</pepNbWithOneMoreScenarios>
+         <cumulNbOfScenarios>22</cumulNbOfScenarios>
+         <sampleSize>17</sampleSize>
+      </dbSearch>
+      <matchList>
+        <match>
+          <rank>1</rank>
+          <score>68.869437</score>
+          <deltaS>0.189923</deltaS>
+          <pValue>1000</pValue>
+          <peptide>
+            <mass>1379.643799</mass>
+            <dbSequence>DIVNMLMHHDR</dbSequence>
+            <scenario>diVN***HHDR</scenario>
+            <shift>31.981438</shift>
+          </peptide>
+          <dbRefList>
+            <dbRef>
+               <ac>P11216</ac>
+               <id>PYGB_HUMAN</id>
+               <de>Glycogen phosphorylase, brain form - Homo sapiens (Human).</de>
+               <ac>DECOY_P11216</ac>
+               <id>PYGB_HUMAN</id>
+               <de>Glycogen phosphorylase, brain form - Homo sapiens (Human).</de>
+            </dbRef>
+          </dbRefList>
+        </match>
+        <match>
+          <rank>2</rank>
+          <score>13.079865</score>
+          <deltaS>0.426053</deltaS>
+          <pValue>1000</pValue>
+          <peptide>
+            <mass>1268.647339</mass>
+            <dbSequence>SGFSSISVSRSR</dbSequence>
+            <scenario>-------VS*SR</scenario>
+            <shift>143.021408</shift>
+          </peptide>
+          <dbRefList>
+            <dbRef>
+               <ac>P48668</ac>
+               <id>K2C6C_HUMAN</id>
+               <de>Keratin, type II cytoskeletal 6C - Homo sapiens (Human).</de>
+               <ac>DECOY_P48668</ac>
+               <id>K2C6C_HUMAN</id>
+               <de>Keratin, type II cytoskeletal 6C - Homo sapiens (Human).</de>
+            </dbRef>
+          </dbRefList>
+        </match>
+        <match>
+          <rank>3</rank>
+          <score>5.572712</score>
+          <deltaS>0.698404</deltaS>
+          <pValue>1000</pValue>
+          <peptide>
+            <mass>1430.774170</mass>
+            <dbSequence>FQNKTNGITPRR</dbSequence>
+            <scenario>*******ITprR</scenario>
+            <shift>-19.094128</shift>
+          </peptide>
+          <dbRefList>
+            <dbRef>
+               <ac>P11216</ac>
+               <id>PYGB_HUMAN</id>
+               <de>Glycogen phosphorylase, brain form - Homo sapiens (Human).</de>
+               <ac>DECOY_P11216</ac>
+               <id>PYGB_HUMAN</id>
+               <de>Glycogen phosphorylase, brain form - Homo sapiens (Human).</de>
+            </dbRef>
+          </dbRefList>
+        </match>
+        <match>
+          <rank>4</rank>
+          <score>3.892003</score>
+          <deltaS>0.864342</deltaS>
+          <pValue>1000</pValue>
+          <peptide>
+            <mass>1025.514160</mass>
+            <dbSequence>SGFSSISVSR</dbSequence>
+            <scenario>-------VS*</scenario>
+            <shift>386.129639</shift>
+          </peptide>
+          <dbRefList>
+            <dbRef>
+               <ac>P48668</ac>
+               <id>K2C6C_HUMAN</id>
+               <de>Keratin, type II cytoskeletal 6C - Homo sapiens (Human).</de>
+               <ac>DECOY_P48668</ac>
+               <id>K2C6C_HUMAN</id>
+               <de>Keratin, type II cytoskeletal 6C - Homo sapiens (Human).</de>
+            </dbRef>
+          </dbRefList>
+        </match>
+        <match>
+          <rank>5</rank>
+          <score>3.364022</score>
+          <deltaS>1000</deltaS>
+          <pValue>1000</pValue>
+          <peptide>
+            <mass>1300.594360</mass>
+            <dbSequence>FCSGSWDKMLK</dbSequence>
+            <scenario>****swdk---</scenario>
+            <shift>111.073364</shift>
+          </peptide>
+          <dbRefList>
+            <dbRef>
+               <ac>Q9GZL7</ac>
+               <id>WDR12_HUMAN</id>
+               <de>WD repeat protein 12 - Homo sapiens (Human).</de>
+               <ac>DECOY_Q9GZL7</ac>
+               <id>WDR12_HUMAN</id>
+               <de>WD repeat protein 12 - Homo sapiens (Human).</de>
+            </dbRef>
+          </dbRefList>
+        </match>
+      </matchList>
+    </spectrumMatch>
+</spectrumMatchList>
+<spectrumList>
+  <spectrum id="0">
+  <peakList>
+<![CDATA[204.127900 9.263470 ?
+211.135100 12.058710 ?
+233.154000 11.318794 ?
+261.151400 8.269656 ?
+275.160200 7.222652 ?
+324.216100 7.515233 ?
+358.202000 6.632655 ?
+471.276200 8.090722 ?
+584.366600 6.439209 ?
+586.340900 19.213659 ?
+587.341100 5.406713 ?
+591.795700 6.814006 ?
+664.861600 19.907630 ?
+665.367500 13.064609 ?
+665.867100 6.320728 ?
+696.857700 100.000000 ?
+697.358000 89.213167 ?
+697.857400 38.069450 ?
+698.365000 12.063549 ?
+723.383600 6.485154 ?
+794.927600 9.481091 ?
+795.437400 8.226134 ?
+807.404400 5.377698 ?
+826.923500 49.417260 ?
+827.429500 53.970404 ?
+827.920300 27.681595 ?
+828.417100 10.837606 ?
+870.437900 6.521425 ?
+941.440600 12.827640 ?
+942.439000 6.850277 ?
+1052.469000 8.414741 ?
+1069.499400 19.438532 ?
+1070.526100 9.357771 ?
+1182.577900 8.274495 ?
+1183.546800 5.181835 ?
+1392.702800 11.524326 ?
+1393.698400 7.268597 ?
+
+]]></peakList>
+  </spectrum>
+  <spectrum id="1">
+  <peakList>
+<![CDATA[104.051700 8.319034 ?
+147.105900 5.017286 ?
+258.105900 7.400563 ?
+274.118900 21.288495 ?
+276.147300 6.627251 ?
+346.164800 6.384439 ?
+437.177400 23.299637 ?
+476.260200 13.824592 ?
+508.243500 8.986778 ?
+536.243400 23.922509 ?
+537.250400 6.951886 ?
+563.292700 18.828687 ?
+607.282200 25.152419 ?
+608.286600 7.516690 ?
+649.239700 25.667079 ?
+650.313500 36.857662 ?
+651.322100 10.929293 ?
+684.800000 12.021959 ?
+685.288500 8.648946 ?
+692.364600 7.141917 ?
+720.361000 73.121479 ?
+721.361100 29.238032 ?
+722.348300 10.322256 ?
+737.352200 68.412988 ?
+738.361900 24.653593 ?
+780.293600 5.487080 ?
+785.845100 6.368604 ?
+786.326000 5.814354 ?
+808.391700 100.000000 ?
+809.393400 37.393434 ?
+810.400500 10.522844 ?
+827.345900 7.664492 ?
+827.860800 9.047480 ?
+828.347900 6.365966 ?
+833.346100 7.023146 ?
+835.391100 17.250387 ?
+836.369400 13.090870 ?
+836.832600 5.985905 ?
+837.372800 6.838398 ?
+844.709800 5.370953 ?
+845.029500 7.883554 ?
+845.378700 6.260392 ?
+851.325300 9.797037 ?
+862.868200 20.681463 ?
+863.370800 23.626905 ?
+863.866500 13.676790 ?
+864.353700 6.062447 ?
+879.424300 46.367016 ?
+880.424900 21.626327 ?
+881.418000 5.376230 ?
+907.364700 8.575048 ?
+907.864300 6.951886 ?
+934.344400 11.441315 ?
+935.355100 5.268018 ?
+963.401700 5.244263 ?
+964.406400 8.440442 ?
+980.462100 62.881042 ?
+981.472200 29.987595 ?
+982.457900 18.889388 ?
+983.440000 7.033705 ?
+998.939900 5.832827 ?
+999.454000 6.690596 ?
+1033.483300 6.038692 ?
+1051.504400 37.805165 ?
+1052.510900 20.354195 ?
+1053.526900 5.429016 ?
+1111.462400 6.975641 ?
+1129.977300 6.447784 ?
+1130.463500 8.973581 ?
+1130.990200 5.830189 ?
+1182.527000 14.051569 ?
+1183.540900 8.160679 ?
+1311.571500 6.666841 ?
+1368.568200 23.999051 ?
+1369.572800 18.749501 ?
+1370.608600 7.725199 ?
+
+]]></peakList>
+  </spectrum>
+  <spectrum id="2">
+  <peakList>
+<![CDATA[86.093700 14.189982 ?
+102.052700 23.813743 ?
+110.068200 20.676447 ?
+120.076900 18.691588 ?
+129.096400 9.611746 ?
+130.080400 10.600416 ?
+131.078700 85.692832 ?
+132.081900 5.373080 ?
+147.107400 14.434899 ?
+159.072000 100.000000 ?
+160.075400 7.281305 ?
+193.104400 5.060554 ?
+201.082100 12.532681 ?
+221.098100 19.369236 ?
+223.145400 5.290442 ?
+231.105900 9.900232 ?
+233.146000 18.750189 ?
+249.116300 19.109297 ?
+251.143500 16.125255 ?
+260.162800 11.909128 ?
+261.145100 15.489679 ?
+270.103100 6.507498 ?
+277.112300 16.727772 ?
+285.094400 19.490941 ?
+288.110200 61.485414 ?
+289.117700 8.887521 ?
+316.167600 10.613939 ?
+334.179700 22.915231 ?
+343.226600 27.676782 ?
+344.214700 7.515703 ?
+348.149300 8.061124 ?
+356.174900 5.291944 ?
+362.173800 5.035012 ?
+364.226300 17.357336 ?
+372.186400 5.904981 ?
+390.183300 10.169186 ?
+398.177500 19.650212 ?
+407.215900 41.647393 ?
+408.216100 8.436760 ?
+417.169400 5.688613 ?
+426.168200 5.819336 ?
+435.175900 12.095444 ?
+447.254900 10.854344 ?
+462.270100 7.371460 ?
+480.282400 48.605646 ?
+481.286800 12.923343 ?
+483.278800 11.243501 ?
+503.244400 5.479762 ?
+511.271100 20.969441 ?
+512.271300 6.432373 ?
+544.280000 43.364790 ?
+545.279000 11.682247 ?
+560.353600 5.237852 ?
+593.365200 42.932058 ?
+594.347700 27.182443 ?
+595.331300 9.553145 ?
+622.326500 8.221894 ?
+640.330900 8.644109 ?
+657.362700 29.014037 ?
+658.346600 15.392012 ?
+706.441300 36.256277 ?
+707.447900 19.931185 ?
+723.377700 5.676595 ?
+770.432300 16.808908 ?
+771.421400 9.730446 ?
+853.509600 28.106504 ?
+854.515400 14.476969 ?
+917.499800 8.185835 ?
+964.518700 5.111639 ?
+982.537700 9.590709 ?
+983.539100 6.007154 ?
+
+]]></peakList>
+  </spectrum>
+  <spectrum id="3">
+  <peakList>
+<![CDATA[175.110800 58.058811 ?
+201.115700 90.361618 ?
+202.113800 9.144753 ?
+214.111400 10.428135 ?
+229.109500 100.000000 ?
+230.111500 11.347810 ?
+262.076000 10.105999 ?
+290.135000 32.957488 ?
+328.167500 21.552524 ?
+427.191900 53.439663 ?
+428.193500 12.740306 ?
+442.218600 13.031279 ?
+454.190600 10.204714 ?
+479.223900 10.750282 ?
+502.697500 8.884964 ?
+511.213700 29.361945 ?
+511.709300 16.741140 ?
+512.218600 5.512832 ?
+525.255200 8.588797 ?
+526.217300 6.396139 ?
+528.746300 17.624436 ?
+529.256300 10.012467 ?
+543.218900 22.664446 ?
+543.713900 12.137585 ?
+552.238500 9.248672 ?
+560.745800 43.151826 ?
+561.244600 25.995007 ?
+561.751800 8.162731 ?
+564.240800 77.870712 ?
+565.254800 17.229554 ?
+566.243100 8.744677 ?
+572.218200 5.419310 ?
+585.280500 7.102780 ?
+589.249000 14.865424 ?
+592.746600 20.004148 ?
+593.263200 12.106411 ?
+598.232000 6.110359 ?
+617.292100 10.100795 ?
+622.785000 6.427312 ?
+634.286700 13.135199 ?
+634.775900 7.315802 ?
+639.763700 5.414106 ?
+640.298900 8.365376 ?
+642.372100 7.258648 ?
+642.800000 51.626305 ?
+643.300000 42.824474 ?
+643.808000 13.919769 ?
+647.273200 45.931614 ?
+648.287100 13.389794 ?
+649.278700 7.061207 ?
+657.280700 6.562406 ?
+665.795200 8.999272 ?
+666.292100 24.685644 ?
+666.774400 11.134777 ?
+667.284000 5.907724 ?
+674.797500 98.129455 ?
+675.297600 68.497334 ?
+675.789600 27.855131 ?
+676.306000 9.955314 ?
+698.282500 8.817412 ?
+706.353500 10.630781 ?
+706.796600 35.144953 ?
+707.296000 33.243267 ?
+707.804300 12.963727 ?
+708.310000 7.435314 ?
+711.269700 26.925069 ?
+712.279500 8.448510 ?
+760.361800 34.957911 ?
+761.349900 9.965701 ?
+824.357800 26.925069 ?
+825.364800 8.708298 ?
+843.410900 18.938993 ?
+844.403000 6.588386 ?
+907.391900 26.758801 ?
+908.392600 10.526861 ?
+922.377300 6.250646 ?
+940.421900 5.310197 ?
+957.421000 42.907619 ?
+958.419200 24.384283 ?
+959.435000 5.668711 ?
+971.395700 7.139147 ?
+1004.389200 6.978074 ?
+1005.418800 5.112745 ?
+1021.423900 62.101206 ?
+1022.408200 29.933493 ?
+1023.416300 10.490494 ?
+1056.494100 12.288260 ?
+1057.508700 7.154729 ?
+1085.434300 19.250752 ?
+1086.420400 12.257086 ?
+1110.482500 5.450484 ?
+1120.499800 18.850665 ?
+1121.516500 11.301044 ?
+1174.481400 8.942118 ?
+1175.468100 7.544428 ?
+
+]]></peakList>
+  </spectrum>
+</spectrumList>
+</analysis>

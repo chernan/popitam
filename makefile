@@ -30,22 +30,28 @@ ifeq ($(OPTION), o)
         OPT = -O3
 endif
 
-POP_VERSION		= '"v4.0.1"'
+VERSION			= "4.0.2"
+VERSION_STR		= '$(VERSION)'
 
 SRC_DIR			= ./src ./src/src_digest ./src/src_digest/base ./src/src_digest/database ./src/src_digest/digest
 # macro qui indique ou chercher pour toutes les sources files
 VPATH			= ${SRC_DIR}
+
 # data folder - don't forget the final /
-DATA 			= '"./data/"'
+DATA			= "./data/"
+DATA_STR		= '$(DATA)'
+
 # db folder - don't forget the final /
 # linux /home/sun-000/Stagiaire/chernand/public_html/indexes/tools/popitam/
 # windows H:\\Work\\Projects\\cpp\\DTBS\\WINDB\\
 DB				= '"../DB/"'
 
 INCLUDE_DIR		= -I ./src -I ./src/src_digest -I ./src/src_digest/base -I ./src/src_digest/database -I ./src/src_digest/digest
-OBJ_DIR			= ./obj
-OUT_DIR         	= ./bin
-OUT             	= $(OUT_DIR)/popitam
+POPITAM_OBJDIR		= ./obj
+POPITAM            	= ./bin/popitam
+POPITAM_NAME		= popitam-$(VERSION)
+DIST_BASEDIR		= ./dist
+DIST			= $(DIST_BASEDIR)/popitam-$(VERSION)
 
 OBJECTS 		= atomicmass file MATerror tagfile txtfile util \
 			  actree dbentry  dbfile dbfilereader dbptm dbreader \
@@ -60,14 +66,27 @@ OBJECTS 		= atomicmass file MATerror tagfile txtfile util \
 RM			= /bin/rm -rf
 MKDIR			= /bin/mkdir -p
 
-all:	$(OBJ_DIR) $(OUT) make_subprojects
-	dos2unix $(OUT_DIR)/popParam.txt
-	
+all:	$(POPITAM_OBJDIR) $(POPITAM) make_subprojects
+	@dos2unix ./bin/popParam.txt
+
+# Produce a minimum Popitam distribution
+dist:	all
+	@mkdir -p $(DIST)/bin
+	@mkdir -p $(DIST)/data
+	@cp $(POPITAM) $(DIST)/bin/
+	@cp ./bin/createDB $(DIST)/bin/
+	@cp ./bin/createdb.sh $(DIST)/bin/
+	@cp $(DATA)/* $(DIST)/data
+	@mkdir -p $(DIST)/dbs
+	@tar -C $(DIST_BASEDIR) -a -cvf $(DIST_BASEDIR)/$(POPITAM_NAME).tar.gz $(POPITAM_NAME)
+	@/bin/rm -r $(DIST_BASEDIR)/$(POPITAM_NAME)
+
 clean:	clean_obj clean_subprojects
-	$(RM) $(OUT)
+	$(RM) $(POPITAM)
+	$(RM) $(DIST_BASEDIR)
 
 clean_obj:	clean_subprojects_obj
-	$(RM) $(OBJ_DIR)
+	$(RM) $(POPITAM_OBJDIR)
 
 clean_subprojects_obj:
 	@make -C ./createDB clean_obj
@@ -87,15 +106,14 @@ help:
 	@echo "    DATA  folder containing data files "
 	@echo "    DB    folder containing databases, i.e. UniProtSP and UniProtTR folders"
 	
-	
-$(OBJ_DIR):
-	mkdir -p $(OBJ_DIR)
+$(POPITAM_OBJDIR):
+	mkdir -p $(POPITAM_OBJDIR)
 
-$(OUT): $(foreach x,$(OBJECTS),$(OBJ_DIR)/$(x).o)   # met chaque object dans x, et créer le nom complet 
+$(POPITAM): $(foreach x,$(OBJECTS),$(POPITAM_OBJDIR)/$(x).o)   # met chaque object dans x, et créer le nom complet 
 	$(CC) $(OPT) -o $@ $^
 
-$(OBJ_DIR)/%.o: %.cpp      # prend tous les .cpp dans les chemins indiqués dans VPATH et cree les .o
-	$(CC) -o $@ $(INCLUDE_DIR) $(CFLAGS) -DPOP_VERSION=$(POP_VERSION) -DDEF_DATA_FOLDER=$(DATA) -DDEF_DB_PATH=$(DB) $(OPT) -c $< 
+$(POPITAM_OBJDIR)/%.o: %.cpp      # prend tous les .cpp dans les chemins indiqués dans VPATH et cree les .o
+	$(CC) -o $@ $(INCLUDE_DIR) $(CFLAGS) -DPOP_VERSION=$(VERSION_STR) -DDEF_DATA_FOLDER=$(DATA_STR) -DDEF_DB_PATH=$(DB) $(OPT) -c $< 
 
-# le $@ réfère à la target courante, donc $(OBJ_DIR)/%.o
+# le $@ réfère à la target courante, donc $(POPITAM_OBJDIR)/%.o
 # le $< réfère au prerequis courant qui a été modifiée plus récemment que la target courante

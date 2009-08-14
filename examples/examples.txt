@@ -1,0 +1,10 @@
+# Examples of popitam runs
+popitam -r=NORMAL -s=UNKNOWN -m=1 -p=popParamTestLocal.txt -d=test/TEST_1MOD.mgf -f=mgf -e=error.txt -o=test/TEST_1MOD.out
+popitam -r=NORMAL -s=UNKNOWN -m=2 -p=popParamTestLocal.txt -d=test/TEST_2MOD.mgf -f=mgf -e=error.txt -o=test/TEST_2MOD.out
+popitam -r=NORMAL -s=UNKNOWN -m=0 -p=popParam.txt -d=test/TEST_0MOD.dta -f=dta -e=error.txt -o=stdout
+popitam -r=NORMAL -s=UNKNOWN -m=0 -p=popParam.txt -d=test/TEST_0MOD.mgf -f=mgf -e=error.txt -o=stdout
+popitam -r=NORMAL -s=UNKNOWN -m=1 -p=popParam.txt -d=test/TEST_1MOD.mgf -f=mgf -e=error.txt -o=stdout
+popitam -r=NORMAL -s=UNKNOWN -m=2 -p=popParam.txt -d=test/TEST_2MOD.mgf -f=mgf -e=error.txt -o=stdout
+
+# How to convert a fasta db
+createDB demoDB_BASE_FORWARDandDECOY.fasta demoDB_BASE_FORWARDandDECOY.bin DemoDB NULL NULL 20090814 BASE

@@ -28,8 +28,8 @@ void usage()
 {
   File fp(stdout);
 
-  fprintf(fp, "VERSION : Popitam %s\n\n", POP_VERSION);
-  fprintf(fp, "USAGE : \n");
+  fprintf(fp, "Popitam - version %s\n\n", POP_VERSION);
+  fprintf(fp, "USAGE: \n");
   fprintf(fp, "tagopop -r=runMode -s=soluceMode -m=modNb -p=paramFile -d=dataFile -f=dataFileFormat -e=errorFile -o=outputFile [-noxml] [-nosht]\n\n");
   fprintf(fp, "REQUIRED arguments:\n");
   fprintf(fp, "runMode:           NORMAL  for a \"normal\" use of tagopop\n");
