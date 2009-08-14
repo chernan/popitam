@@ -30,7 +30,7 @@ ifeq ($(OPTION), o)
         OPT = -O3
 endif
 
-VERSION			= "4.0.2"
+VERSION			= "4.0.3"
 VERSION_STR		= '$(VERSION)'
 
 SRC_DIR			= ./src ./src/src_digest ./src/src_digest/base ./src/src_digest/database ./src/src_digest/digest
@@ -67,19 +67,17 @@ RM			= /bin/rm -rf
 MKDIR			= /bin/mkdir -p
 
 all:	$(POPITAM_OBJDIR) $(POPITAM) make_subprojects
-	@dos2unix ./bin/popParam.txt
 
-# Produce a minimum Popitam distribution
+# Generate the Popitam distribution
 dist:	all
-	@mkdir -p $(DIST)/bin
-	@mkdir -p $(DIST)/data
-	@cp $(POPITAM) $(DIST)/bin/
-	@cp ./bin/createDB $(DIST)/bin/
-	@cp ./bin/createdb.sh $(DIST)/bin/
-	@cp $(DATA)/* $(DIST)/data
-	@mkdir -p $(DIST)/dbs
-	@tar -C $(DIST_BASEDIR) -a -cvf $(DIST_BASEDIR)/$(POPITAM_NAME).tar.gz $(POPITAM_NAME)
-	@/bin/rm -r $(DIST_BASEDIR)/$(POPITAM_NAME)
+	@mkdir -p $(DIST)
+	@cp -r ./bin $(DIST)
+	@cp -r ./data $(DIST)
+	@cp -r ./docs $(DIST)
+	@cp -r ./examples $(DIST)
+	@mkdir $(DIST)/dbs
+	@tar --exclude=.svn -C $(DIST_BASEDIR) -a -cvf $(DIST_BASEDIR)/$(POPITAM_NAME).tar.gz $(POPITAM_NAME)
+	@/bin/rm -rf $(DIST_BASEDIR)/$(POPITAM_NAME)
 
 clean:	clean_obj clean_subprojects
 	$(RM) $(POPITAM)
