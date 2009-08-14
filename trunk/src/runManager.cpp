@@ -239,10 +239,9 @@ void runManager::run()
     memCheck.data--;
   }
 
-  runManParam->FILEIN.Close();
-  
   if (runManParam->XML_OUT) {
 	  // je reload les spectres pour le fichier output xml (les spectres doivent apparaître à la fin)
+  	  runManParam->FILEIN.Close();
 	  runManParam->FILEIN.Open(runManParam->FILEINNAME, "r");
 	  spectrumData = new data();
 	  memCheck.data++;
