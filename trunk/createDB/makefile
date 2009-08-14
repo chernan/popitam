@@ -6,8 +6,7 @@ VPATH		= ${SRC_DIR}
 
 INCLUDE_DIR	= -I ./src -I ./src/base -I ./src/database
 OBJ_DIR		= ./obj
-OUT_DIR		= ./bin
-OUT		= $(OUT_DIR)/createDB
+OUT		= ../bin/createDB
 
 OBJECTS		= atomicmass error file pimw tagfile txtfile util \
 		  dbentry dbfile dbfilewriter dbptm ptmdata ptmsearchmanager taxon taxonomy \
@@ -24,9 +23,9 @@ clean:	clean_obj
 clean_obj:
 	$(RM) $(OBJ_DIR)
 
-make_dir: $(OBJ_DIR) $(OUT_DIR)
+make_dir: $(OBJ_DIR)
 
-$(OBJ_DIR) $(OUT_DIR):
+$(OBJ_DIR):
 	$(MKDIR) $@
 
 $(OUT): $(foreach o,$(OBJECTS),$(OBJ_DIR)/$(o).o) 
