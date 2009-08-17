@@ -117,7 +117,7 @@ void data::init(runManagerParameters* rMP)
 
 bool data::load()
 {
-	bool LOADED = false;
+	bool loaded = false;
 	
 	initPeakNb       = 0;
 	peakNb           = 0;
@@ -129,23 +129,24 @@ bool data::load()
 	strcpy(seqSpec,    "");
 	strcpy(seqAsInDtb, "");
 	
-	if (!strcmp(runManParam->FORMAT, "mgf")) {
-		LOADED = loadPeaksMGF(runManParam->FILEIN);
+	if (runManParam->FORMAT == FMT_MGF) {
+		loaded = loadPeaksMGF(runManParam->FILEIN);
 	}
-	if (!strcmp(runManParam->FORMAT, "pop")) {
-		LOADED = loadPeaksPOP(runManParam->FILEIN);
+	else if (runManParam->FORMAT == FMT_POP) {
+		loaded = loadPeaksPOP(runManParam->FILEIN);
 	}
-	if (!strcmp(runManParam->FORMAT, "dta")) {
-		LOADED = loadPeaksDTA(runManParam->FILEIN);
+	else if (runManParam->FORMAT == FMT_DTA) {
+		loaded = loadPeaksDTA(runManParam->FILEIN);
 	}
 	
-	if (!LOADED) {
+	if (!loaded) {
 		return false;
 	}
 	
 	preprocessPeaks();       
 	putBins();
 	
+	// If in "CHECK" mode (typical mode is UNKNOWN)
 	if (runManParam->r_CHECK) {
 		char filename[256] = "";
 		sprintf(filename, "%s%s", runManParam->OUTPUT_DIR, "SOURCE_SPECTRUM_FINAL.txt");
@@ -154,7 +155,6 @@ bool data::load()
 		write(fp);
 		fp.Close();
 	}
-	
 	
 	specID++;
 	
@@ -510,39 +510,40 @@ bool data::loadPeaksDTA(File &fp)
 
 void data::preprocessPeaks()
 {
-	// trie les pics par masse (ce qu'ils sont sens� d�j� �tre, mais juste au cas o�
+	// trie les pics par masse (ce qu'ils sont sense deja etre, mais juste au cas ou)
 	qsort(peakList, peakNb, sizeof(PEAKS), compar_PEAK_MASSES);
 	
 	// je commence par marquer la masse parente et ses isotopes
 	markParentMass();
 	
-	// trie les pics par intensit� pour la normalisation et l'enl�vement
-	// des pics de basse intensit�
+	// trie les pics par intensite pour la normalisation et l'enlevement
+	// des pics de basse intensite
 	qsort(peakList, peakNb, sizeof(PEAKS), compar_PEAKS);
 	normInt();
 	
-	// vire les pics qui ont une intensit� en dessous du seuil de PEAK_INT_SEUIL
+	// vire les pics qui ont une intensite en dessous du seuil de PEAK_INT_SEUIL
 	for (int i = 0; i < peakNb; i++) {
 		if (peakList[i].intensity < runManParam->PEAK_INT_SEUIL) {
 			peakNb = i;
-		break;}
+			break;
+		}
 	}
 	
-	// attribution des charges � consid�rer pour chaque pic
+	// attribution des charges a considerer pour chaque pic
 	for (int i = 0; i < peakNb; i++) {
 		if ((peakList[i].mass - 4 > (parentMassM+2)/2) && (peakList[i].mass - 4 < parentMassM)) {
-			// le +4, c'est pour que tous les isotopes d'un pic parent soient class�s comme
-			// le pic parent, m�me s'ils sont � +1, +2 ou +3...
-			peakList[i].CHARGE1     = true;
+			// le +4, c'est pour que tous les isotopes d'un pic parent soient classes comme
+			// le pic parent, meme s'ils sont a +1, +2 ou +3...
+			peakList[i].CHARGE1 = true;
 		}
 		if ((peakList[i].mass - 4 > (parentMassM+3)/3) && (peakList[i].mass - 4 < (parentMassM+2)/2)) {
-			peakList[i].CHARGE1     = true; 
-			peakList[i].CHARGE2     = true;
+			peakList[i].CHARGE1 = true; 
+			peakList[i].CHARGE2 = true;
 		}
 		if (peakList[i].mass - 4 < (parentMassM+3)/3) {
-			peakList[i].CHARGE1     = true; 
-			peakList[i].CHARGE2     = true; 
-			peakList[i].CHARGE3     = true;
+			peakList[i].CHARGE1 = true; 
+			peakList[i].CHARGE2 = true; 
+			peakList[i].CHARGE3 = true;
 		}
 	}
 
@@ -552,16 +553,16 @@ void data::preprocessPeaks()
 	// vire tous les pics isopopiques qui ne sont pas le premier isotope
 	for (int i = 0; i < peakNb; i++) {
 		for (int j = i+1; j < peakNb; j++) {
-			// recherche d'isotopes � +0.333, +0.5, +1 selon les charges � consid�rer pour le pic courant
-			// qui d�pendent de la r�gion du spectre o� se trouve le pic
+			// recherche d'isotopes a +0.333, +0.5, +1 selon les charges a considerer pour le pic courant
+			// qui dependent de la region du spectre ou se trouve le pic
 			
 			// +0.333
 			if (peakList[i].CHARGE3 == true) {
 				if ((fabs((peakList[j].mass - peakList[i].mass) - 0.333) < runManParam->FRAGMENT_ERROR1)
 					&& (peakList[j].intensity < peakList[i].intensity)) {  
 					// je prends l'erreur 1 car je compare des isotopes
-					// exiger que l'intensit� soit plus petite fait qu'on va manquer d'oter certains isotopes (hautes masses)
-					// mais je pr�f�re en garder trop que pas assez
+					// exiger que l'intensite soit plus petite fait qu'on va manquer d'oter certains isotopes (hautes masses)
+					// mais je prefere en garder trop que pas assez
 					peakList[j].used = true;
 				}
 			}
@@ -728,7 +729,7 @@ void data::putBins()
 {
 	binsize = int(parentMassM / 100);  
 	
-	// trie les pics par intensit�
+	// trie les pics par intensite
 	qsort(peakList, peakNb, sizeof(PEAKS), compar_PEAKS);
 	
 	int b = -1;
