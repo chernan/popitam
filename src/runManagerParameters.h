@@ -31,6 +31,8 @@
 
 // ********************************************************************************************** //
 
+enum FileFormatType { FMT_MGF, FMT_DTA, FMT_POP, FMT_UNKNOWN };
+
 class runManagerParameters
 {
 public:
@@ -52,7 +54,7 @@ public:
 	int   s_IDSET;
 	int   s_MIXSET;
 	int   m_MUTMOD;
-	char  FORMAT[16];
+	FileFormatType FORMAT;
 	
 	// FILE NAMES
 	char   FILE_ERROR_NAME[256];

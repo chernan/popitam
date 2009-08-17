@@ -278,11 +278,9 @@ void runManager::run()
 		memCheck.popitam++;
 		
 		// CONSTRUIT LE GRAPHE, DIRIGE LES POINTEURS 
-		popitam->init_POP(runManParam, 
-		scoreFunction[runManParam->m_MUTMOD], 
-		aaParam, 
-		ionParamTOFTOF1, ionParamQTOF1, ionParamQTOF2,	ionParamQTOF3,
-		spectrumData, popiResults, allRunStats);
+		popitam->init_POP(runManParam, scoreFunction[runManParam->m_MUTMOD], aaParam,
+				   ionParamTOFTOF1, ionParamQTOF1, ionParamQTOF2, ionParamQTOF3,
+				   spectrumData, popiResults, allRunStats);
 		
 		popitam->init_DIG(); // PREPARE LA DIGESTION	  
 		popitam->Run();      // IDENTIFIE LE SPECTRE

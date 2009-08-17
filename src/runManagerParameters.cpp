@@ -38,7 +38,6 @@ runManagerParameters::runManagerParameters()
 {
 	XML_OUT   =  1;
 	SHT_OUT   =  1;
-	
 	r_NORMAL  =  0;
 	r_CHECK   =  0;
 	r_FUN     =  0; 
@@ -47,8 +46,9 @@ runManagerParameters::runManagerParameters()
 	s_MIXSET  =  0;
 	m_MUTMOD  =  0;
 	
+	FORMAT = FMT_UNKNOWN;
+	
 	strcpy(FILE_ERROR_NAME, "");
-	strcpy(FORMAT, "");
 	strcpy(PATH_INFILE, "");
 	strcpy(AMINO_ACID_INFILE, "");
 	strcpy(GPPARAMETERS_INFILE, "");
@@ -158,7 +158,7 @@ void runManagerParameters::initIN_OUT(char* filenameIN, char* fileformat, char* 
 	char* usedFileName = NULL;
 	
 	if (!strcmp(fileformat, "mzdata")) {
-		strcpy(FORMAT, "mgf");
+		FORMAT = FMT_MGF;
 		usedFileName = convertSpectra(filenameIN);
 	}
 	else {
@@ -170,13 +170,13 @@ void runManagerParameters::initIN_OUT(char* filenameIN, char* fileformat, char* 
 	// OUVERTURE FICHIER MSMSDATA
 	FILEIN.Open(usedFileName, "r");
 	if (!strcmp(fileformat, "mgf")) {
-		strcpy(FORMAT, "mgf");
+		FORMAT = FMT_MGF;
 	}
 	if (!strcmp(fileformat, "dta")) {
-		strcpy(FORMAT, "dta");
+		FORMAT = FMT_DTA;
 	}
 	if (!strcmp(fileformat, "pop")) {
-		strcpy(FORMAT, "pop");
+		FORMAT = FMT_POP;
 	}
 }
 
@@ -200,13 +200,13 @@ void runManagerParameters::initArguments(int argc, char** argv)
 	}
 	// RECUPERE LES VARIABLES DE RUN
 	if (!strcmp(argv[1]+3, "CHECK")) {
-		r_CHECK    = 1;
+		r_CHECK = 1;
 	}
 	if (!strcmp(argv[1]+3, "FUN")) {
 		r_FUN = 1;
 	}
 	if (!strcmp(argv[2]+3, "UNKNOWN")) {
-		s_UNKNOWN  = 1;
+		s_UNKNOWN = 1;
 	}
 	if (!strcmp(argv[2]+3, "IDSET")) {
 		s_IDSET = 1;
@@ -770,13 +770,13 @@ void runManagerParameters::findSpectrumNb(File& fp)
 	char line[256];
 	SPECTRUM_NB = 0;
 	
-	if ((!strcmp(FORMAT, "mgf")) | (!strcmp(FORMAT, "pop"))) {
+	if (FORMAT == FMT_MGF || FORMAT == FMT_POP) {
 		while (fgets(line, 255, fp)) {
 			if (!strncmp(line, "BEGIN ION", 9)) SPECTRUM_NB++;
 		}
 	}
 	else {
-		if (!strcmp(FORMAT, "dta")) {
+		if (FORMAT == FMT_DTA) {
 			// il faut d'abord regarder s'il y a des blancs avant le premier spectre
 			fgets(line, 255, fp);
 			if (isspace(line[0])) {
