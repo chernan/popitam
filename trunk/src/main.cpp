@@ -34,7 +34,8 @@ int main(int argc, char** argv)
 {
 	int status;
  
-	srand(0);                                                                                       // ou: time_t t;   srand((unsigned)time(&t))
+	// ou: time_t t;   srand((unsigned)time(&t))
+	srand(0);
 	//about();
   
 	try {
@@ -55,4 +56,3 @@ int main(int argc, char** argv)
 	return status;
 }
 
-// ********************************************************************************************** //
