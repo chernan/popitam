@@ -109,6 +109,7 @@ $(POPITAM_OBJDIR):
 
 $(POPITAM): $(foreach x,$(OBJECTS),$(POPITAM_OBJDIR)/$(x).o)   # met chaque object dans x, et créer le nom complet 
 	$(CC) $(OPT) -o $@ $^
+	/usr/bin/strip -s $(POPITAM)
 
 $(POPITAM_OBJDIR)/%.o: %.cpp      # prend tous les .cpp dans les chemins indiqués dans VPATH et cree les .o
 	$(CC) -o $@ $(INCLUDE_DIR) $(CFLAGS) -DPOP_VERSION=$(VERSION_STR) -DDEF_DATA_FOLDER=$(DATA_STR) -DDEF_DB_PATH=$(DB) $(OPT) -c $< 

@@ -30,6 +30,7 @@ $(OBJ_DIR):
 
 $(OUT): $(foreach o,$(OBJECTS),$(OBJ_DIR)/$(o).o) 
 	$(CC) -o $(OUT) $^
+	/usr/bin/strip -s $(OUT)
 
 $(OBJ_DIR)/%.o: %.cpp
 	$(CC) $(INCLUDE_DIR) $(CFLAGS) -c $< -o $@
