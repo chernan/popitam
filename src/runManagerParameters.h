@@ -72,7 +72,7 @@ public:
 	char   DB2_PATH[256];
 	int    TAXID[MAX_TAXID_NB];
 	int    TAXID_NB;
-	char   AC_FILTER[AC_FILTER_LENTGH];
+	char   AC_FILTER[AC_FILTER_LENGTH];
 	char   ENZYME[256];
 	char   OUTPUT_DIR[256];    
 	char   GEN_OR_FILENAME_SUFF[256];
@@ -116,7 +116,8 @@ public:
 	void initArguments(int, char**);
 	void checkArguments(int, char**);
 	void displayArguments(File&);
-	void loadParameters(File&, char**);
+	void parseParameters(File&, char**);
+	void validateParameters();
 	char* convertSpectra(char*);
 	void findSpectrumNb(File&);
 	void display(File&);

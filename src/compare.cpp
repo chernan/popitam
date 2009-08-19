@@ -103,7 +103,7 @@ void Compare::init_POP(runManagerParameters* rMP, TREE* F, aa* aaP, ion* TOFTOF1
 		funGen->init(runManParam, spectrumData->specID);
 	}
 	
-	specResults =	new specresults();
+	specResults = new specresults();
 	memCheck.results++;
 	specResults->init(runManParam, spectrumData);
 	
@@ -170,6 +170,7 @@ void Compare::init_DIG()
 	if (strcmp(runManParam->DB1_PATH, "NO")) {
 		m_db.Open(runManParam->DB1_PATH);
 	}
+	
 	if (strcmp(runManParam->DB2_PATH, "NO")) {
 		m_db.Open(runManParam->DB2_PATH);
 	}
@@ -207,14 +208,12 @@ void Compare::init_DIG()
 	}
 
 	// AC list
-	if (strlen(runManParam->AC_FILTER) > 4) {
-		char strAC[AC_FILTER_LENTGH];
-		strcpy(strAC, runManParam->AC_FILTER);
-		
-		for (char *pszAC = strtok(strAC, " "); pszAC; pszAC = strtok(NULL, " ")) {
-			for (i = 0; i < m_db.GetNbFile(); i++) {
-				m_db.GetFile(i)->AddAC(pszAC);
-			}
+	char strAC[AC_FILTER_LENGTH];
+	strcpy(strAC, runManParam->AC_FILTER);
+	
+	for (char *pszAC = strtok(strAC, " "); pszAC; pszAC = strtok(NULL, " ")) {
+		for (i = 0; i < m_db.GetNbFile(); i++) {
+			m_db.GetFile(i)->AddAC(pszAC);
 		}
 	}
 
@@ -262,7 +261,10 @@ void Compare::init_DIG()
 
 void Compare::Run(void) 
 {
-	while ((m_pEntry = m_db.GetNextEntry())) {	
+	while ((m_pEntry = m_db.GetNextEntry())) {
+		//gfs 
+		//cout << "AC = " << m_pEntry->GetAC() << endl;
+		//eof gfs
 		specStats->protNbInRange++;
 		m_digest.Run(m_pEntry->GetSQ(), m_pEntry->GetPtm() );  // rdv dans FindPeptide
 	}

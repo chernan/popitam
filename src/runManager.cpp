@@ -23,6 +23,7 @@
 #include "error.h"
 #include "file.h"
 #include <time.h>
+#include <iostream>
 
 using namespace	std;
 
@@ -263,8 +264,9 @@ void runManager::run()
 	spectrumData = new data();
 	memCheck.data++;
 	spectrumData->init(runManParam);
-  
+
 	while (spectrumData->load()) {
+		
 		spectrumData->display(runManParam->FILEOUT);
 		
 		if (runManParam->XML_OUT) {
@@ -277,13 +279,31 @@ void runManager::run()
 		popitam = new Compare();
 		memCheck.popitam++;
 		
-		// CONSTRUIT LE GRAPHE, DIRIGE LES POINTEURS 
+		// CONSTRUIT LE GRAPHE, DIRIGE LES POINTEURS
+		//gfs
+		unsigned long int t0 = clock();
+		//eof gfs
 		popitam->init_POP(runManParam, scoreFunction[runManParam->m_MUTMOD], aaParam,
 				   ionParamTOFTOF1, ionParamQTOF1, ionParamQTOF2, ionParamQTOF3,
 				   spectrumData, popiResults, allRunStats);
-		
+		//gfs
+		double dt0 = ((double)(clock()-t0)/(CLOCKS_PER_SEC/1000));
+		unsigned long int t1 = clock();
+		//eof gfs
 		popitam->init_DIG(); // PREPARE LA DIGESTION	  
+
+		//gfs
+		double dt1 = ((double)(clock()-t1)/(CLOCKS_PER_SEC/1000));
+		unsigned long int t2 = clock();
+		//eof gfs
 		popitam->Run();      // IDENTIFIE LE SPECTRE
+		//gfs
+		double dt2 = ((double)(clock()-t2)/(CLOCKS_PER_SEC/1000));
+		//cout << "init_POP = " << dt0 << endl;
+		//cout << "init_DIG = " << dt1 << endl;
+		//cout << "Run = " << dt2 << endl;
+		//eof gfs
+		
 		popitam->EndRun(spectrumData->specID);
 		
 		fprintf(runManParam->FILEOUT,	"\nProcessing time was:	%f\n", (double)(clock()-iniTime)/CLOCKS_PER_SEC);

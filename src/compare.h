@@ -44,77 +44,56 @@
 #include "dbreader.h"
 #include "digest.h"
 
-
 // ********************************************************************************************** //
 
 class Compare {
 
-private :
-
-	DBReader						m_db;
-	DBEntry							*m_pEntry;
-	Digest							m_digest;
-	
-	char               m_szPeptideSeq[MAX_LENGHT];
- 	unsigned long      m_ulOffset2;
- 	int                m_iDataBaseId;
- 	int                m_iTaxonId;
-
- 
-
 public :
+	runManagerParameters   *runManParam;
+	allrunstatistics       *allRunStats;
+	TREE                   *scoreF;
+	aa                     *aaParam;
+	ion                    *ionParam;
+	result                 *popiResults;
+	spectrumstatistics     *specStats;
+	data                   *spectrumData;
+	graphe                 *popiGraph;
+	subseq                 *popiTags;
+	peptide                *aPeptide;
+	fun                    *funGen;
+	specresults            *specResults;
+	TreeWord               *treeWord;
+	TreeWord               *ACtree;
+	int                     randomEchNb;
 
- runManagerParameters   *runManParam;
- allrunstatistics       *allRunStats;
- TREE                   *scoreF;
- aa                     *aaParam;
- ion                    *ionParam;
- result                 *popiResults;
-
- spectrumstatistics     *specStats;
- data                   *spectrumData;
- graphe                 *popiGraph;
- subseq                 *popiTags;
- peptide                *aPeptide;
- fun                    *funGen;
- specresults            *specResults;
- TreeWord               *treeWord;
- TreeWord               *ACtree;
- int                     randomEchNb;
-
-  Compare(void);
- ~Compare(void);
-
-
-
-
- void init_DIG();
- void Run(void);
- void  EndRun(int);
- void  init_POP(runManagerParameters*, TREE*, aa*, ion*, ion*, ion*, ion*, data*, result*, allrunstatistics*);
-
- void FindPeptide(PeptideDigest *pPeptideDigest);
-
+	Compare(void);
+	~Compare(void);
+	
+	void init_DIG();
+	void Run(void);
+	void EndRun(int);
+	void init_POP(runManagerParameters*, TREE*, aa*, ion*, ion*, ion*, ion*, data*, result*, allrunstatistics*);
+	void FindPeptide(PeptideDigest *pPeptideDigest);
+	void test();
+	
 private :
+	DBReader m_db;
+	DBEntry *m_pEntry;
+	Digest m_digest;
+	char m_szPeptideSeq[MAX_LENGHT];
+	unsigned long m_ulOffset2;
+	int m_iDataBaseId;
+	int m_iTaxonId;
 
-
- void  loadSpectrum(int);
- void  buildGraph();
- void  processAPeptide();
- void  fillDtbInfos();
- void  computeIDSETstats();
- void  displayIDSETstats(File&);
- void  DisplayUnusedAC(File&);
-
-
-
- void GetProteinInfo( ReloadDBEntry *pReloadDBEntry,	
-				  						char *pszAC, char	*pszID,	char *pszDE,
-				  						int *piChainStart, int *piChainEnd, int *piEntryEnd);
-
-
+	void loadSpectrum(int);
+	void buildGraph();
+	void processAPeptide();
+	void fillDtbInfos();
+	void computeIDSETstats();
+	void displayIDSETstats(File&);
+	void DisplayUnusedAC(File&);
+	void GetProteinInfo(ReloadDBEntry *pReloadDBEntry, char *pszAC, char	*pszID,	char *pszDE,
+	                    int *piChainStart, int *piChainEnd, int *piEntryEnd);
 };
-
-// ********************************************************************************************** //
 
 #endif

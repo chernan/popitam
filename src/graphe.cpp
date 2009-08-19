@@ -47,9 +47,9 @@ extern memorycheck memCheck;
 // ********************************************************************************************** //
 
 struct TEMPOVERTEX {
-    int     iV;
-    double  pr;
-    double  in;
+	int     iV;
+	double  pr;
+	double  in;
 };
 
 // ********************************************************************************************** //
@@ -57,21 +57,21 @@ struct TEMPOVERTEX {
 // COMPARISON ROUTINE FOR QSORT()
 
 int compar_vertices_mean_bMass(const void *a, const void *b) {
-    if (((vertex*)a)->mean_bMass < ((vertex*)b)->mean_bMass) return -1;
-    if (((vertex*)a)->mean_bMass > ((vertex*)b)->mean_bMass) return 1;
-    return 0;
+	if (((vertex*)a)->mean_bMass < ((vertex*)b)->mean_bMass) return -1;
+	if (((vertex*)a)->mean_bMass > ((vertex*)b)->mean_bMass) return 1;
+	return 0;
 }
 
 int compar_tempoVertex_by_p(const void *a, const void *b) {
-    if (((TEMPOVERTEX*)a)->pr > ((TEMPOVERTEX*)b)->pr) return -1;
-    if (((TEMPOVERTEX*)a)->pr < ((TEMPOVERTEX*)b)->pr) return 1;
-    return 0;
+	if (((TEMPOVERTEX*)a)->pr > ((TEMPOVERTEX*)b)->pr) return -1;
+	if (((TEMPOVERTEX*)a)->pr < ((TEMPOVERTEX*)b)->pr) return 1;
+	return 0;
 }
 
 int compar_tempoVertex_by_int(const void *a, const void *b) {
-    if (((TEMPOVERTEX*)a)->in > ((TEMPOVERTEX*)b)->in) return -1;
-    if (((TEMPOVERTEX*)a)->in < ((TEMPOVERTEX*)b)->in) return 1;
-    return 0;
+	if (((TEMPOVERTEX*)a)->in > ((TEMPOVERTEX*)b)->in) return -1;
+	if (((TEMPOVERTEX*)a)->in < ((TEMPOVERTEX*)b)->in) return 1;
+	return 0;
 }
 
 
@@ -80,85 +80,86 @@ int compar_tempoVertex_by_int(const void *a, const void *b) {
 
 graphe::graphe()
 {
-
-    runManParam      = NULL;
-    aaParam          = NULL;
-    ionParam         = NULL;
-
-    spectrumData     = NULL;
-
-    or_vertexList = NULL;
-    vertexList    = NULL;
-
-    orVertexNb    = 0;
-    vertexNb      = 0;
-    wantedNodeNb  = 0;
-    minNodeNb     = 0;
-
-    IedgeNb       = 0;
-    IIedgeNb      = 0;
-    or_IedgeNb    = 0;
-    or_IIedgeNb   = 0;
-    intSom        = 0;
+	runManParam      = NULL;
+	aaParam          = NULL;
+	ionParam         = NULL;
+	spectrumData     = NULL;
+	or_vertexList = NULL;
+	vertexList    = NULL;
+	orVertexNb    = 0;
+	vertexNb      = 0;
+	wantedNodeNb  = 0;
+	minNodeNb     = 0;
+	IedgeNb       = 0;
+	IIedgeNb      = 0;
+	or_IedgeNb    = 0;
+	or_IIedgeNb   = 0;
+	intSom        = 0;
 }
 
 // ********************************************************************************************** //
 
-void graphe::init(runManagerParameters* rMP, aa* aaP, ion* ionP, data* spectrumD) {
+void graphe::init(runManagerParameters* rMP, aa* aaP, ion* ionP, data* spectrumD)
+{
+	runManParam        = rMP;
+	aaParam            = aaP;
+	ionParam           = ionP;
+	spectrumData       = spectrumD;
+	wantedNodeNb       = spectrumData->get_binsize() * runManParam->COVBIN + 2;
+	
+	IedgeNb            = 0;
+	IIedgeNb           = 0;
+	or_IedgeNb         = 0;
+	or_IedgeNb         = 0;
+	
+	or_vertexList      = NULL;
+	vertexList         = NULL;
+	
+	buildGraph();
+	
+	//  connect(0); //PAS BESOIN
+	connect(1);
 
-    runManParam        = rMP;
-    aaParam            = aaP;
-    ionParam           = ionP;
-    spectrumData       = spectrumD;
-
-    wantedNodeNb       = spectrumData->get_binsize() * runManParam->COVBIN + 2;
-
-    IedgeNb            = 0;
-    IIedgeNb           = 0;
-    or_IedgeNb         = 0;
-    or_IedgeNb         = 0;
-
-    or_vertexList      = NULL;
-    vertexList         = NULL;
-
-    buildGraph();
-
-    //  connect(0); //PAS BESOIN
-    connect(1);
-
-    if (runManParam->r_CHECK)
-    {
-        char filename[256] = "";
-        sprintf(filename, "%s%s", runManParam->OUTPUT_DIR, "GRAPH0.txt");
-        File fp;
-        fp.Open(filename, "w");
-        write(fp, 0);
-        fp.Close();
-
-        sprintf(filename, "%s%s", runManParam->OUTPUT_DIR, "GRAPH1.txt");
-        fp.Open(filename, "w");
-        write(fp, 1);
-        fp.Close();
-
-        sprintf(filename, "%s%s", runManParam->OUTPUT_DIR, "GRAPHDOT.dot");
-        fp.Open(filename, "w");
-        write_dotGraphSimple(fp);
-        fp.Close();
-    }
+	if (runManParam->r_CHECK) {
+		char filename[256] = "";
+		sprintf(filename, "%s%s", runManParam->OUTPUT_DIR, "GRAPH0.txt");
+		File fp;
+		fp.Open(filename, "w");
+		write(fp, 0);
+		fp.Close();
+		
+		sprintf(filename, "%s%s", runManParam->OUTPUT_DIR, "GRAPH1.txt");
+		fp.Open(filename, "w");
+		write(fp, 1);
+		fp.Close();
+		
+		sprintf(filename, "%s%s", runManParam->OUTPUT_DIR, "GRAPHDOT.dot");
+		fp.Open(filename, "w");
+		write_dotGraphSimple(fp);
+		fp.Close();
+	}
 }
 
 // ********************************************************************************************** //
 
 graphe::~graphe() {
-    if (vertexList != NULL)     delete[] vertexList;    vertexList = NULL;                                            memCheck.graph--;
-    if (or_vertexList  != NULL) delete[] or_vertexList; or_vertexList = NULL;                                         memCheck.graph--;
+	if (vertexList != NULL) {
+		delete[] vertexList;
+		vertexList = NULL;
+		memCheck.graph--;
+	}
+	
+	if (or_vertexList  != NULL) {
+		delete[] or_vertexList;
+		or_vertexList = NULL;
+		memCheck.graph--;
+	}
 }
 
 // ********************************************************************************************** //
 
 void graphe::buildGraph()
 {
-
     build_vertice();
     qsort(vertexList, vertexNb, sizeof(vertex), compar_vertices_mean_bMass);
     // CONTROL QUE LA SEQUENCE VIDE EST BIEN LE PREMIER NOEUD (= NOEUD ARTIFICIEL)
@@ -167,7 +168,6 @@ void graphe::buildGraph()
         fatal_error(runManParam->FILE_ERROR_NAME, DEBUG, "The spectrum has an peak that takes the place of the first node of the graph; this is not good");
     if (vertexList[vertexNb-1].iHypo[0] != -1)
         fatal_error(runManParam->FILE_ERROR_NAME, DEBUG, "The spectrum has an peak that take the place of the last node of the graph; this is not good");
-
 
     merge();
     qsort(or_vertexList, orVertexNb, sizeof(vertex), compar_vertices_mean_bMass);
@@ -181,21 +181,21 @@ void graphe::buildGraph()
 
     // ATTENTION, maintenant les noeud sont dans or_vertexList!!!
 
-    // parcours le graphe et pick les noeuds à plus grande prob. ionique jusqu'à
+    // parcours le graphe et pick les noeuds ï¿½ plus grande prob. ionique jusqu'ï¿½
     // ce que wantedNodeNb soit atteint
     pickNodes();
-    // ATTENTION, maintenant les noeuds sont à nouveau dans vertexList
+    // ATTENTION, maintenant les noeuds sont ï¿½ nouveau dans vertexList
 
     // il faut refaire un qsort par les mean_bMasses, car le merging
-    // a pu en déplacer certaines
+    // a pu en dï¿½placer certaines
     qsort(vertexList, vertexNb, sizeof(vertex), compar_vertices_mean_bMass);
     if (vertexList[0].iHypo[0] != -1)
         fatal_error(runManParam->FILE_ERROR_NAME, DEBUG, "The spectrum has an peak that takes the place of the first node of the graph; this is not good");
     if (vertexList[vertexNb-1].iHypo[0] != -1)
         fatal_error(runManParam->FILE_ERROR_NAME, DEBUG, "The spectrum has an peak that take the place of the last node of the graph; this is not good");
 
-    // calcul la somme de toutes les intensités des pics inclus dans le small graphe (cette
-    // valeur sera utilisée lors du scoring (sous-score des intensités)
+    // calcul la somme de toutes les intensitï¿½s des pics inclus dans le small graphe (cette
+    // valeur sera utilisï¿½e lors du scoring (sous-score des intensitï¿½s)
     intSom = 0;
     // (je ne prends pas en compte les pseudonoeuds)
     for (int i = 1; i < vertexNb-1; i++) {
@@ -208,8 +208,10 @@ void graphe::buildGraph()
 
 // ********************************************************************************************** //
 
-void graphe::build_vertice() {
-    vertexList = new vertex[spectrumData->get_peakNb()*ionParam->get_totIonNb()+2]();               memCheck.graph++;
+void graphe::build_vertice()
+{
+    vertexList = new vertex[spectrumData->get_peakNb()*ionParam->get_totIonNb()+2]();
+    memCheck.graph++;
 
     // ------------- THE FIRST VERTEX ------------------
 
@@ -237,7 +239,8 @@ void graphe::build_vertice() {
     int       ionCharge;
     char      term;
 
-    for (int j = 0; j < ionParam->get_totIonNb(); j++) {                                              // pour tous les ions
+    // pour tous les ions
+    for (int j = 0; j < ionParam->get_totIonNb(); j++) {
 
         ionDelta  = ionParam->get_delta(j);
         ionCharge = ionParam->get_charge(j);
@@ -287,55 +290,60 @@ void graphe::build_vertice() {
 
 // ********************************************************************************************** //
 
-void graphe::merge() {
-    // greedy
-    int i,j;
-
-    while (true) {
-        if (!findClosestNodes(&i, &j)) break;
-        if ((i >= vertexNb) | (j >= vertexNb)) fatal_error(runManParam->FILE_ERROR_NAME, MEMORY, "in function graphe.:merge();");
-        mergeNodes(i, j);
-    }
-
-    // traite le cas du premier et dernier noeuds
-    // normalement, le premier noeud ne devrait pas avoir d'autres noeuds très près
-    // retire les noeuds qui ont été mergés
-    cleanGraph();
-    // place les indices dans orVertexList (ils seront utilisés par la fonction
-    // dichomSearch
-    for (int i = 0; i< orVertexNb; i++) or_vertexList[i].or_indice = i;
-    // ATTENTION, maintenant les noeuds sont dans or_vertexList !!!!!
-
+void graphe::merge()
+{
+	// greedy
+	int i, j;
+	
+	while (true) {
+		if (!findClosestNodes(&i, &j))
+			break;
+		if ((i >= vertexNb) | (j >= vertexNb))
+			fatal_error(runManParam->FILE_ERROR_NAME, MEMORY, "in function graphe.:merge();");
+		mergeNodes(i, j);
+	}
+	
+	// traite le cas du premier et dernier noeuds
+	// normalement, le premier noeud ne devrait pas avoir d'autres noeuds trï¿½s prï¿½s
+	// retire les noeuds qui ont ï¿½tï¿½ mergï¿½s
+	cleanGraph();
+	
+	// place les indices dans orVertexList (ils seront utilisï¿½s par la fonction
+	// dichomSearch
+	for (int i = 0; i< orVertexNb; i++)
+		or_vertexList[i].or_indice = i;
+	
+	// ATTENTION, maintenant les noeuds sont dans or_vertexList !!!!!
 }
 
 // ********************************************************************************************** //
 
 bool graphe::findClosestNodes(int*a, int*b) {
 
-    // les noeuds sont déjà triés selon leur masse
+    // les noeuds sont dï¿½jï¿½ triï¿½s selon leur masse
 
     double min = 1000;
     double breakMin=0.0;
     double setError=0.0;
 
     for (int i = 0; i < vertexNb-1; i++) {
-        if (isDoubleEqual(vertexList[i].mean_bMass, 1000000.0)) continue; // signifie qu'il a déjà été mergé
+        if (isDoubleEqual(vertexList[i].mean_bMass, 1000000.0)) continue; // signifie qu'il a dï¿½jï¿½ ï¿½tï¿½ mergï¿½
         for (int j = i+1; j < vertexNb; j++) {
-            if (isDoubleEqual(vertexList[j].mean_bMass, 1000000.0)) continue;  // signifie qu'il a déjà été mergé
+            if (isDoubleEqual(vertexList[j].mean_bMass, 1000000.0)) continue;  // signifie qu'il a dï¿½jï¿½ ï¿½tï¿½ mergï¿½
             breakMin = 1000;
 
             // ATTENTION, il faut comparer toutes les bMasses entre elles et non les mean_bMass!!!
             for (int m = 0; m < vertexList[j].mergedNb; m++) {
                 for (int n = 0; n < vertexList[i].mergedNb; n++) {
                     if (fabs(vertexList[j].bMass[m] - vertexList[i].bMass[n]) < min) {
-                        // je fais la valeur absolue, même si les noeuds sont triés, car je ne suis pas certaine
-                        // que les bMasses soient également triés après que le processus de merging ait commencé
+                        // je fais la valeur absolue, mï¿½me si les noeuds sont triï¿½s, car je ne suis pas certaine
+                        // que les bMasses soient ï¿½galement triï¿½s aprï¿½s que le processus de merging ait commencï¿½
 
                         // on ne va updater le minimum que si on est en dessous de l'erreur
-                        // maximale autorisée pour le merging; et cette erreur dépend des
-                        // terminaux des hypothèses ioniques utilisées pour bMass[m] et bMass[n]
-                        // si l'un des noeuds à merger est un terminal, autorise l'erreur la plus grande (à cause des
-                        // problèmes de calibration)
+                        // maximale autorisï¿½e pour le merging; et cette erreur dï¿½pend des
+                        // terminaux des hypothï¿½ses ioniques utilisï¿½es pour bMass[m] et bMass[n]
+                        // si l'un des noeuds ï¿½ merger est un terminal, autorise l'erreur la plus grande (ï¿½ cause des
+                        // problï¿½mes de calibration)
                         if ((i == 0) | (j == vertexNb-1)) setError = runManParam->FRAGMENT_ERROR2;
                         else {
                             if (ionParam->get_term(vertexList[j].iHypo[n]) == ionParam->get_term(vertexList[j].iHypo[m])) setError = runManParam->FRAGMENT_ERROR1;
@@ -358,93 +366,106 @@ bool graphe::findClosestNodes(int*a, int*b) {
         }
     }
 
-    // min représente la distance minimale
+    // min reprï¿½sente la distance minimale
     if (min < setError) return true;
     else                return false;
 }
 
 //---------------------------------------------------------------
 
-void graphe::mergeNodes(int i, int j) {
-    // met j dans i
-    for (int m = 0; m < vertexList[j].mergedNb; m++) {
-        vertexList[i].mean_bMass += vertexList[j].bMass[m];
-        vertexList[i].bMass[vertexList[i].mergedNb]     = vertexList[j].bMass[m];
-        vertexList[i].iHypo[vertexList[i].mergedNb]     = vertexList[j].iHypo[m];
-        vertexList[i].iPeak[vertexList[i].mergedNb]     = vertexList[j].iPeak[m];
-        vertexList[i].peakMass[vertexList[i].mergedNb]  = vertexList[j].peakMass[m];
-        vertexList[i].peakInt[vertexList[i].mergedNb]   = vertexList[j].peakInt[m];
-        vertexList[i].peakBin[vertexList[i].mergedNb]   = vertexList[j].peakBin[m];
-
-        vertexList[i].mergedNb++;
-        if (vertexList[i].mergedNb >= MAX_MERGED){
-            fatal_error(runManParam->FILE_ERROR_NAME, MEMORY, "Please increase MAX_MERGED in defines.h");
-        }
-
-    }
-    // recalcule la mean_bMass pour le noeud i
-    vertexList[i].mean_bMass = 0;
-    for (int m = 0; m < vertexList[i].mergedNb; m++) {
-        vertexList[i].mean_bMass += vertexList[i].bMass[m];
-    }
-    vertexList[i].mean_bMass /= (double)vertexList[i].mergedNb;
-
-    // et met le noeud j hors service
-    vertexList[j].mean_bMass = 1000000;
+void graphe::mergeNodes(int i, int j)
+{
+	// met j dans i
+	for (int m = 0; m < vertexList[j].mergedNb; m++) {
+		vertexList[i].mean_bMass += vertexList[j].bMass[m];
+		vertexList[i].bMass[vertexList[i].mergedNb]     = vertexList[j].bMass[m];
+		vertexList[i].iHypo[vertexList[i].mergedNb]     = vertexList[j].iHypo[m];
+		vertexList[i].iPeak[vertexList[i].mergedNb]     = vertexList[j].iPeak[m];
+		vertexList[i].peakMass[vertexList[i].mergedNb]  = vertexList[j].peakMass[m];
+		vertexList[i].peakInt[vertexList[i].mergedNb]   = vertexList[j].peakInt[m];
+		vertexList[i].peakBin[vertexList[i].mergedNb]   = vertexList[j].peakBin[m];
+		
+		vertexList[i].mergedNb++;
+		if (vertexList[i].mergedNb >= MAX_MERGED){
+		fatal_error(runManParam->FILE_ERROR_NAME, MEMORY, "Please increase MAX_MERGED in defines.h");
+		}
+	}
+	
+	// recalcule la mean_bMass pour le noeud i
+	vertexList[i].mean_bMass = 0;
+	for (int m = 0; m < vertexList[i].mergedNb; m++) {
+		vertexList[i].mean_bMass += vertexList[i].bMass[m];
+	}
+	vertexList[i].mean_bMass /= (double)vertexList[i].mergedNb;
+	
+	// et met le noeud j hors service
+	vertexList[j].mean_bMass = 1000000;
 }
 
 // ********************************************************************************************** //
 
-void graphe::cleanGraph() {
-    // compte le nombre de noeuds valides
-    int c = 0;
-    for (int i = 0; i < vertexNb; i++) if (!isDoubleEqual(vertexList[i].mean_bMass, 1000000.0)) c++;
-    orVertexNb    = c;
-    or_vertexList = new vertex[c]();                                                                memCheck.graph++;
-
-    // copie les noeuds valides dans or_vertexList
-    c = 0;
-    for (int i = 0; i < vertexNb; i++) {
-        if (isDoubleEqual(vertexList[i].mean_bMass,  1000000.0)) continue;
-        or_vertexList[c].mergedNb   = vertexList[i].mergedNb;
-        or_vertexList[c].mean_bMass = vertexList[i].mean_bMass;
-
-        for (int m = 0; m < vertexList[i].mergedNb; m++) {
-            or_vertexList[c].bMass[m]     = vertexList[i].bMass[m];
-            or_vertexList[c].iHypo[m]     = vertexList[i].iHypo[m];
-            or_vertexList[c].iPeak[m]     = vertexList[i].iPeak[m];
-            or_vertexList[c].peakMass[m]  = vertexList[i].peakMass[m];
-            or_vertexList[c].peakInt[m]   = vertexList[i].peakInt[m];
-            or_vertexList[c].peakBin[m]   = vertexList[i].peakBin[m];
-        }
-        c++;
-    }
-
-    vertexNb = c;
-    delete[] vertexList; vertexList = NULL;                                                         memCheck.graph--;
-
-    // clean aussi le premier et dernier noeud
-    or_vertexList[0].mergedNb    = 1;
-    or_vertexList[0].bMass[0]    = or_vertexList[0].mean_bMass;
-    or_vertexList[0].iHypo[0]    = -1;
-    or_vertexList[0].iPeak[0]    = -1;
-    or_vertexList[0].peakMass[0] = -1;
-    or_vertexList[0].peakInt[0]  = -1;
-    or_vertexList[0].peakBin[0]  = -1;
-
-    or_vertexList[vertexNb-1].mergedNb    = 1;
-    or_vertexList[vertexNb-1].bMass[0]    = or_vertexList[vertexNb-1].mean_bMass;
-    or_vertexList[vertexNb-1].iHypo[0]    = -1;
-    or_vertexList[vertexNb-1].iPeak[0]    = -1;
-    or_vertexList[vertexNb-1].peakMass[0] = -1;
-    or_vertexList[vertexNb-1].peakInt[0]  = -1;
-    or_vertexList[vertexNb-1].peakBin[0]  = -1;
+void graphe::cleanGraph()
+{
+	// compte le nombre de noeuds valides
+	int c = 0;
+	for (int i = 0; i < vertexNb; i++) {
+		if (!isDoubleEqual(vertexList[i].mean_bMass, 1000000.0)) {
+			c++;
+		}
+	}
+	orVertexNb = c;
+	or_vertexList = new vertex[c]();
+	memCheck.graph++;
+	
+	// copie les noeuds valides dans or_vertexList
+	c = 0;
+	for (int i = 0; i < vertexNb; i++) {
+		if (isDoubleEqual(vertexList[i].mean_bMass,  1000000.0)) {
+			continue;
+		}
+		
+		or_vertexList[c].mergedNb   = vertexList[i].mergedNb;
+		or_vertexList[c].mean_bMass = vertexList[i].mean_bMass;
+		
+		for (int m = 0; m < vertexList[i].mergedNb; m++) {
+			or_vertexList[c].bMass[m]     = vertexList[i].bMass[m];
+			or_vertexList[c].iHypo[m]     = vertexList[i].iHypo[m];
+			or_vertexList[c].iPeak[m]     = vertexList[i].iPeak[m];
+			or_vertexList[c].peakMass[m]  = vertexList[i].peakMass[m];
+			or_vertexList[c].peakInt[m]   = vertexList[i].peakInt[m];
+			or_vertexList[c].peakBin[m]   = vertexList[i].peakBin[m];
+		}
+		c++;
+	}
+	
+	vertexNb = c;
+	
+	delete[] vertexList;
+	vertexList = NULL;
+	memCheck.graph--;
+	
+	// clean aussi le premier et dernier noeud
+	or_vertexList[0].mergedNb    = 1;
+	or_vertexList[0].bMass[0]    = or_vertexList[0].mean_bMass;
+	or_vertexList[0].iHypo[0]    = -1;
+	or_vertexList[0].iPeak[0]    = -1;
+	or_vertexList[0].peakMass[0] = -1;
+	or_vertexList[0].peakInt[0]  = -1;
+	or_vertexList[0].peakBin[0]  = -1;
+	
+	or_vertexList[vertexNb-1].mergedNb    = 1;
+	or_vertexList[vertexNb-1].bMass[0]    = or_vertexList[vertexNb-1].mean_bMass;
+	or_vertexList[vertexNb-1].iHypo[0]    = -1;
+	or_vertexList[vertexNb-1].iPeak[0]    = -1;
+	or_vertexList[vertexNb-1].peakMass[0] = -1;
+	or_vertexList[vertexNb-1].peakInt[0]  = -1;
+	or_vertexList[vertexNb-1].peakBin[0]  = -1;
 }
 
 // ********************************************************************************************** //
 
-void graphe::pickNodes() {
-
+void graphe::pickNodes()
+{
     // commence par trier les graphe selon les probs maximum
     TEMPOVERTEX *tempoVertex;
     tempoVertex = new TEMPOVERTEX[vertexNb];                                                        memCheck.graph++;
@@ -471,9 +492,9 @@ void graphe::pickNodes() {
     tempoVertex[vertexNb-1].pr    = 100;
     tempoVertex[vertexNb-1].in    = 100;
 
-    // il faut trier selon la probabilité, puis pour chaque probabilité, selon l'intensité du pic
+    // il faut trier selon la probabilitï¿½, puis pour chaque probabilitï¿½, selon l'intensitï¿½ du pic
     qsort(tempoVertex, vertexNb, sizeof(TEMPOVERTEX), compar_tempoVertex_by_p);
-    // trie encore une fois selon l'intensité (par classe de prob)
+    // trie encore une fois selon l'intensitï¿½ (par classe de prob)
     int          n = 1;
     int          c = 1;
     double       prob = tempoVertex[0].pr;
@@ -528,23 +549,24 @@ void graphe::pickNodes() {
     }
 
     delete[] tempoVertex; tempoVertex = NULL;                                                       memCheck.graph--;
-    // je garde or_vertexList à disposition pour les fonctions allonge_left et allonge_right
+    // je garde or_vertexList ï¿½ disposition pour les fonctions allonge_left et allonge_right
 }
 
 // ********************************************************************************************** //
 
-void graphe::connect(int choice) {
-    connectSucc1(choice);
-
-    if (runManParam->EDGES_TYPE == 1) {
-        connectSucc2(choice);
-    }
+void graphe::connect(int choice)
+{
+	connectSucc1(choice);
+	
+	if (runManParam->EDGES_TYPE == 1) {
+		connectSucc2(choice);
+	}
 }
 
 // ********************************************************************************************** //
 
-void graphe::connectSucc1(int choice) {
-
+void graphe::connectSucc1(int choice)
+{
     vertex* vL=NULL;
     int     vN=0;
     int     countEdges  = 0;
@@ -565,7 +587,7 @@ void graphe::connectSucc1(int choice) {
 
         for (j = i+1; j < vN; j++) {
 
-            // je suis entrain de comparer un noeud avec son suivant (dont la mean_bMass doit être plus grande)
+            // je suis entrain de comparer un noeud avec son suivant (dont la mean_bMass doit ï¿½tre plus grande)
             if (vL[j].mean_bMass < vL[i].mean_bMass) fatal_error(runManParam->FILE_ERROR_NAME, DEBUG, "in function graph::connectSucc1");
 
 
@@ -599,7 +621,7 @@ void graphe::connectSucc1(int choice) {
             }
 
 
-            // recherche si un acide aminé peut correspondre à diff
+            // recherche si un acide aminï¿½ peut correspondre ï¿½ diff
             for (k = 0; k < aaNb; k++) {
 
 
@@ -624,8 +646,8 @@ void graphe::connectSucc1(int choice) {
 
 // ********************************************************************************************** //
 
-void graphe::connectSucc2(int choice) {
-
+void graphe::connectSucc2(int choice)
+{
     vertex* vL=NULL;
     int     vN=0;
     int     countEdges  = 0;
@@ -643,7 +665,7 @@ void graphe::connectSucc2(int choice) {
     for (i = 0; i < vN; i++)  {
         for (j = i+1; j < vN; j++) {
 
-            // je suis entrain de comparer un noeud avec son suivant (dont la mean_bMass doit être plus grande)
+            // je suis entrain de comparer un noeud avec son suivant (dont la mean_bMass doit ï¿½tre plus grande)
             if (vL[j].mean_bMass < vL[i].mean_bMass) fatal_error(runManParam->FILE_ERROR_NAME, DEBUG, "in function graph::connectSucc1");
 
             // il faut maintenant comparer toutes les bMasses des des noeuds pour savoir si on peut
@@ -665,7 +687,7 @@ void graphe::connectSucc2(int choice) {
             }
             if (diff - runManParam->FRAGMENT_ERROR2 > aaParam->aa2Table[aaNb-1].mass) break;
 
-            // recherche si un acide aminé peut correspondre à diff
+            // recherche si un acide aminï¿½ peut correspondre ï¿½ diff
             for (k = 0; k < aaNb; k++) {
 
                 if(fabs(diff - crotteAlors->aa2Table[k].mass) < setError) {
@@ -694,8 +716,8 @@ void graphe::connectSucc2(int choice) {
 
 
 bool graphe::verifyEdges(vertex* vL, int ii, int jj, int kk) {
-    // dès qu'on trouve deux successeurs partant de ii et menant à jj, retourne TRUE, ce qui signifie :
-    // deux edges existent déjà entre ii et jj, donc ne les relie pas avec un 2aa_edge;
+    // dï¿½s qu'on trouve deux successeurs partant de ii et menant ï¿½ jj, retourne TRUE, ce qui signifie :
+    // deux edges existent dï¿½jï¿½ entre ii et jj, donc ne les relie pas avec un 2aa_edge;
 
     int iEl1 = aaParam->aa2Table[kk].indice1;
     int iEl2 = aaParam->aa2Table[kk].indice2;
@@ -719,8 +741,8 @@ bool graphe::verifyEdges(vertex* vL, int ii, int jj, int kk) {
 
 // ********************************************************************************************** //
 
-void graphe::write(File &fp, int choice) {
-
+void graphe::write(File &fp, int choice)
+{
     vertex* vL = NULL;
     int     vN = 0;
 
@@ -791,9 +813,8 @@ void graphe::write(File &fp, int choice) {
 
 // ********************************************************************************************** //
 
-void graphe::write_dotGraphSimple(File &fp) {
-
-
+void graphe::write_dotGraphSimple(File &fp)
+{
     // UNIQUEMENT SIMPLE EDGES
 
     // ECRITURE EN-TETE
@@ -850,8 +871,8 @@ void graphe::write_dotGraphSimple(File &fp) {
 
 // ********************************************************************************************** //
 
-void graphe::write_dotGraphDouble(File &fp) {
-
+void graphe::write_dotGraphDouble(File &fp)
+{
     // ECRITURE EN-TETE
     fprintf(fp, "digraph seqgraph { \n");
     // page A4 portrait
@@ -896,22 +917,20 @@ void graphe::write_dotGraphDouble(File &fp) {
     //system("gv ../out/dotGraph.ps");
 }
 
-
 // ********************************************************************************************** //
 
 void graphe::display(File &fp)
 {
-    fprintf(fp,"%-25s: %7i \n","NodeNb ",  vertexNb);
-    fprintf(fp,"%-25s: %7i / %-7i\n", "EdgeNb (simple/double)", IedgeNb, IIedgeNb);
+	fprintf(fp,"%-25s: %7i \n","NodeNb ",  vertexNb);
+	fprintf(fp,"%-25s: %7i / %-7i\n", "EdgeNb (simple/double)", IedgeNb, IIedgeNb);
 }
 
 // ********************************************************************************************** //
 
 void graphe::displayXML(File &fp)
 {
-    fprintf(fp,"      <nodeNb>%i</nodeNb>\n", vertexNb);
-    fprintf(fp,"      <simpleEdgeNb>%i</simpleEdgeNb>\n", IedgeNb);
-    fprintf(fp,"      <doubleEdgeNb>%i</doubleEdgeNb>\n", IIedgeNb);
+	fprintf(fp,"      <nodeNb>%i</nodeNb>\n", vertexNb);
+	fprintf(fp,"      <simpleEdgeNb>%i</simpleEdgeNb>\n", IedgeNb);
+	fprintf(fp,"      <doubleEdgeNb>%i</doubleEdgeNb>\n", IIedgeNb);
 }
 
-// ********************************************************************************************** //

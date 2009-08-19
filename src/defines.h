@@ -38,7 +38,7 @@
 #define AC_LENGHT                       256
 #define ID_LENGHT                       256
 #define DE_LENGHT                       256
-#define AC_FILTER_LENTGH             100000 
+#define AC_FILTER_LENGTH             100000 
 
 #define MAX_IONS                         20
 #define MAX_BIN_NB                       10
@@ -59,15 +59,15 @@
 #define NB_MODIF	                  0          // uniquemement meth oxidation et carbamidomethylation
 
 #define MAX_DOUBLONS                   1000
-#define MAX_COMBI                       100          // max de combinaisons possibles pour les modifs prévues
+#define MAX_COMBI                       100          // max de combinaisons possibles pour les modifs prï¿½vues
 
 #define MIN_PROT_MASS                   666
 #define MAX_PROT_MASS              10000000
 
 #define MAX_MUT_NB                        3
 
-#define MIN_PRESCORE                      4.0        // (float) PAS UTILISE ratio par rapport au nombre d'aa présumés du peptide parent
-                                                     // pour le scoring (2 signifie nbrePrésumé / 2)
+#define MIN_PRESCORE                      4.0        // (float) PAS UTILISE ratio par rapport au nombre d'aa prï¿½sumï¿½s du peptide parent
+                                                     // pour le scoring (2 signifie nbrePrï¿½sumï¿½ / 2)
 #define MAX_MERGED                      500
 #define MAX_SUCC1                       100
 #define MAX_SUCC2                      1000

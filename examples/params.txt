@@ -82,7 +82,7 @@ PREC_MASS_ERR      =  this parameter is only important when running Popitam in N
 
 INSTRUMENT         =  QTOF / TOFTOF   
 
-MISSED             =  0 (means no missed cleavage) / 1 (means 0 or 1 missed cleavages)
+MISSED             =  0 (means no missed cleavage), 1 (means 0 or 1 missed cleavages), 2 (means 0, 1, or 2 missed cleavages), etc.
 
 PEAK_INT_SEUIL     =  float, représentant le seuil d'intensité (en % par rapport à l'intensité maximum normalisée 100) 
                       à partir duquel on ne considère plus les pics (2 signifie que les pics avec une intensité < 2 sont supprimés) 
