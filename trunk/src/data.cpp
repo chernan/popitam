@@ -558,7 +558,7 @@ void data::preprocessPeaks()
 			
 			// +0.333
 			if (peakList[i].CHARGE3 == true) {
-				if ((fabs((peakList[j].mass - peakList[i].mass) - 0.333) < runManParam->FRAGMENT_ERROR1)
+				if ((fabs((peakList[j].mass - peakList[i].mass) - 0.333333333333333333) < runManParam->FRAGMENT_ERROR1)
 					&& (peakList[j].intensity < peakList[i].intensity)) {  
 					// je prends l'erreur 1 car je compare des isotopes
 					// exiger que l'intensite soit plus petite fait qu'on va manquer d'oter certains isotopes (hautes masses)
@@ -623,19 +623,19 @@ void  data::markParentMass()
 				
 				// +0.333
 				if (charge == 3) {
-					if (fabs((peakList[j].mass - peakList[i].mass) - 0.333) < runManParam->FRAGMENT_ERROR1) {
+					if (fabs((peakList[j].mass - peakList[i].mass) - 0.333333333333333333) < runManParam->FRAGMENT_ERROR1) {
 						peakList[j].used = true;
 					}
-					if (fabs((peakList[j].mass - peakList[i].mass) - 0.666) < runManParam->FRAGMENT_ERROR1) {
+					if (fabs((peakList[j].mass - peakList[i].mass) - 0.666666666666666666) < runManParam->FRAGMENT_ERROR1) {
 						peakList[j].used = true;
 					}
 					if (fabs((peakList[j].mass - peakList[i].mass) - 1) < runManParam->FRAGMENT_ERROR1) {
 						peakList[j].used = true;
 					}
-					if (fabs((peakList[j].mass - peakList[i].mass) - 1.333) < runManParam->FRAGMENT_ERROR1) {
+					if (fabs((peakList[j].mass - peakList[i].mass) - 1.333333333333333333) < runManParam->FRAGMENT_ERROR1) {
 						peakList[j].used = true;
 					}
-					if (fabs((peakList[j].mass - peakList[i].mass) - 1.666) < runManParam->FRAGMENT_ERROR1) {
+					if (fabs((peakList[j].mass - peakList[i].mass) - 1.666666666666666666) < runManParam->FRAGMENT_ERROR1) {
 						peakList[j].used = true;
 					}
 					if (fabs((peakList[j].mass - peakList[i].mass) - 2) < runManParam->FRAGMENT_ERROR1) {

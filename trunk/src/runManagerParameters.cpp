@@ -139,8 +139,10 @@ void runManagerParameters::init(int argc, char** argv)
 	
 	File fp;
 	fp.Open(filenamePARAMS, "r");
-	loadParameters(fp, argv);
+	parseParameters(fp, argv);
 	fp.Close();
+	
+	validateParameters();
 }
 
 // ********************************************************************************************** //
@@ -350,7 +352,7 @@ void runManagerParameters::displayArguments(File &fp)
 
 // ********************************************************************************************** //
 
-void runManagerParameters::loadParameters(File &fp, char** argv) 
+void runManagerParameters::parseParameters(File &fp, char** argv) 
 {
 	char car;
 	
@@ -522,14 +524,11 @@ void runManagerParameters::loadParameters(File &fp, char** argv)
 	
 	while (fscanf(fp, "%c", &car)) { 
 		if (car == ':') {
-			fgets(AC_FILTER, AC_FILTER_LENTGH, fp); 
+			fgets(AC_FILTER, AC_FILTER_LENGTH, fp); 
 			AC_FILTER[strlen(AC_FILTER)-1] = '\0';
 			break;
 		}
 	}
-	if (strlen(AC_FILTER) >= AC_FILTER_LENTGH-3) {
-		fatal_error(FILE_ERROR_NAME, MEMORY, "Please, increase AC_FILTER_LENTGH in defines.h");
-	} 
 	
 	while (fscanf(fp, "%c", &car)) {
 		if (car == ':') {
@@ -765,6 +764,19 @@ void runManagerParameters::loadParameters(File &fp, char** argv)
 
 // ********************************************************************************************** //
 
+void runManagerParameters::validateParameters()
+{
+	if (strlen(AC_FILTER) < 4) {
+		fatal_error(FILE_ERROR_NAME, PARAMETER, "Invalid AC_FILTER entry!");
+	}
+
+	if (strlen(AC_FILTER) >= AC_FILTER_LENGTH - 3) {
+		fatal_error(FILE_ERROR_NAME, MEMORY, "Please, increase AC_FILTER_LENGTH in defines.h");
+	} 
+}
+
+// ********************************************************************************************** //
+
 void runManagerParameters::findSpectrumNb(File& fp)
 {
 	char line[256];
@@ -870,20 +882,16 @@ void runManagerParameters::display(File &fp)
 		fprintf(fp, "\n");
 	}  
 	
+	// Truncate AC_FILTER list to 50 characters.
 	fprintf(fp, "%-45s: ", "AC FILTER");
-	if (!(strncmp(AC_FILTER, "NO", 2)) && (strlen(AC_FILTER)<4)) {
-		fprintf(fp, "%s\n", "NO");
+	if (strlen(AC_FILTER) < 50) {
+		fprintf(fp, "%s\n", AC_FILTER);
 	}
 	else {
-		if (strlen(AC_FILTER) < 50) {
-			fprintf(fp, "%s\n", AC_FILTER);
+		for (int c = 0; c < 50; c++) {
+			fprintf(fp, "%c", AC_FILTER[c]);
 		}
-		else {
-			for (int c = 0; c < 50; c++) {
-				fprintf(fp, "%c", AC_FILTER[c]);
-			}
-			fprintf(fp, "...  \n");
-		}
+		fprintf(fp, "...  \n");
 	}
 	
 	fprintf(fp, "\n%-45s: %s\n", "Enzyme", ENZYME);
@@ -966,9 +974,7 @@ void runManagerParameters::displayXML(File &fp)
 	}  
 	
 	
-	if (strlen(AC_FILTER) > 4) {
-		fprintf(fp, "   <acFilter>%s</acFilter>\n", AC_FILTER);
-	}
+	fprintf(fp, "   <acFilter>%s</acFilter>\n", AC_FILTER);
 	fprintf(fp, "   <enzyme>%s</enzyme>\n", ENZYME);
 	fprintf(fp, "   <missedCleavageNb>%i</missedCleavageNb>\n", MISSED);
 	

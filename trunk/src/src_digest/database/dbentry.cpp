@@ -21,20 +21,18 @@
 /***********************************************************
 
   Company            : Swiss Intitute of Bioinformatics
-	Author             : Marc Tuloup
-	Contact            : Marc.Tuloup@isb-sib.ch
-	Created on         : 19.01.2006
+  Author             : Marc Tuloup
+  Contact            : Marc.Tuloup@isb-sib.ch
+  Created on         : 19.01.2006
   Last modification  : 27.03.2008
-	Comments           : 
-	
+  Comments           : 
+
 ***********************************************************/
 
 #include "dbentry.h"
 #include "dbfile.h"
-
 #include <string.h>
 #include <limits.h>
-
 
 /******************************************************
 
@@ -48,8 +46,6 @@ const char DBEntry::decodeTable1[15] = {'L', 'A', 'S', 'G', 'V', 'E', 'K', 'I', 
 //8 caracteres les moins frequents dans les sequences sont encodes sur 8 bits
 const char DBEntry::decodeTable2[8] = {'Y', 'M', 'H', 'C', 'W', 'X', 'B', 'Z'};
 
-
-
 /******************************************************
 
 		DECODE
@@ -58,94 +54,81 @@ const char DBEntry::decodeTable2[8] = {'Y', 'M', 'H', 'C', 'W', 'X', 'B', 'Z'};
 
 //false = encode sur 4 bits
 //true = encode sur 8 bits
-const bool DBEntry::encodeTable1[26] = {	true,		//A
-																					false,	//B
-																					false,	//C
-																					true,		//D
-																					true,		//E
-																					true,		//F
-																					true,		//G
-																					false,	//H
-																					true,		//I
-																					false,	//J		inutilise
-																					true,		//K
-																					true,		//L
-																					false,	//M
-																					true,		//N
-																					false,	//O		inutilise
-																					true,		//P
-																					true,		//Q
-																					true,		//R
-																					true,		//S
-																					true,		//T
-																					false,	//U		inutilise
-																					true,		//V
-																					false,	//W
-																					false,	//X
-																					false,	//Y
-																					false		//Z
-																			};	
-
+const bool DBEntry::encodeTable1[26] = {
+	true,		//A
+	false,	//B
+	false,	//C
+	true,		//D
+	true,		//E
+	true,		//F
+	true,		//G
+	false,	//H
+	true,		//I
+	false,	//J		inutilise
+	true,		//K
+	true,		//L
+	false,	//M
+	true,		//N
+	false,	//O		inutilise
+	true,		//P
+	true,		//Q
+	true,		//R
+	true,		//S
+	true,		//T
+	false,	//U		inutilise
+	true,		//V
+	false,	//W
+	false,	//X
+	false,	//Y
+	false		//Z
+};	
 
 //index dans decodeTable1 ou decodeTable2 
-const unsigned char DBEntry::encodeTable2[26] = {	1,	//A
-																									6,	//B
-																									3,	//C
-																									9,	//D
-																									5,	//E
-																									14, //F
-																									3, 	//G
-																									2, 	//H
-																									7, 	//I
-																									5, 	//J		inutilise	pointe par defaut sur X
-																									6, 	//K
-																									0, 	//L
-																									1, 	//M
-																									12, //N
-																									5,	//O		inutilise	pointe par defaut sur X
-																									11, //P
-																									13, //Q
-																									10, //R
-																									2, 	//S
-																									8, 	//T
-																									5, 	//U 	inutilise	pointe par defaut sur X
-																									4, 	//V
-																									4, 	//W
-																									5, 	//X
-																									0, 	//Y
-																									7		//Z
-																								};
-
-
-
-
-
-
+const unsigned char DBEntry::encodeTable2[26] = {
+	1,	//A
+	6,	//B
+	3,	//C
+	9,	//D
+	5,	//E
+	14, //F
+	3, 	//G
+	2, 	//H
+	7, 	//I
+	5, 	//J		inutilise	pointe par defaut sur X
+	6, 	//K
+	0, 	//L
+	1, 	//M
+	12, //N
+	5,	//O		inutilise	pointe par defaut sur X
+	11, //P
+	13, //Q
+	10, //R
+	2, 	//S
+	8, 	//T
+	5, 	//U 	inutilise	pointe par defaut sur X
+	4, 	//V
+	4, 	//W
+	5, 	//X
+	0, 	//Y
+	7		//Z
+};
 
 /******************************************************
-
 		Constructor
-
 *******************************************************/
 DBEntry::DBEntry(void) 
 {	
 }
 
-
 /******************************************************
-
 		Destructor
-
 *******************************************************/
 DBEntry::~DBEntry(void)
 {
 }
 
-
 /***********************************************************
-
 	Read
-
 ***********************************************************/
 
 bool DBEntry::Read(FILE *pFile, unsigned int *puiOffset, DBFile *pDBFile)
@@ -173,7 +156,6 @@ bool DBEntry::Read(FILE *pFile, unsigned int *puiOffset, DBFile *pDBFile)
 	m_iNbByte += m_aDE.Read(pFile, m_stEntryHeader.usDE_Size);
 	m_aDE.Add('\0');
 
-
 	//Keyword
 	m_iNbByte += m_aKW.Read(pFile, m_stEntryHeader.usKW_Size) * sizeof(unsigned short);
 
@@ -183,9 +165,7 @@ bool DBEntry::Read(FILE *pFile, unsigned int *puiOffset, DBFile *pDBFile)
 	//Sequence
 	ReadSQ(pFile);
 	
-
 	*puiOffset += m_iNbByte;
-
 
 	//Transform PtmRef info into Ptm info
 	m_aPTM.SetNbElt(m_aPtmRef.GetNbElt());
@@ -194,17 +174,12 @@ bool DBEntry::Read(FILE *pFile, unsigned int *puiOffset, DBFile *pDBFile)
 		m_aPTM[i].iPos	= m_aPtmRef[i].iPos;
 		m_aPTM[i].pPtm	= pDBFile->GetPtm(m_aPtmRef[i].iId);
 	}
-	
 
 	return true;
 }
 
-
-
 /***********************************************************
-
 	Write
-
 ***********************************************************/
 
 void DBEntry::Write(FILE *pFile, unsigned int *puiOffset)
@@ -216,8 +191,6 @@ void DBEntry::Write(FILE *pFile, unsigned int *puiOffset)
 		m_aPtmRef[i].iPos	= m_aPTM[i].iPos;
 		m_aPtmRef[i].iId	= m_aPTM[i].pPtm->GetId();
 	}
-
-
 
 	assert(m_aAC.GetNbElt() -1 <= USHRT_MAX);
 	assert(m_aID.GetNbElt() -1 <= USHRT_MAX);
@@ -253,27 +226,19 @@ void DBEntry::Write(FILE *pFile, unsigned int *puiOffset)
 	m_aKW.Sort(DBEntry::SortKeyword);
 	m_iNbByte += m_aKW.Write(pFile) * sizeof(unsigned short);
 
-	
-	
-
 	//PTM
 	m_aPtmRef.Sort(DBEntry::SortPtmByPos);
 	m_iNbByte += m_aPtmRef.Write(pFile) * sizeof(TS_PtmRef);
-
 	
 	//Sequence
 	WriteSQ(pFile);
-	
-	
 
 	*puiOffset += m_iNbByte;
 }
 
 
 /***********************************************************
-
    ResetForRead
-
 ***********************************************************/
 void DBEntry::ResetForRead(void)
 {
@@ -286,14 +251,11 @@ void DBEntry::ResetForRead(void)
 }
 
 /***********************************************************
-
    ResetForWrite
-
 ***********************************************************/
 void DBEntry::ResetForWrite(void)
 {
 	memset(&m_stEntryHeader, 0, sizeof(TS_EntryHeader));
-
 	m_aAC.Reset();
 	m_aID.Reset();
 	m_aDE.Reset();
@@ -303,9 +265,7 @@ void DBEntry::ResetForWrite(void)
 }
 
 /***********************************************************
-
    ReadSQ
-
 ***********************************************************/
 void DBEntry::ReadSQ(FILE *pFile)
 {
@@ -315,9 +275,9 @@ void DBEntry::ReadSQ(FILE *pFile)
 
 	unsigned char ucByte, ucHightBits, ucLowBits;
 
-	bool bEchap			= false;
+	bool bEchap		= false;
 	int iNbAARead		= 0;
-	int iEnd				= m_stEntryHeader.usSQ_Size;
+	int iEnd		= m_stEntryHeader.usSQ_Size;
 
 	//cette boucle peut lire 2 AA on peut donc a la fin de la sequence ajouter un AA de trop 
 	//(poid faible du dernier octet qui reste ne doit pas forcement etre decode)
@@ -364,12 +324,8 @@ void DBEntry::ReadSQ(FILE *pFile)
 	m_aSQ.Add('\0');
 }
 
-
-
 /***********************************************************
-
    WriteSQ
-
 ***********************************************************/
 void DBEntry::WriteSQ(FILE *pFile)
 {
@@ -419,11 +375,8 @@ void DBEntry::WriteSQ(FILE *pFile)
 	}
 }
 
-
 /***********************************************************
-
    Print
-
 ***********************************************************/
 void DBEntry::Print(void)
 {
@@ -467,9 +420,7 @@ void DBEntry::Print(void)
 
 
 /***********************************************************
-
    SetSQ
-
  ***********************************************************/
 void DBEntry::SetSQ(const char *pszSQ)
 {
@@ -479,9 +430,7 @@ void DBEntry::SetSQ(const char *pszSQ)
 
 
 /***********************************************************
-
    SetAC
-
  ***********************************************************/
 void DBEntry::SetAC(const char *pszAC)
 {
@@ -491,9 +440,7 @@ void DBEntry::SetAC(const char *pszAC)
 
 
 /***********************************************************
-
    SetID
-
  ***********************************************************/
 void DBEntry::SetID(const char *pszID)
 {
@@ -501,16 +448,12 @@ void DBEntry::SetID(const char *pszID)
 	m_aID.Add((char *)pszID, (int)strlen(pszID)+1);
 }
 
-
 /***********************************************************
-
    SetDE
-
  ***********************************************************/
 void DBEntry::SetDE(const char *pszDE)
 {
 	m_aDE.Reset();
-
 	int iLen = (int)strlen(pszDE);
 
 	if(iLen > 60){
@@ -524,13 +467,11 @@ void DBEntry::SetDE(const char *pszDE)
 	}
 }
 
-void DBEntry::Set(	const char *pszAC, const char *pszID, const char *pszDE, const char *pszSQ, 
-										int iTaxId, int iMw, double dPi, unsigned char ucType, int iChildId, int iChildStart, int iChildEnd,
-										DynamicArray<unsigned short> &aKW, DynamicArray<TS_Ptm> &aPtm)
+void DBEntry::Set(const char *pszAC, const char *pszID, const char *pszDE, const char *pszSQ, 
+			int iTaxId, int iMw, double dPi, unsigned char ucType, int iChildId, int iChildStart, int iChildEnd,
+			DynamicArray<unsigned short> &aKW, DynamicArray<TS_Ptm> &aPtm)
 {
-
 	ResetForWrite();
-
 	SetAC(pszAC);
 	SetID(pszID);
 	SetDE(pszDE);

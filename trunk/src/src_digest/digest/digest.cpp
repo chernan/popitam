@@ -73,41 +73,40 @@ void Digest::Load(IOParam *pParam)
 	m_iMCLimit = pParam->m_iMissedClevage + 1;
 
 	//Masse des AA
-	const char *ppszAAFormula[26] = {	"C3H5ON",			//A
-																		"",						//B
-																		"C3H5ONS", 		//C
-																		"C4H5O3N", 		//D
-																		"C5H7O3N", 		//E
-																		"C9H9ON",			//F
-																		"C2H3ON", 		//G
-																		"C6H7ON3", 		//H
-																		"C6H11ON", 		//I
-																		"C6H11ON", 		//J
-																		"C6H12ON2", 	//K
-																		"C6H11ON", 		//L
-																		"C5H9ONS",		//M
-																		"C4H6O2N2", 	//N
-																		"", 					//O
-																		"C5H7ON", 		//P
-																		"C5H8O2N2", 	//Q
-																		"C6H12ON4", 	//R
-																		"C3H5O2N", 		//S
-																		"C4H7O2N", 		//T
-																		"", 					//U
-																		"C5H9ON", 		//V
-																		"C11H10ON2", 	//W
-																		"", 					//X
-																		"C9H9O2N",		//Y
-																		""						//Z	
-																	};
+	const char *ppszAAFormula[26] = {
+		"C3H5ON",		//A
+		"",			//B
+		"C3H5ONS", 		//C
+		"C4H5O3N", 		//D
+		"C5H7O3N", 		//E
+		"C9H9ON",		//F
+		"C2H3ON", 		//G
+		"C6H7ON3", 		//H
+		"C6H11ON", 		//I
+		"C6H11ON", 		//J
+		"C6H12ON2", 		//K
+		"C6H11ON", 		//L
+		"C5H9ONS",		//M
+		"C4H6O2N2", 		//N
+		"", 			//O
+		"C5H7ON", 		//P
+		"C5H8O2N2", 		//Q
+		"C6H12ON4", 		//R
+		"C3H5O2N", 		//S
+		"C4H7O2N", 		//T
+		"", 			//U
+		"C5H9ON", 		//V
+		"C11H10ON2", 		//W
+		"", 			//X
+		"C9H9O2N",		//Y
+		""			//Z	
+	};
 
 	AtomicMass atomicMass(pParam->m_eResolution);
 
 	//tous les amino acids
 	for(int i=0; i<26; i++)
 		m_tdAAMass[i] = atomicMass.GetMass(ppszAAFormula[i]);
-	
-
 
 	//H2O
 	m_dHPlus		= atomicMass.GetMass("H(+)"); 
@@ -206,7 +205,7 @@ void Digest::Run(const char *pszSequence, DynamicArray<TS_Ptm> &aPtm)
 
 	//set sequence
 	m_pszSequence	= pszSequence;
-	m_iNbAA				= (int)strlen(m_pszSequence);
+	m_iNbAA		= (int)strlen(m_pszSequence);
 
 	//set ptm list
 	m_ptmManager.Set(aPtm);
