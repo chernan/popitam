@@ -1,0 +1,7 @@
+TODO:
+* Change all computations to use doubles instead of floats (change *FLOAT* defines accordingly).
+* Make database lookups (AC) at initialization time instead of at runtime FOR EACH spectra!
+* Rewrite runManager::run() (and all its dependencies) to allocate memory/objects outside of the run loop
+  and move initialization code outside of the loop as well. A lot of work though, maybe not worth it given
+  the real time spent doing initializations. It would prevent memory fragmentation however.
+* Implement support for half-cleaved AA (as in Phenyx)
