@@ -44,7 +44,6 @@ extern memorycheck memCheck;
 
 Compare::Compare() 
 {
-	m_digest.SetCompare(this);
 	runManParam			= NULL;
 	allRunStats			= NULL;
 	scoreF				= NULL;
@@ -216,57 +215,18 @@ void Compare::init_DIG()
 			m_db.GetFile(i)->AddAC(pszAC);
 		}
 	}
-
-	// ************************ DIGESTION ************************
-	IOParam param;
-	param.SetEnzyme(runManParam->ENZYME);
-	param.m_iMissedClevage	= runManParam->MISSED;
-	param.m_eResolution = MASS_MONOISOTOPIC;
-	param.m_eIonMode = ION_MODE_M;
-	param.m_bPTM = false;
-	
-	//param.m_aModif.Add( new IOParamModif("CAM", "CAM", "C", "C2H3ON", 0, 0, 0.3));
-  
-	m_digest.Load(&param);
-  
-	//  if (tagoData->get_parentMassM() <	MIN_ERR+2) fatal_error(runManParam->FILE_ERROR_NAME, DEBUG,	"Sorry,	parentMass is small; please	look in	compare::SetParam for borning the parentMass");
-	//  m_digest.SetPeptideRange(600,	50000);
-  
-	// PEPTIDE RANGE: ABSOLUTE MIN = 666 (~6aa); ABSOLUTE MAX = 3333 (~30aa);
-	double MIN = 666;
-	double MAX = 3333;
-
-	// c'est l'erreur sur la masse parente qui determine le range
-	if (!runManParam->m_MUTMOD) {
-		if ((spectrumData->get_parentMassM() - runManParam->PREC_MASS_ERROR) > 666) {  
-			MIN = spectrumData->get_parentMassM() - runManParam->PREC_MASS_ERROR;
-		}
-		if ((spectrumData->get_parentMassM() + runManParam->PREC_MASS_ERROR) < 3333) { 
-			MAX = spectrumData->get_parentMassM() + runManParam->PREC_MASS_ERROR;
-		}
-	}
-	else {
-		if ((spectrumData->get_parentMassM() - runManParam->UP_LIMIT_RANGE_PM)  > 666) {  
-			MIN = spectrumData->get_parentMassM() - runManParam->UP_LIMIT_RANGE_PM;
-		}
-		if ((spectrumData->get_parentMassM() - runManParam->LOW_LIMIT_RANGE_PM) < 3333) { 
-			MAX = spectrumData->get_parentMassM() - runManParam->LOW_LIMIT_RANGE_PM;
-		}
-	}
-	
-	m_digest.Limit(MIN, MAX);
 }
 
 // *****************************************************************************
 
-void Compare::Run(void) 
+void Compare::Run(Digest* digest) 
 {
 	while ((m_pEntry = m_db.GetNextEntry())) {
 		//gfs 
 		//cout << "AC = " << m_pEntry->GetAC() << endl;
 		//eof gfs
 		specStats->protNbInRange++;
-		m_digest.Run(m_pEntry->GetSQ(), m_pEntry->GetPtm() );  // rdv dans FindPeptide
+		digest->Run(m_pEntry->GetSQ(), m_pEntry->GetPtm() );  // rdv dans FindPeptide
 	}
 	
 	specStats->display(runManParam->FILEOUT);

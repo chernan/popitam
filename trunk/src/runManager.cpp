@@ -264,9 +264,18 @@ void runManager::run()
 	spectrumData = new data();
 	memCheck.data++;
 	spectrumData->init(runManParam);
-
+	
+	// DIGESTION: static initialization
+	IOParam param;
+	param.SetEnzyme(runManParam->ENZYME);
+	param.m_iMissedClevage	= runManParam->MISSED;
+	param.m_eResolution = MASS_MONOISOTOPIC;
+	param.m_eIonMode = ION_MODE_M;
+	param.m_bPTM = false;
+	Digest digest;
+	digest.Load(&param);
+	
 	while (spectrumData->load()) {
-		
 		spectrumData->display(runManParam->FILEOUT);
 		
 		if (runManParam->XML_OUT) {
@@ -274,7 +283,6 @@ void runManager::run()
 		}
 		
 		unsigned long int iniTime = clock();
-		//if ((spectrumData->get_parentMassM() < 2224) | (spectrumData->get_parentMassM()	> 2228)) continue;
 		
 		popitam = new Compare();
 		memCheck.popitam++;
@@ -290,13 +298,41 @@ void runManager::run()
 		double dt0 = ((double)(clock()-t0)/(CLOCKS_PER_SEC/1000));
 		unsigned long int t1 = clock();
 		//eof gfs
-		popitam->init_DIG(); // PREPARE LA DIGESTION	  
+		popitam->init_DIG(); // PREPARE LA DIGESTION
+		
+		
+		// DIGESTION: dynamic initialization
+		digest.SetCompare(popitam);
+		// PEPTIDE RANGE: ABSOLUTE MIN = 666 (~6aa); ABSOLUTE MAX = 3333 (~30aa);
+		double MIN = 666;
+		double MAX = 3333;
+		
+		// c'est l'erreur sur la masse parente qui determine le range
+		if (!runManParam->m_MUTMOD) {
+			if ((spectrumData->get_parentMassM() - runManParam->PREC_MASS_ERROR) > 666) {  
+				MIN = spectrumData->get_parentMassM() - runManParam->PREC_MASS_ERROR;
+			}
+			if ((spectrumData->get_parentMassM() + runManParam->PREC_MASS_ERROR) < 3333) { 
+				MAX = spectrumData->get_parentMassM() + runManParam->PREC_MASS_ERROR;
+			}
+		}
+		else {
+			if ((spectrumData->get_parentMassM() - runManParam->UP_LIMIT_RANGE_PM)  > 666) {  
+				MIN = spectrumData->get_parentMassM() - runManParam->UP_LIMIT_RANGE_PM;
+			}
+			if ((spectrumData->get_parentMassM() - runManParam->LOW_LIMIT_RANGE_PM) < 3333) { 
+				MAX = spectrumData->get_parentMassM() - runManParam->LOW_LIMIT_RANGE_PM;
+			}
+		}
+		
+		digest.Limit(MIN, MAX);
+		// ---------------------------
 
 		//gfs
 		double dt1 = ((double)(clock()-t1)/(CLOCKS_PER_SEC/1000));
 		unsigned long int t2 = clock();
 		//eof gfs
-		popitam->Run();      // IDENTIFIE LE SPECTRE
+		popitam->Run(&digest);      // IDENTIFIE LE SPECTRE
 		//gfs
 		double dt2 = ((double)(clock()-t2)/(CLOCKS_PER_SEC/1000));
 		//cout << "init_POP = " << dt0 << endl;
