@@ -70,7 +70,7 @@ public :
 	~Compare(void);
 	
 	void init_DIG();
-	void Run(void);
+	void Run(Digest* digest);
 	void EndRun(int);
 	void init_POP(runManagerParameters*, TREE*, aa*, ion*, ion*, ion*, ion*, data*, result*, allrunstatistics*);
 	void FindPeptide(PeptideDigest *pPeptideDigest);
@@ -79,7 +79,6 @@ public :
 private :
 	DBReader m_db;
 	DBEntry *m_pEntry;
-	Digest m_digest;
 	char m_szPeptideSeq[MAX_LENGHT];
 	unsigned long m_ulOffset2;
 	int m_iDataBaseId;
