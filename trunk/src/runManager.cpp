@@ -263,7 +263,7 @@ void runManager::run()
 	
 	spectrumData = new data();
 	memCheck.data++;
-	spectrumData->init(runManParam);
+	spectrumData->init(runManParam);	
 	
 	// DIGESTION: static initialization
 	IOParam param;

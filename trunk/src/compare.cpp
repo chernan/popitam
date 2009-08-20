@@ -163,8 +163,6 @@ void Compare::buildGraph()
 
 void Compare::init_DIG()
 {  
-	int i;
-	
 	//************************ DATABASES ************************
 	if (strcmp(runManParam->DB1_PATH, "NO")) {
 		m_db.Open(runManParam->DB1_PATH);
@@ -174,14 +172,9 @@ void Compare::init_DIG()
 		m_db.Open(runManParam->DB2_PATH);
 	}
 	
-	if ((!strcmp(runManParam->DB1_PATH, "NO")) && (!strcmp(runManParam->DB2_PATH, "NO"))) {
-		fatal_error(runManParam->FILE_ERROR_NAME, DEBUG, "in function Compare::SetParam(), no db selected");
-	}
-	
-	DBFileReader *pDBFileReader;
-	
+	int i;
 	for (i = 0; i < m_db.GetNbFile(); i++) {
-		pDBFileReader = m_db.GetFile(i);
+		DBFileReader *pDBFileReader = m_db.GetFile(i);
 	
 		// statistics
 		specStats->protNbInDatabases += pDBFileReader->GetNbEntries();
