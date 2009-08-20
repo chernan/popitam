@@ -772,7 +772,12 @@ void runManagerParameters::validateParameters()
 
 	if (strlen(AC_FILTER) >= AC_FILTER_LENGTH - 3) {
 		fatal_error(FILE_ERROR_NAME, MEMORY, "Please, increase AC_FILTER_LENGTH in defines.h");
-	} 
+	}
+	
+	if ((!strcmp(DB1_PATH, "NO")) && (!strcmp(DB2_PATH, "NO"))) {
+		fatal_error(FILE_ERROR_NAME, PARAMETER, "No database selected!");
+	}
+	
 }
 
 // ********************************************************************************************** //
