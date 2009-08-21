@@ -33,8 +33,9 @@
 
 struct FICHE
 {
-  int           dtbId;
-  unsigned int	offId;
+  //int           dtbId;
+  //unsigned int	offId;
+  DBEntry*	prot;
   char          AC[AC_LENGHT];
   char          ID[ID_LENGHT];
   char          DE[DE_LENGHT];

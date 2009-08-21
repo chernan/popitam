@@ -255,8 +255,8 @@ void Compare::FindPeptide(PeptideDigest *pPeptideDigest)
 	memCheck.peptide++;
 
 	aPeptide->init(runManParam, aaParam, (float)pPeptideDigest->GetMass(), m_szPeptideSeq,
-                       pPeptideDigest->GetStart(), pPeptideDigest->GetEnd(), &m_db, FALSE);	
-
+                       pPeptideDigest->GetStart(), pPeptideDigest->GetEnd(), m_pEntry, FALSE);	
+	
 	char str[MAX_LENGHT+1];
 	sprintf(str, "%s#", m_szPeptideSeq);
 
@@ -354,7 +354,7 @@ void Compare::processAPeptide(peptide* pep)
 }
 
 // ********************************************************************************************** //
-
+/*
 void Compare::fillDtbInfos()
 {
 	specResults->currentElement = specResults->firstElement->following;
@@ -365,8 +365,9 @@ void Compare::fillDtbInfos()
 		for (int i = 0; i < exemplairesNB; i++) {
 			
 			peptide* pep = specResults->currentElement->Peptide; 
-			Protein* prot = pep->getProtein(i);
+			DBEntry* prot = pep->getProtein(i);
 			
+			// Retrive the entry from prot->m_reloadDBEntry and copy it to prot->AC,iD,DE and pep->iChainStart[i], ...
 			GetProteinInfo(&(prot->m_reloadDBEntry),
 				prot->AC,
 				prot->ID,
@@ -378,7 +379,7 @@ void Compare::fillDtbInfos()
 		specResults->currentElement = specResults->currentElement->following;
 	}
 }
-
+*/
 // ********************************************************************************************** //
 
 void Compare::computeIDSETstats()
@@ -432,7 +433,7 @@ void Compare::displayIDSETstats(File &fp)
 
 void Compare::EndRun(int ID)
 {
-	fillDtbInfos();
+	//fillDtbInfos();
 	specResults->putRanks();
 	specResults->computePValuesNEG();
 	specResults->computePValuesRANDOM();

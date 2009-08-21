@@ -35,7 +35,7 @@ peptide::peptide()
 {  
 	runManParam = NULL;
 	aaParam = NULL;
-	myProt = new Protein*[MAX_DOUBLONS];                                          memCheck.digest++;
+	myProt = new DBEntry*[MAX_DOUBLONS];                                          memCheck.digest++;
 	for (int i = 0; i < MAX_DOUBLONS; i++) myProt[i] = NULL;
   
 }
@@ -51,13 +51,13 @@ peptide::~peptide()
       if(myProt[i])	{delete myProt[i]; myProt[i] = NULL;                         memCheck.digest--;}
     }
     delete[] myProt; myProt = NULL;                                                  memCheck.digest--;
-    myProt=NULL;
   }
 }
 
 // ********************************************************************************************** //
 
-void peptide::init(runManagerParameters* rMP, aa* aaP, float dbM, char* seq,  int start, int end, DBReader *pDBReader, bool IR)
+// Only used in Compare::FindPeptide
+void peptide::init(runManagerParameters* rMP, aa* aaP, float dbM, char* seq,  int start, int end, DBEntry* prot, bool IR)
 {
   runManParam           = rMP;
   aaParam               = aaP;
@@ -68,8 +68,9 @@ void peptide::init(runManagerParameters* rMP, aa* aaP, float dbM, char* seq,  in
   exemplairesNb         = 1;
   posStart[0]           = start;
   posEnd[0]             = end;
-  myProt[0] = new Protein;                                                               memCheck.digest++;
-  myProt[0]->init(pDBReader);
+  
+  allocProtein(0, prot);
+  
   computeLayers();
 }
 

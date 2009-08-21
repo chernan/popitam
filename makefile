@@ -30,7 +30,7 @@ ifeq ($(OPTION), o)
         OPT = -O3
 endif
 
-VERSION			= "4.0.5"
+VERSION			= "4.0.6 (beta)"
 VERSION_STR		= '$(VERSION)'
 
 SRC_DIR			= ./src ./src/src_digest ./src/src_digest/base ./src/src_digest/database ./src/src_digest/digest
@@ -59,7 +59,7 @@ OBJECTS 		= atomicmass file MATerror tagfile txtfile util \
 			  ioparam ioversion \
 			  aa about allrunstatistics ants clicsearch compare data element error \
 			  fun gnb gpparameters gptree gptreenode graphe ion main memorycheck peptide \
-			  prot Protein protEl result runManager runManagerParameters scenario \
+			  prot protEl result runManager runManagerParameters scenario \
 			  score Sequence setlib0 specresults spectrumstatistics subseq sufftab \
 			  tag_extractor tag_processor Tree usage utils vertex
 

@@ -86,7 +86,7 @@ private :
 	void loadSpectrum(int);
 	void buildGraph();
 	void processAPeptide(peptide *pep);
-	void fillDtbInfos();
+	/* void fillDtbInfos(); */
 	void computeIDSETstats();
 	void displayIDSETstats(File&);
 	void DisplayUnusedAC(File&);

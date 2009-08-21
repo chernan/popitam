@@ -298,16 +298,16 @@ void specresults::write(File &fp) {
 		else                                    fprintf(fp, " %7.1e) | ", currentElement->PVALUE_NEG);
 
 		fprintf(fp, "%11.5f | ",         currentElement->Peptide->popiPep.dtbPepMass);
-		fprintf(fp, "%-25s | ",         currentElement->Peptide->getProtein(0)->AC);
+		fprintf(fp, "%-25s | ",         currentElement->Peptide->getProtein(0)->GetAC());
 		char tempoText[ID_LENGHT];
-		if (strlen(currentElement->Peptide->getProtein(0)->ID) > 19) 
+		if (strlen(currentElement->Peptide->getProtein(0)->GetID()) > 19) 
 		 {
-		    strcpy(tempoText, currentElement->Peptide->getProtein(0)->ID);
+		    strcpy(tempoText, currentElement->Peptide->getProtein(0)->GetID());
 		 	tempoText[16] = '\0';
 			strcat(tempoText, "...");
 		 }
 		else {
-			strcpy(tempoText, currentElement->Peptide->getProtein(0)->ID);
+			strcpy(tempoText, currentElement->Peptide->getProtein(0)->GetID());
 		}
 		fprintf(fp, "%-20s | ",         tempoText);
 		fprintf(fp, "%s",                      currentElement->Peptide->popiPep.dtbSeq);
@@ -319,13 +319,13 @@ void specresults::write(File &fp) {
 		
 		if (i < currentElement->Peptide->exemplairesNb) 
 		{
-			if (strlen(currentElement->Peptide->getProtein(i)->ID) > 19) 
+			if (strlen(currentElement->Peptide->getProtein(i)->GetID()) > 19) 
 			{
-				strcpy(tempoText, currentElement->Peptide->getProtein(i)->ID);
+				strcpy(tempoText, currentElement->Peptide->getProtein(i)->GetID());
 				tempoText[16] = '\0';
 				strcat(tempoText, "...");
 			} 
-			fprintf(fp, "%9s | %27s | %11s | %-25s | %-20s | ", "", "", "", currentElement->Peptide->getProtein(i)->AC, tempoText);
+			fprintf(fp, "%9s | %27s | %11s | %-25s | %-20s | ", "", "", "", currentElement->Peptide->getProtein(i)->GetAC(), tempoText);
 			i++;
 		}
 		else 
@@ -346,13 +346,13 @@ void specresults::write(File &fp) {
 		if (i < currentElement->Peptide->exemplairesNb) {
 			while (i < currentElement->Peptide->exemplairesNb) 
 			{	
-				if (strlen(currentElement->Peptide->getProtein(i)->ID) > 19) 
+				if (strlen(currentElement->Peptide->getProtein(i)->GetID()) > 19) 
 				{
-				strcpy(tempoText, currentElement->Peptide->getProtein(i)->ID);
+				strcpy(tempoText, currentElement->Peptide->getProtein(i)->GetID());
 				tempoText[16] = '\0';
 				strcat(tempoText, "...");
 				}
-				fprintf(fp, "%9s | %27s | %11s | %-25s | %-20s | %20s \n", "", "", "", currentElement->Peptide->getProtein(i)->AC, tempoText, "");
+				fprintf(fp, "%9s | %27s | %11s | %-25s | %-20s | %20s \n", "", "", "", currentElement->Peptide->getProtein(i)->GetAC(), tempoText, "");
 				i++;
 			}
 		}
@@ -407,9 +407,9 @@ void specresults::writeXML(File &fp) {
 		fprintf(fp, "          <dbRefList>\n");
 		fprintf(fp, "            <dbRef>\n");
 		for (int e = 0; e < currentElement->Peptide->exemplairesNb; e++)
-		{fprintf(fp, "               <ac>%s</ac>\n", currentElement->Peptide->getProtein(e)->AC);
-		 fprintf(fp, "               <id>%s</id>\n", currentElement->Peptide->getProtein(e)->ID);
-		 fprintf(fp, "               <de>%s</de>\n", currentElement->Peptide->getProtein(e)->DE);}
+		{fprintf(fp, "               <ac>%s</ac>\n", currentElement->Peptide->getProtein(e)->GetAC());
+		 fprintf(fp, "               <id>%s</id>\n", currentElement->Peptide->getProtein(e)->GetID());
+		 fprintf(fp, "               <de>%s</de>\n", currentElement->Peptide->getProtein(e)->GetDE());}
 		fprintf(fp, "            </dbRef>\n");
 		fprintf(fp, "          </dbRefList>\n");
 		fprintf(fp, "        </match>\n");
@@ -473,7 +473,7 @@ void specresults::writeSimple(File &fp) {
 
 
 		fprintf(fp, "%7.2f | ",                currentElement->Peptide->popiPep.dtbPepMass);
-		fprintf(fp, "%-6s | %-15s | ",         currentElement->Peptide->getProtein(0)->AC, currentElement->Peptide->getProtein(0)->ID);
+		fprintf(fp, "%-6s | %-15s | ",         currentElement->Peptide->getProtein(0)->GetAC(), currentElement->Peptide->getProtein(0)->GetID());
 		fprintf(fp, " %s",                     currentElement->Peptide->popiPep.dtbSeq);
 		// fprintf(fp, " \t %f",                currentElement->ZSCORE_RANDOM);
 		fprintf(fp, "\n");
@@ -481,7 +481,7 @@ void specresults::writeSimple(File &fp) {
 		// l�, j'inscrit le scenario, et en m�me temps, j'affiche les autres AC et ID s'ils existent
 		int i = 1;                                                           
 		if (i < currentElement->Peptide->exemplairesNb) { 
-			fprintf(fp, "%9s | %18s | %7s | %-6s | %-15s | ", "", "", "", currentElement->Peptide->getProtein(i)->AC, currentElement->Peptide->getProtein(i)->ID);
+			fprintf(fp, "%9s | %18s | %7s | %-6s | %-15s | ", "", "", "", currentElement->Peptide->getProtein(i)->GetAC(), currentElement->Peptide->getProtein(i)->GetID());
 			i++;
 		}
 		else {
@@ -500,7 +500,7 @@ void specresults::writeSimple(File &fp) {
 		// s'il reste des exemplaires � �crire, fait le maintenant
 		if (i < currentElement->Peptide->exemplairesNb) {
 			while (i < currentElement->Peptide->exemplairesNb) {	
-				fprintf(fp, "%9s | %18s | %7s | %-6s | %-15s | %20s \n", "", "", "", currentElement->Peptide->getProtein(i)->AC, currentElement->Peptide->getProtein(i)->ID, "");
+				fprintf(fp, "%9s | %18s | %7s | %-6s | %-15s | %20s \n", "", "", "", currentElement->Peptide->getProtein(i)->GetAC(), currentElement->Peptide->getProtein(i)->GetID(), "");
 				i++;
 			}
 			//fprintf(fp, "\n");

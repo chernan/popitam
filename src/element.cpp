@@ -84,8 +84,8 @@ void element::fillElement(peptide* pep, scenario* scen) {
  
   for (int i = 0; i < pep->exemplairesNb; i++)
     {
-      Peptide->allocProtein(i);
-      Peptide->getProtein(i)->init(pep->getProtein(i)->m_reloadDBEntry);
+	    
+      Peptide->allocProtein(i, pep->getProtein(i));
       Peptide->posStart[i]           = pep->posStart[i];
       Peptide->posEnd[i]             = pep->posEnd[i];
     }
@@ -110,8 +110,8 @@ void element::fillElement(peptide* pep, scenario* scen) {
 void element::update(peptide* pep, char* FileErrorName)
 {
   int nbExp = Peptide->exemplairesNb;
-  Peptide->allocProtein(nbExp);
-  Peptide->getProtein(nbExp)->init(pep->getProtein(0)->m_reloadDBEntry);
+  
+  Peptide->allocProtein(nbExp, pep->getProtein(0));
   Peptide->posStart[nbExp]           = pep->posStart[0];
   Peptide->posEnd[nbExp]             = pep->posEnd[0]; 
   Peptide->exemplairesNb++;

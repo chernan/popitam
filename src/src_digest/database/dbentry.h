@@ -156,6 +156,11 @@ public :
 	/******************************************************
 	SET
 	*******************************************************/
+
+	// Copy values from the entry passed in argument.
+	// NOTE: keywords are not copied!
+	void copy(DBEntry* entry);
+	
 protected :
 	void Set(	const char *pszAC, const char *pszID, const char *pszDE, const char *pszSQ, 
 						int iTaxId, int iMw, double dPi, unsigned char ucType, int iChildId, int iChildStart, int iChildEnd,
