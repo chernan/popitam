@@ -44,7 +44,6 @@ class peptide {
 
   int                     exemplairesNb;
 
-  Protein**               myProt;             
   int                     posStart[MAX_DOUBLONS];
   int                     posEnd[MAX_DOUBLONS];
   int                    iChainStart[MAX_DOUBLONS];
@@ -61,6 +60,12 @@ class peptide {
   void computeLayers();
   //void updateResult();
   void randomize();
+  
+  void allocProtein(int i) { myProt[i] = new Protein; }
+  Protein* getProtein(int i) { return myProt[i]; }
+  
+private:
+  Protein**               myProt;             
 };
     
 // ********************************************************************************************** //

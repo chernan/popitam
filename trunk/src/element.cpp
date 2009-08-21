@@ -44,7 +44,7 @@ extern memorycheck    memCheck;
 
 element::element()
 {
-  FILLED          = false;    // element non "visité"
+  FILLED          = false;    // element non "visitï¿½"
   rank            = 0;
   Peptide         = NULL;
   Scenario        = NULL;
@@ -84,8 +84,8 @@ void element::fillElement(peptide* pep, scenario* scen) {
  
   for (int i = 0; i < pep->exemplairesNb; i++)
     {
-      Peptide->myProt[i] = new Protein;                                                          memCheck.digest++;
-      Peptide->myProt[i]->init(pep->myProt[i]->m_reloadDBEntry);
+      Peptide->allocProtein(i);
+      Peptide->getProtein(i)->init(pep->getProtein(i)->m_reloadDBEntry);
       Peptide->posStart[i]           = pep->posStart[i];
       Peptide->posEnd[i]             = pep->posEnd[i];
     }
@@ -110,9 +110,8 @@ void element::fillElement(peptide* pep, scenario* scen) {
 void element::update(peptide* pep, char* FileErrorName)
 {
   int nbExp = Peptide->exemplairesNb;
-  Peptide->myProt[nbExp] = new Protein;   memCheck.digest++;
-  
-  Peptide->myProt[nbExp]->init( pep->myProt[0]->m_reloadDBEntry );
+  Peptide->allocProtein(nbExp);
+  Peptide->getProtein(nbExp)->init(pep->getProtein(0)->m_reloadDBEntry);
   Peptide->posStart[nbExp]           = pep->posStart[0];
   Peptide->posEnd[nbExp]             = pep->posEnd[0]; 
   Peptide->exemplairesNb++;
