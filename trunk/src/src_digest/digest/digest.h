@@ -104,7 +104,7 @@ public:
 	void Load(IOParam *pParam);
 	void Limit(double dMassMin, double dMassMax);
 
-	void Run(const char *pszSequence, DynamicArray<TS_Ptm> &aPtm);
+	void Run(DBEntry* prot);
 	
 	inline int GetNbPeptideGenerated(void)
 	{ return m_iNbPeptideGenerated; }

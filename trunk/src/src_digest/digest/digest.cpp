@@ -198,17 +198,17 @@ void Digest::Limit(double dMassMin, double dMassMax)
 		Run
 
 *******************************************************/
-void Digest::Run(const char *pszSequence, DynamicArray<TS_Ptm> &aPtm)
+void Digest::Run(DBEntry* prot)
 {	
 	//reset
 	m_pCurrent	= m_MCManager.Reset();
 
 	//set sequence
-	m_pszSequence	= pszSequence;
+	m_pszSequence	= prot->GetSQ();
 	m_iNbAA		= (int)strlen(m_pszSequence);
 
 	//set ptm list
-	m_ptmManager.Set(aPtm);
+	m_ptmManager.Set(prot->GetPtm());
 	
 	//digestion proprement dite par l'enzyme choisie
 	(this->*m_pfctEnzyme)();

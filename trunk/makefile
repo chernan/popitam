@@ -30,7 +30,7 @@ ifeq ($(OPTION), o)
         OPT = -O3
 endif
 
-VERSION			= "4.0.6 (beta)"
+VERSION			= "4.0.7 (beta)"
 VERSION_STR		= '$(VERSION)'
 
 SRC_DIR			= ./src ./src/src_digest ./src/src_digest/base ./src/src_digest/database ./src/src_digest/digest
