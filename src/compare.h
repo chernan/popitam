@@ -59,7 +59,6 @@ public :
 	data                   *spectrumData;
 	graphe                 *popiGraph;
 	subseq                 *popiTags;
-	peptide                *aPeptide;
 	fun                    *funGen;
 	specresults            *specResults;
 	TreeWord               *treeWord;
@@ -86,7 +85,7 @@ private :
 
 	void loadSpectrum(int);
 	void buildGraph();
-	void processAPeptide();
+	void processAPeptide(peptide *pep);
 	void fillDtbInfos();
 	void computeIDSETstats();
 	void displayIDSETstats(File&);

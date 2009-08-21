@@ -81,7 +81,7 @@ specresults::~specresults() {
 		currentElement = firstElement->following;
 	}
 
-	// remove tête et queue
+	// remove tï¿½te et queue
 	if (firstElement != NULL) {delete firstElement;  firstElement = NULL;                            memCheck.tagoResults--;}
 	if (lastElement  != NULL) {delete lastElement;   lastElement  = NULL;                            memCheck.tagoResults--;}
 
@@ -224,7 +224,7 @@ void specresults::removeElement(element* el){
 void specresults::putRanks() 
 {
 	currentElement = firstElement->following;
-	if (!currentElement->FILLED) return; //aucune protéine candidate n'a été trouvée
+	if (!currentElement->FILLED) return; //aucune protï¿½ine candidate n'a ï¿½tï¿½ trouvï¿½e
 	currentElement->rank = 1;
 
 	while ((currentElement->following != lastElement) && (currentElement->following->FILLED))
@@ -298,34 +298,34 @@ void specresults::write(File &fp) {
 		else                                    fprintf(fp, " %7.1e) | ", currentElement->PVALUE_NEG);
 
 		fprintf(fp, "%11.5f | ",         currentElement->Peptide->popiPep.dtbPepMass);
-		fprintf(fp, "%-25s | ",         currentElement->Peptide->myProt[0]->AC);
+		fprintf(fp, "%-25s | ",         currentElement->Peptide->getProtein(0)->AC);
 		char tempoText[ID_LENGHT];
-		if (strlen(currentElement->Peptide->myProt[0]->ID) > 19) 
+		if (strlen(currentElement->Peptide->getProtein(0)->ID) > 19) 
 		 {
-		    strcpy(tempoText, currentElement->Peptide->myProt[0]->ID);
+		    strcpy(tempoText, currentElement->Peptide->getProtein(0)->ID);
 		 	tempoText[16] = '\0';
 			strcat(tempoText, "...");
 		 }
 		else {
-			strcpy(tempoText, currentElement->Peptide->myProt[0]->ID);
+			strcpy(tempoText, currentElement->Peptide->getProtein(0)->ID);
 		}
 		fprintf(fp, "%-20s | ",         tempoText);
 		fprintf(fp, "%s",                      currentElement->Peptide->popiPep.dtbSeq);
 		// fprintf(fp, " \t %f",                currentElement->ZSCORE_RANDOM);
 		fprintf(fp, "\n");
 
-		// là, j'inscrit le scenario, et en même temps, j'affiche les autres AC et ID s'ils existent
+		// lï¿½, j'inscrit le scenario, et en mï¿½me temps, j'affiche les autres AC et ID s'ils existent
 		int i = 1;                                                           
 		
 		if (i < currentElement->Peptide->exemplairesNb) 
 		{
-			if (strlen(currentElement->Peptide->myProt[i]->ID) > 19) 
+			if (strlen(currentElement->Peptide->getProtein(i)->ID) > 19) 
 			{
-				strcpy(tempoText, currentElement->Peptide->myProt[i]->ID);
+				strcpy(tempoText, currentElement->Peptide->getProtein(i)->ID);
 				tempoText[16] = '\0';
 				strcat(tempoText, "...");
 			} 
-			fprintf(fp, "%9s | %27s | %11s | %-25s | %-20s | ", "", "", "", currentElement->Peptide->myProt[i]->AC, tempoText);
+			fprintf(fp, "%9s | %27s | %11s | %-25s | %-20s | ", "", "", "", currentElement->Peptide->getProtein(i)->AC, tempoText);
 			i++;
 		}
 		else 
@@ -342,17 +342,17 @@ void specresults::write(File &fp) {
 
 		fprintf(fp, "\n");
 
-		// s'il reste des exemplaires à écrire, fait le maintenant
+		// s'il reste des exemplaires ï¿½ ï¿½crire, fait le maintenant
 		if (i < currentElement->Peptide->exemplairesNb) {
 			while (i < currentElement->Peptide->exemplairesNb) 
 			{	
-				if (strlen(currentElement->Peptide->myProt[i]->ID) > 19) 
+				if (strlen(currentElement->Peptide->getProtein(i)->ID) > 19) 
 				{
-				strcpy(tempoText, currentElement->Peptide->myProt[i]->ID);
+				strcpy(tempoText, currentElement->Peptide->getProtein(i)->ID);
 				tempoText[16] = '\0';
 				strcat(tempoText, "...");
 				}
-				fprintf(fp, "%9s | %27s | %11s | %-25s | %-20s | %20s \n", "", "", "", currentElement->Peptide->myProt[i]->AC, tempoText, "");
+				fprintf(fp, "%9s | %27s | %11s | %-25s | %-20s | %20s \n", "", "", "", currentElement->Peptide->getProtein(i)->AC, tempoText, "");
 				i++;
 			}
 		}
@@ -407,9 +407,9 @@ void specresults::writeXML(File &fp) {
 		fprintf(fp, "          <dbRefList>\n");
 		fprintf(fp, "            <dbRef>\n");
 		for (int e = 0; e < currentElement->Peptide->exemplairesNb; e++)
-		{fprintf(fp, "               <ac>%s</ac>\n", currentElement->Peptide->myProt[e]->AC);
-		 fprintf(fp, "               <id>%s</id>\n", currentElement->Peptide->myProt[e]->ID);
-		 fprintf(fp, "               <de>%s</de>\n", currentElement->Peptide->myProt[e]->DE);}
+		{fprintf(fp, "               <ac>%s</ac>\n", currentElement->Peptide->getProtein(e)->AC);
+		 fprintf(fp, "               <id>%s</id>\n", currentElement->Peptide->getProtein(e)->ID);
+		 fprintf(fp, "               <de>%s</de>\n", currentElement->Peptide->getProtein(e)->DE);}
 		fprintf(fp, "            </dbRef>\n");
 		fprintf(fp, "          </dbRefList>\n");
 		fprintf(fp, "        </match>\n");
@@ -473,15 +473,15 @@ void specresults::writeSimple(File &fp) {
 
 
 		fprintf(fp, "%7.2f | ",                currentElement->Peptide->popiPep.dtbPepMass);
-		fprintf(fp, "%-6s | %-15s | ",         currentElement->Peptide->myProt[0]->AC, currentElement->Peptide->myProt[0]->ID);
+		fprintf(fp, "%-6s | %-15s | ",         currentElement->Peptide->getProtein(0)->AC, currentElement->Peptide->getProtein(0)->ID);
 		fprintf(fp, " %s",                     currentElement->Peptide->popiPep.dtbSeq);
 		// fprintf(fp, " \t %f",                currentElement->ZSCORE_RANDOM);
 		fprintf(fp, "\n");
 
-		// là, j'inscrit le scenario, et en même temps, j'affiche les autres AC et ID s'ils existent
+		// lï¿½, j'inscrit le scenario, et en mï¿½me temps, j'affiche les autres AC et ID s'ils existent
 		int i = 1;                                                           
 		if (i < currentElement->Peptide->exemplairesNb) { 
-			fprintf(fp, "%9s | %18s | %7s | %-6s | %-15s | ", "", "", "", currentElement->Peptide->myProt[i]->AC, currentElement->Peptide->myProt[i]->ID);
+			fprintf(fp, "%9s | %18s | %7s | %-6s | %-15s | ", "", "", "", currentElement->Peptide->getProtein(i)->AC, currentElement->Peptide->getProtein(i)->ID);
 			i++;
 		}
 		else {
@@ -497,10 +497,10 @@ void specresults::writeSimple(File &fp) {
 
 		fprintf(fp, "\n");
 
-		// s'il reste des exemplaires à écrire, fait le maintenant
+		// s'il reste des exemplaires ï¿½ ï¿½crire, fait le maintenant
 		if (i < currentElement->Peptide->exemplairesNb) {
 			while (i < currentElement->Peptide->exemplairesNb) {	
-				fprintf(fp, "%9s | %18s | %7s | %-6s | %-15s | %20s \n", "", "", "", currentElement->Peptide->myProt[i]->AC, currentElement->Peptide->myProt[i]->ID, "");
+				fprintf(fp, "%9s | %18s | %7s | %-6s | %-15s | %20s \n", "", "", "", currentElement->Peptide->getProtein(i)->AC, currentElement->Peptide->getProtein(i)->ID, "");
 				i++;
 			}
 			//fprintf(fp, "\n");
@@ -557,17 +557,17 @@ void specresults::computePValuesNEG()
 				
 				double temp1, temp2, temp3;
 				temp3 = sqrt(fabs(curr_VAR_NEG));
-				if (temp3 < 0.00001) temp3 = 0.00001; // prévient la division par 0 lorsque tous les scores sont très similaires
+				if (temp3 < 0.00001) temp3 = 0.00001; // prï¿½vient la division par 0 lorsque tous les scores sont trï¿½s similaires
 				currentElement->ZSCORE_NEG  =  ((float)currentElement->Scenario->Scores.finArrScore - curr_MEAN_NEG)/temp3; 
 				if (currentElement->ZSCORE_NEG > 0) temp1 =     normal3(currentElement->ZSCORE_NEG, runManParam->FILE_ERROR_NAME)+0.5; 
-				// normal3 représente toute la partie GAUCHE par rapport au meilleur score
+				// normal3 reprï¿½sente toute la partie GAUCHE par rapport au meilleur score
 				else                                temp1 =  1-(normal3(currentElement->ZSCORE_NEG, runManParam->FILE_ERROR_NAME)+0.5);
-				// normal3 représente toute la partie DROITE par rapport au meilleur score, donc 1-() 
+				// normal3 reprï¿½sente toute la partie DROITE par rapport au meilleur score, donc 1-() 
 
 				temp2 = pow(temp1, ECH_SIZE_NEG-1); // ATTENTION, SI JE FAIS (DOUBLE)ECH_SIZE, RESULTAT ERRONE
-				// temp2 représente la probabilité que tous les peptides scorés de la dtb soient < bestScore
+				// temp2 reprï¿½sente la probabilitï¿½ que tous les peptides scorï¿½s de la dtb soient < bestScore
 				currentElement->PVALUE_NEG = 1-temp2;
-				//  PVALUE     =   1-(pow(normal3(ZSCORE_NEG, runManParam->FILE_ERROR_NAME)+0.5,(double)ECH_SIZE_NEG)); // on ne considère que ceux qui ont été scorés; on pourrait
+				//  PVALUE     =   1-(pow(normal3(ZSCORE_NEG, runManParam->FILE_ERROR_NAME)+0.5,(double)ECH_SIZE_NEG)); // on ne considï¿½re que ceux qui ont ï¿½tï¿½ scorï¿½s; on pourrait
 				//  PVALUE EST LA PROBABILITE QUE, DANS UNE DTB DE ECH_SIZE SEQUENCES, AUCUNE N'AIT UN SCORE SIMILAIRE OU SUP A BESTSCORE
 				currentElement->ECH_SIZE_NEG = ECH_SIZE_NEG-1;
 			}
@@ -606,15 +606,15 @@ void specresults::computePValuesRANDOM()
 
 				double temp1, temp2;
 				if (currentElement->ZSCORE_RANDOM > 0)    temp1 =    normal3(currentElement->ZSCORE_RANDOM, runManParam->FILE_ERROR_NAME)+0.5; 
-				// normal3 représente toute la partie GAUCHE par rapport au meilleur score
+				// normal3 reprï¿½sente toute la partie GAUCHE par rapport au meilleur score
 				else                                      temp1 = 1-(normal3(currentElement->ZSCORE_RANDOM, runManParam->FILE_ERROR_NAME)+0.5);
-				// normal3 représente toute la partie DROITE par rapport au meilleur score, donc 1-() 
+				// normal3 reprï¿½sente toute la partie DROITE par rapport au meilleur score, donc 1-() 
 
 				temp2 = pow(temp1, ECH_SIZE_RANDOM); // ATTENTION, SI JE FAIS (DOUBLE)ECH_SIZE, RESULTAT ERRONE
 
-				// temp2 représente la probabilité que tous les peptides scorés de la dtb soient < bestScore
+				// temp2 reprï¿½sente la probabilitï¿½ que tous les peptides scorï¿½s de la dtb soient < bestScore
 				currentElement->PVALUE_RANDOM = 1-temp2;
-				//  PVALUE     =   1-(pow(normal3(ZSCORE_RANDOM, runManParam->FILE_ERROR_NAME)+0.5,(double)ECH_SIZE_RANDOM)); // on ne considère que ceux qui ont été scorés; on pourrait
+				//  PVALUE     =   1-(pow(normal3(ZSCORE_RANDOM, runManParam->FILE_ERROR_NAME)+0.5,(double)ECH_SIZE_RANDOM)); // on ne considï¿½re que ceux qui ont ï¿½tï¿½ scorï¿½s; on pourrait
 				//  PVALUE EST LA PROBABILITE QUE, DANS UNE DTB DE ECH_SIZE SEQUENCES, AUCUNE N'AIT UN SCORE SIMILAIRE OU SUP A BESTSCORE
 				currentElement->ECH_SIZE_RANDOM = ECH_SIZE_RANDOM;
 			}
@@ -633,7 +633,7 @@ void specresults::computePValuesRANDOM()
 
 void specresults::createPopScoresNEG(int specID) 
 {
-	// créé le fichier montrant la distribution des scores avec R
+	// crï¿½ï¿½ le fichier montrant la distribution des scores avec R
 
 	fpSCORES_NEG.Close();
 
@@ -675,7 +675,7 @@ void specresults::createPopScoresNEG(int specID)
 
 void specresults::createPopScoresRANDOM(int specID) 
 {
-	// créé le fichier montrant la distribution des scores avec R
+	// crï¿½ï¿½ le fichier montrant la distribution des scores avec R
 
 	fpSCORES_RANDOM.Close();
 	char com[512];

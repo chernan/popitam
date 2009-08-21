@@ -54,7 +54,6 @@ Compare::Compare()
 	spectrumData			= NULL;
 	popiGraph			= NULL;
 	popiTags			= NULL;
-	aPeptide			= NULL;
 	funGen				= NULL;
 	specResults			= NULL;
 	treeWord			= NULL;
@@ -76,7 +75,6 @@ Compare::~Compare()
 	if (specStats	!= NULL) { delete specStats;specStats = NULL; memCheck.spectrumstatistics--; }
 	if (popiGraph	!= NULL) { delete popiGraph; popiGraph = NULL; memCheck.graph--; }
 	if (popiTags	!= NULL) { delete popiTags; popiTags = NULL; memCheck.subseq--; }
-	if (aPeptide	!= NULL) { delete aPeptide; aPeptide = NULL; memCheck.peptide--; }
 	if (specResults	!= NULL) { delete specResults; specResults  = NULL; memCheck.results--; }
 	if (funGen	!= NULL) { delete funGen; funGen = NULL; memCheck.fun--; }
 	if (treeWord	!= NULL) { delete treeWord; treeWord = NULL; memCheck.treeword--; }
@@ -253,7 +251,7 @@ void Compare::FindPeptide(PeptideDigest *pPeptideDigest)
 */
 
 	// Create new Peptide
-	aPeptide = new peptide();
+	peptide* aPeptide = new peptide();
 	memCheck.peptide++;
 
 	aPeptide->init(runManParam, aaParam, (float)pPeptideDigest->GetMass(), m_szPeptideSeq,
@@ -279,14 +277,14 @@ void Compare::FindPeptide(PeptideDigest *pPeptideDigest)
 		}
 
 		// PROCESS LE PEPTIDE
-		processAPeptide();
+		processAPeptide(aPeptide);
 
 		// COLLECT LES DONNEES POUR PEPTIDE RANDOMS
 		// ON REPROCESSE LE PEPTIDE APRES L'AVOIR RANDOMIZE, ET ON RECOLTE LES SCORES OBTENUS DANS fp_ScoresRandom;
 		if (runManParam->PVAL_ECHSIZE)	{ //0 ne randomise pas, sinon fait le pour chaque peptide theorique pr�sent�
 	  		// strcpy(pThis->specResults->randPep[pThis->specResults->iRandCount].popiPep.dtbSeq, pThis->aPeptide->popiPep.dtbSeq);
 	  		aPeptide->randomize();
-	  		processAPeptide();
+	  		processAPeptide(aPeptide);
 		}
 	}
   
@@ -315,7 +313,7 @@ void Compare::GetProteinInfo(ReloadDBEntry *pReloadDBEntry, char *pszAC, char *p
 
 // ********************************************************************************************** //
 
-void Compare::processAPeptide()
+void Compare::processAPeptide(peptide* pep)
 {
 	popiTags = new subseq();
 	memCheck.subseq++;
@@ -323,14 +321,14 @@ void Compare::processAPeptide()
 	
 	tag_extractor* tagExtractor =	new tag_extractor();
 	memCheck.tagextractor++;
-	tagExtractor->init(runManParam, aaParam, spectrumData, popiGraph, aPeptide, popiTags);
+	tagExtractor->init(runManParam, aaParam, spectrumData, popiGraph, pep, popiTags);
 	tagExtractor->getTheTags();
 	
 	if (popiTags->subSeqNb > 0) {
 		tag_processor* tagProcessor =	new tag_processor();
 		memCheck.tagprocessor++; 
 		tagProcessor->init(runManParam, specStats, aaParam, ionParam,	spectrumData, 
-		popiGraph, aPeptide, popiTags, funGen, scoreF, specResults);	 
+		popiGraph, pep, popiTags, funGen, scoreF, specResults);	 
 		
 		// CONSTRUIT ET SCORE LES SCENARIOS, GARDE LE MEILLEUR
 		tagProcessor->processTags();
@@ -365,13 +363,17 @@ void Compare::fillDtbInfos()
 	while ((specResults->currentElement != specResults->lastElement) && (specResults->currentElement->FILLED)) {
 		exemplairesNB = specResults->currentElement->Peptide->exemplairesNb;
 		for (int i = 0; i < exemplairesNB; i++) {
-			GetProteinInfo(&(specResults->currentElement->Peptide->myProt[i]->m_reloadDBEntry),
-				specResults->currentElement->Peptide->myProt[i]->AC,
-				specResults->currentElement->Peptide->myProt[i]->ID,
-				specResults->currentElement->Peptide->myProt[i]->DE, 
-				&specResults->currentElement->Peptide->iChainStart[i], 
-				&specResults->currentElement->Peptide->iChainEnd[i],
-				&specResults->currentElement->Peptide->iEntryEnd[i]);
+			
+			peptide* pep = specResults->currentElement->Peptide; 
+			Protein* prot = pep->getProtein(i);
+			
+			GetProteinInfo(&(prot->m_reloadDBEntry),
+				prot->AC,
+				prot->ID,
+				prot->DE, 
+				&pep->iChainStart[i], 
+				&pep->iChainEnd[i],
+				&pep->iEntryEnd[i]);
 		}
 		specResults->currentElement = specResults->currentElement->following;
 	}

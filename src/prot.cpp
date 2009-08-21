@@ -88,7 +88,7 @@ prot::~prot() {
     currentElement = firstElement->following;
   }
   
-  // remove tête et queue
+  // remove tï¿½te et queue
   delete firstElement;                                                                              memCheck.prot--;
   firstElement = NULL;
   delete lastElement;                                                                               memCheck.prot--;
@@ -135,8 +135,8 @@ void prot::update(element* cE, specresults* specR, int ID)
       currentElement = firstElement->following;
       while (currentElement != lastElement)
 	{
-	  if (   (currentElement->protIds[0].dtbId == cE->Peptide->myProt[i]->m_reloadDBEntry.m_iDBFileIndex) 
-	      && (currentElement->protIds[0].offId == cE->Peptide->myProt[i]->m_reloadDBEntry.m_uiEntryOffset)   )
+	  if (   (currentElement->protIds[0].dtbId == cE->Peptide->getProtein(i)->m_reloadDBEntry.m_iDBFileIndex) 
+	      && (currentElement->protIds[0].offId == cE->Peptide->getProtein(i)->m_reloadDBEntry.m_uiEntryOffset)   )
 	    {
 	      PRESENT = true;
 	      currentElement->updateIt(cE, i, 
@@ -228,7 +228,7 @@ void prot::sortPepByParentMass()
 
 /******************************************************************************/
 
-void prot::removeDuplicatedProteins()  // n'appeler cette fonction qu'à la fin
+void prot::removeDuplicatedProteins()  // n'appeler cette fonction qu'ï¿½ la fin
 {
   currentElement = firstElement->following;
   while (currentElement->following != lastElement)
@@ -260,7 +260,7 @@ bool prot::compareElements(protEl* el1, protEl* el2)
 
 void prot::compactElements(protEl* el1, protEl* el2)
 {
-  el1->protIds[el1->similarProtNb].dtbId = el2->protIds[0].dtbId;  // el2 sera toujours à similarProtNb =0;
+  el1->protIds[el1->similarProtNb].dtbId = el2->protIds[0].dtbId;  // el2 sera toujours ï¿½ similarProtNb =0;
   el1->protIds[el1->similarProtNb].offId = el2->protIds[0].offId;
   strcpy(el1->protIds[el1->similarProtNb].AC, el2->protIds[0].AC);
   strcpy(el1->protIds[el1->similarProtNb].ID, el2->protIds[0].ID);
