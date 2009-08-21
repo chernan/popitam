@@ -139,6 +139,8 @@ public :
 	inline DynamicArray<TS_Ptm> &GetPtm(void) 
 	{ return m_aPTM; }
 
+	inline DynamicArray<unsigned short> &GetKeywords(void) 
+	{ return m_aKW; }
 
 	inline const char *GetSQ(void)
 	{ return m_aSQ; }
@@ -158,7 +160,6 @@ public :
 	*******************************************************/
 
 	// Copy values from the entry passed in argument.
-	// NOTE: keywords are not copied!
 	void copy(DBEntry* entry);
 	
 protected :

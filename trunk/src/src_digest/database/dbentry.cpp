@@ -135,9 +135,7 @@ void DBEntry::copy(DBEntry* e)
 	SetChildStart(e->GetChildStart());
 	SetChildEnd(e->GetChildEnd());
 	SetPtm(e->GetPtm());
-	
-	// should loop for each keyword and them to the list
-	//SetKeyword(aKW);
+	SetKeyword(e->GetKeywords());
 }
 
 /******************************************************
