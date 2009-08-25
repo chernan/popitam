@@ -30,7 +30,7 @@ ifeq ($(OPTION), o)
         OPT = -O3
 endif
 
-VERSION			= "4.0.8 (beta)"
+VERSION			= "4.0.9"
 VERSION_STR		= '$(VERSION)'
 
 SRC_DIR			= ./src ./src/src_digest ./src/src_digest/base ./src/src_digest/database ./src/src_digest/digest
@@ -56,7 +56,7 @@ DIST			= $(DIST_BASEDIR)/popitam-$(VERSION)
 OBJECTS 		= atomicmass file MATerror tagfile txtfile util \
 			  actree dbentry  dbfile dbfilereader dbptm dbreader \
 			  digest mcmanager modifmanager peptidebase peptidedigest ptmmanager  \
-			  ioparam ioversion \
+			  ioparam ioversion Protein \
 			  aa about allrunstatistics ants clicsearch compare data element error \
 			  fun gnb gpparameters gptree gptreenode graphe ion main memorycheck peptide \
 			  prot protEl result runManager runManagerParameters scenario \

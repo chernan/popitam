@@ -67,13 +67,12 @@ void protEl::fillIt(element* cE, int i, char* title, char* seqAsInDtb, float PMr
 {
   FILLED           = TRUE;
 
-  //protIds[0].dtbId = cE->Peptide->getProtein(i)->m_reloadDBEntry.m_iDBFileIndex; 
-  //protIds[0].offId = cE->Peptide->getProtein(i)->m_reloadDBEntry.m_uiEntryOffset;
-  protIds[0].prot = cE->Peptide->getProtein(i);
+	protIds[0].dtbId = cE->Peptide->getProtein(i)->m_reloadDBEntry.m_iDBFileIndex; 
+  protIds[0].offId = cE->Peptide->getProtein(i)->m_reloadDBEntry.m_uiEntryOffset;
   
-  strcpy(protIds[0].AC, cE->Peptide->getProtein(i)->GetAC());
-  strcpy(protIds[0].ID, cE->Peptide->getProtein(i)->GetID());
-  strcpy(protIds[0].DE, cE->Peptide->getProtein(i)->GetDE());
+  strcpy(protIds[0].AC, cE->Peptide->getProtein(i)->AC);
+  strcpy(protIds[0].ID, cE->Peptide->getProtein(i)->ID);
+  strcpy(protIds[0].DE, cE->Peptide->getProtein(i)->DE);
   similarProtNb ++;
   if (similarProtNb >= MAX_SIMILAR_PROT) fatal_error(fileErrorName, MEMORY, "in function prot::compactElements(); please increase MAX_SIMILAR_PROT in defines.h"); 
 

@@ -139,8 +139,6 @@ public :
 	inline DynamicArray<TS_Ptm> &GetPtm(void) 
 	{ return m_aPTM; }
 
-	inline DynamicArray<unsigned short> &GetKeywords(void) 
-	{ return m_aKW; }
 
 	inline const char *GetSQ(void)
 	{ return m_aSQ; }
@@ -158,10 +156,6 @@ public :
 	/******************************************************
 	SET
 	*******************************************************/
-
-	// Copy values from the entry passed in argument.
-	void copy(DBEntry* entry);
-	
 protected :
 	void Set(	const char *pszAC, const char *pszID, const char *pszDE, const char *pszSQ, 
 						int iTaxId, int iMw, double dPi, unsigned char ucType, int iChildId, int iChildStart, int iChildEnd,
