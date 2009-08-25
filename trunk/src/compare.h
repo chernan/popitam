@@ -76,8 +76,8 @@ public :
 	void test();
 	
 private :
-	DBEntry *currentProtein;	
 	DBReader m_db;
+	DBEntry *m_pEntry;
 	char m_szPeptideSeq[MAX_LENGHT];
 	unsigned long m_ulOffset2;
 	int m_iDataBaseId;
@@ -86,14 +86,12 @@ private :
 	void loadSpectrum(int);
 	void buildGraph();
 	void processAPeptide(peptide *pep);
-	/* void fillDtbInfos(); */
+	void fillDtbInfos();
 	void computeIDSETstats();
 	void displayIDSETstats(File&);
 	void DisplayUnusedAC(File&);
-	/*
 	void GetProteinInfo(ReloadDBEntry *pReloadDBEntry, char *pszAC, char	*pszID,	char *pszDE,
 	                    int *piChainStart, int *piChainEnd, int *piEntryEnd);
-	*/
 };
 
 #endif

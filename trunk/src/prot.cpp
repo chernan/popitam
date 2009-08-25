@@ -135,10 +135,8 @@ void prot::update(element* cE, specresults* specR, int ID)
       currentElement = firstElement->following;
       while (currentElement != lastElement)
 	{
-	  //if (   (currentElement->protIds[0].dtbId == cE->Peptide->getProtein(i)->m_reloadDBEntry.m_iDBFileIndex) 
-	  //    && (currentElement->protIds[0].offId == cE->Peptide->getProtein(i)->m_reloadDBEntry.m_uiEntryOffset)   )
-	    if (currentElement->protIds[0].prot == cE->Peptide->getProtein(i))
-		    
+	  if (   (currentElement->protIds[0].dtbId == cE->Peptide->getProtein(i)->m_reloadDBEntry.m_iDBFileIndex) 
+	      && (currentElement->protIds[0].offId == cE->Peptide->getProtein(i)->m_reloadDBEntry.m_uiEntryOffset)   )
 	    {
 	      PRESENT = true;
 	      currentElement->updateIt(cE, i, 
@@ -262,10 +260,8 @@ bool prot::compareElements(protEl* el1, protEl* el2)
 
 void prot::compactElements(protEl* el1, protEl* el2)
 {
-  //el1->protIds[el1->similarProtNb].dtbId = el2->protIds[0].dtbId;  // el2 sera toujours � similarProtNb =0;
-  //el1->protIds[el1->similarProtNb].offId = el2->protIds[0].offId;
-  el1->protIds[el1->similarProtNb].prot = el2->protIds[0].prot;
-  
+  el1->protIds[el1->similarProtNb].dtbId = el2->protIds[0].dtbId;  // el2 sera toujours � similarProtNb =0;
+  el1->protIds[el1->similarProtNb].offId = el2->protIds[0].offId;
   strcpy(el1->protIds[el1->similarProtNb].AC, el2->protIds[0].AC);
   strcpy(el1->protIds[el1->similarProtNb].ID, el2->protIds[0].ID);
   strcpy(el1->protIds[el1->similarProtNb].DE, el2->protIds[0].DE);

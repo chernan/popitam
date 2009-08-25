@@ -120,24 +120,6 @@ DBEntry::DBEntry(void)
 {	
 }
 
-void DBEntry::copy(DBEntry* e)
-{
-	ResetForWrite();
-	SetAC(e->GetAC());
-	SetID(e->GetID());
-	SetDE(e->GetDE());
-	SetSQ(e->GetSQ());
-	SetTaxId(e->GetTaxId());
-	SetMw(e->GetMw());
-	SetPi(e->GetPi());
-	SetType(e->GetType());
-	SetChildId(e->GetChildId());
-	SetChildStart(e->GetChildStart());
-	SetChildEnd(e->GetChildEnd());
-	SetPtm(e->GetPtm());
-	SetKeyword(e->GetKeywords());
-}
-
 /******************************************************
 		Destructor
 *******************************************************/

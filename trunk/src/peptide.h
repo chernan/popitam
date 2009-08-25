@@ -26,6 +26,7 @@
 #include "defines.h"
 #include "runManagerParameters.h"
 #include "aa.h"
+#include "Protein.h"
 #include "Sequence.h"
 #include "Tree.h"
 #include "dbreader.h"
@@ -54,20 +55,17 @@ class peptide {
 
   Sequence getSeqAA();  
   char* getSeqAAcar();                 //donne la seq sous forme char*
-  
-  void init(runManagerParameters*, aa*, float, char*, int, int, DBEntry* prot, bool);
-  
+  void init(runManagerParameters*, aa*, float, char*, int, int, DBReader *pDBReader, bool); 
   void update();
   void computeLayers();
   //void updateResult();
   void randomize();
   
-  // Allocate a new protein and initialize it with the value of the one passed in argument
-  void allocProtein(int i, DBEntry* prot) { myProt[i] = new DBEntry(); myProt[i]->copy(prot); }
-  DBEntry* getProtein(int i) { return myProt[i]; }
+  void allocProtein(int i) { myProt[i] = new Protein; }
+  Protein* getProtein(int i) { return myProt[i]; }
   
 private:
-  DBEntry**               myProt;             
+  Protein**               myProt;             
 };
     
 // ********************************************************************************************** //
