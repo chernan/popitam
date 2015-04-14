@@ -1,0 +1,1 @@
+Popitam is a method designed to characterize peptides with mutations or unexpected post-translational modifications using MS/MS data.
